@@ -24,10 +24,10 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeReadMsg()
+        
         self.title = contactName
-        ChatHub.addChatHub(hub: ChatHub.chatHub)
         self.initEnvetChatHub()
+        makeReadMsg()
         collectionView.backgroundColor = UIColor.white
         collectionView.register(Chat_Cell.self, forCellWithReuseIdentifier: cellId)
         getMessage()
@@ -234,6 +234,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func initEnvetChatHub(){
+        ChatHub.addChatHub(hub: ChatHub.chatHub)
         if contactType == 1{
             ChatHub.chatHub.on("receivePrivateMessage") { args in
                 let sender = args?[0] as? [Any]
@@ -282,6 +283,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 }
             }
         }
+        
+        
+        ChatHub.chatHub.on("makeReadMessage"){args in
+            self.collectionView.reloadData()
+        }
     }
     
     func receiveMessage(senderID : Int, senderName : String, receiverID : Int, receiverName : String, message : String, messageType : Int, inboxID : Int64, contactType : Int){
@@ -309,20 +315,21 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             //self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
-    
-    func makeReadMsg(){
-        if !isRead{
-            do {
-                print(ChatHub.userID, contactID, contactType, lastInboxID)
-                try ChatHub.chatHub.invoke("MakeReadMessage", arguments: [ChatHub.userID, contactID, contactType, lastInboxID])
-            } catch {
-                print(error)
-            }
 
-            isRead = true;
+    func makeReadMsg(){
+        if !self.isRead{
+            if self.lastInboxID != nil{
+                do {
+                    print(ChatHub.userID, self.contactID, self.contactType, self.lastInboxID)
+                    try ChatHub.chatHub.invoke("MakeReadMessage", arguments: [ChatHub.userID, self.contactID, self.contactType, self.lastInboxID])
+                } catch {
+                    print(error)
+                }
+            }
+            self.isRead = true;
         }
+        
     }
-    
 }
 
 class Chat_Cell: BaseCell {

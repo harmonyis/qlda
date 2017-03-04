@@ -64,13 +64,12 @@ class ChatHub {
             //print("Connection slow...")
         }
         
-
-        
         connection.start()
         
     }
     static func conect(){
         if let hub = chatHub {
+            
             do {
                 try hub.invoke("Connect", arguments: [userID, userName])
             } catch {
@@ -176,6 +175,19 @@ class ChatHub {
             newContact.TypeOfMessage = 0
             newContact.setPicture()
             ChatCommon.listContact.insert(newContact, at: 0)
+        }
+        
+        chatHub.on("makeReadMessage"){args in
+            let contactID = args?[0] as? Int
+            let contactType = args?[1] as? Int
+            let user : UserContact = ChatCommon.listContact.filter() {
+                let contact = $0 as UserContact
+                if contact.ContactID == contactID && contact.TypeOfContact == contactType{
+                    return true
+                }
+                return false
+                }.first!
+            user.NumberOfNewMessage = 0
         }
     }
     static func changeDataWhenReciveMessage(inboxID : Int64, message : String, messageType : Int, senderID : Int, senderName : String,  receiverID : Int, receiverName : String, contactType : Int){

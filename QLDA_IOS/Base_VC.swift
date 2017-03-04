@@ -79,8 +79,7 @@ class Base_VC: UIViewController {
         //self.navigationItem.rightBarButtonItems = [customNotiBarItem, customChatBarItem, customMapBarItem]
         self.navigationItem.setRightBarButtonItems([customNotiBarItem, customChatBarItem, customMapBarItem], animated: true)
         
-        updateBadgeChat()
-        initEnvent()
+        updateBadgeChat()        
     }
     
     func onChatBarPressesd(_ sender : UIButton){
@@ -105,6 +104,9 @@ class Base_VC: UIViewController {
             self.updateBadgeChat()
         }
         ChatHub.chatHub.on("receiveChatGroup") {args in
+            self.updateBadgeChat()
+        }
+        ChatHub.chatHub.on("makeReadMessage"){args in
             self.updateBadgeChat()
         }
     }

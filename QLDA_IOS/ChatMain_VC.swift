@@ -32,7 +32,10 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //ChatHub.connection.connect()
+        ChatHub.addChatHub(hub: ChatHub.chatHub)
         self.initEnvetChatHub()
+        self.initEnvent()
         btnCreateGroup.layer.cornerRadius = 25
         btnCreateGroup.setImage(#imageLiteral(resourceName: "ic_createGroup"), for: UIControlState.normal)
         btnCreateGroup.imageEdgeInsets = UIEdgeInsetsMake(40,40,40,40)
@@ -118,9 +121,13 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         }
         let frame = CGRect(x: 25, y: 0, width: 15, height: 15)
         //self.createBadge(parent: cell.viewImageContact, tag: indexPath.row, number: contact.NumberOfNewMessage!, frame: frame)
-        if(contact.NumberOfNewMessage! > 0){
-             cell.viewImageContact.createBadge(tag: indexPath.row, number: contact.NumberOfNewMessage!, frame: frame)
+        if contact.NumberOfNewMessage! > 0{
+            cell.viewImageContact.setBadge(tag: indexPath.row + 1, number: contact.NumberOfNewMessage!, frame: frame)
         }
+        else{
+            cell.viewImageContact.setBadge(tag: indexPath.row, number: -1, frame: frame)
+        }
+        
        
         cell.imgContact.maskCircle(anyImage: contact.Picture!)
         cell.lblContactName.text = contact.Name
@@ -144,7 +151,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         else{
             passIsRead = false
         }
-        
+        //makeReadMsg(contactID: contact.ContactID!, contactType: contact.TypeOfContact!, lastInboxID: contact.LatestMessageID!)
         performSegue(withIdentifier: "GoToChat", sender: self)
     }
     
@@ -173,9 +180,9 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     
     
     // Chat hub
-    
     func initEnvetChatHub(){
-        ChatHub.addChatHub(hub:  ChatHub.chatHub)
+        
+        
         ChatHub.chatHub.on("onConnected") {args in            
             self.reloadData()
         }
@@ -192,6 +199,11 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         ChatHub.chatHub.on("receiveChatGroup") {args in
             self.reloadData()
         }
+        
+        ChatHub.chatHub.on("makeReadMessage"){args in
+            self.tblListContact.reloadData()
+        }
+        //ChatHub.addChatHub(hub:  ChatHub.chatHub)
     }
     
     func reloadData(){
@@ -200,6 +212,18 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
                 self.tblListContact.reloadData()
             }
         }
+    }
+    
+    func makeReadMsg(contactID : Int, contactType : Int, lastInboxID: Int64){
+        if let hub = ChatHub.chatHub {
+            do {
+                print(ChatHub.userID, contactID, contactType, lastInboxID)
+                try hub.invoke("MakeReadMessage", arguments: [ChatHub.userID, contactID, contactType, lastInboxID])
+            } catch {
+                print(error)
+            }
+        }
+        
     }
 }
 

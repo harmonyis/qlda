@@ -94,9 +94,9 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
             if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
-                DispatchQueue.main.async() { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     self.navigationController?.popViewController(animated: true)
-                }
+                })
                 
             }
         }
