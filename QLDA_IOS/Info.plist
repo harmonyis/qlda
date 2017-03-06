@@ -50,5 +50,9 @@
 	<string>You can select photos to attach to reports.</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string></string>
+	</array>
 </dict>
 </plist>

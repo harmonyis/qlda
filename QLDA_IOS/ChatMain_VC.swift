@@ -23,7 +23,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     var listContact = [UserContact]()
     
     var passContactID:Int!
-    var passContactType:Int!
+    var passContactType:Int32!
     var passContactName:String!
     var passIsRead : Bool!
     var passLastInboxID : Int64!
@@ -34,8 +34,9 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         super.viewDidLoad()
         //ChatHub.connection.connect()
         ChatHub.addChatHub(hub: ChatHub.chatHub)
-        self.initEnvetChatHub()
         self.initEnvent()
+        self.initEnvetChatHub()
+        
         btnCreateGroup.layer.cornerRadius = 25
         btnCreateGroup.setImage(#imageLiteral(resourceName: "ic_createGroup"), for: UIControlState.normal)
         btnCreateGroup.imageEdgeInsets = UIEdgeInsetsMake(40,40,40,40)
@@ -48,7 +49,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         self.aivLoad.isHidden = true
         self.tblListContact.isHidden = false
         
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in})
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,6 +60,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         super.viewWillAppear(animated)
         self.reloadData()
     }
+    
     
     @IBAction func goToChat(_ sender: Any) {
         //let vc = storyboard?.instantiateViewController(withIdentifier: "Chat") as! Chat_VC
@@ -125,7 +127,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
             cell.viewImageContact.setBadge(tag: indexPath.row + 1, number: contact.NumberOfNewMessage!, frame: frame)
         }
         else{
-            cell.viewImageContact.setBadge(tag: indexPath.row, number: -1, frame: frame)
+            cell.viewImageContact.setBadge(tag: indexPath.row + 1, number: -1, frame: frame)
         }
         
        
@@ -183,25 +185,36 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     func initEnvetChatHub(){
         
         
-        ChatHub.chatHub.on("onConnected") {args in            
+        ChatHub.chatHub.on("onConnected") {args in
+            let userID = args?[0] as? Int
+            ChatCommon.updateOnConnect(userID: userID!)
             self.reloadData()
         }
         
         ChatHub.chatHub.on("onDisconnected") {args in
+            let userID = args?[0] as? Int
+            ChatCommon.updateOnDisconnect(userID: userID!)
             self.reloadData()
         }
         ChatHub.chatHub.on("receivePrivateMessage") {args in
+            ChatCommon.updateReceiveMessage(args: args, contactType: 1)
             self.reloadData()
         }
         ChatHub.chatHub.on("receiveGroupMessage") {args in
+            ChatCommon.updateReceiveMessage(args: args, contactType: 2)
             self.reloadData()
         }
         ChatHub.chatHub.on("receiveChatGroup") {args in
+           
+            ChatCommon.updateCreateGroup(args: args)
             self.reloadData()
         }
         
         ChatHub.chatHub.on("makeReadMessage"){args in
-            self.tblListContact.reloadData()
+            let contactID = args?[0] as? Int
+            let contactType = args?[1] as? Int32
+            ChatCommon.updateMakeReadMessage(contactID: contactID!, contactType: contactType!)
+            self.reloadData()
         }
         //ChatHub.addChatHub(hub:  ChatHub.chatHub)
     }

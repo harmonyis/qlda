@@ -38,9 +38,9 @@ class Login_VC: UIViewController {
                 if nIdUser > 0 {
                     DispatchQueue.global(qos: .userInitiated).async {
                         DispatchQueue.main.async {
-                            ChatHub.initChatHub()
-                            ChatHub.initEvent()
-                            ChatCommon.getContacts()
+                            //ChatHub.initChatHub()
+                            //ChatHub.initEvent()
+                            //ChatCommon.getContacts()
                             variableConfig.m_szUserName = self.szTenDangNhap
                             variableConfig.m_szPassWord = self.szMatKhau
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC

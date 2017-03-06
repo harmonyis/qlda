@@ -1517,6 +1517,11 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="txtMessageEditingChanged:" destination="9P1-YK-rft" eventType="editingChanged" id="t94-g9-hzX"/>
+                                            <action selector="txtMessageTouchUpInside:" destination="9P1-YK-rft" eventType="touchUpInside" id="HpL-b8-US2"/>
+                                            <action selector="txtMessageValueChanged:" destination="9P1-YK-rft" eventType="valueChanged" id="QhC-sy-LIB"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jO-v1-d9c">
                                         <rect key="frame" x="260" y="4" width="52" height="30"/>

@@ -23,7 +23,7 @@ class ChatHub {
     
     static func initChatHub(){
         connection = SignalR("http://harmonysoft.vn:8089/QLDA_Services/")
-        //connection.useWKWebView = true
+       // connection.useWKWebView = true
         connection.signalRVersion = .v2_2_0
         
         chatHub = Hub("chatHub")
@@ -49,6 +49,7 @@ class ChatHub {
             //print("Connection ID")
             //DispatchQueue.main.async() { () -> Void in
             ChatHub.conect()
+            ChatHub.initEvent()
             //}
         }
         
@@ -116,7 +117,24 @@ class ChatHub {
             let msgType = (inbox![1] as? Int)!
             let inboxID = (inbox![2] as? Int64)!
             
-            changeDataWhenReciveMessage(inboxID: inboxID, message: msg, messageType: msgType, senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, contactType: 1)
+
+            let content = UNMutableNotificationContent()
+            content.title = "Tin nhắn mới"
+            content.subtitle = senderName
+            content.body = msg
+            
+            let list = ChatCommon.listContact.filter(){
+                if $0.NumberOfNewMessage! > 0 {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            content.badge = list.count as NSNumber
+            content.sound = UNNotificationSound.default()
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: "msg", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         }
         
         chatHub.on("receiveGroupMessage") {args in
@@ -133,7 +151,7 @@ class ChatHub {
             let msgType = (inbox![1] as? Int)!
             let inboxID = (inbox![2] as? Int64)!
             
-            changeDataWhenReciveMessage(inboxID: inboxID, message: msg, messageType: msgType, senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, contactType: 2)
+
         }
         
         chatHub.on("receiveChatGroup") {args in
@@ -154,102 +172,23 @@ class ChatHub {
             if let temp = args?[3] as? String{
                 pictureUrl = temp
             }
-            print(groupID, groupName, host, pictureUrl)
-            let newContact : UserContact = UserContact()
-            newContact.ContactID = groupID
-            if(host == ChatHub.userID){
-                newContact.LatestMessage = "Bạn vừa tạo nhóm"
-            }
-            else{
-                newContact.LatestMessage = "Bạn vừa được thêm vào nhóm"
-            }
-            newContact.LatestMessageID = 0
-            newContact.LoginName = ""
-            newContact.Name = groupName
-            newContact.NumberOfNewMessage = 1
-            newContact.Online = false
-            newContact.PictureUrl = pictureUrl
-            newContact.ReceiverOfMessage = groupID
-            newContact.SenderOfMessage = 0
-            newContact.TypeOfContact = 2
-            newContact.TypeOfMessage = 0
-            newContact.setPicture()
-            ChatCommon.listContact.insert(newContact, at: 0)
+            
         }
         
         chatHub.on("makeReadMessage"){args in
             let contactID = args?[0] as? Int
-            let contactType = args?[1] as? Int
-            let user : UserContact = ChatCommon.listContact.filter() {
-                let contact = $0 as UserContact
-                if contact.ContactID == contactID && contact.TypeOfContact == contactType{
-                    return true
-                }
-                return false
-                }.first!
-            user.NumberOfNewMessage = 0
+            let contactType = args?[1] as? Int32
+            
         }
     }
-    static func changeDataWhenReciveMessage(inboxID : Int64, message : String, messageType : Int, senderID : Int, senderName : String,  receiverID : Int, receiverName : String, contactType : Int){
-        
-        var contactID : Int
-        if(contactType == 2){
-            contactID = receiverID
-        }
-        else{
-            contactID = senderID
-            if senderID == ChatHub.userID{
-                contactID = receiverID
-            }
-        }
-
-        let filter = ChatCommon.listContact.filter(){
-            if $0.ContactID == contactID && $0.TypeOfContact == contactType{
-                return true
-            }
-            return false
-        }
-        var newContact : UserContact
-        if filter.count == 0{
-            newContact = UserContact()
-            newContact.ContactID = contactID
-            newContact.Name = senderName
-            newContact.LatestMessage = message
-            newContact.TypeOfContact = contactType
-            newContact.SenderOfMessage = senderID
-            newContact.ReceiverOfMessage = receiverID
-            newContact.TypeOfMessage = messageType
-            newContact.NumberOfNewMessage = 1
-            newContact.LatestMessageID = inboxID
-        }
-        else{
-            newContact = filter.first!
-       
-            newContact.LatestMessage = message
-            newContact.SenderOfMessage = senderID;
-            newContact.ReceiverOfMessage = receiverID
-            newContact.TypeOfMessage = messageType;
-            newContact.NumberOfNewMessage = newContact.NumberOfNewMessage! + 1
-            /*
-            if senderID == ChatHub.userID{
-                newContact.NumberOfNewMessage = 0;
-            }
-            else{
-                newContact.NumberOfNewMessage = 0;
-            }*/
-            newContact.LatestMessageID = inboxID;
-            ChatCommon.listContact = ChatCommon.listContact.filter() { $0.ContactID != contactID || $0.TypeOfContact != contactType}
-        }
-        ChatCommon.listContact.insert(newContact, at: 0)
-        notification()
-    }
+    
     
     static func notification(){
         let content = UNMutableNotificationContent()
         content.title = "Thông báo"
         content.subtitle = "subsite"
         content.body = "Đây là thông báo"
-        content.badge = 1
+        content.badge = 2
         
         let request = UNNotificationRequest(identifier: "test", content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
