@@ -33,8 +33,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     override func viewDidLoad() {
         super.viewDidLoad()
         //ChatHub.connection.connect()
-        ChatHub.addChatHub(hub: ChatHub.chatHub)
-        self.initEnvent()
+        //ChatHub.addChatHub(hub: ChatHub.chatHub)
+        
         self.initEnvetChatHub()
         
         btnCreateGroup.layer.cornerRadius = 25
@@ -151,7 +151,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
             passIsRead = false
         }
         else{
-            passIsRead = false
+            passIsRead = true
         }
         //makeReadMsg(contactID: contact.ContactID!, contactType: contact.TypeOfContact!, lastInboxID: contact.LatestMessageID!)
         performSegue(withIdentifier: "GoToChat", sender: self)
@@ -211,9 +211,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         }
         
         ChatHub.chatHub.on("makeReadMessage"){args in
-            let contactID = args?[0] as? Int
-            let contactType = args?[1] as? Int32
-            ChatCommon.updateMakeReadMessage(contactID: contactID!, contactType: contactType!)
+            ChatCommon.updateMakeReadMessage(args: args)
             self.reloadData()
         }
         //ChatHub.addChatHub(hub:  ChatHub.chatHub)

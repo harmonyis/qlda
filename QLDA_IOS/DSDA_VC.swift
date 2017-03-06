@@ -19,9 +19,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
     var indexTrangThaiDuAnCon = Set<String>()
     override func viewDidLoad() {
         super.viewDidLoad()
-        ChatHub.initChatHub()
-        //ChatHub.initEvent()
-        ChatCommon.getContacts()
+
         //self.tbDSDA.rowHeight = UITableViewAutomaticDimension
         
         

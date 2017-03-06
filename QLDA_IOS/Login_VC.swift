@@ -36,17 +36,17 @@ class Login_VC: UIViewController {
             if let idUser = dic["CheckUserResult"] as? String {
                 let nIdUser:Int = Int(idUser)!
                 if nIdUser > 0 {
+                    getContacts()
+                    /*
                     DispatchQueue.global(qos: .userInitiated).async {
                         DispatchQueue.main.async {
-                            //ChatHub.initChatHub()
-                            //ChatHub.initEvent()
-                            //ChatCommon.getContacts()
+                            ChatHub.initChatHub()
                             variableConfig.m_szUserName = self.szTenDangNhap
                             variableConfig.m_szPassWord = self.szMatKhau
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
-                    }
+                    }*/
                 }
                 else {
                     DispatchQueue.global(qos: .userInitiated).async {
@@ -84,5 +84,52 @@ class Login_VC: UIViewController {
         
         // Show the navigation bar on other view controllers
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    func getContacts(){
+        ChatCommon.listContact = [UserContact]()
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
+        ApiService.Get(url: apiUrl, callback: callbackGetContacts, errorCallBack: errorGetContacts)
+    }
+    
+    func callbackGetContacts(data : Data) {
+        //let result = String(data: data, encoding: String.Encoding.utf8)
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        
+        if let dic = json as? [[String:Any]] {
+            for item in dic{
+                let contact = UserContact()
+                contact.ContactID =  item["ContactID"] as? Int
+                contact.TimeOfLatestMessage = Date(jsonDate: item["TimeOfLatestMessage"] as! String)
+                contact.LatestMessage = item["LatestMessage"] as? String
+                contact.LatestMessageID = item["LatestMessageID"] as? Int64
+                contact.LoginName = item["LoginName"] as? String
+                contact.Name = item["Name"] as? String
+                contact.NumberOfNewMessage = item["NumberOfNewMessage"] as? Int
+                contact.Online = item["Online"] as? Bool
+                contact.PictureUrl = item["PictureUrl"] as? String
+                contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
+                contact.SenderOfMessage = item["SenderOfMessage"] as? Int
+                contact.TypeOfContact = item["TypeOfContact"] as? Int32
+                contact.TypeOfMessage = item["TypeOfMessage"] as? Int
+                
+                contact.setPicture()
+                ChatCommon.listContact.append(contact)
+            }
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+            ChatHub.initChatHub()
+            ChatHub.initEvent()
+            variableConfig.m_szUserName = self.szTenDangNhap
+            variableConfig.m_szPassWord = self.szMatKhau
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
+            self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    func errorGetContacts(error : Error) {
     }
 }

@@ -26,7 +26,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         super.viewDidLoad()
         
         self.title = contactName
-       
+        self.initEnvetChatHub()
         //makeReadMsg()
         collectionView.backgroundColor = UIColor.white
         collectionView.register(Chat_Cell.self, forCellWithReuseIdentifier: cellId)
@@ -35,8 +35,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.initEnvetChatHub()
+        //super.viewDidAppear(animated)
+        
         makeReadMsg()
     }
     
@@ -60,6 +60,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         super.viewWillDisappear(animated)
         ChatCommon.currentChatID = nil
         ChatCommon.currentChatType = nil
+        //self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -237,18 +238,13 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     @IBAction func btnSendTouchUpInside(_ sender: UIButton) {
         sendMessage()
-        makeReadMsg()
     }
     
     @IBAction func txtMessageEditingChanged(_ sender: UITextField) {
-        
-        makeReadMsg()
-        
-    }
-    @IBAction func txtMessageValueChanged(_ sender: UITextField) {
         makeReadMsg()
     }
-    @IBAction func txtMessageTouchUpInside(_ sender: UITextField) {
+
+    @IBAction func txtMessageTouchDown(_ sender: UITextField) {
         makeReadMsg()
     }
     func initEnvetChatHub(){

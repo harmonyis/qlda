@@ -15,7 +15,7 @@ class ChatHub {
     static var connection: SignalR!
     static var userID = 59
     static var userName = "demo2"
-    
+    static var navicontroller : UINavigationController?
     static func addChatHub(hub : Hub){
         connection.addHub(hub)
         connection.connect()
@@ -49,7 +49,7 @@ class ChatHub {
             //print("Connection ID")
             //DispatchQueue.main.async() { () -> Void in
             ChatHub.conect()
-            ChatHub.initEvent()
+            
             //}
         }
         
@@ -80,6 +80,7 @@ class ChatHub {
     }
     
     static func initEvent(){
+        /*
         chatHub.on("onConnected"){args in
             let userID = args?[0] as? Int
             ChatCommon.listContact.filter() {
@@ -102,7 +103,7 @@ class ChatHub {
                 return false
                 }.first?.Online = false
             
-        }
+        }*/
         
         chatHub.on("receivePrivateMessage") {args in
             let sender = args?[0] as? [Any]
@@ -118,23 +119,16 @@ class ChatHub {
             let inboxID = (inbox![2] as? Int64)!
             
 
-            let content = UNMutableNotificationContent()
-            content.title = "Tin nhắn mới"
-            content.subtitle = senderName
-            content.body = msg
             
-            let list = ChatCommon.listContact.filter(){
-                if $0.NumberOfNewMessage! > 0 {
-                    return true
-                } else {
-                    return false
-                }
+            if ChatCommon.currentChatID == senderID && ChatHub.userID == receiverID {
+                return
             }
-            content.badge = list.count as NSNumber
-            content.sound = UNNotificationSound.default()
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: "msg", content: content, trigger: trigger)
-            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            if senderID == ChatHub.userID{
+                return
+            }
+            let identifier = "\(senderID + 1000)"
+            UserNotificationManager.share.addNotificationWithTimeIntervalTrigger(identifier: identifier, title: senderName, body: msg)
+        
         }
         
         chatHub.on("receiveGroupMessage") {args in
@@ -151,7 +145,25 @@ class ChatHub {
             let msgType = (inbox![1] as? Int)!
             let inboxID = (inbox![2] as? Int64)!
             
-
+            /*
+            let list = ChatCommon.listContact.filter(){
+                if $0.NumberOfNewMessage! > 0 {
+                    return true
+                } else {
+                    return false
+                }
+            }*/
+            
+            
+            if ChatCommon.currentChatID == receiverID {
+                return
+            }
+            if senderID == ChatHub.userID{
+                return
+            }
+            let body = "\(senderName) : \(msg)"
+            let identifier = "\(-receiverID - 1000)"
+            UserNotificationManager.share.addNotificationWithTimeIntervalTrigger(identifier: identifier, title: receiverName, body: body)
         }
         
         chatHub.on("receiveChatGroup") {args in
@@ -174,12 +186,13 @@ class ChatHub {
             }
             
         }
-        
-        chatHub.on("makeReadMessage"){args in
-            let contactID = args?[0] as? Int
-            let contactType = args?[1] as? Int32
-            
-        }
+
+    }
+    
+    static func pushView(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "Chat") as! Chat_VC
+        navicontroller?.pushViewController(controller, animated: true)
     }
     
     

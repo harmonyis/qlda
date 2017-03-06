@@ -195,7 +195,9 @@ class ChatCommon{
         
     }
     
-    static func updateMakeReadMessage(contactID : Int, contactType : Int32){
+    static func updateMakeReadMessage(args : [Any]?){
+        let contactID = args?[0] as? Int
+        let contactType = args?[1] as? Int32
         let user : UserContact = listContact.filter() {
             let contact = $0 as UserContact
             if contact.ContactID == contactID && contact.TypeOfContact == contactType{

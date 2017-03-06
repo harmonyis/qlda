@@ -4,6 +4,13 @@ import UIKit
 class Base_VC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                ChatHub.addChatHub(hub: ChatHub.chatHub)
+                self.initEnvent()
+            }
+        }
+        
         // Do any additional setup after loading the view.
         self.addLeftBarButton()
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -110,6 +117,7 @@ class Base_VC: UIViewController {
             self.updateBadgeChat()
         }
         ChatHub.chatHub.on("makeReadMessage"){args in
+            ChatCommon.updateMakeReadMessage(args: args)
             self.updateBadgeChat()
         }
     }
