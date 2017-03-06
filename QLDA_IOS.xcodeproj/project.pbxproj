@@ -57,6 +57,8 @@
 		24BEAF091E697AA6008F205C /* variableConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAEDC1E697AA6008F205C /* variableConfig.swift */; };
 		24BEAF0A1E697AA6008F205C /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAEDD1E697AA6008F205C /* View.xib */; };
 		24BEAF0D1E697AF0008F205C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF0C1E697AF0008F205C /* SWRevealViewController.m */; };
+		24BEAF9E1E6CFF78008F205C /* Tab_QDDT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */; };
+		24BEAFA01E6D01D6008F205C /* Tab_KHV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */; };
 		77874250CB5F4720BEE7F789 /* Pods_QLDA_IOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535DCDAF1DDB47BDB402007B /* Pods_QLDA_IOSUITests.framework */; };
 		9F34B56EEC1973EE57EF0B1C /* Pods_QLDA_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E42F0C1058275E72661BB7E /* Pods_QLDA_IOS.framework */; };
 		BE79D381EFB3531BB18550ED /* Pods_QLDA_IOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */; };
@@ -139,6 +141,8 @@
 		24BEAF0B1E697AF0008F205C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		24BEAF0C1E697AF0008F205C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		24BEAF0E1E697B14008F205C /* QLDA_IOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QLDA_IOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_QDDT.swift; sourceTree = "<group>"; };
+		24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_KHV.swift; sourceTree = "<group>"; };
 		2A199DA80609F755A9AD9CBA /* Pods-QLDA_IOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOS/Pods-QLDA_IOS.debug.xcconfig"; sourceTree = "<group>"; };
 		449599864E657405E335FC9F /* Pods-QLDA_IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOS/Pods-QLDA_IOS.release.xcconfig"; sourceTree = "<group>"; };
 		4E42F0C1058275E72661BB7E /* Pods_QLDA_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDA_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -300,6 +304,8 @@
 				24BEAED51E697AA6008F205C /* ThongTinCaNhan_VC.swift */,
 				24BEAED31E697AA6008F205C /* Tab_.swift */,
 				24BEAED41E697AA6008F205C /* Tab_TTC.swift */,
+				24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */,
+				24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -694,6 +700,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24BEAF9E1E6CFF78008F205C /* Tab_QDDT.swift in Sources */,
 				24BEAEFC1E697AA6008F205C /* MyCollectionViewCell.swift in Sources */,
 				24BEAEF71E697AA6008F205C /* Login_VC.swift in Sources */,
 				24BEAEFB1E697AA6008F205C /* MenuViewController.swift in Sources */,
@@ -726,6 +733,7 @@
 				24BEAEEE1E697AA6008F205C /* DanhSachDA.swift in Sources */,
 				24BEAF031E697AA6008F205C /* UIColor.swift in Sources */,
 				24BEAEFA1E697AA6008F205C /* MenuLeft_VC.swift in Sources */,
+				24BEAFA01E6D01D6008F205C /* Tab_KHV.swift in Sources */,
 				24BEAF051E697AA6008F205C /* UIImageViewExtension.swift in Sources */,
 				24BEAEE91E697AA6008F205C /* ChatMain_VC.swift in Sources */,
 				24BEAF021E697AA6008F205C /* ThongTinCaNhan_VC.swift in Sources */,

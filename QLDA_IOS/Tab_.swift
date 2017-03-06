@@ -138,9 +138,13 @@ class Tab_:ButtonBarPagerTabStripViewController {
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         
-        let child_6 = self.storyboard?.instantiateViewController(withIdentifier: "Tab_TTC") as! Tab_TTC
-        child_6.blackTheme = true
-        return [child_6]
+        let child_TTC = self.storyboard?.instantiateViewController(withIdentifier: "Tab_TTC") as! Tab_TTC
+        child_TTC.blackTheme = true
+        let child_QDDT = self.storyboard?.instantiateViewController(withIdentifier: "Tab_QDDT") as! Tab_QDDT
+        child_QDDT.blackTheme = true
+        let child_KHV = self.storyboard?.instantiateViewController(withIdentifier: "Tab_KHV") as! Tab_KHV
+        child_QDDT.blackTheme = true
+        return [child_TTC,child_QDDT,child_KHV]
     }
     
     // MARK: - Actions

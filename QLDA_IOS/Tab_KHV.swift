@@ -1,22 +1,25 @@
 //
-//  Tab_TTC.swift
+//  Tab_KHV.swift
 //  QLDA_IOS
 //
-//  Created by Hoang The Anh on 02/03/2017.
-//  Copyright © 2017 datlh. All rights reserved.
+//  Created by Hoang The Anh on 06/03/2017.
+//  Copyright © 2017 Harmony Soft. All rights reserved.
 //
 
 import UIKit
 import Foundation
 import XLPagerTabStrip
 
-class Tab_TTC: UIViewController, IndicatorInfoProvider {
+class Tab_KHV: UIViewController , IndicatorInfoProvider {
     
     let cellIdentifier = "postCell"
     var blackTheme = false
-    var itemInfo = IndicatorInfo(title: "Thông tin chung")
+    var itemInfo = IndicatorInfo(title: "Kế hoạch vốn")
     
-    @IBOutlet weak var uiViewThongTin: UIView!
+    @IBOutlet weak var UiviewKHV: UIView!
+    @IBOutlet weak var UiviewKHVDC: UIView!
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         //  self.ViewData.autoresizesSubviews = true
@@ -41,15 +44,15 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                             lable.text = arrlblTTDA[icount]
                             icount = 1 + icount
-                            lable.frame = CGRect(x: 10, y: 0 , width: self.uiViewThongTin.frame.width, height: CGFloat.greatestFiniteMagnitude)
+                            lable.frame = CGRect(x: 10, y: 0 , width: self.UiviewKHV.frame.width, height: CGFloat.greatestFiniteMagnitude)
                             lable.numberOfLines = 0
                             lable.sizeToFit()
                             uiView.addSubview(lable)
                             
-                            uiView.frame = CGRect(x: 0,y: totalHeight ,width: self.uiViewThongTin.frame.width - 10 , height: lable.frame.height + 4)
+                            uiView.frame = CGRect(x: 0,y: totalHeight ,width: self.UiviewKHV.frame.width - 10 , height: lable.frame.height + 4)
                             totalHeight = totalHeight + uiView.frame.height
                             
-                            self.uiViewThongTin.addSubview(uiView)
+                            self.UiviewKHV.addSubview(uiView)
                             uiView = UIView()
                             //self.uiViewThongTin.addSubview(uiView)
                             print(lable.frame.height)
@@ -57,7 +60,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                             lblTenDuAn.textColor = UIColor.black
                             lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                             lblTenDuAn.text = itemTTDA
-                            lblTenDuAn.frame = CGRect(x: 10, y: 30 , width: self.uiViewThongTin.frame.width - 10,  height: CGFloat.greatestFiniteMagnitude)
+                            lblTenDuAn.frame = CGRect(x: 10, y: 30 , width: self.UiviewKHV.frame.width - 10,  height: CGFloat.greatestFiniteMagnitude)
                             
                             lblTenDuAn.numberOfLines = 0
                             lblTenDuAn.sizeToFit()
@@ -68,20 +71,20 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                             if lblTenDuAn.frame.height > 20 {
                                 calHeight = lblTenDuAn.frame.height + 7
                             }
-                            uiView.frame = CGRect(x: 0,y: totalHeight ,width: self.uiViewThongTin.frame.width, height: calHeight + 4)
+                            uiView.frame = CGRect(x: 0,y: totalHeight ,width: self.UiviewKHV.frame.width, height: calHeight + 4)
                             totalHeight = totalHeight + uiView.frame.height
                             
                             let borderBottom = CALayer()
                             let borderWidth = CGFloat(1)
                             borderBottom.borderColor =  self.myColorBoder.cgColor
                             borderBottom.borderWidth = borderWidth
-                            borderBottom.frame = CGRect(x: 0, y: calHeight, width: self.uiViewThongTin.frame.width, height: 1)
+                            borderBottom.frame = CGRect(x: 0, y: calHeight, width: self.UiviewKHV.frame.width, height: 1)
                             uiView.layer.addSublayer(borderBottom)
                             uiView.layer.masksToBounds = true
                             
-                            self.uiViewThongTin.addSubview(uiView)
+                            self.UiviewKHV.addSubview(uiView)
                         }
-                        let heightConstraint = self.uiViewThongTin.heightAnchor.constraint(equalToConstant: totalHeight)
+                        let heightConstraint = self.UiviewKHV.heightAnchor.constraint(equalToConstant: totalHeight)
                         print(totalHeight)
                         NSLayoutConstraint.activate([heightConstraint])
                         //   self.uiViewThongTin.heightAnchor.constraint(
