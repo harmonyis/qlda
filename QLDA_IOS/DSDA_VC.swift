@@ -38,10 +38,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
             if let arrDSDA = dic["GetDuAnResult"] as? [[String]] {
-                
-                
                 for itemDA in arrDSDA {
-                    
                     if itemDA[0] == itemDA[5] {
                         let itemNhomDA = DanhSachDA()
                         itemNhomDA.IdDA = itemDA[0] as String
@@ -52,7 +49,6 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
                         itemNhomDA.TongMucDauTu = itemDA[6] as String
                         itemNhomDA.GiaTriGiaiNgan = itemDA[7] as String
                         self.DSDA.append(itemNhomDA)
-                        
                     }
                     else if  self.DSDA.contains(where: { $0.IdDA! == itemDA[5] }) {
                         let NhomDuAn = self.DSDA.first(where: { $0.IdDA! == itemDA[5] })
@@ -76,8 +72,6 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate{
                         NhomDuAn?.DuAnCon=NhomDuAnCon
                         self.DSDA.append(NhomDuAn!)
                     }
-                    
-                    
                 }
                 
                 DispatchQueue.global(qos: .userInitiated).async {

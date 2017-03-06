@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B655B8F1E6D1D15007A615B /* YAxisValueFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B8D1E6D1D15007A615B /* YAxisValueFormatted.swift */; };
+		1B655B901E6D1D15007A615B /* ConvertDVT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B8E1E6D1D15007A615B /* ConvertDVT.swift */; };
 		24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAE801E6979D8008F205C /* AppDelegate.swift */; };
 		24BEAE861E6979D8008F205C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE841E6979D8008F205C /* Main.storyboard */; };
 		24BEAE881E6979D8008F205C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE871E6979D8008F205C /* Assets.xcassets */; };
@@ -79,8 +81,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1B655B8A1E6D1815007A615B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		18481FBDFADDC304EFED2593 /* Pods-QLDA_IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1B655B8D1E6D1D15007A615B /* YAxisValueFormatted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YAxisValueFormatted.swift; path = ../../../../Desktop/qlda_ios/QLDA_IOS/YAxisValueFormatted.swift; sourceTree = "<group>"; };
+		1B655B8E1E6D1D15007A615B /* ConvertDVT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConvertDVT.swift; path = ../../../../Desktop/qlda_ios/QLDA_IOS/ConvertDVT.swift; sourceTree = "<group>"; };
 		24BEAE7D1E6979D8008F205C /* QLDA_IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLDA_IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BEAE801E6979D8008F205C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24BEAE851E6979D8008F205C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -318,6 +335,8 @@
 		24BEAF151E697CD8008F205C /* QLDA */ = {
 			isa = PBXGroup;
 			children = (
+				1B655B8D1E6D1D15007A615B /* YAxisValueFormatted.swift */,
+				1B655B8E1E6D1D15007A615B /* ConvertDVT.swift */,
 				24BEAF1B1E697D33008F205C /* CustomTableAndCell */,
 				24BEAF1A1E697D2C008F205C /* Entity */,
 			);
@@ -423,6 +442,7 @@
 				24BEAE7B1E6979D8008F205C /* Resources */,
 				80DD5DA9B8DD3B5EFB3C0FAE /* [CP] Embed Pods Frameworks */,
 				C654C0D66CB960D2A2467B87 /* [CP] Copy Pods Resources */,
+				1B655B8A1E6D1815007A615B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -695,6 +715,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24BEAEFC1E697AA6008F205C /* MyCollectionViewCell.swift in Sources */,
+				1B655B8F1E6D1D15007A615B /* YAxisValueFormatted.swift in Sources */,
 				24BEAEF71E697AA6008F205C /* Login_VC.swift in Sources */,
 				24BEAEFB1E697AA6008F205C /* MenuViewController.swift in Sources */,
 				24BEAEF01E697AA6008F205C /* DSDA_VC.swift in Sources */,
@@ -720,6 +741,7 @@
 				24BEAEF61E697AA6008F205C /* Lich_VC.swift in Sources */,
 				24BEAEE21E697AA6008F205C /* BDNVDT_VC.swift in Sources */,
 				24BEAEE51E697AA6008F205C /* Chat_VC.swift in Sources */,
+				1B655B901E6D1D15007A615B /* ConvertDVT.swift in Sources */,
 				24BEAEEA1E697AA6008F205C /* ChatMessage.swift in Sources */,
 				24BEAF081E697AA6008F205C /* UserContact.swift in Sources */,
 				24BEAEE81E697AA6008F205C /* ChatHub.swift in Sources */,
