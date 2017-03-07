@@ -121,13 +121,19 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         else{
             contact = listContact[indexPath.row]
         }
-        let frame = CGRect(x: 25, y: 0, width: 15, height: 15)
-        //self.createBadge(parent: cell.viewImageContact, tag: indexPath.row, number: contact.NumberOfNewMessage!, frame: frame)
+
+        cell.lblBadge.layer.borderColor = UIColor.clear.cgColor
+        cell.lblBadge.layer.borderWidth = 2
+        cell.lblBadge.layer.cornerRadius = cell.lblBadge.bounds.size.height / 2
+        cell.lblBadge.layer.masksToBounds = true
+        
         if contact.NumberOfNewMessage! > 0{
-            cell.viewImageContact.setBadge(tag: indexPath.row + 1, number: contact.NumberOfNewMessage!, frame: frame)
+            cell.lblBadge.isHidden = false
+            cell.lblBadge.text = "\(contact.NumberOfNewMessage!)"
         }
         else{
-            cell.viewImageContact.setBadge(tag: indexPath.row + 1, number: -1, frame: frame)
+            cell.lblBadge.isHidden = true
+            cell.lblBadge.text = ""
         }
         
        
@@ -240,6 +246,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
 
 class ChatMain_Cell: UITableViewCell{
     
+    @IBOutlet weak var lblBadge: UILabel!
     @IBOutlet weak var viewImageContact: UIView!
     @IBOutlet weak var imgContact : UIImageView!
     @IBOutlet weak var lblContactName : UILabel!
