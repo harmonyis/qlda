@@ -331,6 +331,8 @@
 				24BEAED51E697AA6008F205C /* ThongTinCaNhan_VC.swift */,
 				24BEAED31E697AA6008F205C /* Tab_.swift */,
 				24BEAED41E697AA6008F205C /* Tab_TTC.swift */,
+				24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */,
+				24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */,
 				7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */,
 			);
 			name = ViewController;
@@ -742,6 +744,7 @@
 				24BEAF011E697AA6008F205C /* Tab_TTC.swift in Sources */,
 				24BEAEDF1E697AA6008F205C /* Base_VC.swift in Sources */,
 				24BEAEE01E697AA6008F205C /* BaseViewController.swift in Sources */,
+				BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */,
 				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
 				24BEAEEC1E697AA6008F205C /* CustomCellDSDATableViewCell.swift in Sources */,
 				24BEAEEB1E697AA6008F205C /* Config.swift in Sources */,
