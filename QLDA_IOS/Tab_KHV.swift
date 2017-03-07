@@ -146,8 +146,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                                 var lblTenDuAn:UILabel = UILabel()
                                 lblTenDuAn.textColor = UIColor.black
                                 lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lblTenDuAn.text =  Double(itemTTDA)?.doubleToString
-
+                                lblTenDuAn.text =  variableConfig.convert(itemTTDA)
                                     //variableConfig.convert(itemTTDA)
                                 
                                 lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiviewKHV.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
@@ -207,8 +206,9 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                                 var lblTenDuAn:UILabel = UILabel()
                                 lblTenDuAn.textColor = UIColor.black
                                 lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
-                                    lblTenDuAn.text =  Double((arrTTDA[icount + 1]))?.doubleToString
- 
+                                lblTenDuAn.text =  variableConfig.convert(arrTTDA[icount + 1])
+                                    //variableConfig.convert(itemTTDA)
+                                
                                 lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiviewKHV.frame.width)/2, height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
                                 lblTenDuAn.sizeToFit()
@@ -375,7 +375,10 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                                 var lblTenDuAn:UILabel = UILabel()
                                 lblTenDuAn.textColor = UIColor.black
                                 lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lblTenDuAn.text = Double(itemTTDA)?.doubleToString
+                                lblTenDuAn.text = variableConfig.convert(itemTTDA)
+                                    //variableConfig.convert(itemTTDA)
+                                lblTenDuAn.textAlignment = NSTextAlignment.right
+                                
                                 lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiviewKHV.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
                                 lblTenDuAn.sizeToFit()
@@ -433,8 +436,9 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                                 var lblTenDuAn:UILabel = UILabel()
                                 lblTenDuAn.textColor = UIColor.black
                                 lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
-                                lblTenDuAn.text = Double((arrTTDA[icount + 1]))?.doubleToString
-                                  
+                                lblTenDuAn.text =  variableConfig.convert(arrTTDA[icount + 1])
+                                    //variableConfig.convert(itemTTDA)
+                                
                                 lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiviewKHV.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
                                 lblTenDuAn.sizeToFit()
