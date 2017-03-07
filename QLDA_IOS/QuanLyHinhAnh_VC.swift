@@ -36,7 +36,8 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     func GetDSHASuccess(data : Data) {
         //let result = String(data: data, encoding: String.Encoding.utf8)
         
-       
+       items.removeAll()
+        print("Lấy lại danh sách")
         
         //print(result)
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -317,6 +318,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                     
                     
                 }
+                DSDA = DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
                 
                 let itemTatCa = DanhSachDA()
                 itemTatCa.IdDA = "0"
@@ -739,10 +741,13 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         
         
         let idDuAn : Int = (sender.view?.tag)!
+        //print(idDuAn)
         if String(idDuAn) == "0" {
+            var ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/GetAllFileUpload"
             let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\"}"
             ApiService.Post(url: ApiUrl, params: params, callback: GetDSHASuccess, errorCallBack:GetDSHAError)
             self.DuAnSelected = String(idDuAn)
+            //print("ádasdasdsa")
         } else
         if self.lstDuAnExists.contains(String(idDuAn)) {
             DuAnSelected = String(idDuAn)
