@@ -185,6 +185,12 @@ class ChatHub {
                 pictureUrl = temp
             }
             
+            let identifier = "\(-groupID - 1000)"
+            if host != ChatHub.userID{
+                UserNotificationManager.share.addNotificationWithTimeIntervalTrigger(identifier: identifier, title: groupName, body: "Bạn vừa được thêm vào nhóm")
+            }
+           
+            
         }
 
     }

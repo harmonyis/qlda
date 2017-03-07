@@ -10,7 +10,9 @@ import UIKit
 extension UIView{
     func setBadge(tag : Int, number : Int, frame : CGRect){
         var containBadge = false
-        for v in self.subviews{            
+        //self.viewWithTag(tag)?.isHidden = true
+        for v in self.subviews{
+            
             if(v.tag == tag){                
                 let label = v as! UILabel
                 label.isHidden = true

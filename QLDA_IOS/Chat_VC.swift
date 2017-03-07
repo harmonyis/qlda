@@ -9,9 +9,11 @@
 import UIKit
 import SwiftR
 
-
-class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate{
     fileprivate let cellId = "cellId"
+    
+    
+    @IBOutlet weak var viewBottom: UIView!
     @IBOutlet weak var txtMessage: UITextField!
     var messages: [ChatMessage] = [ChatMessage]()
     var contactID : Int!
@@ -20,6 +22,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     var isRead : Bool!
     var lastInboxID : Int64!
     
+    
+    var bottomConstraint: NSLayoutConstraint?
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -32,6 +36,55 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         collectionView.register(Chat_Cell.self, forCellWithReuseIdentifier: cellId)
         getMessage()
         
+        bottomConstraint = NSLayoutConstraint(item: viewBottom, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        view.addConstraint(bottomConstraint!)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    
+    func handleKeyboardNotification(_ notification: Notification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+            //print(keyboardFrame)
+            
+            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            
+            bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
+            
+
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                
+                self.view.layoutIfNeeded()
+                
+            }, completion: { (completed) in
+                
+                if isKeyboardShowing {
+                    self.scrollToBottom(animate: true)
+                    //let indexPath = IndexPath(item: self.txtMessage!.count - 1, section: 0)
+                    //self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+                }
+                
+            })
+            
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,7 +94,10 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        collectionView.reloadData()
+        DispatchQueue.main.async() { () -> Void in
+            self.collectionView.reloadData()
+           // self.scrollToBottom(animate: false)
+        }
     }
     
     override func didReceiveMemoryWarning() {
