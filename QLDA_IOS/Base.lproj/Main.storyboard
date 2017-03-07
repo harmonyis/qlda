@@ -2053,7 +2053,7 @@
         <!--Hinh AnhVC-->
         <scene sceneID="Kyn-Ka-9UL">
             <objects>
-                <viewController id="0t6-yp-i5N" customClass="QLHinhAnh_VC" customModule="QLDA_IOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Tab_QLHA" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0t6-yp-i5N" customClass="QLHinhAnh_VC" customModule="QLDA_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fb7-vF-r4V"/>
                         <viewControllerLayoutGuide type="bottom" id="HaP-g7-vUc"/>
