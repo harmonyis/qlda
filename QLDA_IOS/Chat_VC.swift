@@ -15,7 +15,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet weak var txtMessage: UITextField!
     var messages: [ChatMessage] = [ChatMessage]()
     var contactID : Int!
-    var contactType : Int!
+    var contactType : Int32!
     var contactName : String!
     var isRead : Bool!
     var lastInboxID : Int64!
@@ -27,11 +27,17 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         self.title = contactName
         self.initEnvetChatHub()
-        makeReadMsg()
+        //makeReadMsg()
         collectionView.backgroundColor = UIColor.white
         collectionView.register(Chat_Cell.self, forCellWithReuseIdentifier: cellId)
         getMessage()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //super.viewDidAppear(animated)
+        
+        makeReadMsg()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -54,6 +60,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         super.viewWillDisappear(animated)
         ChatCommon.currentChatID = nil
         ChatCommon.currentChatType = nil
+        //self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -233,6 +240,13 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         sendMessage()
     }
     
+    @IBAction func txtMessageEditingChanged(_ sender: UITextField) {
+        makeReadMsg()
+    }
+
+    @IBAction func txtMessageTouchDown(_ sender: UITextField) {
+        makeReadMsg()
+    }
     func initEnvetChatHub(){
         ChatHub.addChatHub(hub: ChatHub.chatHub)
         if contactType == 1{
@@ -249,13 +263,17 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 let msgType = (inbox![1] as? Int)!
                 let inboxID = (inbox![2] as? Int64)!
                 
-                self.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 1)
-                
-                DispatchQueue.global(qos: .userInitiated).async {
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                        self.scrollToBottom(animate: true)
+                if ((receiverID == ChatHub.userID && senderID == self.contactID) || (receiverID == self.contactID && senderID == ChatHub.userID )){
+                    
+                    self.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 1)
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                            self.scrollToBottom(animate: true)
+                        }
                     }
+                    self.isRead = false
                 }
             }
         }
@@ -273,20 +291,18 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 let msgType = (inbox![1] as? Int)!
                 let inboxID = (inbox![2] as? Int64)!
                 
-                self.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 2)
-                
-                DispatchQueue.global(qos: .userInitiated).async {
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                        self.scrollToBottom(animate: true)
+                if(receiverID == self.contactID){
+                    self.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 2)
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                            self.scrollToBottom(animate: true)
+                        }
                     }
-                }
+                    self.isRead = false
+                }                
             }
-        }
-        
-        
-        ChatHub.chatHub.on("makeReadMessage"){args in
-            self.collectionView.reloadData()
         }
     }
     
@@ -320,8 +336,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         if !self.isRead{
             if self.lastInboxID != nil{
                 do {
-                    print(ChatHub.userID, self.contactID, self.contactType, self.lastInboxID)
-                    try ChatHub.chatHub.invoke("MakeReadMessage", arguments: [ChatHub.userID, self.contactID, self.contactType, self.lastInboxID])
+                    print(ChatHub.userID, self.contactID!, self.contactType!, self.lastInboxID!)
+                    try ChatHub.chatHub.invoke("MakeReadMessage", arguments: [ChatHub.userID, self.contactID!, self.contactType!, self.lastInboxID!])
                 } catch {
                     print(error)
                 }
