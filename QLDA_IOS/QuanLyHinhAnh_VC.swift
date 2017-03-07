@@ -756,7 +756,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
             ApiService.Post(url: ApiUrl, params: params, callback: GetDSHAByIdSuccess, errorCallBack: GetDSHAError)
             self.DuAnSelected = String(idDuAn)
         } else {
-            self.view.makeToast("Dự án không có ảnh!", duration: 3.0, position: .bottom)
+            self.view.makeToast("Dự án không có ảnh!", duration: 1.5, position: .bottom)
             
         }
         let label:UILabel = (sender.view!) as! UILabel
