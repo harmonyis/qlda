@@ -8,15 +8,16 @@
 
 import UIKit
 import ImageViewer
+import XLPagerTabStrip
 
-class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate{
+class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate, IndicatorInfoProvider {
     
     @IBOutlet weak var clv: UICollectionView!
     var imagePicker = UIImagePickerController()
     
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     var items : [ImageEntity] = []
-    
+    var itemInfo = IndicatorInfo(title: "Quản lý hình ảnh")
     let ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/GetAllFileUpload"
     
     var idDuAn : Int = 0
@@ -279,6 +280,25 @@ class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegat
         // Dispose of any resources that can be recreated.
     }
     
+    init(itemInfo: IndicatorInfo) {
+        self.itemInfo = itemInfo
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    // MARK: - UITableViewDataSource
+    
+    
+    
+    // MARK: - IndicatorInfoProvider
+    
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return itemInfo
+    }
 }
 
 extension QLHinhAnh_VC: GalleryItemsDatasource {
@@ -300,4 +320,5 @@ extension QLHinhAnh_VC: GalleryItemsDatasource {
         
         return GalleryItem.image{$0(image)}
     }
+    
 }

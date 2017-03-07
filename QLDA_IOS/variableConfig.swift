@@ -15,12 +15,19 @@ public class variableConfig {
     
     static var m_szPassWord : String = ""
     static func convert(_ sztext: String) -> String {
-     if !(sztext==""){
-        var dValue = (Double)(sztext)
-        return String(format:"%.3f",dValue!/1000000)
+         if !(sztext==""){
+        var doubleRound = (Double)(sztext)!/1000000
+
+        var arrDouble = String(doubleRound).components(separatedBy: ".")
+        var dou = Double(arrDouble[0])
+        var doubleFormat = Number.formatterWithSeparator.string(from: NSNumber(value: dou!)) ?? ""
+        if arrDouble[1] != "0" || arrDouble[1] != ""{
+            doubleFormat = doubleFormat + "," + arrDouble[1]
         }
-        else
-     {
+        return doubleFormat
+      }
+      else
+      {
         return "0"
         }
         
