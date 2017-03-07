@@ -14,4 +14,8 @@ class ImageEntity {
     
     init () {
     }
+    /*
+    deinit {
+        print("đã Huỷ \(self.ImageName)")
+    }*/
 }
