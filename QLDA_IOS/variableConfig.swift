@@ -14,5 +14,16 @@ public class variableConfig {
     static var m_szUserName : String = ""
     
     static var m_szPassWord : String = ""
-    
+    static func convert(_ sztext: String) -> String {
+     if !(sztext==""){
+        var dValue = (Double)(sztext)
+        return String(format:"%.3f",dValue!/1000000)
+        }
+        else
+     {
+        return "0"
+        }
+        
+    }
 }
+

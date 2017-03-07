@@ -4,6 +4,13 @@ import UIKit
 class Base_VC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                ChatHub.addChatHub(hub: ChatHub.chatHub)
+                self.initEnvent()
+            }
+        }
+        
         // Do any additional setup after loading the view.
         self.addLeftBarButton()
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -97,16 +104,20 @@ class Base_VC: UIViewController {
     func initEnvent(){
         //ChatHub.addChatHub(hub:  ChatHub.chatHub)
 
-        ChatHub.chatHub.on("receivePrivateMessage") {args in
+        ChatHub.chatHub.on("receivePrivateMessage") {args in         
+            ChatCommon.updateReceiveMessage(args: args, contactType: 1)
             self.updateBadgeChat()
         }
         ChatHub.chatHub.on("receiveGroupMessage") {args in
+            ChatCommon.updateReceiveMessage(args: args, contactType: 2)
             self.updateBadgeChat()
         }
         ChatHub.chatHub.on("receiveChatGroup") {args in
+            ChatCommon.updateCreateGroup(args: args)
             self.updateBadgeChat()
         }
         ChatHub.chatHub.on("makeReadMessage"){args in
+            ChatCommon.updateMakeReadMessage(args: args)
             self.updateBadgeChat()
         }
     }

@@ -9,17 +9,21 @@
 import UIKit
 import SwiftR
 
-
-class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate{
     fileprivate let cellId = "cellId"
+    
+    
+    @IBOutlet weak var viewBottom: UIView!
     @IBOutlet weak var txtMessage: UITextField!
     var messages: [ChatMessage] = [ChatMessage]()
     var contactID : Int!
-    var contactType : Int!
+    var contactType : Int32!
     var contactName : String!
     var isRead : Bool!
     var lastInboxID : Int64!
     
+    
+    var bottomConstraint: NSLayoutConstraint?
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -27,15 +31,73 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         self.title = contactName
         self.initEnvetChatHub()
-        makeReadMsg()
+        //makeReadMsg()
         collectionView.backgroundColor = UIColor.white
         collectionView.register(Chat_Cell.self, forCellWithReuseIdentifier: cellId)
         getMessage()
         
+        bottomConstraint = NSLayoutConstraint(item: viewBottom, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        view.addConstraint(bottomConstraint!)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    
+    func handleKeyboardNotification(_ notification: Notification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+            //print(keyboardFrame)
+            
+            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            
+            bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
+            
+
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                
+                self.view.layoutIfNeeded()
+                
+            }, completion: { (completed) in
+                
+                if isKeyboardShowing {
+                    self.scrollToBottom(animate: true)
+                    //let indexPath = IndexPath(item: self.txtMessage!.count - 1, section: 0)
+                    //self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+                }
+                
+            })
+            
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //super.viewDidAppear(animated)
+        
+        makeReadMsg()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        collectionView.reloadData()
+        DispatchQueue.main.async() { () -> Void in
+            self.collectionView.reloadData()
+           // self.scrollToBottom(animate: false)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,6 +116,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         super.viewWillDisappear(animated)
         ChatCommon.currentChatID = nil
         ChatCommon.currentChatType = nil
+        //self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -233,6 +296,13 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         sendMessage()
     }
     
+    @IBAction func txtMessageEditingChanged(_ sender: UITextField) {
+        makeReadMsg()
+    }
+
+    @IBAction func txtMessageTouchDown(_ sender: UITextField) {
+        makeReadMsg()
+    }
     func initEnvetChatHub(){
         ChatHub.addChatHub(hub: ChatHub.chatHub)
         if contactType == 1{
@@ -249,13 +319,17 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 let msgType = (inbox![1] as? Int)!
                 let inboxID = (inbox![2] as? Int64)!
                 
-                self.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 1)
-                
-                DispatchQueue.global(qos: .userInitiated).async {
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                        self.scrollToBottom(animate: true)
+                if ((receiverID == ChatHub.userID && senderID == self.contactID) || (receiverID == self.contactID && senderID == ChatHub.userID )){
+                    
+                    self.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 1)
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                            self.scrollToBottom(animate: true)
+                        }
                     }
+                    self.isRead = false
                 }
             }
         }
@@ -273,20 +347,18 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 let msgType = (inbox![1] as? Int)!
                 let inboxID = (inbox![2] as? Int64)!
                 
-                self.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 2)
-                
-                DispatchQueue.global(qos: .userInitiated).async {
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                        self.scrollToBottom(animate: true)
+                if(receiverID == self.contactID){
+                    self.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 2)
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                            self.scrollToBottom(animate: true)
+                        }
                     }
-                }
+                    self.isRead = false
+                }                
             }
-        }
-        
-        
-        ChatHub.chatHub.on("makeReadMessage"){args in
-            self.collectionView.reloadData()
         }
     }
     
@@ -320,8 +392,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         if !self.isRead{
             if self.lastInboxID != nil{
                 do {
-                    print(ChatHub.userID, self.contactID, self.contactType, self.lastInboxID)
-                    try ChatHub.chatHub.invoke("MakeReadMessage", arguments: [ChatHub.userID, self.contactID, self.contactType, self.lastInboxID])
+                    print(ChatHub.userID, self.contactID!, self.contactType!, self.lastInboxID!)
+                    try ChatHub.chatHub.invoke("MakeReadMessage", arguments: [ChatHub.userID, self.contactID!, self.contactType!, self.lastInboxID!])
                 } catch {
                     print(error)
                 }

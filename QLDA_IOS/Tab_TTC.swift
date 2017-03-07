@@ -82,6 +82,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                             self.uiViewThongTin.addSubview(uiView)
                         }
                         let heightConstraint = self.uiViewThongTin.heightAnchor.constraint(equalToConstant: totalHeight)
+                        print(totalHeight)
                         NSLayoutConstraint.activate([heightConstraint])
                         //   self.uiViewThongTin.heightAnchor.constraint(
                         //        equalTo: 500,
