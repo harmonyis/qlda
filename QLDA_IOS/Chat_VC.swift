@@ -29,6 +29,9 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if(contactType == 2){
+            addRightBar()
+        }
         self.title = contactName
         self.initEnvetChatHub()
         //makeReadMsg()
@@ -401,6 +404,23 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             self.isRead = true;
         }
         
+    }
+    
+    func addRightBar(){
+        let btnInfoMenu = UIButton(type: UIButtonType.system)
+        btnInfoMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        btnInfoMenu.addTarget(self, action: #selector(Chat_VC.onInfoBarPressed(_:)), for: UIControlEvents.touchUpInside)
+        btnInfoMenu.setImage(UIImage(named: "HomeIcon"), for: UIControlState())
+        btnInfoMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+        let custoInfoBarItem = UIBarButtonItem(customView: btnInfoMenu)
+        self.navigationItem.rightBarButtonItem = custoInfoBarItem
+    }
+    
+    func onInfoBarPressed(_ sender : UIButton){
+        Config.SelectMenuIndex = -1
+        let vc = storyboard?.instantiateViewController(withIdentifier: "GroupInfo") as! ChatGroupInfo_VC
+        vc.groupID = contactID
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

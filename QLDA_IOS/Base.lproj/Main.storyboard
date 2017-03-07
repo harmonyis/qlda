@@ -1613,6 +1613,39 @@
             </objects>
             <point key="canvasLocation" x="-1129" y="2331"/>
         </scene>
+        <!--Chat Group InfoVC-->
+        <scene sceneID="Ahz-ro-br0">
+            <objects>
+                <viewController storyboardIdentifier="GroupInfo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eRd-Tg-Dzc" customClass="ChatGroupInfo_VC" customModule="QLDA_IOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uap-w9-dlB"/>
+                        <viewControllerLayoutGuide type="bottom" id="kPU-nQ-AKa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1m2-zC-GS5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sOx-14-gbX">
+                                <rect key="frame" x="0.0" y="64" width="320" height="136"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6w-Rh-0qz">
+                                <rect key="frame" x="176" y="229" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="WVb-fq-erJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nd0-gZ-ysK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-571" y="2346"/>
+        </scene>
         <!--ChatVC-->
         <scene sceneID="59C-ES-ehr">
             <objects>
@@ -1702,6 +1735,7 @@
                         <outlet property="collectionView" destination="Jjd-7L-i8K" id="1Xn-3K-jdO"/>
                         <outlet property="txtMessage" destination="lvi-b6-uHZ" id="Evz-jh-1QO"/>
                         <outlet property="viewBottom" destination="V6w-AW-Ki8" id="6Ix-4y-KCy"/>
+                        <segue destination="eRd-Tg-Dzc" kind="push" id="pnC-Yw-Iq3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gHM-co-o5C" userLabel="First Responder" sceneMemberID="firstResponder"/>
