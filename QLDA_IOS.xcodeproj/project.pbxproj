@@ -62,6 +62,10 @@
 		24BEAF9E1E6CFF78008F205C /* Tab_QDDT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */; };
 		24BEAFA01E6D01D6008F205C /* Tab_KHV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */; };
 		77874250CB5F4720BEE7F789 /* Pods_QLDA_IOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535DCDAF1DDB47BDB402007B /* Pods_QLDA_IOSUITests.framework */; };
+		7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7B15191E6E5DF500F95D99 /* Toast.swift */; };
+		7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */; };
+		7CA6B9311E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B92F1E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift */; };
+		7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B9331E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift */; };
 		9F34B56EEC1973EE57EF0B1C /* Pods_QLDA_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E42F0C1058275E72661BB7E /* Pods_QLDA_IOS.framework */; };
 		BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */; };
 		BE79D381EFB3531BB18550ED /* Pods_QLDA_IOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */; };
@@ -168,6 +172,10 @@
 		572B215EA84F7B7CF9E16D67 /* Pods-QLDA_IOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSTests/Pods-QLDA_IOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A1182175A41F00793BBEEF5 /* Pods-QLDA_IOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		73BD672CC9788352FF0DB175 /* Pods-QLDA_IOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSTests/Pods-QLDA_IOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7C7B15191E6E5DF500F95D99 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Toast.swift; path = "../Pods/Toast-Swift/Toast/Toast.swift"; sourceTree = "<group>"; };
+		7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuanLyHinhAnh_VC.swift; sourceTree = "<group>"; };
+		7CA6B92F1E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDanhSachDuAnTableViewCell.swift; sourceTree = "<group>"; };
+		7CA6B9331E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDanhSachDuAnDatasource.swift; sourceTree = "<group>"; };
 		8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDA_IOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -325,6 +333,7 @@
 				24BEAED41E697AA6008F205C /* Tab_TTC.swift */,
 				24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */,
 				24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */,
+				7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -365,8 +374,11 @@
 		24BEAF171E697CE4008F205C /* Camera */ = {
 			isa = PBXGroup;
 			children = (
+				7C7B15191E6E5DF500F95D99 /* Toast.swift */,
 				24BEAEC51E697AA5008F205C /* Entity.swift */,
 				24BEAECD1E697AA5008F205C /* MyCollectionViewCell.swift */,
+				7CA6B92F1E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift */,
+				7CA6B9331E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -733,6 +745,7 @@
 				24BEAEDF1E697AA6008F205C /* Base_VC.swift in Sources */,
 				24BEAEE01E697AA6008F205C /* BaseViewController.swift in Sources */,
 				BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */,
+				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
 				24BEAEEC1E697AA6008F205C /* CustomCellDSDATableViewCell.swift in Sources */,
 				24BEAEEB1E697AA6008F205C /* Config.swift in Sources */,
 				24BEAEF51E697AA6008F205C /* ExtendtionUItableViewCell.swift in Sources */,
@@ -747,6 +760,8 @@
 				24BEAF0D1E697AF0008F205C /* SWRevealViewController.m in Sources */,
 				24BEAEF41E697AA6008F205C /* Entity.swift in Sources */,
 				24BEAEF91E697AA6008F205C /* MapItem.swift in Sources */,
+				7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */,
+				7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */,
 				24BEAF001E697AA6008F205C /* Tab_.swift in Sources */,
 				24BEAEF11E697AA6008F205C /* DSDA_View.swift in Sources */,
 				24BEAEF61E697AA6008F205C /* Lich_VC.swift in Sources */,
@@ -762,6 +777,7 @@
 				24BEAF051E697AA6008F205C /* UIImageViewExtension.swift in Sources */,
 				24BEAEE91E697AA6008F205C /* ChatMain_VC.swift in Sources */,
 				24BEAF021E697AA6008F205C /* ThongTinCaNhan_VC.swift in Sources */,
+				7CA6B9311E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift in Sources */,
 				24BEAEE31E697AA6008F205C /* BDTMDT_VC.swift in Sources */,
 				24BEAEE11E697AA6008F205C /* BDGiaiNgan_VC.swift in Sources */,
 				1B655B941E6D4145007A615B /* YAxisValueFormatted.swift in Sources */,
