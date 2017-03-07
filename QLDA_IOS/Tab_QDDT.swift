@@ -135,7 +135,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 var lblTenDuAn:UILabel = UILabel()
                                 lblTenDuAn.textColor = UIColor.black
                                 lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lblTenDuAn.text =  variableConfig.convert(itemTTDA)
+                                lblTenDuAn.text =  Double(itemTTDA)?.doubleToString
                                 
                                 lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
@@ -193,7 +193,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 var lblTenDuAn:UILabel = UILabel()
                                 lblTenDuAn.textColor = UIColor.black
                                 lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
-                                lblTenDuAn.text = variableConfig.convert(itemTTDA)
+                                lblTenDuAn.text = Double(itemTTDA)?.doubleToString
                                 
                                 lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width)/2, height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
@@ -358,7 +358,8 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 var lblTenDuAn:UILabel = UILabel()
                                 lblTenDuAn.textColor = UIColor.black
                                 lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lblTenDuAn.text = variableConfig.convert(itemTTDA)
+                                lblTenDuAn.text = Double(itemTTDA)?.doubleToString
+
                                 lblTenDuAn.textAlignment = NSTextAlignment.right
                                 
                                 lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
@@ -417,7 +418,8 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 var lblTenDuAn:UILabel = UILabel()
                                 lblTenDuAn.textColor = UIColor.black
                                 lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
-                                lblTenDuAn.text = variableConfig.convert(itemTTDA)
+                                lblTenDuAn.text = Double(itemTTDA)?.doubleToString
+
                                 
                                 lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
