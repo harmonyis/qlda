@@ -8,15 +8,16 @@
 
 import UIKit
 import ImageViewer
+import XLPagerTabStrip
 
-class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate{
+class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate, IndicatorInfoProvider, UIGestureRecognizerDelegate  {
     
     @IBOutlet weak var clv: UICollectionView!
     var imagePicker = UIImagePickerController()
     
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     var items : [ImageEntity] = []
-    
+    var itemInfo = IndicatorInfo(title: "Quản lý hình ảnh")
     let ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/GetAllFileUpload"
     
     var idDuAn : Int = 0
@@ -25,6 +26,36 @@ class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegat
     var password : String = ""
     
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.title = "Danh sách hình ảnh"
+        self.idDuAn = variableConfig.m_szIdDuAn
+        self.listName = "DuAn"
+        self.userName = variableConfig.m_szUserName
+        self.password = variableConfig.m_szPassWord
+        
+        let ApiUrl = "\(UrlPreFix.Camera.rawValue)/GetAllFileUploadByID"
+        let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\", \"listName\":\"DuAn\", \"IDItem\":\(idDuAn)}"
+        ApiService.Post(url: ApiUrl, params: params, callback: GetDSHAByIdSuccess, errorCallBack: GetDSHAError)
+        
+        imagePicker.delegate = self
+        
+        // Do any additional setup after loading the view.
+        let lpgr = UILongPressGestureRecognizer(target: self, action:  #selector(QuanLyHinhAnh_VC.handleLongPress))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delaysTouchesBegan = false
+        lpgr.delegate = self
+        lpgr.allowableMovement = CGFloat(600)
+        self.clv!.addGestureRecognizer(lpgr)
+        activityIndicatorStart()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        // Dispose of any resources that can be recreated.
+    }
     
     @IBAction func btnGallery(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum){
@@ -116,15 +147,16 @@ class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     
-    func GetDSHASuccess(data : Data) {
+    func GetDSHAByIdSuccess(data : Data) {
         //let result = String(data: data, encoding: String.Encoding.utf8)
         
         
         //print(result)
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         
+        items.removeAll()
         if let dic = json as? [String:Any] {
-            if let dataResult = dic["GetAllFileUploadResult"] as? [String:Any] {
+            if let dataResult = dic["GetAllFileUploadByIDResult"] as? [String:Any] {
                 if let array = dataResult["DataResult"] as? [[String:Any]] {
                     var image : ImageEntity
                     for obj in array {
@@ -147,9 +179,6 @@ class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegat
                 }
             }
         }
-        
-        
-        //print(json)
     }
     
     
@@ -258,27 +287,145 @@ class QLHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegat
         ]
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.title = "Danh sách hình ảnh"
-        self.idDuAn = 142
-        self.listName = "DuAn"
-        self.userName = "administrator"
-        self.password = "abc@123"
-        
-        let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\"}"
-        ApiService.Post(url: ApiUrl, params: params, callback: GetDSHASuccess, errorCallBack: GetDSHAError)
-        imagePicker.delegate = self
-        
-        // Do any additional setup after loading the view.
+
+    
+    init(itemInfo: IndicatorInfo) {
+        self.itemInfo = itemInfo
+        super.init(nibName: nil, bundle: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-        // Dispose of any resources that can be recreated.
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
+    
+    // MARK: - UITableViewDataSource
+    
+    
+    
+    // MARK: - IndicatorInfoProvider
+    
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return itemInfo
+    }
+    
+    
+    
+    
+    // long click 
+    func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        
+        
+        if gestureReconizer.state != UIGestureRecognizerState.began {
+            return
+        }
+        print("đã đc")
+        
+        let point = gestureReconizer.location(in: self.clv)
+        let indexPath = self.clv.indexPathForItem(at: point)
+        
+        if let index = indexPath {
+            var cell = self.clv.cellForItem(at: index)
+            // do stuff with your cell, for example print the indexPath
+            print(index.row)
+            showMenu(index: index.row)
+            
+        } else {
+            print("Could not find index path")
+        }
+        
+    }
+    
+    func showMenu(index:Int) {
+        // 1
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        
+        // 2
+        let detailAction = UIAlertAction(title: "Chi tiết", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            var obj = self.items[index]
+            var message = ""
+            
+            let ApiUrlDetail = "\(UrlPreFix.Camera.rawValue)/GetImageDetail"
+            let params : String = "{\"userName\" : \"\(self.userName)\", \"password\": \"\(self.password)\", \"listName\":\"DuAn\", \"IDItem\":\(obj.ItemId), \"fileName\":\"\(obj.ImageName)\"}"
+            ApiService.Post(url: ApiUrlDetail, params: params, callback: {(data) in
+                
+                let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                print(json)
+                if let dic = json as? [String:Any] {
+                    if let dataResult = dic["GetImageDetailResult"] as? [String:Any] {
+                        if let array = dataResult["DataResult"] as? [String:Any] {
+                            message = "Dự án: \(array["DuAn"] as! String) \nTên ảnh: \(array["Name"] as! String) \nNgười tạo: \(array["CreatedBy"] as! String) \nNgày tạo: \(array["Created"] as! String) \nKích thước: \(array["Size"] as! String) \nĐộ phân giải:\(array["Dimensions"] as! String)"
+                            
+                            let alert = UIAlertController(title: "Chi tiết:", message: message, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Đóng", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            
+                        }
+                    }
+                }
+                
+            }, errorCallBack: self.GetDSHAError)
+            
+        })
+        
+        
+        let deleteAction = UIAlertAction(title: "Xoá ảnh", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            let alert = UIAlertController(title: "Xác nhận xóa ?", message: "Bạn có chắc chắn muốn xóa ?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Đóng", style: UIAlertActionStyle.default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Xác nhận", style: UIAlertActionStyle.default, handler: {(action) -> Void in
+                var obj = self.items[index]
+                let ApiUrlDetail = "\(UrlPreFix.Camera.rawValue)/DeleteFileUpload"
+                let params : String = "{\"userName\" : \"\(self.userName)\", \"password\": \"\(self.password)\", \"listName\":\"DuAn\", \"IDItem\":\(obj.ItemId), \"fileName\":\"\(obj.ImageName)\"}"
+                ApiService.Post(url: ApiUrlDetail, params: params, callback: {(data) in
+                    
+                    let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                    
+                    self.items.remove(at: index)
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        // Bounce back to the main thread to update the UI
+                        DispatchQueue.main.async {
+                            
+                            self.clv.reloadData()
+                        }
+                        
+                    }
+                    
+                    
+                }, errorCallBack: self.GetDSHAError)
+ 
+
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+        })
+        
+        //
+        let cancelAction = UIAlertAction(title: "Đóng", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+        })
+        
+       
+        // 4
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(detailAction)
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
+    func activityIndicatorStart() {
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.center = self.view.center
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
 }
 
 extension QLHinhAnh_VC: GalleryItemsDatasource {
@@ -300,4 +447,5 @@ extension QLHinhAnh_VC: GalleryItemsDatasource {
         
         return GalleryItem.image{$0(image)}
     }
+    
 }
