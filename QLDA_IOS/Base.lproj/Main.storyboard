@@ -1559,7 +1559,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AkV-Z9-gtl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-571" y="3068"/>
+            <point key="canvasLocation" x="-571" y="3110"/>
         </scene>
         <!--Chat Create GroupVC-->
         <scene sceneID="hx7-Ww-poN">
@@ -1667,6 +1667,9 @@
                                         <rect key="frame" x="56" y="0.0" width="256" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Tên nhóm"/>
+                                        <connections>
+                                            <segue destination="X3L-6e-wS4" kind="modal" modalPresentationStyle="fullScreen" id="qQH-Ba-tKY"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </view>
@@ -1763,6 +1766,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nd0-gZ-ysK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-571" y="2346"/>
+        </scene>
+        <!--Chat Change Group Name Modal-->
+        <scene sceneID="ZeD-dJ-z3M">
+            <objects>
+                <viewController id="X3L-6e-wS4" customClass="ChatChangeGroupName_Modal" customModule="QLDA_IOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="wI7-wL-aK4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3rk-UD-qyA">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSz-dq-zfO">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="dismissPopup:" destination="X3L-6e-wS4" eventType="touchUpInside" id="ywU-r1-3u6"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEd-JX-GuJ">
+                                    <rect key="frame" x="40" y="164" width="240" height="240"/>
+                                    <color key="backgroundColor" red="0.23921568627450981" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="240" id="8ps-8E-1mU"/>
+                                        <constraint firstAttribute="height" constant="240" id="owR-eK-YGQ"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="LEd-JX-GuJ" firstAttribute="centerX" secondItem="3rk-UD-qyA" secondAttribute="centerX" id="4K4-93-Emf"/>
+                                <constraint firstItem="LEd-JX-GuJ" firstAttribute="centerY" secondItem="3rk-UD-qyA" secondAttribute="centerY" id="5QA-tD-8d6"/>
+                                <constraint firstAttribute="trailing" secondItem="HSz-dq-zfO" secondAttribute="trailing" id="Aad-Rl-TPz"/>
+                                <constraint firstItem="HSz-dq-zfO" firstAttribute="leading" secondItem="3rk-UD-qyA" secondAttribute="leading" id="axH-SL-X0y"/>
+                                <constraint firstAttribute="bottom" secondItem="HSz-dq-zfO" secondAttribute="bottom" id="mpo-eh-QdN"/>
+                                <constraint firstItem="HSz-dq-zfO" firstAttribute="top" secondItem="3rk-UD-qyA" secondAttribute="top" id="nK1-md-u8Z"/>
+                            </constraints>
+                        </view>
+                        <blurEffect style="light"/>
+                    </visualEffectView>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JkQ-ne-U9G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-114" y="2724"/>
         </scene>
         <!--ChatVC-->
         <scene sceneID="59C-ES-ehr">

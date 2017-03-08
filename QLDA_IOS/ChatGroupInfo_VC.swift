@@ -19,7 +19,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     @IBOutlet weak var tblListUser: UITableView!
     var groupID : Int!
     var listUser : [UserContact] = [UserContact]()
-    
+    var arrUser : [Int]? = []
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +31,13 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         tblListUser.tableFooterView = UIView(frame: .zero)
         getInfoGroup()
         
+        initEnvetChatHub()
         // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         loadUsers()
+        loadUsers()
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,7 +67,6 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell2 : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellContact")!
         let cell : ChatGroupInfo_Cell = tableView.dequeueReusableCell(withIdentifier: "cellGroupInfo") as! ChatGroupInfo_Cell
         var contact : UserContact
         contact = listUser[indexPath.row]
@@ -111,7 +111,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         
         if let dic = json as? [Int] {
-            
+            arrUser = dic
             listUser = ChatCommon.listContact.filter() {
                 if let user = ($0 as UserContact) as UserContact! {
                     if dic.contains(user.ContactID!) && user.TypeOfContact == 1{
@@ -129,7 +129,6 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
                 self.tblListUser.reloadData()
-                self.initEnvetChatHub()
             }
         }
         
@@ -139,8 +138,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
 
-    @IBAction func leaveGroup(_ sender: Any) {
-
+    @IBAction func leaveGroup(_ sender: Any) {       
 
         let alert = UIAlertController(title: "Thông báo", message: "Bạn thực sự muốn rời nhóm?", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Huỷ", style: UIAlertActionStyle.default, handler: nil))
@@ -160,7 +158,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "addUserToGroup") {
             if let vc = segue.destination as? ChatAddUser_VC{
-                vc.exceptUser = [1, 2]
+                vc.exceptUser = arrUser
             }
         }
     }
@@ -197,11 +195,21 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         }
         
         ChatHub.chatHub.on("removeUserFromGroup"){args in
+            let userID = args?[0] as! Int
+            let groupID = args?[1] as! Int
+            
+            if(userID == ChatHub.userID && groupID == self.groupID)
+            {
+                //khi user hiện tại bị bị xoá khỏi nhóm
+            }
+            else{
+                self.loadUsers()
+            }
             
         }
         
         ChatHub.chatHub.on("addUserToGroup"){args in
-            
+            //self.loadUsers()
         }
         
         ChatHub.chatHub.on("changeGroupPicture"){args in
