@@ -69,6 +69,7 @@
 		9F34B56EEC1973EE57EF0B1C /* Pods_QLDA_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E42F0C1058275E72661BB7E /* Pods_QLDA_IOS.framework */; };
 		BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */; };
 		BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */; };
+		BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */; };
 		BE79D381EFB3531BB18550ED /* Pods_QLDA_IOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -180,6 +181,7 @@
 		8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDA_IOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfo_VC.swift; sourceTree = "<group>"; };
+		BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAddUser_VC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,6 +327,7 @@
 				24BEAEB81E697AA5008F205C /* ChatCreateGroup_VC.swift */,
 				24BEAEBA1E697AA5008F205C /* ChatMain_VC.swift */,
 				BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */,
+				BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */,
 				24BEAEC11E697AA5008F205C /* DSDA_VC.swift */,
 				24BEAEC71E697AA5008F205C /* Lich_VC.swift */,
 				24BEAEC81E697AA5008F205C /* Login_VC.swift */,
@@ -757,6 +760,7 @@
 				24BEAEE71E697AA6008F205C /* ChatCreateGroup_VC.swift in Sources */,
 				24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */,
 				24BEAF041E697AA6008F205C /* UIImageView.swift in Sources */,
+				BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */,
 				24BEAEF31E697AA6008F205C /* DuAn.swift in Sources */,
 				24BEAF091E697AA6008F205C /* variableConfig.swift in Sources */,
 				1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */,
