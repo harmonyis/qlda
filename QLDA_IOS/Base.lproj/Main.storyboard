@@ -2062,9 +2062,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mKy-46-16o">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mKy-46-16o">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="44" right="8"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="2" id="h2W-uE-z6R">
@@ -2081,12 +2080,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Ug-YO-fqb">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Ug-YO-fqb">
                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="5Ug-YO-fqb" firstAttribute="leading" secondItem="Tbd-LL-IEw" secondAttribute="leading" id="17j-eb-OI6"/>
+                                            <constraint firstAttribute="trailing" secondItem="5Ug-YO-fqb" secondAttribute="trailing" id="89T-0R-jxy"/>
+                                            <constraint firstAttribute="bottom" secondItem="5Ug-YO-fqb" secondAttribute="bottom" id="aNv-kY-gSS"/>
+                                            <constraint firstItem="5Ug-YO-fqb" firstAttribute="top" secondItem="Tbd-LL-IEw" secondAttribute="top" id="moZ-LF-h3U"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="imgHinhAnh" destination="5Ug-YO-fqb" id="7sn-fO-y6A"/>
                                         </connections>
@@ -2112,6 +2116,12 @@
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HaP-g7-vUc" firstAttribute="top" secondItem="mKy-46-16o" secondAttribute="bottom" constant="44" id="ReS-pn-6Wd"/>
+                            <constraint firstItem="mKy-46-16o" firstAttribute="top" secondItem="eag-Tv-pxf" secondAttribute="top" id="Wfs-59-LNB"/>
+                            <constraint firstItem="mKy-46-16o" firstAttribute="leading" secondItem="eag-Tv-pxf" secondAttribute="leading" id="Zn3-Hk-wE7"/>
+                            <constraint firstAttribute="trailing" secondItem="mKy-46-16o" secondAttribute="trailing" id="ov7-Af-2Jv"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="v3p-uP-Cb2"/>

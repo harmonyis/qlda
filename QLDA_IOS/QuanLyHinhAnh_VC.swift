@@ -156,6 +156,8 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     
     // MARK: - UICollectionViewDelegate protocol
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let galleryViewController = GalleryViewController(startIndex: indexPath.row, itemsDatasource: self, displacedViewsDatasource: nil, configuration: galleryConfiguration())
@@ -218,8 +220,8 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         self.navigationItem.title = "Danh sách hình ảnh"
         self.idDuAn = 142
         self.listName = "DuAn"
-        self.userName = "administrator"
-        self.password = "abc@123"
+        self.userName = variableConfig.m_szUserName
+        self.password = variableConfig.m_szPassWord
         
         let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\"}"
         ApiService.Post(url: ApiUrl, params: params, callback: GetDSHASuccess, errorCallBack: GetDSHAError)
@@ -237,21 +239,25 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        print("Load Danh sách dự án thành công")
+        //print("Load Danh sách dự án thành công")
         
-        let lpgr = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+        let lpgr = UILongPressGestureRecognizer(target: self, action:  #selector(QuanLyHinhAnh_VC.handleLongPress))
         lpgr.minimumPressDuration = 0.5
-        lpgr.delaysTouchesBegan = true
+        lpgr.delaysTouchesBegan = false
         lpgr.delegate = self
+        lpgr.allowableMovement = CGFloat(600)
         self.clv!.addGestureRecognizer(lpgr)
         
         
         // Do any additional setup after loading the view.
     }
     func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-        if gestureReconizer.state != UIGestureRecognizerState.ended {
+        
+        
+        if gestureReconizer.state != UIGestureRecognizerState.began {
             return
         }
+        print("đã đc")
         
         let point = gestureReconizer.location(in: self.clv)
         let indexPath = self.clv.indexPathForItem(at: point)
@@ -260,10 +266,64 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
             var cell = self.clv.cellForItem(at: index)
             // do stuff with your cell, for example print the indexPath
             print(index.row)
+            showMenu(index: index.row)
+            
         } else {
             print("Could not find index path")
         }
+        
     }
+    
+    func showMenu(index:Int) {
+        // 1
+        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        
+        // 2
+        let detailAction = UIAlertAction(title: "Chi tiết", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            var obj = self.items[index]
+            var message = ""
+            
+            let ApiUrlDetail = "\(UrlPreFix.Camera.rawValue)/GetImageDetail"
+            let params : String = "{\"userName\" : \"\(self.userName)\", \"password\": \"\(self.password)\", \"listName\":\"DuAn\", \"IDItem\":\(obj.ItemId), \"fileName\":\"\(obj.ImageName)\"}"
+            ApiService.Post(url: ApiUrlDetail, params: params, callback: {(data) in
+                
+                 let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                print(json)
+                if let dic = json as? [String:Any] {
+                    if let dataResult = dic["GetImageDetailResult"] as? [String:Any] {
+                        if let array = dataResult["DataResult"] as? [String:Any] {
+                            message = "Dự án: \(array["DuAn"] as! String) \nTên ảnh: \(array["Name"] as! String) \nNgười tạo: \(array["CreatedBy"] as! String) \nNgày tạo: \(array["Created"] as! String) \nKích thước: \(array["Size"] as! String) \nĐộ phân giải:\(array["Dimensions"] as! String)"
+                            
+                            let alert = UIAlertController(title: "Chi tiết:", message: message, preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Đóng", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                            
+                        }
+                    }
+                }
+                
+            }, errorCallBack: self.GetDSHAError)
+   
+        })
+        
+        
+        //
+        let cancelAction = UIAlertAction(title: "Đóng", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+
+        })
+        
+        
+        // 4
+        optionMenu.addAction(detailAction)
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -743,7 +803,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         let idDuAn : Int = (sender.view?.tag)!
         //print(idDuAn)
         if String(idDuAn) == "0" {
-            var ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/GetAllFileUpload"
+            let ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/GetAllFileUpload"
             let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\"}"
             ApiService.Post(url: ApiUrl, params: params, callback: GetDSHASuccess, errorCallBack:GetDSHAError)
             self.DuAnSelected = String(idDuAn)
