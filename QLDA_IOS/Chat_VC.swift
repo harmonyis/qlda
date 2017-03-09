@@ -22,6 +22,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     var isRead : Bool!
     var lastInboxID : Int64!
     
+    var isClose : Bool! = false
     
     var bottomConstraint: NSLayoutConstraint?
     @IBOutlet weak var collectionView: UICollectionView!
@@ -39,8 +40,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         collectionView.register(Chat_Cell.self, forCellWithReuseIdentifier: cellId)
         getMessage()
         
+        
+        //toggle bàn phím và hiện thị ô chat
         bottomConstraint = NSLayoutConstraint(item: viewBottom, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         view.addConstraint(bottomConstraint!)
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -113,6 +117,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         ChatCommon.currentChatID = contactID
         ChatCommon.currentChatType = contactType
+        
+        if(ChatCommon.checkCloseView){
+            self.navigationController?.popViewController(animated: true)
+            ChatCommon.checkCloseView = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

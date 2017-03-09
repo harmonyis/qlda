@@ -137,6 +137,9 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     func errorGetUsers(error : Error) {
     }
     
+    @IBAction func chageGroupName(_ sender: UIButton) {
+        performSegue(withIdentifier: "changeGroupNameModal", sender: self)
+    }
 
     @IBAction func leaveGroup(_ sender: Any) {       
 
@@ -145,6 +148,23 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
 
         let action = UIAlertAction(title: "Ok", style: .default) { action in
             self.removeUserFromGroup(userID: ChatHub.userID, groupID: self.groupID!)
+            ChatCommon.checkCloseView = true
+            self.navigationController?.popViewController(animated: true)
+            /*
+            guard let parent = self.navigationController?.presentingViewController else{
+                return
+            }
+            //presented by parent view controller 1
+            if parent.isKind(of: Chat_VC.self){
+                 let vc = parent as! Chat_VC
+                vc.isClose = true
+                self.navigationController?.popViewController(animated: true)
+                // do something
+            }else{
+                //presented by parent view controller 2
+            }
+            */
+            
         }
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
@@ -159,6 +179,13 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         if (segue.identifier == "addUserToGroup") {
             if let vc = segue.destination as? ChatAddUser_VC{
                 vc.exceptUser = arrUser
+            }
+        }
+        if(segue.identifier == "changeGroupNameModal"){
+            if let vc = segue.destination as? ChatChangeGroupName_Modal{
+                vc.groupID = self.groupID
+                vc.groupName = self.btnGroupName.titleLabel?.text
+                segue.destination.modalPresentationStyle = .overCurrentContext
             }
         }
     }
@@ -187,11 +214,13 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     func initEnvetChatHub(){
         ChatHub.addChatHub(hub: ChatHub.chatHub)
         ChatHub.chatHub.on("changeGroupNameSuccess"){args in
-            
+            let newName : String = args?[1] as! String
+            self.btnGroupName.setTitle(newName, for: .normal)
         }
         
         ChatHub.chatHub.on("changeGroupName"){args in
-            
+            let newName : String = args?[1] as! String
+            self.btnGroupName.setTitle(newName, for: .normal)
         }
         
         ChatHub.chatHub.on("removeUserFromGroup"){args in
@@ -203,13 +232,14 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
                 //khi user hiện tại bị bị xoá khỏi nhóm
             }
             else{
+                ChatCommon.removedFromGroup(args: args)
                 self.loadUsers()
             }
             
         }
         
         ChatHub.chatHub.on("addUserToGroup"){args in
-            //self.loadUsers()
+            self.loadUsers()
         }
         
         ChatHub.chatHub.on("changeGroupPicture"){args in

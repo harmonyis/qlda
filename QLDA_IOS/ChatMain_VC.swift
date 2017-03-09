@@ -220,12 +220,17 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
             ChatCommon.updateMakeReadMessage(args: args)
             self.reloadData()
         }
-        //ChatHub.addChatHub(hub:  ChatHub.chatHub)
+        ChatHub.chatHub.on("removeUserFromGroup"){args in
+            ChatCommon.removedFromGroup(args: args)
+            self.reloadData()
+            
+        }
     }
     
     func reloadData(){
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
+                self.listContact = ChatCommon.listContact
                 self.tblListContact.reloadData()
             }
         }
