@@ -72,19 +72,23 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     var filtered = [UserContact]()
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+        searchActive = false;
+        self.tblListContact.reloadData()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.tblListContact.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.tblListContact.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = true;
+        self.tblListContact.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -94,18 +98,21 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
          let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
          return range.location != NSNotFound
          })*/
-        filtered = listContact.filter() {
-            if let name = ($0 as UserContact).Name?.lowercased() as String! {
-                return name.contains(searchText.lowercased())
+        filtered = listContact.filter() {         
+            if let name = ($0 as UserContact).Name?.toUnsign() as String! {
+                var key : String = searchText
+                return name.contains(key.toUnsign())
             } else {
                 return false
             }
         }
-        if(filtered.count == 0){
+        
+        if(searchText.characters.count == 0){
             searchActive = false;
         } else {
             searchActive = true;
         }
+ 
         self.tblListContact.reloadData()
     }
     
