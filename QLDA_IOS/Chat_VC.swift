@@ -22,6 +22,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     var isRead : Bool!
     var lastInboxID : Int64!
     
+    var isClose : Bool! = false
     
     var bottomConstraint: NSLayoutConstraint?
     @IBOutlet weak var collectionView: UICollectionView!
@@ -29,6 +30,9 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if(contactType == 2){
+            addRightBar()
+        }
         self.title = contactName
         self.initEnvetChatHub()
         //makeReadMsg()
@@ -36,8 +40,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         collectionView.register(Chat_Cell.self, forCellWithReuseIdentifier: cellId)
         getMessage()
         
+        
+        //toggle bàn phím và hiện thị ô chat
         bottomConstraint = NSLayoutConstraint(item: viewBottom, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         view.addConstraint(bottomConstraint!)
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -110,6 +117,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         ChatCommon.currentChatID = contactID
         ChatCommon.currentChatType = contactType
+        
+        if(ChatCommon.checkCloseView){
+            self.navigationController?.popViewController(animated: true)
+            ChatCommon.checkCloseView = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -401,6 +413,23 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             self.isRead = true;
         }
         
+    }
+    
+    func addRightBar(){
+        let btnInfoMenu = UIButton(type: UIButtonType.system)
+        btnInfoMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        btnInfoMenu.addTarget(self, action: #selector(Chat_VC.onInfoBarPressed(_:)), for: UIControlEvents.touchUpInside)
+        btnInfoMenu.setImage(UIImage(named: "HomeIcon"), for: UIControlState())
+        btnInfoMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+        let custoInfoBarItem = UIBarButtonItem(customView: btnInfoMenu)
+        self.navigationItem.rightBarButtonItem = custoInfoBarItem
+    }
+    
+    func onInfoBarPressed(_ sender : UIButton){
+        Config.SelectMenuIndex = -1
+        let vc = storyboard?.instantiateViewController(withIdentifier: "GroupInfo") as! ChatGroupInfo_VC
+        vc.groupID = contactID
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

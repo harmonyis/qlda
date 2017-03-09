@@ -14,6 +14,8 @@ class ChatCommon{
     
     static var listContact : [UserContact] = [UserContact]()
     
+    static var checkCloseView : Bool = false
+    
     static func getContacts(){
         listContact = [UserContact]()
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
@@ -206,5 +208,19 @@ class ChatCommon{
             return false
             }.first!
         user.NumberOfNewMessage = 0
+    }
+    
+    static func removedFromGroup(args : [Any]?){
+        let userID : Int = args?[0] as! Int
+        let groupID : Int = args?[1] as! Int
+        if userID == ChatHub.userID{
+            ChatCommon.listContact = ChatCommon.listContact.filter(){
+                if($0.ContactID == groupID && $0.TypeOfContact == 2){
+                    return false
+                }
+                return true
+            }
+        }      
+        
     }
 }

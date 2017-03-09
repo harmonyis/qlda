@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIView{
+    /*
     func setBadge(tag : Int, number : Int, frame : CGRect){
         var containBadge = false
         //self.viewWithTag(tag)?.isHidden = true
@@ -50,4 +51,5 @@ extension UIView{
             self.addSubview(label)
         }
     }
+ */
 }

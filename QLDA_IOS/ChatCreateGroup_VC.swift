@@ -21,6 +21,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     var listContact : [UserContact] = [UserContact]()
     @IBOutlet weak var txtGroupName: UITextField!
     @IBOutlet weak var btnCreateGroup: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
