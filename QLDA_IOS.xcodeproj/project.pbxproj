@@ -61,6 +61,13 @@
 		24BEAF0D1E697AF0008F205C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF0C1E697AF0008F205C /* SWRevealViewController.m */; };
 		24BEAF9E1E6CFF78008F205C /* Tab_QDDT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */; };
 		24BEAFA01E6D01D6008F205C /* Tab_KHV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */; };
+		24BEAFA21E6EA0EA008F205C /* Tab_KHGN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFA11E6EA0EA008F205C /* Tab_KHGN.swift */; };
+		24BEAFA51E6EB0EC008F205C /* CustomCellKHGN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFA41E6EB0EC008F205C /* CustomCellKHGN.swift */; };
+		24BEAFAB1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFAA1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift */; };
+		24BEAFAD1E6FAF98008F205C /* Cell_KHLCNT_R2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFAC1E6FAF98008F205C /* Cell_KHLCNT_R2.swift */; };
+		24BEAFAF1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFAE1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift */; };
+		24BEAFB21E6FB580008F205C /* Tab_KHLCNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */; };
+		24BEAFB41E6FEC0E008F205C /* GoiThau.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFB31E6FEC0E008F205C /* GoiThau.swift */; };
 		77874250CB5F4720BEE7F789 /* Pods_QLDA_IOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535DCDAF1DDB47BDB402007B /* Pods_QLDA_IOSUITests.framework */; };
 		7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7B15191E6E5DF500F95D99 /* Toast.swift */; };
 		7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */; };
@@ -165,6 +172,13 @@
 		24BEAF0E1E697B14008F205C /* QLDA_IOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QLDA_IOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_QDDT.swift; sourceTree = "<group>"; };
 		24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_KHV.swift; sourceTree = "<group>"; };
+		24BEAFA11E6EA0EA008F205C /* Tab_KHGN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_KHGN.swift; sourceTree = "<group>"; };
+		24BEAFA41E6EB0EC008F205C /* CustomCellKHGN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellKHGN.swift; sourceTree = "<group>"; };
+		24BEAFAA1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_R1.swift; sourceTree = "<group>"; };
+		24BEAFAC1E6FAF98008F205C /* Cell_KHLCNT_R2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_R2.swift; sourceTree = "<group>"; };
+		24BEAFAE1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_R3.swift; sourceTree = "<group>"; };
+		24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_KHLCNT.swift; sourceTree = "<group>"; };
+		24BEAFB31E6FEC0E008F205C /* GoiThau.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoiThau.swift; sourceTree = "<group>"; };
 		2A199DA80609F755A9AD9CBA /* Pods-QLDA_IOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOS/Pods-QLDA_IOS.debug.xcconfig"; sourceTree = "<group>"; };
 		449599864E657405E335FC9F /* Pods-QLDA_IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOS/Pods-QLDA_IOS.release.xcconfig"; sourceTree = "<group>"; };
 		4E42F0C1058275E72661BB7E /* Pods_QLDA_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDA_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -334,6 +348,8 @@
 				24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */,
 				24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */,
 				7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */,
+				24BEAFA11E6EA0EA008F205C /* Tab_KHGN.swift */,
+				24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -405,6 +421,7 @@
 			children = (
 				24BEAEBF1E697AA5008F205C /* DanhSachDA.swift */,
 				24BEAEC41E697AA5008F205C /* DuAn.swift */,
+				24BEAFB31E6FEC0E008F205C /* GoiThau.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -414,6 +431,10 @@
 			children = (
 				24BEAEBD1E697AA5008F205C /* CustomCellDSDATableViewCell.swift */,
 				24BEAEC61E697AA5008F205C /* ExtendtionUItableViewCell.swift */,
+				24BEAFA41E6EB0EC008F205C /* CustomCellKHGN.swift */,
+				24BEAFAA1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift */,
+				24BEAFAC1E6FAF98008F205C /* Cell_KHLCNT_R2.swift */,
+				24BEAFAE1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift */,
 			);
 			name = CustomTableAndCell;
 			sourceTree = "<group>";
@@ -735,8 +756,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24BEAFB41E6FEC0E008F205C /* GoiThau.swift in Sources */,
 				24BEAF9E1E6CFF78008F205C /* Tab_QDDT.swift in Sources */,
 				24BEAEFC1E697AA6008F205C /* MyCollectionViewCell.swift in Sources */,
+				24BEAFA51E6EB0EC008F205C /* CustomCellKHGN.swift in Sources */,
 				24BEAEF71E697AA6008F205C /* Login_VC.swift in Sources */,
 				24BEAEFB1E697AA6008F205C /* MenuViewController.swift in Sources */,
 				24BEAEF01E697AA6008F205C /* DSDA_VC.swift in Sources */,
@@ -747,6 +770,7 @@
 				BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */,
 				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
 				24BEAEEC1E697AA6008F205C /* CustomCellDSDATableViewCell.swift in Sources */,
+				24BEAFAD1E6FAF98008F205C /* Cell_KHLCNT_R2.swift in Sources */,
 				24BEAEEB1E697AA6008F205C /* Config.swift in Sources */,
 				24BEAEF51E697AA6008F205C /* ExtendtionUItableViewCell.swift in Sources */,
 				24BEAF061E697AA6008F205C /* UIView.swift in Sources */,
@@ -756,12 +780,15 @@
 				24BEAF041E697AA6008F205C /* UIImageView.swift in Sources */,
 				24BEAEF31E697AA6008F205C /* DuAn.swift in Sources */,
 				24BEAF091E697AA6008F205C /* variableConfig.swift in Sources */,
+				24BEAFAF1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift in Sources */,
+				24BEAFA21E6EA0EA008F205C /* Tab_KHGN.swift in Sources */,
 				1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */,
 				24BEAF0D1E697AF0008F205C /* SWRevealViewController.m in Sources */,
 				24BEAEF41E697AA6008F205C /* Entity.swift in Sources */,
 				24BEAEF91E697AA6008F205C /* MapItem.swift in Sources */,
 				7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */,
 				7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */,
+				24BEAFB21E6FB580008F205C /* Tab_KHLCNT.swift in Sources */,
 				24BEAF001E697AA6008F205C /* Tab_.swift in Sources */,
 				24BEAEF11E697AA6008F205C /* DSDA_View.swift in Sources */,
 				24BEAEF61E697AA6008F205C /* Lich_VC.swift in Sources */,
@@ -776,6 +803,7 @@
 				24BEAFA01E6D01D6008F205C /* Tab_KHV.swift in Sources */,
 				24BEAF051E697AA6008F205C /* UIImageViewExtension.swift in Sources */,
 				24BEAEE91E697AA6008F205C /* ChatMain_VC.swift in Sources */,
+				24BEAFAB1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift in Sources */,
 				24BEAF021E697AA6008F205C /* ThongTinCaNhan_VC.swift in Sources */,
 				7CA6B9311E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift in Sources */,
 				24BEAEE31E697AA6008F205C /* BDTMDT_VC.swift in Sources */,
