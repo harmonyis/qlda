@@ -92,7 +92,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func callbackChagePictureGroup(data : Data) {
-        print("s ")
+    
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
