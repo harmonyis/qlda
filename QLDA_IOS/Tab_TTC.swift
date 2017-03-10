@@ -37,11 +37,13 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                         for itemTTDA in arrTTDA {
                             var uiView = UIView()
                             var lable:UILabel = UILabel()
+                           
+                           if icount > 0 {
                             lable.textColor = UIColor.black
                             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                             lable.text = arrlblTTDA[icount]
-                            icount = 1 + icount
-                            lable.frame = CGRect(x: 10, y: 0 , width: self.uiViewThongTin.frame.width, height: CGFloat.greatestFiniteMagnitude)
+                           
+                            lable.frame = CGRect(x: 10, y: 5 , width: self.uiViewThongTin.frame.width, height: CGFloat.greatestFiniteMagnitude)
                             lable.numberOfLines = 0
                             lable.sizeToFit()
                             uiView.addSubview(lable)
@@ -81,24 +83,13 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                             
                             self.uiViewThongTin.addSubview(uiView)
                         }
+                             icount = 1 + icount
+                        }
+                       
                         let heightConstraint = self.uiViewThongTin.heightAnchor.constraint(equalToConstant: totalHeight)
                         print(totalHeight)
                         NSLayoutConstraint.activate([heightConstraint])
-                        //   self.uiViewThongTin.heightAnchor.constraint(
-                        //        equalTo: 500,
-                        //       multiplier: 0.65).isActive = true
-                        /*  self.lblTenDuAn.text = arrDSDA[0]
-                         self.lblTenDuAn.sizeToFit()
-                         self.UiViewTenDuAn.frame = CGRect(x: 0, y: 0, width: 15, height: 90)
-                         
-                         self.lblChuDauTu.text = arrDSDA[1]
-                         self.lblMucTieu.text = arrDSDA[2]
-                         self.lblQuyMo.text = arrDSDA[3]
-                         self.lblThoiGianTH.text = arrDSDA[4]
-                         self.lblLinhVuc.text = arrDSDA[5]
-                         self.lblNhomDuAn.text = arrDSDA[6]
-                         */
-                    }
+                                           }
                 }                }
         }
     }

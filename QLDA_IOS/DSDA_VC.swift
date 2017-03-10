@@ -21,7 +21,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
     var indexTrangThaiDuAnCon = Set<String>()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tbDSDA.separatorColor = UIColor.clear
         //self.tbDSDA.rowHeight = UITableViewAutomaticDimension
         
         
