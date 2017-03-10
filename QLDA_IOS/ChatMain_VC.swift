@@ -152,6 +152,9 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         if(!contact.Online!){
             cell.imgOnline.isHidden = true
         }
+        else{
+            cell.imgOnline.isHidden = false
+        }
         return cell
     }
     

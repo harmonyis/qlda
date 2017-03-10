@@ -56,23 +56,24 @@ class ChatCommon{
     
     //function change data chat
     static func updateOnConnect(userID : Int){
-        listContact.filter() {
+        listContact = listContact.filter() {
             let contact = $0 as UserContact
             if contact.ContactID == userID && contact.TypeOfContact == 1{
-                return true
+                contact.Online = true
+                
             }
-            return false
-            }.first?.Online = true
+            return true
+        }
     }
     
     static func updateOnDisconnect(userID : Int){
-        listContact.filter() {
+        listContact = listContact.filter() {
             let contact = $0 as UserContact
             if contact.ContactID == userID && contact.TypeOfContact == 1{
-                return true
+                contact.Online = false
             }
-            return false
-            }.first?.Online = false
+            return true
+        }
     }
     
     static func updateReceiveMessage(args : [Any]?, contactType : Int32){

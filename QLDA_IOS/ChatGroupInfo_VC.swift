@@ -144,7 +144,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
             let alert = UIAlertController(title: "Thông báo", message: "Bạn muốn xóa người dùng \"\(self.listUser[indexPath.row].Name!)\" khỏi nhóm?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Huỷ", style: UIAlertActionStyle.default, handler: nil))
             
-            let action = UIAlertAction(title: "Ok", style: .default) { action in
+            let action = UIAlertAction(title: "OK", style: .destructive) { action in
                 self.removeUserFromGroup(userID: self.listUser[indexPath.row].ContactID!, groupID: self.groupID!)
             }
             alert.addAction(action)
