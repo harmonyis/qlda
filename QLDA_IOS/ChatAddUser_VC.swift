@@ -10,14 +10,17 @@ import UIKit
 
 class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
+    @IBOutlet weak var btnAddBar: UIBarButtonItem!
     @IBOutlet weak var tblListUser: UITableView!
     
     var exceptUser : [Int]? = []
     var listContact : [UserContact] = [UserContact]()
     var listUserChecked : [Int] = []
+    var groupID : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Thêm người dùng vào nhóm"
+        btnAddBar.isEnabled = false
+        //self.title = "Thêm người dùng vào nhóm"
         tblListUser.tableFooterView = UIView(frame: .zero)
         
         listContact = ChatCommon.listContact.filter(){
@@ -30,6 +33,48 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         tblListUser.reloadData()
     }
+    
+    @IBAction func addUser(_ sender: Any) {
+        //print(listUserChecked.count)
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_AddUserToGroup"
+        
+        let params : String = "{\"lstUser\" : \""+getListUser()+"\", \"groupID\": \""+String(groupID)+"\"}"
+        ApiService.Post(url: apiUrl, params: params, callback: callbackAddUser, errorCallBack: errorAddUser)
+        
+    }
+    
+    func callbackAddUser(data : Data) {
+        
+        
+        DispatchQueue.main.async(execute: { () -> Void in
+            self.navigationController?.popViewController(animated: true)
+        })
+        
+        
+    }
+    
+    func getListUser() -> String{
+        var userIDs : String = ""
+        var i : Int = 0
+        for ctID in listUserChecked{
+            userIDs += String(ctID)
+            if(i < listUserChecked.count - 1){
+                userIDs += ","
+            }
+            i += 1
+        }
+        return userIDs
+    }
+    
+    
+    func errorAddUser(error : Error) {
+        let message = error.localizedDescription
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     
     var searchActive : Bool = false
     var filtered = [UserContact]()
@@ -56,12 +101,9 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filtered = listContact.filter() {
-            if let name = ($0 as UserContact).Name?.toUnsign() as String! {
-                var key : String = searchText
-                return name.contains(key.toUnsign())
-            } else {
-                return false
-            }
+            var name = ($0 as UserContact).Name! as String
+            var key : String = searchText
+            return name.toUnsign().contains(key.toUnsign())
         }
         if(searchText.characters.count == 0){
             searchActive = false;
@@ -122,7 +164,12 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
             listUserChecked.append(value)
         }
         self.tblListUser.reloadData()
-        
+        if listUserChecked.count == 0{
+            btnAddBar.isEnabled = false
+        }
+        else{
+            btnAddBar.isEnabled = true
+        }
     }
     
     override func didReceiveMemoryWarning() {

@@ -179,6 +179,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         if (segue.identifier == "addUserToGroup") {
             if let vc = segue.destination as? ChatAddUser_VC{
                 vc.exceptUser = arrUser
+                vc.groupID = groupID
             }
         }
         if(segue.identifier == "changeGroupNameModal"){

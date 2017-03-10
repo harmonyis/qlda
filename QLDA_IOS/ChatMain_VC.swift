@@ -98,13 +98,10 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
          let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
          return range.location != NSNotFound
          })*/
-        filtered = listContact.filter() {         
-            if let name = ($0 as UserContact).Name?.toUnsign() as String! {
-                var key : String = searchText
-                return name.contains(key.toUnsign())
-            } else {
-                return false
-            }
+        filtered = listContact.filter() {
+            var name = ($0 as UserContact).Name! as String            
+            var key : String = searchText
+            return name.toUnsign().contains(key.toUnsign())
         }
         
         if(searchText.characters.count == 0){
@@ -137,10 +134,15 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         if contact.NumberOfNewMessage! > 0{
             cell.lblBadge.isHidden = false
             cell.lblBadge.text = "\(contact.NumberOfNewMessage!)"
+            //cell.lblLastMessage.font = UIFont.boldSystemFont(ofSize: 11)
+            cell.lblLastMessage.font = UIFont.systemFont(ofSize: 11)
+
+            cell.lblLastMessage.font = cell.lblLastMessage.font.boldItalic()
         }
         else{
             cell.lblBadge.isHidden = true
             cell.lblBadge.text = ""
+            cell.lblLastMessage.font = UIFont.systemFont(ofSize: 11)
         }
         
        
