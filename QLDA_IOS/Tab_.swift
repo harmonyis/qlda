@@ -148,7 +148,8 @@ class Tab_:ButtonBarPagerTabStripViewController {
         child_KHLCNT.blackTheme = true
         let child_QLHA = self.storyboard?.instantiateViewController(withIdentifier: "Tab_QLHA") as! QLHinhAnh_VC
         child_QDDT.blackTheme = true
-        return [child_TTC,child_QDDT,child_KHV,child_KHLCNT,child_QLHA]
+        let child_VBDA = self.storyboard?.instantiateViewController(withIdentifier: "Tab_VBDA") as! Tab_VanBanDuAnVC
+        return [child_TTC,child_QDDT,child_KHV,child_KHLCNT,child_VBDA,child_QLHA]
     }
     
     // MARK: - Actions
