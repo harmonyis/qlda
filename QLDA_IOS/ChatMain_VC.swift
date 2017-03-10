@@ -72,19 +72,23 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     var filtered = [UserContact]()
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+        searchActive = false;
+        self.tblListContact.reloadData()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.tblListContact.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.tblListContact.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = true;
+        self.tblListContact.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -95,17 +99,17 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
          return range.location != NSNotFound
          })*/
         filtered = listContact.filter() {
-            if let name = ($0 as UserContact).Name?.lowercased() as String! {
-                return name.contains(searchText.lowercased())
-            } else {
-                return false
-            }
+            var name = ($0 as UserContact).Name! as String            
+            var key : String = searchText
+            return name.toUnsign().contains(key.toUnsign())
         }
-        if(filtered.count == 0){
+        
+        if(searchText.characters.count == 0){
             searchActive = false;
         } else {
             searchActive = true;
         }
+ 
         self.tblListContact.reloadData()
     }
     
@@ -130,10 +134,15 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         if contact.NumberOfNewMessage! > 0{
             cell.lblBadge.isHidden = false
             cell.lblBadge.text = "\(contact.NumberOfNewMessage!)"
+            //cell.lblLastMessage.font = UIFont.boldSystemFont(ofSize: 11)
+            cell.lblLastMessage.font = UIFont.systemFont(ofSize: 11)
+
+            cell.lblLastMessage.font = cell.lblLastMessage.font.boldItalic()
         }
         else{
             cell.lblBadge.isHidden = true
             cell.lblBadge.text = ""
+            cell.lblLastMessage.font = UIFont.systemFont(ofSize: 11)
         }
         
        

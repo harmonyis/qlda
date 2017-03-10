@@ -69,6 +69,9 @@
 		24BEAFB21E6FB580008F205C /* Tab_KHLCNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */; };
 		24BEAFB41E6FEC0E008F205C /* GoiThau.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFB31E6FEC0E008F205C /* GoiThau.swift */; };
 		77874250CB5F4720BEE7F789 /* Pods_QLDA_IOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535DCDAF1DDB47BDB402007B /* Pods_QLDA_IOSUITests.framework */; };
+		7C71ED2E1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */; };
+		7C71ED301E6FD71A0089BC0D /* VanBanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */; };
+		7C71ED321E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */; };
 		7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7B15191E6E5DF500F95D99 /* Toast.swift */; };
 		7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */; };
 		7CA6B9311E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B92F1E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift */; };
@@ -77,7 +80,9 @@
 		BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */; };
 		BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */; };
 		BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */; };
-		BA649B891E700468003973FA /* ChatChangeGroupName_Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B881E700468003973FA /* ChatChangeGroupName_Modal.swift */; };
+		BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */; };
+		BAB6284B1E71535E002472D6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6284A1E71535E002472D6 /* String.swift */; };
+		BAF1E4891E72459300F28FE9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E4881E72459300F28FE9 /* UIFont.swift */; };
 		BE79D381EFB3531BB18550ED /* Pods_QLDA_IOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -189,6 +194,9 @@
 		572B215EA84F7B7CF9E16D67 /* Pods-QLDA_IOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSTests/Pods-QLDA_IOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A1182175A41F00793BBEEF5 /* Pods-QLDA_IOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		73BD672CC9788352FF0DB175 /* Pods-QLDA_IOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSTests/Pods-QLDA_IOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_VanBanDuAnVC.swift; sourceTree = "<group>"; };
+		7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VanBanEntity.swift; sourceTree = "<group>"; };
+		7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VanBanDuAnTableViewCell.swift; sourceTree = "<group>"; };
 		7C7B15191E6E5DF500F95D99 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Toast.swift; path = "../Pods/Toast-Swift/Toast/Toast.swift"; sourceTree = "<group>"; };
 		7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuanLyHinhAnh_VC.swift; sourceTree = "<group>"; };
 		7CA6B92F1E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDanhSachDuAnTableViewCell.swift; sourceTree = "<group>"; };
@@ -197,7 +205,9 @@
 		BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfo_VC.swift; sourceTree = "<group>"; };
 		BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAddUser_VC.swift; sourceTree = "<group>"; };
-		BA649B881E700468003973FA /* ChatChangeGroupName_Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChangeGroupName_Modal.swift; sourceTree = "<group>"; };
+		BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChangeGroupName_Modal.swift; sourceTree = "<group>"; };
+		BAB6284A1E71535E002472D6 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		BAF1E4881E72459300F28FE9 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +326,8 @@
 				24BEAECE1E697AA5008F205C /* PaddingLabel.swift */,
 				24BEAED81E697AA6008F205C /* UIImageViewExtension.swift */,
 				24BEAED91E697AA6008F205C /* UIView.swift */,
+				BAB6284A1E71535E002472D6 /* String.swift */,
+				BAF1E4881E72459300F28FE9 /* UIFont.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -343,8 +355,8 @@
 				24BEAEB81E697AA5008F205C /* ChatCreateGroup_VC.swift */,
 				24BEAEBA1E697AA5008F205C /* ChatMain_VC.swift */,
 				BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */,
-				BA649B881E700468003973FA /* ChatChangeGroupName_Modal.swift */,
 				BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */,
+				BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */,
 				24BEAEC11E697AA5008F205C /* DSDA_VC.swift */,
 				24BEAEC71E697AA5008F205C /* Lich_VC.swift */,
 				24BEAEC81E697AA5008F205C /* Login_VC.swift */,
@@ -359,6 +371,7 @@
 				7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */,
 				24BEAFA11E6EA0EA008F205C /* Tab_KHGN.swift */,
 				24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */,
+				7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -381,6 +394,8 @@
 				1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */,
 				24BEAF1B1E697D33008F205C /* CustomTableAndCell */,
 				24BEAF1A1E697D2C008F205C /* Entity */,
+				7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */,
+				7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */,
 			);
 			name = QLDA;
 			sourceTree = "<group>";
@@ -558,6 +573,7 @@
 				TargetAttributes = {
 					24BEAE7C1E6979D8008F205C = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Z732Q55FC4;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -777,22 +793,27 @@
 				24BEAEDF1E697AA6008F205C /* Base_VC.swift in Sources */,
 				24BEAEE01E697AA6008F205C /* BaseViewController.swift in Sources */,
 				BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */,
+				7C71ED301E6FD71A0089BC0D /* VanBanEntity.swift in Sources */,
 				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
 				24BEAEEC1E697AA6008F205C /* CustomCellDSDATableViewCell.swift in Sources */,
 				24BEAFAD1E6FAF98008F205C /* Cell_KHLCNT_R2.swift in Sources */,
 				24BEAEEB1E697AA6008F205C /* Config.swift in Sources */,
 				24BEAEF51E697AA6008F205C /* ExtendtionUItableViewCell.swift in Sources */,
 				24BEAF061E697AA6008F205C /* UIView.swift in Sources */,
+				7C71ED321E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift in Sources */,
 				24BEAEDE1E697AA6008F205C /* ApiService.swift in Sources */,
 				24BEAEE71E697AA6008F205C /* ChatCreateGroup_VC.swift in Sources */,
 				24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */,
 				24BEAF041E697AA6008F205C /* UIImageView.swift in Sources */,
+				BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */,
 				BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */,
 				24BEAEF31E697AA6008F205C /* DuAn.swift in Sources */,
 				24BEAF091E697AA6008F205C /* variableConfig.swift in Sources */,
 				24BEAFAF1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift in Sources */,
 				24BEAFA21E6EA0EA008F205C /* Tab_KHGN.swift in Sources */,
+				BAF1E4891E72459300F28FE9 /* UIFont.swift in Sources */,
 				1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */,
+				BAB6284B1E71535E002472D6 /* String.swift in Sources */,
 				24BEAF0D1E697AF0008F205C /* SWRevealViewController.m in Sources */,
 				24BEAEF41E697AA6008F205C /* Entity.swift in Sources */,
 				24BEAEF91E697AA6008F205C /* MapItem.swift in Sources */,
@@ -801,6 +822,7 @@
 				7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */,
 				BA649B891E700468003973FA /* ChatChangeGroupName_Modal.swift in Sources */,
 				24BEAFB21E6FB580008F205C /* Tab_KHLCNT.swift in Sources */,
+				7C71ED2E1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift in Sources */,
 				24BEAF001E697AA6008F205C /* Tab_.swift in Sources */,
 				24BEAEF11E697AA6008F205C /* DSDA_View.swift in Sources */,
 				24BEAEF61E697AA6008F205C /* Lich_VC.swift in Sources */,
@@ -980,6 +1002,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Z732Q55FC4;
 				INFOPLIST_FILE = QLDA_IOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Harmony-Soft.QLDA-IOS";
@@ -996,6 +1020,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Z732Q55FC4;
 				INFOPLIST_FILE = QLDA_IOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Harmony-Soft.QLDA-IOS";
