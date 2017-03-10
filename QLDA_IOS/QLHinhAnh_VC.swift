@@ -48,7 +48,8 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
         lpgr.delegate = self
         lpgr.allowableMovement = CGFloat(600)
         self.clv!.addGestureRecognizer(lpgr)
-        activityIndicatorStart()
+        //activityIndicatorStart()
+        print("aaaaa")
     }
     
     override func didReceiveMemoryWarning() {

@@ -62,6 +62,9 @@
 		24BEAF9E1E6CFF78008F205C /* Tab_QDDT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */; };
 		24BEAFA01E6D01D6008F205C /* Tab_KHV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */; };
 		77874250CB5F4720BEE7F789 /* Pods_QLDA_IOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535DCDAF1DDB47BDB402007B /* Pods_QLDA_IOSUITests.framework */; };
+		7C71ED2E1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */; };
+		7C71ED301E6FD71A0089BC0D /* VanBanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */; };
+		7C71ED321E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */; };
 		7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7B15191E6E5DF500F95D99 /* Toast.swift */; };
 		7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */; };
 		7CA6B9311E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B92F1E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift */; };
@@ -172,6 +175,9 @@
 		572B215EA84F7B7CF9E16D67 /* Pods-QLDA_IOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSTests/Pods-QLDA_IOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A1182175A41F00793BBEEF5 /* Pods-QLDA_IOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		73BD672CC9788352FF0DB175 /* Pods-QLDA_IOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSTests/Pods-QLDA_IOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_VanBanDuAnVC.swift; sourceTree = "<group>"; };
+		7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VanBanEntity.swift; sourceTree = "<group>"; };
+		7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VanBanDuAnTableViewCell.swift; sourceTree = "<group>"; };
 		7C7B15191E6E5DF500F95D99 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Toast.swift; path = "../Pods/Toast-Swift/Toast/Toast.swift"; sourceTree = "<group>"; };
 		7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuanLyHinhAnh_VC.swift; sourceTree = "<group>"; };
 		7CA6B92F1E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDanhSachDuAnTableViewCell.swift; sourceTree = "<group>"; };
@@ -334,6 +340,7 @@
 				24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */,
 				24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */,
 				7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */,
+				7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -356,6 +363,8 @@
 				1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */,
 				24BEAF1B1E697D33008F205C /* CustomTableAndCell */,
 				24BEAF1A1E697D2C008F205C /* Entity */,
+				7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */,
+				7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */,
 			);
 			name = QLDA;
 			sourceTree = "<group>";
@@ -745,11 +754,13 @@
 				24BEAEDF1E697AA6008F205C /* Base_VC.swift in Sources */,
 				24BEAEE01E697AA6008F205C /* BaseViewController.swift in Sources */,
 				BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */,
+				7C71ED301E6FD71A0089BC0D /* VanBanEntity.swift in Sources */,
 				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
 				24BEAEEC1E697AA6008F205C /* CustomCellDSDATableViewCell.swift in Sources */,
 				24BEAEEB1E697AA6008F205C /* Config.swift in Sources */,
 				24BEAEF51E697AA6008F205C /* ExtendtionUItableViewCell.swift in Sources */,
 				24BEAF061E697AA6008F205C /* UIView.swift in Sources */,
+				7C71ED321E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift in Sources */,
 				24BEAEDE1E697AA6008F205C /* ApiService.swift in Sources */,
 				24BEAEE71E697AA6008F205C /* ChatCreateGroup_VC.swift in Sources */,
 				24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */,
@@ -762,6 +773,7 @@
 				24BEAEF91E697AA6008F205C /* MapItem.swift in Sources */,
 				7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */,
 				7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */,
+				7C71ED2E1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift in Sources */,
 				24BEAF001E697AA6008F205C /* Tab_.swift in Sources */,
 				24BEAEF11E697AA6008F205C /* DSDA_View.swift in Sources */,
 				24BEAEF61E697AA6008F205C /* Lich_VC.swift in Sources */,
