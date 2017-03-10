@@ -8,12 +8,16 @@
 
 import UIKit
 
-class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     @IBOutlet weak var btnAddUsers: UIButton!
     @IBOutlet weak var viewTop: UIView!
-    @IBOutlet weak var imgGroup: UIImageView!
-    //@IBOutlet weak var lblGroupName: UILabel!
+    
+    @IBOutlet weak var btnGroupPicture: UIButton!
+    //@IBOutlet weak var imgGroup: UIImageView!
+
+    
+    var imagePicker = UIImagePickerController()
     
     @IBOutlet weak var btnGroupName: UIButton!
     @IBOutlet weak var tblListUser: UITableView!
@@ -32,7 +36,8 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         getInfoGroup()
         
         initEnvetChatHub()
-        // Do any additional setup after loading the view.
+        
+        imagePicker.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +48,63 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func btnGroupPictureTouchUp(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum){
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
+            imagePicker.allowsEditing = false
+            
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            //btnGroupPicture.setBackgroundImage(image, for: .normal)
+            
+            let newImg = resizeImage(image: image, newWidth: 540)
+            //imageView.image = image
+            let data = UIImageJPEGRepresentation(newImg, 1.0)
+            let array = [UInt8](data!)            
+            
+            let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_ChangeGroupPicture"
+            
+            let params : String = "{\"groupID\" : \"\(String(groupID!))\", \"userID\": \"\(String(ChatHub.userID))\", \"imageData\":\(array)}"
+            //let params : String = "{\"groupID\" : \"\(String(groupID!))\", \"userID\": \"\(String(ChatHub.userID))\"}"
+            ApiService.Post(url: apiUrl, params: params, callback: callbackChagePictureGroup, errorCallBack: { (error) in
+                print("error")
+                print(error.localizedDescription)
+            })
+
+        } else{
+            //print("Something went wrong")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: { () -> Void in
+            
+        })
+        
+    }
+    
+    func callbackChagePictureGroup(data : Data) {
+        print("s ")
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect( x: 0, y : 0,width: newWidth,height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
     
     
@@ -206,7 +268,8 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
             return false
             }.first
         
-        imgGroup.maskCircle(anyImage: (group?.Picture)!)
+        //imgGroup.maskCircle(anyImage: (group?.Picture)!)
+        btnGroupPicture.setBackgroundImage(group?.Picture, for: .normal)
         //lblGroupName.text = group?.Name
         btnGroupName.setTitle(group?.Name, for: .normal)
     }

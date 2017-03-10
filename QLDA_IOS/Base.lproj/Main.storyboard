@@ -2265,7 +2265,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vgQ-6A-T8Z">
-                        <barButtonItem key="rightBarButtonItem" title="Hoàn tất" id="kMT-vw-JBg">
+                        <barButtonItem key="rightBarButtonItem" title="Thêm" id="kMT-vw-JBg">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="addUser:" destination="D2j-5b-dnE" id="i1K-HR-AnN"/>
@@ -2409,10 +2409,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOx-14-gbX">
                                 <rect key="frame" x="0.0" y="64" width="320" height="48"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OeD-Cu-Rgs">
-                                        <rect key="frame" x="8" y="4.3999999999996362" width="40" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FR1-R5-pdq">
+                                        <rect key="frame" x="8" y="4.5" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
+                                        <connections>
+                                            <action selector="btnGroupPictureTouchUp:" destination="eRd-Tg-Dzc" eventType="touchUpInside" id="MC3-s5-ybU"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzB-BZ-UuU">
                                         <rect key="frame" x="56" y="0.0" width="256" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2509,7 +2512,7 @@
                     <connections>
                         <outlet property="btnAddUsers" destination="7vy-Xi-uvO" id="DtZ-p0-itF"/>
                         <outlet property="btnGroupName" destination="XzB-BZ-UuU" id="B6E-Rt-XId"/>
-                        <outlet property="imgGroup" destination="OeD-Cu-Rgs" id="UMo-Sy-9NS"/>
+                        <outlet property="btnGroupPicture" destination="FR1-R5-pdq" id="iW5-a9-62j"/>
                         <outlet property="tblListUser" destination="izH-bA-4cf" id="kkg-n6-9XA"/>
                         <outlet property="viewTop" destination="sOx-14-gbX" id="2NN-VH-EY5"/>
                         <segue destination="D2j-5b-dnE" kind="push" identifier="addUserToGroup" id="Cpp-88-uQo"/>

@@ -15,5 +15,5 @@ enum UrlPreFix:String {
     case Camera = "http://harmonysoft.vn:8089/sv/AttachmentFilesService.svc"
     case Chat = "http://harmonysoft.vn:8089/QLDA_Services/Chat/ChatService.svc"
     case Map = "http://harmonysoft.vn:8089/QLDA_Services/MapNotificationsv.svc"
-    
+    case Root = "http://harmonysoft.vn:8089/QLDA_Services"
 }

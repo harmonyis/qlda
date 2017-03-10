@@ -234,6 +234,25 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
             self.reloadData()
             
         }
+        
+        ChatHub.chatHub.on("changeGroupPicture"){args in
+            let group = args?[0] as? [Any]
+            let userID = (args?[1] as? Int)!
+            
+            let groupID = (group![0] as? Int)!
+            let groupName = (group![1] as? String)!
+            let url = (group![2] as? String)!
+            
+            ChatCommon.listContact = ChatCommon.listContact.filter(){
+                if($0.ContactID == groupID && $0.TypeOfContact == 2){
+                    $0.PictureUrl =  "\(UrlPreFix.Root.rawValue)\(url)"
+                    $0.setPicture()
+                }
+                return true
+            }
+
+            self.reloadData()
+        }
     }
     
     func reloadData(){
