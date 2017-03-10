@@ -21,7 +21,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
     var indexTrangThaiDuAnCon = Set<String>()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tbDSDA.separatorColor = UIColor.clear
         //self.tbDSDA.rowHeight = UITableViewAutomaticDimension
         
         
@@ -296,7 +296,6 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
     func getStringSizeForFont(font: UIFont, myText: String) -> CGSize {
         let fontAttributes = [NSFontAttributeName: font]
         let size = (myText as NSString).size(attributes: fontAttributes)
-        
         return size
         
     }
