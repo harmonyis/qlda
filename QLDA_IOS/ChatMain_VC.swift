@@ -72,19 +72,23 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     var filtered = [UserContact]()
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+        searchActive = false;
+        self.tblListContact.reloadData()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.tblListContact.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
+        self.tblListContact.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = true;
+        self.tblListContact.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -95,17 +99,17 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
          return range.location != NSNotFound
          })*/
         filtered = listContact.filter() {
-            if let name = ($0 as UserContact).Name?.lowercased() as String! {
-                return name.contains(searchText.lowercased())
-            } else {
-                return false
-            }
+            var name = ($0 as UserContact).Name! as String            
+            var key : String = searchText
+            return name.toUnsign().contains(key.toUnsign())
         }
-        if(filtered.count == 0){
+        
+        if(searchText.characters.count == 0){
             searchActive = false;
         } else {
             searchActive = true;
         }
+ 
         self.tblListContact.reloadData()
     }
     
@@ -121,13 +125,24 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         else{
             contact = listContact[indexPath.row]
         }
-        let frame = CGRect(x: 25, y: 0, width: 15, height: 15)
-        //self.createBadge(parent: cell.viewImageContact, tag: indexPath.row, number: contact.NumberOfNewMessage!, frame: frame)
+
+        cell.lblBadge.layer.borderColor = UIColor.clear.cgColor
+        cell.lblBadge.layer.borderWidth = 2
+        cell.lblBadge.layer.cornerRadius = cell.lblBadge.bounds.size.height / 2
+        cell.lblBadge.layer.masksToBounds = true
+        
         if contact.NumberOfNewMessage! > 0{
-            cell.viewImageContact.setBadge(tag: indexPath.row + 1, number: contact.NumberOfNewMessage!, frame: frame)
+            cell.lblBadge.isHidden = false
+            cell.lblBadge.text = "\(contact.NumberOfNewMessage!)"
+            //cell.lblLastMessage.font = UIFont.boldSystemFont(ofSize: 11)
+            cell.lblLastMessage.font = UIFont.systemFont(ofSize: 11)
+
+            cell.lblLastMessage.font = cell.lblLastMessage.font.boldItalic()
         }
         else{
-            cell.viewImageContact.setBadge(tag: indexPath.row + 1, number: -1, frame: frame)
+            cell.lblBadge.isHidden = true
+            cell.lblBadge.text = ""
+            cell.lblLastMessage.font = UIFont.systemFont(ofSize: 11)
         }
         
        
@@ -214,12 +229,17 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
             ChatCommon.updateMakeReadMessage(args: args)
             self.reloadData()
         }
-        //ChatHub.addChatHub(hub:  ChatHub.chatHub)
+        ChatHub.chatHub.on("removeUserFromGroup"){args in
+            ChatCommon.removedFromGroup(args: args)
+            self.reloadData()
+            
+        }
     }
     
     func reloadData(){
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
+                self.listContact = ChatCommon.listContact
                 self.tblListContact.reloadData()
             }
         }
@@ -240,6 +260,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
 
 class ChatMain_Cell: UITableViewCell{
     
+    @IBOutlet weak var lblBadge: UILabel!
     @IBOutlet weak var viewImageContact: UIView!
     @IBOutlet weak var imgContact : UIImageView!
     @IBOutlet weak var lblContactName : UILabel!

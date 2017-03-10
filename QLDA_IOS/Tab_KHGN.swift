@@ -1,17 +1,16 @@
 //
-//  DSDAViewController.swift
+//  Tab_KHGN.swift
 //  QLDA_IOS
 //
-//  Created by datlh on 2/16/17.
-//  Copyright © 2017 datlh. All rights reserved.
+//  Created by Hoang The Anh on 07/03/2017.
+//  Copyright © 2017 Harmony Soft. All rights reserved.
 //
 
 import UIKit
-
-
-class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate{
-    
-    @IBOutlet weak var uiSearchTDA: UISearchBar!
+import XLPagerTabStrip
+class Tab_KHGN: UIViewController, IndicatorInfoProvider {
+var itemInfo = IndicatorInfo(title: "Thông tin chung")
+   
     @IBOutlet weak var tbDSDA: UITableView!
     var m_arrDSDA : [[String]] = []
     var DSDA = [DanhSachDA]()
@@ -97,129 +96,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    var searchActive : Bool = false
-    var filtered = [UserContact]()
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if !(searchText == "") {
-            DSDA = [DanhSachDA]()
-            for itemDA in self.m_arrDSDA {
-                if itemDA[0] == itemDA[5] , ConvertToUnsign(itemDA[1]).contains(ConvertToUnsign(searchText)){
-                    let itemNhomDA = DanhSachDA()
-                    itemNhomDA.IdDA = itemDA[0] as String
-                    itemNhomDA.TenDA = itemDA[1] as String
-                    itemNhomDA.GiaiDoan = itemDA[4] as String
-                    itemNhomDA.NhomDA = itemDA[3] as String
-                    itemNhomDA.ThoiGianThucHien = itemDA[8] as String
-                    itemNhomDA.TongMucDauTu = itemDA[6] as String
-                    itemNhomDA.GiaTriGiaiNgan = itemDA[7] as String
-                    self.DSDA.append(itemNhomDA)
-                }
-                else if  self.DSDA.contains(where: { $0.IdDA! == itemDA[5] }) , ConvertToUnsign(itemDA[1]).contains(ConvertToUnsign(searchText)) {
-                    let NhomDuAn = self.DSDA.first(where: { $0.IdDA! == itemDA[5] })
-                    print(itemDA[5])
-                    print(itemDA[0])
-                    var NhomDuAnCon = [DuAn]()
-                    NhomDuAnCon = (NhomDuAn?.DuAnCon)!
-                    
-                    let DuAnCon = DuAn()
-                    DuAnCon.IdDA = itemDA[0] as String
-                    DuAnCon.TenDA = itemDA[1] as String
-                    DuAnCon.GiaiDoan = itemDA[4] as String
-                    DuAnCon.NhomDA = itemDA[3] as String
-                    DuAnCon.ThoiGianThucHien = itemDA[8] as String
-                    DuAnCon.TongMucDauTu = itemDA[6] as String
-                    DuAnCon.GiaTriGiaiNgan = itemDA[7] as String
-                    
-                    NhomDuAnCon.append(DuAnCon)
-                    
-                    self.DSDA.remove(at: self.DSDA.index(where: { $0.IdDA! == itemDA[5] })!)
-                    NhomDuAn?.DuAnCon=NhomDuAnCon
-                    self.DSDA.append(NhomDuAn!)
-                }
-                else if  !self.DSDA.contains(where: { $0.IdDA! == itemDA[5] }) , ConvertToUnsign(itemDA[1]).contains(ConvertToUnsign(searchText)) {
-                    let NhomDuAn = self.m_arrDSDA.first(where: { $0[0] == itemDA[5] })
-                    
-                    let itemNhomDA = DanhSachDA()
-                    itemNhomDA.IdDA = (NhomDuAn?[0])! as String
-                    itemNhomDA.TenDA = (NhomDuAn?[1])! as String
-                    itemNhomDA.GiaiDoan = (NhomDuAn?[4])! as String
-                    itemNhomDA.NhomDA = (NhomDuAn?[3])! as String
-                    itemNhomDA.ThoiGianThucHien = (NhomDuAn?[8])! as String
-                    itemNhomDA.TongMucDauTu = (NhomDuAn?[6])! as String
-                    itemNhomDA.GiaTriGiaiNgan = (NhomDuAn?[7])! as String
-                    self.DSDA.append(itemNhomDA)
-                    
-                    var NhomDuAnCon = [DuAn]()
-                    let DuAnCon = DuAn()
-                    DuAnCon.IdDA = itemDA[0] as String
-                    DuAnCon.TenDA = itemDA[1] as String
-                    DuAnCon.GiaiDoan = itemDA[4] as String
-                    DuAnCon.NhomDA = itemDA[3] as String
-                    DuAnCon.ThoiGianThucHien = itemDA[8] as String
-                    DuAnCon.TongMucDauTu = itemDA[6] as String
-                    DuAnCon.GiaTriGiaiNgan = itemDA[7] as String
-                    
-                    NhomDuAnCon.append(DuAnCon)
-                    self.DSDA.remove(at: self.DSDA.index(where: { $0.IdDA! == itemDA[5] })!)
-                    itemNhomDA.DuAnCon=NhomDuAnCon
-                    self.DSDA.append(itemNhomDA)            }
-            }
-        }
-        else
-        {
-            self.DSDA = self.m_DSDA
-        }
-        self.tbDSDA.reloadData()
-        
-    }
-    
-    func  ConvertToUnsign(_ sztext: String) -> String
-    {
-        var signs : [String] = [
-            "aAeEoOuUiIdDyY",
-            "áàạảãâấầậẩẫăắằặẳẵ",
-            "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
-            "éèẹẻẽêếềệểễ",
-            "ÉÈẸẺẼÊẾỀỆỂỄ",
-            "óòọỏõôốồộổỗơớờợởỡ",
-            "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
-            "úùụủũưứừựửữ",
-            "ÚÙỤỦŨƯỨỪỰỬỮ",
-            "íìịỉĩ",
-            "ÍÌỊỈĨ",
-            "đ",
-            "Đ",
-            "ýỳỵỷỹ",
-            "ÝỲỴỶỸ"
-        ]
-        var szValue : String = sztext
-        for i in 1..<signs.count
-        {
-            for  j in 0..<signs[i].characters.count
-            {
-                let item : String = signs[i]
-                szValue = (szValue as NSString).replacingOccurrences(of: (String)(signs[i][j]), with: (String)(signs[0][i-1]))
-            }
-        }
-        return szValue.lowercased();
-    }
+  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetDuAn"
@@ -296,6 +173,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
     func getStringSizeForFont(font: UIFont, myText: String) -> CGSize {
         let fontAttributes = [NSFontAttributeName: font]
         let size = (myText as NSString).size(attributes: fontAttributes)
+        
         return size
         
     }
@@ -582,5 +460,25 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
         self.navigationController?.pushViewController(vc, animated: true)
     }
+
+    init(itemInfo: IndicatorInfo) {
+        self.itemInfo = itemInfo
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    // MARK: - UITableViewDataSource
+    
+    
+    
+    // MARK: - IndicatorInfoProvider
+    
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return itemInfo
+    }
+
 }

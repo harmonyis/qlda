@@ -21,6 +21,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     var listContact : [UserContact] = [UserContact]()
     @IBOutlet weak var txtGroupName: UITextField!
     @IBOutlet weak var btnCreateGroup: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -86,7 +87,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func btnCreateGroupTouchUpInside(_ sender: Any) {
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_CreateGroupChat"
 
-        let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(59)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
+        let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(ChatHub.userID)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
         ApiService.Post(url: apiUrl, params: params, callback: callbackCreateGroup, errorCallBack: errorCreateGroup)
     }
     

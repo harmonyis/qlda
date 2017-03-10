@@ -61,6 +61,13 @@
 		24BEAF0D1E697AF0008F205C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF0C1E697AF0008F205C /* SWRevealViewController.m */; };
 		24BEAF9E1E6CFF78008F205C /* Tab_QDDT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */; };
 		24BEAFA01E6D01D6008F205C /* Tab_KHV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */; };
+		24BEAFA21E6EA0EA008F205C /* Tab_KHGN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFA11E6EA0EA008F205C /* Tab_KHGN.swift */; };
+		24BEAFA51E6EB0EC008F205C /* CustomCellKHGN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFA41E6EB0EC008F205C /* CustomCellKHGN.swift */; };
+		24BEAFAB1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFAA1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift */; };
+		24BEAFAD1E6FAF98008F205C /* Cell_KHLCNT_R2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFAC1E6FAF98008F205C /* Cell_KHLCNT_R2.swift */; };
+		24BEAFAF1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFAE1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift */; };
+		24BEAFB21E6FB580008F205C /* Tab_KHLCNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */; };
+		24BEAFB41E6FEC0E008F205C /* GoiThau.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFB31E6FEC0E008F205C /* GoiThau.swift */; };
 		77874250CB5F4720BEE7F789 /* Pods_QLDA_IOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535DCDAF1DDB47BDB402007B /* Pods_QLDA_IOSUITests.framework */; };
 		7C71ED2E1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */; };
 		7C71ED301E6FD71A0089BC0D /* VanBanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */; };
@@ -71,6 +78,11 @@
 		7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B9331E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift */; };
 		9F34B56EEC1973EE57EF0B1C /* Pods_QLDA_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E42F0C1058275E72661BB7E /* Pods_QLDA_IOS.framework */; };
 		BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */; };
+		BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */; };
+		BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */; };
+		BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */; };
+		BAB6284B1E71535E002472D6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6284A1E71535E002472D6 /* String.swift */; };
+		BAF1E4891E72459300F28FE9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E4881E72459300F28FE9 /* UIFont.swift */; };
 		BE79D381EFB3531BB18550ED /* Pods_QLDA_IOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -168,6 +180,13 @@
 		24BEAF0E1E697B14008F205C /* QLDA_IOS-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QLDA_IOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		24BEAF9D1E6CFF78008F205C /* Tab_QDDT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_QDDT.swift; sourceTree = "<group>"; };
 		24BEAF9F1E6D01D6008F205C /* Tab_KHV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_KHV.swift; sourceTree = "<group>"; };
+		24BEAFA11E6EA0EA008F205C /* Tab_KHGN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_KHGN.swift; sourceTree = "<group>"; };
+		24BEAFA41E6EB0EC008F205C /* CustomCellKHGN.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellKHGN.swift; sourceTree = "<group>"; };
+		24BEAFAA1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_R1.swift; sourceTree = "<group>"; };
+		24BEAFAC1E6FAF98008F205C /* Cell_KHLCNT_R2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_R2.swift; sourceTree = "<group>"; };
+		24BEAFAE1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_R3.swift; sourceTree = "<group>"; };
+		24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab_KHLCNT.swift; sourceTree = "<group>"; };
+		24BEAFB31E6FEC0E008F205C /* GoiThau.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoiThau.swift; sourceTree = "<group>"; };
 		2A199DA80609F755A9AD9CBA /* Pods-QLDA_IOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOS/Pods-QLDA_IOS.debug.xcconfig"; sourceTree = "<group>"; };
 		449599864E657405E335FC9F /* Pods-QLDA_IOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOS/Pods-QLDA_IOS.release.xcconfig"; sourceTree = "<group>"; };
 		4E42F0C1058275E72661BB7E /* Pods_QLDA_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDA_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +203,11 @@
 		7CA6B9331E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDanhSachDuAnDatasource.swift; sourceTree = "<group>"; };
 		8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDA_IOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
+		BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfo_VC.swift; sourceTree = "<group>"; };
+		BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAddUser_VC.swift; sourceTree = "<group>"; };
+		BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChangeGroupName_Modal.swift; sourceTree = "<group>"; };
+		BAB6284A1E71535E002472D6 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		BAF1E4881E72459300F28FE9 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +326,8 @@
 				24BEAECE1E697AA5008F205C /* PaddingLabel.swift */,
 				24BEAED81E697AA6008F205C /* UIImageViewExtension.swift */,
 				24BEAED91E697AA6008F205C /* UIView.swift */,
+				BAB6284A1E71535E002472D6 /* String.swift */,
+				BAF1E4881E72459300F28FE9 /* UIFont.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -328,6 +354,9 @@
 				24BEAEB61E697AA5008F205C /* Chat_VC.swift */,
 				24BEAEB81E697AA5008F205C /* ChatCreateGroup_VC.swift */,
 				24BEAEBA1E697AA5008F205C /* ChatMain_VC.swift */,
+				BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */,
+				BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */,
+				BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */,
 				24BEAEC11E697AA5008F205C /* DSDA_VC.swift */,
 				24BEAEC71E697AA5008F205C /* Lich_VC.swift */,
 				24BEAEC81E697AA5008F205C /* Login_VC.swift */,
@@ -414,6 +443,7 @@
 			children = (
 				24BEAEBF1E697AA5008F205C /* DanhSachDA.swift */,
 				24BEAEC41E697AA5008F205C /* DuAn.swift */,
+				24BEAFB31E6FEC0E008F205C /* GoiThau.swift */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -423,6 +453,10 @@
 			children = (
 				24BEAEBD1E697AA5008F205C /* CustomCellDSDATableViewCell.swift */,
 				24BEAEC61E697AA5008F205C /* ExtendtionUItableViewCell.swift */,
+				24BEAFA41E6EB0EC008F205C /* CustomCellKHGN.swift */,
+				24BEAFAA1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift */,
+				24BEAFAC1E6FAF98008F205C /* Cell_KHLCNT_R2.swift */,
+				24BEAFAE1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift */,
 			);
 			name = CustomTableAndCell;
 			sourceTree = "<group>";
@@ -537,6 +571,7 @@
 				TargetAttributes = {
 					24BEAE7C1E6979D8008F205C = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Z732Q55FC4;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -744,8 +779,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24BEAFB41E6FEC0E008F205C /* GoiThau.swift in Sources */,
 				24BEAF9E1E6CFF78008F205C /* Tab_QDDT.swift in Sources */,
 				24BEAEFC1E697AA6008F205C /* MyCollectionViewCell.swift in Sources */,
+				24BEAFA51E6EB0EC008F205C /* CustomCellKHGN.swift in Sources */,
 				24BEAEF71E697AA6008F205C /* Login_VC.swift in Sources */,
 				24BEAEFB1E697AA6008F205C /* MenuViewController.swift in Sources */,
 				24BEAEF01E697AA6008F205C /* DSDA_VC.swift in Sources */,
@@ -757,6 +794,7 @@
 				7C71ED301E6FD71A0089BC0D /* VanBanEntity.swift in Sources */,
 				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
 				24BEAEEC1E697AA6008F205C /* CustomCellDSDATableViewCell.swift in Sources */,
+				24BEAFAD1E6FAF98008F205C /* Cell_KHLCNT_R2.swift in Sources */,
 				24BEAEEB1E697AA6008F205C /* Config.swift in Sources */,
 				24BEAEF51E697AA6008F205C /* ExtendtionUItableViewCell.swift in Sources */,
 				24BEAF061E697AA6008F205C /* UIView.swift in Sources */,
@@ -765,12 +803,19 @@
 				24BEAEE71E697AA6008F205C /* ChatCreateGroup_VC.swift in Sources */,
 				24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */,
 				24BEAF041E697AA6008F205C /* UIImageView.swift in Sources */,
+				BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */,
+				BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */,
 				24BEAEF31E697AA6008F205C /* DuAn.swift in Sources */,
 				24BEAF091E697AA6008F205C /* variableConfig.swift in Sources */,
+				24BEAFAF1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift in Sources */,
+				24BEAFA21E6EA0EA008F205C /* Tab_KHGN.swift in Sources */,
+				BAF1E4891E72459300F28FE9 /* UIFont.swift in Sources */,
 				1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */,
+				BAB6284B1E71535E002472D6 /* String.swift in Sources */,
 				24BEAF0D1E697AF0008F205C /* SWRevealViewController.m in Sources */,
 				24BEAEF41E697AA6008F205C /* Entity.swift in Sources */,
 				24BEAEF91E697AA6008F205C /* MapItem.swift in Sources */,
+				BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */,
 				7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */,
 				7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */,
 				7C71ED2E1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift in Sources */,
@@ -788,6 +833,7 @@
 				24BEAFA01E6D01D6008F205C /* Tab_KHV.swift in Sources */,
 				24BEAF051E697AA6008F205C /* UIImageViewExtension.swift in Sources */,
 				24BEAEE91E697AA6008F205C /* ChatMain_VC.swift in Sources */,
+				24BEAFAB1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift in Sources */,
 				24BEAF021E697AA6008F205C /* ThongTinCaNhan_VC.swift in Sources */,
 				7CA6B9311E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift in Sources */,
 				24BEAEE31E697AA6008F205C /* BDTMDT_VC.swift in Sources */,
@@ -952,6 +998,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Z732Q55FC4;
 				INFOPLIST_FILE = QLDA_IOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Harmony-Soft.QLDA-IOS";
@@ -968,6 +1016,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Z732Q55FC4;
 				INFOPLIST_FILE = QLDA_IOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Harmony-Soft.QLDA-IOS";
