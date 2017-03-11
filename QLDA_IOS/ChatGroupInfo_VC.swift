@@ -27,6 +27,9 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Thông tin nhóm"
+        //self.navigationItem.backBarButtonItem?.title = ""
+        //self.navigationController?.navigationItem.backBarButtonItem?.title=""
         
         btnAddUsers.layer.cornerRadius = 25
         btnAddUsers.setImage(#imageLiteral(resourceName: "ic_addUser"), for: UIControlState.normal)
@@ -61,9 +64,9 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            //btnGroupPicture.setBackgroundImage(image, for: .normal)
             
             let newImg = resizeImage(image: image, newWidth: 540)
+            btnGroupPicture.setBackgroundImage(newImg, for: .normal)
             //imageView.image = image
             let data = UIImageJPEGRepresentation(newImg, 1.0)
             let array = [UInt8](data!)            

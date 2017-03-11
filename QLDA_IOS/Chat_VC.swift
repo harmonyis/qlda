@@ -384,6 +384,18 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 }                
             }
         }
+        
+        ChatHub.chatHub.on("changeGroupNameSuccess"){args in
+            let newName : String = args?[1] as! String
+            ChatCommon.chageGroupName(args: args)
+            self.title = newName
+        }
+        
+        ChatHub.chatHub.on("changeGroupName"){args in
+            let newName : String = args?[1] as! String
+            ChatCommon.chageGroupName(args: args)
+            self.title = newName
+        }
     }
     
     func receiveMessage(senderID : Int, senderName : String, receiverID : Int, receiverName : String, message : String, messageType : Int, inboxID : Int64, contactType : Int){

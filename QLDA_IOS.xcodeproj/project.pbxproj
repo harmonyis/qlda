@@ -80,6 +80,7 @@
 		BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */; };
 		BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */; };
 		BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */; };
+		BA7E1DED1E738C9C00140811 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7E1DEC1E738C9C00140811 /* UIImage.swift */; };
 		BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */; };
 		BAB6284B1E71535E002472D6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6284A1E71535E002472D6 /* String.swift */; };
 		BAF1E4891E72459300F28FE9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E4881E72459300F28FE9 /* UIFont.swift */; };
@@ -206,6 +207,7 @@
 		BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfo_VC.swift; sourceTree = "<group>"; };
 		BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAddUser_VC.swift; sourceTree = "<group>"; };
+		BA7E1DEC1E738C9C00140811 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChangeGroupName_Modal.swift; sourceTree = "<group>"; };
 		BAB6284A1E71535E002472D6 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BAF1E4881E72459300F28FE9 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				24BEAED91E697AA6008F205C /* UIView.swift */,
 				BAB6284A1E71535E002472D6 /* String.swift */,
 				BAF1E4881E72459300F28FE9 /* UIFont.swift */,
+				BA7E1DEC1E738C9C00140811 /* UIImage.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -826,6 +829,7 @@
 				24BEAFB21E6FB580008F205C /* Tab_KHLCNT.swift in Sources */,
 				7C71ED2E1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift in Sources */,
 				24BEAF001E697AA6008F205C /* Tab_.swift in Sources */,
+				BA7E1DED1E738C9C00140811 /* UIImage.swift in Sources */,
 				24BEAEF11E697AA6008F205C /* DSDA_View.swift in Sources */,
 				24BEAEF61E697AA6008F205C /* Lich_VC.swift in Sources */,
 				24BEAEE21E697AA6008F205C /* BDNVDT_VC.swift in Sources */,

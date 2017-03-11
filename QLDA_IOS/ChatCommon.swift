@@ -211,6 +211,17 @@ class ChatCommon{
         user.NumberOfNewMessage = 0
     }
     
+    static func chageGroupName(args : [Any]?){
+        let groupID : Int = args?[0] as! Int
+        let newName : String = args?[1] as! String
+        listContact = listContact.filter(){
+            if $0.ContactID == groupID && $0.TypeOfContact == 2 {
+                $0.Name = newName
+            }
+            return true
+        }
+    }
+    
     static func removedFromGroup(args : [Any]?){
         let userID : Int = args?[0] as! Int
         let groupID : Int = args?[1] as! Int

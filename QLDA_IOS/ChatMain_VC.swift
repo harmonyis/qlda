@@ -256,6 +256,16 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
 
             self.reloadData()
         }
+        
+        ChatHub.chatHub.on("changeGroupNameSuccess"){args in
+            ChatCommon.chageGroupName(args: args)
+            self.reloadData()
+        }
+        
+        ChatHub.chatHub.on("changeGroupName"){args in
+            ChatCommon.chageGroupName(args: args)
+            self.reloadData()
+        }
     }
     
     func reloadData(){
