@@ -12,11 +12,15 @@ import XLPagerTabStrip
 class Tab_VanBanDuAnVC: UIViewController , UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider{
 
     var itemInfo = IndicatorInfo(title: "Quản lý văn bản")
+    
     var arrVanBan : [VanBanEntity] = []
     let apiUrl = "\(UrlPreFix.QLDA.rawValue)/GetFile"
-    var idDuAn : String = "143"
-    var userName : String = "administrator"
-    var password : String = "abc@123"
+    @IBOutlet weak var viewLabelSTT: UIView!
+    @IBOutlet weak var viewLabelTenDuAn: UIView!
+    @IBOutlet weak var viewLabelDetail: UIView!
+    var idDuAn : String = String(variableConfig.m_szIdDuAn)
+    var userName : String = variableConfig.m_szUserName
+    var password : String = variableConfig.m_szPassWord
     var arrOpen : Set<Int> = []
     
     @IBOutlet weak var tbVanBanDuAn: UITableView!
@@ -24,8 +28,9 @@ class Tab_VanBanDuAnVC: UIViewController , UITableViewDelegate, UITableViewDataS
         super.viewDidLoad()
         tbVanBanDuAn.rowHeight = UITableViewAutomaticDimension
         tbVanBanDuAn.estimatedRowHeight = 30
-         tbVanBanDuAn.separatorColor = UIColor.clear
+        tbVanBanDuAn.separatorColor = UIColor.clear
         loadData()
+        addBorder()
         
        
         // Do any additional setup after loading the view.
@@ -92,14 +97,25 @@ class Tab_VanBanDuAnVC: UIViewController , UITableViewDelegate, UITableViewDataS
     
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! VanBanDuAnTableViewCell
-        cell.lblTenVanban.text = arrVanBan[indexPath.row].tenVanBan
+        cell.lblTenVanban.text = "\(arrVanBan[indexPath.row].tenVanBan)"
         cell.lblTenVanban.sizeToFit()
-        let tieuDeHeight = cell.lblTenVanban.frame.height + CGFloat(10)
-        cell.lblTenVanBanHeight.constant = tieuDeHeight
-        cell.lblTenVanBanTop.constant = 0
-        print("tiêu đề height \(tieuDeHeight)")
+        
+        //let tieuDeHeight = cell.lblTenVanban.frame.height + CGFloat(10)
+        
+        let w : Int = Int(cell.viewTieuDeTenVanBan.frame.width)
+        let size = CGSize(width: w, height: 1000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let estimatedFrame = NSString(string: "\(arrVanBan[indexPath.row].tenVanBan)").boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13)], context: nil)
+        //print("Estimated\(estimatedFrame.height)")
+        
+        let tieuDeHeight = estimatedFrame.height +  CGFloat(10)
+        //let tieuDeHeight : CGFloat = CGFloat(40)
+        //cell.lblTenVanBanHeight.constant = (tieuDeHeight - CGFloat(10))
+        //cell.lblTenVanBanTop.constant = 0
+        //print("tiêu đề height \(tieuDeHeight)")
         
         
         let rowIndex = indexPath.row + 1
@@ -129,40 +145,24 @@ class Tab_VanBanDuAnVC: UIViewController , UITableViewDelegate, UITableViewDataS
         targetString = "Cơ quan ban hành: \(arrVanBan[indexPath.row].coQuanBanHanh)"
         range = NSMakeRange(18, targetString.characters.count - 18)
         cell.lblCoQuanBanHanh.attributedText = attributedString(from: targetString, nonBoldRange: range)
-         cell.lblCoQuanBanHanh.sizeToFit()
- 
-        /*
-        cell.lblCoQuanBanHanh.text = "Cơ quan ban hành: \(arrVanBan[indexPath.row].coQuanBanHanh) ad of ád sad ád ád đá jdfj o ádo iasj odiajs"
         cell.lblCoQuanBanHanh.sizeToFit()
- */
-
-        //cell.lblCoQuanBanHanh.text =
-        
-        
-        
-        //cell.lblSoVanBan.numberOfLines = 0
-        //cell.lblTenVanban.sizeToFit()
-        //cell.lblTenVanban.numberOfLines = 0
-        //cell.lblTenVanban.lineBreakMode = NSLineBreakMode.byCharWrapping
-        //cell.lblSoVanBan.isHidden = true
-        
-        //cell.frame.height = CGFloat(30)
-        //let heightC =  cell.uiViewGoiThau.heightAnchor.constraint(equalToConstant:  50 )
-        //NSLayoutConstraint.activate([heightC])
-        
-        //let msg = "Cơ quan ban hành: \(arrVanBan[indexPath.row].coQuanBanHanh) ad of ád sad ád ád đá jdfj o ádo iasj odiajs"
-        //getStringSizeForFont(font: UIFont.systemFont(ofSize: 13), myText: msg)
-        
+ 
+        let bg = UIColor(netHex: 0xB4e2f7)
         cell.viewTieuDe.layer.borderColor = myColorBoder.cgColor
         cell.viewTieuDe.layer.borderWidth = 0.5
+        //cell.viewTieuDe.backgroundColor = bg
         
         cell.viewChiTiet.layer.borderColor = myColorBoder.cgColor
         cell.viewChiTiet.layer.borderWidth = 0.5
+        //cell.viewChiTiet.backgroundColor = bg
         
-        cell.viewTieuDe.layer.borderColor = myColorBoder.cgColor
-        cell.viewTieuDe.layer.borderWidth = 0.5
+        cell.viewTieuDeSTT.layer.borderColor = myColorBoder.cgColor
+        cell.viewTieuDeSTT.layer.borderWidth = 0.5
+        cell.viewTieuDeSTT.backgroundColor = bg
         
         
+        cell.viewTieuDeTenVanBan.backgroundColor = bg
+        cell.viewTieuDeChiTiet.backgroundColor = bg
         
         
         
@@ -199,36 +199,40 @@ class Tab_VanBanDuAnVC: UIViewController , UITableViewDelegate, UITableViewDataS
         //let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
         let value = String(indexPath.row)
         cell.viewTieuDeChiTiet.accessibilityLabel = value
-        print(indexPath.row)
+        //print(indexPath.row)
         eventClick.addTarget(self, action:  #selector(Tab_VanBanDuAnVC.chiTietClick(sender: )))
         cell.viewTieuDeChiTiet.addGestureRecognizer(eventClick)
         cell.viewTieuDeChiTiet.isUserInteractionEnabled = true;
         
- 
-        
-        
-        
-        //cell.viewTieuDe.sizeToFit()
-        //cell.viewChiTiet.sizeToFit()
-        //cell.viewChiTietNoiDung.sizeToFit()
-        /*
-        print("CHiều cao")
-        print(cell.lblCoQuanBanHanh.frame.height)
-        print(cell.lblSoVanBan.frame.height)
-        print(cell.lblNgayBanHanh.frame.height)
- */
+
         var stkFrame : CGFloat = CGFloat(tieuDeHeight)
         
+        let viewCTNDWidth = cell.viewChiTietNoiDung.frame.width - 20
+        
+        let h1 = calulaterTextSize(text: "Số văn bản: \(arrVanBan[indexPath.row].soVanBan)", size: CGSize(width: viewCTNDWidth , height: 1000))
+        
+        let h2 = calulaterTextSize(text: "Ngày ban hành: \(arrVanBan[indexPath.row].ngayBanHanh)", size: CGSize(width: viewCTNDWidth , height: 1000))
+        
+        let h3 = calulaterTextSize(text: "Cơ quan ban hành: \(arrVanBan[indexPath.row].coQuanBanHanh)", size: CGSize(width: viewCTNDWidth , height: 1000))
+        
+        let h = h1.height + h2.height + h3.height
+         //print(h)
+        //print("view ::::: \(cell.viewChiTietNoiDung.frame.width)")
         if arrOpen.contains(indexPath.row) {
-            stkFrame = cell.lblCoQuanBanHanh.frame.height + cell.lblSoVanBan.frame.height + cell.lblNgayBanHanh.frame.height + CGFloat(20) + CGFloat(tieuDeHeight)
+            //stkFrame = 110
+            stkFrame = h + CGFloat(25) + CGFloat(tieuDeHeight)
         }
 
         cell.viewTieuDeHeight.constant = tieuDeHeight
 
         cell.stkHeight.constant = stkFrame
-
-
         
+        
+        cell.viewChiTietHeight.constant = (stkFrame - tieuDeHeight)
+        
+
+
+
         
         //cell.lblSoVanBan.sizeToFit()
 
@@ -240,6 +244,12 @@ class Tab_VanBanDuAnVC: UIViewController , UITableViewDelegate, UITableViewDataS
         return cell
     }
     
+    func calulaterTextSize(text : String, size : CGSize) -> CGRect{
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
+        return estimatedFrame
+    }
+    
     func chiTietClick(sender: UITapGestureRecognizer) {
          let value : Int = Int((sender.view?.accessibilityLabel)!)!
         if arrOpen.contains(value) {
@@ -247,10 +257,25 @@ class Tab_VanBanDuAnVC: UIViewController , UITableViewDelegate, UITableViewDataS
         } else {
             arrOpen.insert(value)
         }
-        print("Giá trị dòng \(value)")
+        //print("Giá trị dòng \(value)")
         tbVanBanDuAn.reloadData()
         //print(value)
         
+    }
+
+    func addBorder() {
+        let backgorund = UIColor(netHex: 0x21affa)
+        self.viewLabelSTT.layer.borderColor = myColorBoder.cgColor
+        self.viewLabelSTT.layer.borderWidth = 0.5
+        self.viewLabelSTT.backgroundColor = backgorund
+        
+        self.viewLabelDetail.layer.borderColor = myColorBoder.cgColor
+        self.viewLabelDetail.layer.borderWidth = 0.5
+        self.viewLabelDetail.backgroundColor = backgorund
+        
+        self.viewLabelTenDuAn.layer.borderColor = myColorBoder.cgColor
+        self.viewLabelTenDuAn.layer.borderWidth = 0.5
+        self.viewLabelTenDuAn.backgroundColor = backgorund
     }
     
 
