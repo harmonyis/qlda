@@ -80,6 +80,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
+                        self.DSDA = self.DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
                         self.m_DSDA = self.DSDA
                         self.tbDSDA.reloadData()
                     }
@@ -277,7 +278,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
         let labelWidth = cell.lblTenDuAn.frame.width
         let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
         //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
-        var height = CGFloat(labelLines * (stringSizeAsText.height + 3))
+        var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
         if height<30
         {
             height=30
@@ -285,7 +286,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
         print(height)
         if !self.indexTrangThaiDuAnCon.contains((String)(indexPath.section)+"-"+(String)(indexPath.row)) {
             
-            return height + 13
+            return height + 2
             
         }
         return   height + 150
@@ -318,7 +319,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
         let labelWidth = cell.lblTenDuAn.frame.width
         let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
         //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
-        var height = CGFloat(labelLines * (stringSizeAsText.height + 3))
+        var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
         
         if height<30
         {
@@ -327,7 +328,7 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
         
         if !self.indexTrangThaiDuAnCha.contains(section) {
             
-            return height + 13
+            return height + 2
             
         }
         return height + 150
@@ -346,8 +347,8 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
         cell.lblTenDuAn.textAlignment = NSTextAlignment.left
         cell.lblNhomDuAn.text = itemNhomDA.NhomDA!
         cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
-        cell.lblGiaTriGiaiNgan.text = itemNhomDA.GiaTriGiaiNgan!
-        cell.lblTongDauTu.text = itemNhomDA.TongMucDauTu!
+        cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!)
+        cell.lblTongDauTu.text = variableConfig.convert(itemNhomDA.TongMucDauTu!)
         cell.lblThoiGianThucHien.text = itemNhomDA.ThoiGianThucHien!
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
         cell.UiViewGroup.layer.borderWidth = 0.5
@@ -487,8 +488,8 @@ class DSDA_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearchBar
         
         cell.lblNhomDuAn.text = itemDuAnCon.NhomDA!
         cell.lblGiaiDoan.text = itemDuAnCon.GiaiDoan!
-        cell.lblGiaTriGiaiNgan.text = itemDuAnCon.GiaTriGiaiNgan!
-        cell.lblTongDauTu.text = itemDuAnCon.TongMucDauTu!
+        cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemDuAnCon.GiaTriGiaiNgan!)
+        cell.lblTongDauTu.text = variableConfig.convert(itemDuAnCon.TongMucDauTu!)
         cell.lblThoiGianThucHien.text = itemDuAnCon.ThoiGianThucHien!
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor

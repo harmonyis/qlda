@@ -33,7 +33,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
                         var icount = 0
-                        var totalHeight : CGFloat = 0
+                        var totalHeight : CGFloat = 5
                         for itemTTDA in arrTTDA {
                             var uiView = UIView()
                             var lable:UILabel = UILabel()

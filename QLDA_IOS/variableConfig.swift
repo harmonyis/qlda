@@ -21,8 +21,14 @@ public class variableConfig {
         var arrDouble = String(doubleRound).components(separatedBy: ".")
         var dou = Double(arrDouble[0])
         var doubleFormat = Number.formatterWithSeparator.string(from: NSNumber(value: dou!)) ?? ""
-        if arrDouble[1] != "0" || arrDouble[1] != ""{
+        if arrDouble[1] != "0" && arrDouble[1] != ""{
+            if arrDouble[1].characters.count<4 {
             doubleFormat = doubleFormat + "," + arrDouble[1]
+            }
+            else
+            {
+            doubleFormat = doubleFormat + "," + arrDouble[1][0]  + arrDouble[1][1]  + arrDouble[1][2]
+            }
         }
         return doubleFormat
       }
