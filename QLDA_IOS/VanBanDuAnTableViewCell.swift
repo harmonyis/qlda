@@ -21,6 +21,7 @@ class VanBanDuAnTableViewCell: UITableViewCell {
     @IBOutlet weak var lblNgayBanHanh: UILabel!
     @IBOutlet weak var lblSoVanBan: UILabel!
     @IBOutlet weak var lblTenVanBanTop: NSLayoutConstraint!
+    @IBOutlet weak var viewChiTietHeight: NSLayoutConstraint!
     @IBOutlet weak var lblTenVanBanHeight: NSLayoutConstraint!
     @IBOutlet weak var viewChiTietNoiDung: UIView!
     @IBOutlet weak var viewChiTiet: UIView!
