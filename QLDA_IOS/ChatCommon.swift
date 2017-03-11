@@ -56,23 +56,24 @@ class ChatCommon{
     
     //function change data chat
     static func updateOnConnect(userID : Int){
-        listContact.filter() {
+        listContact = listContact.filter() {
             let contact = $0 as UserContact
             if contact.ContactID == userID && contact.TypeOfContact == 1{
-                return true
+                contact.Online = true
+                
             }
-            return false
-            }.first?.Online = true
+            return true
+        }
     }
     
     static func updateOnDisconnect(userID : Int){
-        listContact.filter() {
+        listContact = listContact.filter() {
             let contact = $0 as UserContact
             if contact.ContactID == userID && contact.TypeOfContact == 1{
-                return true
+                contact.Online = false
             }
-            return false
-            }.first?.Online = false
+            return true
+        }
     }
     
     static func updateReceiveMessage(args : [Any]?, contactType : Int32){
@@ -208,6 +209,17 @@ class ChatCommon{
             return false
             }.first!
         user.NumberOfNewMessage = 0
+    }
+    
+    static func chageGroupName(args : [Any]?){
+        let groupID : Int = args?[0] as! Int
+        let newName : String = args?[1] as! String
+        listContact = listContact.filter(){
+            if $0.ContactID == groupID && $0.TypeOfContact == 2 {
+                $0.Name = newName
+            }
+            return true
+        }
     }
     
     static func removedFromGroup(args : [Any]?){

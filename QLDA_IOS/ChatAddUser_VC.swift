@@ -17,6 +17,7 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
     var listContact : [UserContact] = [UserContact]()
     var listUserChecked : [Int] = []
     var groupID : Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAddBar.isEnabled = false
@@ -24,6 +25,9 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
         tblListUser.tableFooterView = UIView(frame: .zero)
         
         listContact = ChatCommon.listContact.filter(){
+            if($0.ContactID == groupID && $0.TypeOfContact == 2){
+                self.title = $0.Name
+            }
             if $0.TypeOfContact! == 1 && !(exceptUser?.contains($0.ContactID!))!{
                 return true
             }
