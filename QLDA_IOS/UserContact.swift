@@ -43,8 +43,7 @@ class UserContact{
     var ReceiverOfMessage : Int?
     var NumberOfNewMessage: Int?
     
-    func setPicture(){
-        
+    func setPicture(){        
         if let path : String = PictureUrl{
             if let url = NSURL(string: path) {
                 if let data = NSData(contentsOf: url as URL) {
