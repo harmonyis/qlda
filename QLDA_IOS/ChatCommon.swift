@@ -54,6 +54,25 @@ class ChatCommon{
     }
     
     
+    static func downLoadImage(_ path : String) -> UIImage?{
+        if let url = NSURL(string: path) {
+            if let data = NSData(contentsOf: url as URL) {
+                if let pic : UIImage =  UIImage(data: data as Data){
+                    return pic
+                }
+                else{
+                    return nil
+                }
+            }
+            else{
+                return nil
+            }
+        }
+        else{
+            return nil
+        }
+    }
+    
     //function change data chat
     static func updateOnConnect(userID : Int){
         listContact = listContact.filter() {

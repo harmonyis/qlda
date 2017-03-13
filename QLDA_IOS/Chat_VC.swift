@@ -151,14 +151,15 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         let msg = messages[indexPath.item]
         
         if let messageText = msg.Message {
+            
+            let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             switch msg.MessageType!{
             case 0 :
                 cell.messageImageView.isHidden = true
                 cell.messageTextView.isHidden = false
                 cell.messageTextView.text = msg.Message
-                let w : Int = Int(view.frame.width * 7 / 10)
+                let w : Int = Int(view.frame.width * 6 / 10)
                 let size = CGSize(width: w, height: 1000)
-                let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
                 let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
                 
                 cell.contactNameLabel.isHidden = true
@@ -202,10 +203,47 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             case 1 :
                 cell.messageImageView.isHidden = false
                 cell.messageTextView.isHidden = true
+
                 
-                cell.messageImageView.downloadImage(url: UrlPreFix.Root.rawValue + messageText)
-                let cgImg = cell.messageImageView.image?.cgImage
-                print(cgImg?.width, cgImg?.height)
+                //cell.messageImageView.downloadImage(url: UrlPreFix.Root.rawValue + messageText)
+                if(msg.ImageMsg != nil){
+                    cell.messageImageView.image = msg.ImageMsg
+                    var h = msg.ImageMsg?.size.height
+                    var w = msg.ImageMsg?.size.width
+                    let wView = view.frame.width * 6 / 10
+                    let wOld = w
+                    if(w! > wView){
+                        w = wView
+                        h = h! * w! / wOld!
+                    }
+                    let size = CGSize(width: wView, height: 1000)
+                    if(msg.IsMe)!{
+                        cell.messageImageView.frame = CGRect(x: view.frame.width - w! - 16 - 16 - 6, y: 0 + 12, width: w! + 16, height: h! + 20)
+                        
+                        cell.textBubbleView.frame = CGRect(x: view.frame.width - w! - 16 - 16 - 8 - 10, y: 0, width: w! + 8 + 8 + 16 + 8, height: h! + 20 + 24)
+                        cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
+                    }
+                    else{
+                        if msg.ContactType == 1{
+                            cell.messageImageView.frame = CGRect(x: 8 + 4 + 4, y: 0 + 12, width: w! + 16, height: h! + 20)
+                            
+                            cell.textBubbleView.frame = CGRect(x: 4, y: 0, width: w! + 8 + 8 + 16 + 8, height: h! + 20 + 24)
+                        }
+                        else{
+                            cell.contactNameLabel.isHidden = false
+                            cell.contactNameLabel.text = msg.SenderName
+                            
+                            let estimatedFrameContactName = NSString(string: msg.SenderName!).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 10)], context: nil)
+                            
+                            cell.contactNameLabel.frame = CGRect(x: 4, y: 0, width: estimatedFrameContactName.width + 16, height: 10)
+                            cell.messageImageView.frame = CGRect(x: 8 + 4 + 4, y: 0 + 12 + 10, width: w! + 16, height: h! + 20)
+                            
+                            cell.textBubbleView.frame = CGRect(x: 4, y: 0 + 10, width: w! + 8 + 8 + 16 + 8, height: h! + 20 + 24)
+                        }
+                        cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+                    }
+                }
+       
             //case 2 :
             default:
                 print("none")
@@ -218,7 +256,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         let msg = messages[indexPath.item]
         
-        let w : Int = Int(view.frame.width * 7 / 10)
+        let w : Int = Int(view.frame.width * 6 / 10)
         if let messageText = msg.Message {
             switch msg.MessageType!{
             case 0 :
@@ -237,12 +275,36 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         return CGSize(width: view.frame.width, height: estimatedFrame.height + 20 + 10)
                     }
                 }
+            case 1 :
+                if(msg.ImageMsg != nil){
+                    var h = msg.ImageMsg?.size.height
+                    var w = msg.ImageMsg?.size.width
+                    let wView = view.frame.width * 6 / 10
+                    let wOld = w
+                    if(w! > wView){
+                        w = wView
+                        h = h! * w! / wOld!
+                    }
+
+                    if(msg.IsMe)!{
+                        return CGSize(width: view.frame.width, height: h! + 20 + 24)
+                    }
+                    else{
+                        if msg.ContactType == 1{
+                            return CGSize(width: view.frame.width, height: h! + 20 + 24)
+                        }
+                        else{
+                            return CGSize(width: view.frame.width, height: h! + 20 + 10 + 24)
+                        }
+                    }
+                }
+                
             default :
                 print("none")
             }
         }
         
-        return CGSize(width: w, height: 100)
+        return CGSize(width: view.frame.width, height: 100)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -285,10 +347,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         }.first?.Name
                 }
                 msg.Created = Date(jsonDate: item["Created"] as! String)
-                messages.append(msg)
+                msg.setImageMsg()
+                self.messages.append(msg)
+
             }
         }
-        
         DispatchQueue.main.async() { () -> Void in
             self.collectionView.reloadData()
             self.scrollToBottom(animate: false)
@@ -412,6 +475,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         newChat.MessageType = messageType
         newChat.SenderID = senderID
         newChat.SenderName = senderName
+        newChat.setImageMsg()
         messages.append(newChat)
     }
     
@@ -503,6 +567,10 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBAction func btnOpenFile(_ sender: Any) {
         let fileBrowser = FileBrowser()
         present(fileBrowser, animated: true, completion: nil)
+        fileBrowser.didSelectFile = { (file: FBFile) -> Void in
+       
+            print(file.displayName)
+        }
     }
     
     
@@ -547,7 +615,9 @@ class Chat_Cell: BaseCell {
     
     let messageImageView: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = UIColor.clear
+        view.image = ChatCommon.downLoadImage("http://harmonysoft.vn:8089/QLDA_Services/ImageMessage/12577.jpg")
+        //view.backgroundColor = UIColor.clear
+        //view.backgroundColor = UIColor.black
         return view
     }()
     

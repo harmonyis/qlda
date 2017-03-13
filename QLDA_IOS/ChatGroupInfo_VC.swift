@@ -41,6 +41,8 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         initEnvetChatHub()
         
         imagePicker.delegate = self
+        
+       
     }
 
     override func viewWillAppear(_ animated: Bool) {
