@@ -165,22 +165,20 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 cell.contactNameLabel.isHidden = true
                 cell.contactNameLabel.text = ""
                 if (msg.IsMe)!{
-                    cell.messageTextView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 8 - 8 - 8, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                    cell.messageTextView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 28 - 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                     
-                    cell.textBubbleView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 16 - 8 - 8, y: 0, width: estimatedFrame.width + 16 + 8, height: estimatedFrame.height + 20)
+                    cell.bubbleImageView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 40, y: 0, width: estimatedFrame.width + 32, height: estimatedFrame.height + 20)
                     
-                    cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
-                    //cell.bubbleImageView.image = ChatLogMessageCell.blueBubbleImage
-                    //cell.bubbleImageView.tintColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
-                    cell.messageTextView.textColor = UIColor.white
+                    cell.bubbleImageView.image = Chat_Cell.rightBubbleImage
+                    cell.bubbleImageView.tintColor = UIColor(netHex: 0xFEA21C)
                     
                 } else {
                     
                     if msg.ContactType == 1{
                         
-                        cell.messageTextView.frame = CGRect(x: 8 + 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                        cell.messageTextView.frame = CGRect(x: 12, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                         
-                        cell.textBubbleView.frame = CGRect(x: 4, y: 0, width: estimatedFrame.width + 8 + 8 + 16, height: estimatedFrame.height + 20)
+                        cell.bubbleImageView.frame = CGRect(x: 0, y: 0, width: estimatedFrame.width + 32, height: estimatedFrame.height + 20)
                     }
                     else{
                         cell.contactNameLabel.isHidden = false
@@ -188,24 +186,20 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         
                         let estimatedFrameContactName = NSString(string: msg.SenderName!).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 10)], context: nil)
                         
-                        cell.contactNameLabel.frame = CGRect(x: 4, y: 0, width: estimatedFrameContactName.width + 16, height: 10)
+                        cell.contactNameLabel.frame = CGRect(x: 8, y: 0, width: estimatedFrameContactName.width, height: 10)
+                        cell.messageTextView.frame = CGRect(x: 12, y: 10, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                         
-                        cell.messageTextView.frame = CGRect(x: 8 + 4, y: 0 + 10, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
-                        
-                        cell.textBubbleView.frame = CGRect(x: 4, y: 0 + 10, width: estimatedFrame.width + 8 + 8 + 16, height: estimatedFrame.height + 20)
+                        cell.bubbleImageView.frame = CGRect(x: 0, y: 10, width: estimatedFrame.width + 32, height: estimatedFrame.height + 20)
                     }
                     
-                    cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-                    //cell.bubbleImageView.image = ChatLogMessageCell.grayBubbleImage
-                    //cell.bubbleImageView.tintColor = UIColor(white: 0.95, alpha: 1)
-                    cell.messageTextView.textColor = UIColor.black
+                    cell.bubbleImageView.image = Chat_Cell.leftBubbleImage
+                    cell.bubbleImageView.tintColor = UIColor(netHex: 0x8ABEFA)
                 }
             case 1 :
                 cell.messageImageView.isHidden = false
                 cell.messageTextView.isHidden = true
 
-                
-                //cell.messageImageView.downloadImage(url: UrlPreFix.Root.rawValue + messageText)
+            
                 if(msg.ImageMsg != nil){
                     cell.messageImageView.image = msg.ImageMsg
                     var h = msg.ImageMsg?.size.height
@@ -217,17 +211,20 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         h = h! * w! / wOld!
                     }
                     let size = CGSize(width: wView, height: 1000)
+                    cell.contactNameLabel.isHidden = true
                     if(msg.IsMe)!{
-                        cell.messageImageView.frame = CGRect(x: view.frame.width - w! - 16 - 16 - 6, y: 0 + 12, width: w! + 16, height: h! + 20)
+                        cell.messageImageView.frame = CGRect(x: view.frame.width - w! - 38 - 4, y: 0 + 12, width: w! + 16, height: h! + 20)
                         
-                        cell.textBubbleView.frame = CGRect(x: view.frame.width - w! - 16 - 16 - 8 - 10, y: 0, width: w! + 8 + 8 + 16 + 8, height: h! + 20 + 24)
-                        cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
+                        cell.bubbleImageView.frame = CGRect(x: view.frame.width - w! - 50 - 4, y: 0, width: w! + 46, height: h! + 44)
+
+                        cell.bubbleImageView.image = Chat_Cell.rightBubbleImage
+                        cell.bubbleImageView.tintColor = UIColor(netHex: 0xFEA21C)
                     }
                     else{
                         if msg.ContactType == 1{
-                            cell.messageImageView.frame = CGRect(x: 8 + 4 + 4, y: 0 + 12, width: w! + 16, height: h! + 20)
+                            cell.messageImageView.frame = CGRect(x: 18, y: 0 + 12, width: w! + 16, height: h! + 20)
                             
-                            cell.textBubbleView.frame = CGRect(x: 4, y: 0, width: w! + 8 + 8 + 16 + 8, height: h! + 20 + 24)
+                            cell.bubbleImageView.frame = CGRect(x: 0, y: 0, width: w! + 48, height: h! + 44)
                         }
                         else{
                             cell.contactNameLabel.isHidden = false
@@ -235,12 +232,14 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                             
                             let estimatedFrameContactName = NSString(string: msg.SenderName!).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 10)], context: nil)
                             
-                            cell.contactNameLabel.frame = CGRect(x: 4, y: 0, width: estimatedFrameContactName.width + 16, height: 10)
-                            cell.messageImageView.frame = CGRect(x: 8 + 4 + 4, y: 0 + 12 + 10, width: w! + 16, height: h! + 20)
+                            cell.contactNameLabel.frame = CGRect(x: 8, y: 0, width: estimatedFrameContactName.width, height: 10)
+                            cell.messageImageView.frame = CGRect(x: 18, y: 22, width: w! + 16, height: h! + 20)
                             
-                            cell.textBubbleView.frame = CGRect(x: 4, y: 0 + 10, width: w! + 8 + 8 + 16 + 8, height: h! + 20 + 24)
+                            cell.bubbleImageView.frame = CGRect(x: 0, y: 10, width: w! + 48, height: h! + 44)
                         }
-                        cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+
+                        cell.bubbleImageView.image = Chat_Cell.leftBubbleImage
+                        cell.bubbleImageView.tintColor = UIColor(netHex: 0x8ABEFA)
                     }
                 }
        
@@ -526,17 +525,19 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             //imageView.image = image
             let data = UIImageJPEGRepresentation(newImg, 1.0)
             let array = [UInt8](data!)
-            
+            var sv = "Chat_SendGroupImage"
             if contactType == 1{
-                let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_SendPrivateImage"
-                print(String(ChatHub.userID), ChatHub.userName, String(contactID), contactName!)
-                let params : String = "{\"senderID\" : \"\(String(ChatHub.userID))\", \"senderName\": \"\(ChatHub.userName)\",\"receiverID\" : \"\(String(contactID))\", \"receiverName\": \"\(contactName!)\", \"imageData\":\(array)}"
-            
-                ApiService.Post(url: apiUrl, params: params, callback: callbackSendImage, errorCallBack: { (error) in
-                    print("error")
-                    print(error.localizedDescription)
-                })
+                sv = "Chat_SendPrivateImage"
             }
+
+            let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/\(sv)"
+            print(String(ChatHub.userID), ChatHub.userName, String(contactID), contactName!)
+            let params : String = "{\"senderID\" : \"\(String(ChatHub.userID))\", \"senderName\": \"\(ChatHub.userName)\",\"receiverID\" : \"\(String(contactID))\", \"receiverName\": \"\(contactName!)\", \"imageData\":\(array)}"
+            
+            ApiService.Post(url: apiUrl, params: params, callback: callbackSendImage, errorCallBack: { (error) in
+                print("error")
+                print(error.localizedDescription)
+            })
         } else{
             print("Something went wrong")
         }
@@ -594,13 +595,15 @@ class Chat_Cell: BaseCell {
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.text = "Sample message"
         textView.backgroundColor = UIColor.clear
+        textView.textColor = UIColor.black
         return textView
     }()
     
     let textBubbleView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        view.layer.cornerRadius = 15
+        view.backgroundColor = UIColor.clear
+        //view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        //view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
         return view
     }()
@@ -615,18 +618,30 @@ class Chat_Cell: BaseCell {
     
     let messageImageView: UIImageView = {
         let view = UIImageView()
-        view.image = ChatCommon.downLoadImage("http://harmonysoft.vn:8089/QLDA_Services/ImageMessage/12577.jpg")
-        //view.backgroundColor = UIColor.clear
-        //view.backgroundColor = UIColor.black
         return view
+    }()
+    
+    static let rightBubbleImage = #imageLiteral(resourceName: "ic_BubbleChatRight").resizableImage(withCapInsets: UIEdgeInsetsMake(22, 26, 22, 26)).withRenderingMode(.alwaysTemplate)
+    static let leftBubbleImage = #imageLiteral(resourceName: "ic_BubbleChatLeft").resizableImage(withCapInsets: UIEdgeInsetsMake(22, 26, 22, 26)).withRenderingMode(.alwaysTemplate)
+    
+    let bubbleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = Chat_Cell.leftBubbleImage
+        imageView.tintColor = UIColor(white: 0.90, alpha: 1)
+        return imageView
     }()
     
     override func setupViews() {
         super.setupViews()
         addSubview(contactNameLabel)
-        addSubview(textBubbleView)
+        //addSubview(textBubbleView)
+        addSubview(bubbleImageView)
         addSubview(messageTextView)
         addSubview(messageImageView)
+        
+       
+        //textBubbleView.addConstraintsWithFormat("H:|[v0]|", views: bubbleImageView)
+        //textBubbleView.addConstraintsWithFormat("V:|[v0]|", views: bubbleImageView)
     }
     
     
