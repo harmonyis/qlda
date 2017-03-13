@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B911E6D4145007A615B /* ConvertDVT.swift */; };
 		1B655B941E6D4145007A615B /* YAxisValueFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */; };
+		244937621E76470E00929B6F /* TableDSDA_ Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */; };
+		244937641E76820500929B6F /* TableDSDA_Lanscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244937631E76820500929B6F /* TableDSDA_Lanscape.swift */; };
 		24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAE801E6979D8008F205C /* AppDelegate.swift */; };
 		24BEAE861E6979D8008F205C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE841E6979D8008F205C /* Main.storyboard */; };
 		24BEAE881E6979D8008F205C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE871E6979D8008F205C /* Assets.xcassets */; };
@@ -122,6 +124,8 @@
 		18481FBDFADDC304EFED2593 /* Pods-QLDA_IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1B655B911E6D4145007A615B /* ConvertDVT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertDVT.swift; sourceTree = "<group>"; };
 		1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YAxisValueFormatted.swift; sourceTree = "<group>"; };
+		244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableDSDA_ Portrait.swift"; sourceTree = "<group>"; };
+		244937631E76820500929B6F /* TableDSDA_Lanscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDSDA_Lanscape.swift; sourceTree = "<group>"; };
 		24BEAE7D1E6979D8008F205C /* QLDA_IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLDA_IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BEAE801E6979D8008F205C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24BEAE851E6979D8008F205C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -242,6 +246,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		244937601E7646A800929B6F /* CustomTable */ = {
+			isa = PBXGroup;
+			children = (
+				244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */,
+				244937631E76820500929B6F /* TableDSDA_Lanscape.swift */,
+			);
+			name = CustomTable;
+			sourceTree = "<group>";
+		};
 		24BEAE741E6979D8008F205C = {
 			isa = PBXGroup;
 			children = (
@@ -395,9 +408,10 @@
 		24BEAF151E697CD8008F205C /* QLDA */ = {
 			isa = PBXGroup;
 			children = (
+				244937601E7646A800929B6F /* CustomTable */,
 				1B655B911E6D4145007A615B /* ConvertDVT.swift */,
 				1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */,
-				24BEAF1B1E697D33008F205C /* CustomTableAndCell */,
+				24BEAF1B1E697D33008F205C /* CustomCell */,
 				24BEAF1A1E697D2C008F205C /* Entity */,
 				7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */,
 				7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */,
@@ -456,7 +470,7 @@
 			name = Entity;
 			sourceTree = "<group>";
 		};
-		24BEAF1B1E697D33008F205C /* CustomTableAndCell */ = {
+		24BEAF1B1E697D33008F205C /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
 				24BEAEBD1E697AA5008F205C /* CustomCellDSDATableViewCell.swift */,
@@ -466,7 +480,7 @@
 				24BEAFAC1E6FAF98008F205C /* Cell_KHLCNT_R2.swift */,
 				24BEAFAE1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift */,
 			);
-			name = CustomTableAndCell;
+			name = CustomCell;
 			sourceTree = "<group>";
 		};
 		24BEAF1C1E697D5C008F205C /* Common */ = {
@@ -796,6 +810,7 @@
 				24BEAEF01E697AA6008F205C /* DSDA_VC.swift in Sources */,
 				24BEAEFD1E697AA6008F205C /* PaddingLabel.swift in Sources */,
 				24BEAF011E697AA6008F205C /* Tab_TTC.swift in Sources */,
+				244937641E76820500929B6F /* TableDSDA_Lanscape.swift in Sources */,
 				24BEAEDF1E697AA6008F205C /* Base_VC.swift in Sources */,
 				24BEAEE01E697AA6008F205C /* BaseViewController.swift in Sources */,
 				BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */,
@@ -854,6 +869,7 @@
 				24BEAEEF1E697AA6008F205C /* Date.swift in Sources */,
 				24BEAEE61E697AA6008F205C /* ChatCommon.swift in Sources */,
 				24BEAEFE1E697AA6008F205C /* QLHinhAnh_VC.swift in Sources */,
+				244937621E76470E00929B6F /* TableDSDA_ Portrait.swift in Sources */,
 				24BEAEE41E697AA6008F205C /* CanhBao_VC.swift in Sources */,
 				24BEAF071E697AA6008F205C /* UrlPreFix.swift in Sources */,
 			);

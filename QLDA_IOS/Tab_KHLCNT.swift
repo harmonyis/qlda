@@ -279,7 +279,7 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
             var eventClick = UITapGestureRecognizer()
             
             cell.uiViewDetail.tag = (Int)(m_dsGoiThau[index - 4].IdGT!)!
-            eventClick.addTarget(self, action:  #selector(DSDA_VC.duAnConClickDetail(sender: )))
+            eventClick.addTarget(self, action:  #selector(Tab_KHLCNT.duAnConClickDetail(sender: )))
             cell.uiViewDetail.addGestureRecognizer(eventClick)
             cell.uiViewDetail.isUserInteractionEnabled = true;
             
