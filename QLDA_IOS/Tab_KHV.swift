@@ -412,7 +412,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                                 lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                                 lable.text = arrTTDA[icount]
                                 
-                                lable.frame = CGRect(x: 10, y: 0 , width: (self.UiviewKHV.frame.width - 10), height: 25)
+                                lable.frame = CGRect(x: 10, y: 3 , width: (self.UiviewKHV.frame.width - 10), height: 25)
                                 lable.numberOfLines = 0
                                 lable.sizeToFit()
                                 uiView.addSubview(lable)
