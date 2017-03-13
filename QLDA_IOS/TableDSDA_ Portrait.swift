@@ -1,132 +1,54 @@
 //
-//  Tab_KHGN.swift
+//  TableDSDA_LanscapeTableViewController.swift
 //  QLDA_IOS
 //
-//  Created by Hoang The Anh on 07/03/2017.
+//  Created by Hoang The Anh on 13/03/2017.
 //  Copyright © 2017 Harmony Soft. All rights reserved.
 //
 
 import UIKit
-import XLPagerTabStrip
-class Tab_KHGN: UIViewController, IndicatorInfoProvider {
-var itemInfo = IndicatorInfo(title: "Thông tin chung")
-   
-    @IBOutlet weak var tbDSDA: UITableView!
+
+class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
+
+    
     var m_arrDSDA : [[String]] = []
     var DSDA = [DanhSachDA]()
-    var m_DSDA = [DanhSachDA]()
     var indexTrangThaiDuAnCha = Set<Int>()
     var indexGroupDuAnCon = Set<Int>()
     var indexTrangThaiDuAnCon = Set<String>()
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        //self.tbDSDA.rowHeight = UITableViewAutomaticDimension
-        
-        
-        self.automaticallyAdjustsScrollViewInsets = false
-        
-        //     self.tbDSDA.sectionHeaderHeight = UITableViewAutomaticDimension
-        //     self.tbDSDA.rowHeight = UITableViewAutomaticDimension
-        //     self.tbDSDA.estimatedRowHeight = 50
-        //   self.tbDSDA.estimatedSectionHeaderHeight = 50
-        
-        //    self.tbDSDA.alwaysBounceVertical = false
-        
-        //self.addSlideMenuButton()
-    }
-    
-    func Alert(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        if let dic = json as? [String:Any] {
-            if let arrDSDA = dic["GetDuAnResult"] as? [[String]] {
-                self.m_arrDSDA = arrDSDA
-                for itemDA in arrDSDA {
-                    if itemDA[0] == itemDA[5] {
-                        let itemNhomDA = DanhSachDA()
-                        itemNhomDA.IdDA = itemDA[0] as String
-                        itemNhomDA.TenDA = itemDA[1] as String
-                        itemNhomDA.GiaiDoan = itemDA[4] as String
-                        itemNhomDA.NhomDA = itemDA[3] as String
-                        itemNhomDA.ThoiGianThucHien = itemDA[8] as String
-                        itemNhomDA.TongMucDauTu = itemDA[6] as String
-                        itemNhomDA.GiaTriGiaiNgan = itemDA[7] as String
-                        self.DSDA.append(itemNhomDA)
-                    }
-                    else if  self.DSDA.contains(where: { $0.IdDA! == itemDA[5] }) {
-                        let NhomDuAn = self.DSDA.first(where: { $0.IdDA! == itemDA[5] })
-                        print(itemDA[5])
-                        print(itemDA[0])
-                        var NhomDuAnCon = [DuAn]()
-                        NhomDuAnCon = (NhomDuAn?.DuAnCon)!
-                        
-                        let DuAnCon = DuAn()
-                        DuAnCon.IdDA = itemDA[0] as String
-                        DuAnCon.TenDA = itemDA[1] as String
-                        DuAnCon.GiaiDoan = itemDA[4] as String
-                        DuAnCon.NhomDA = itemDA[3] as String
-                        DuAnCon.ThoiGianThucHien = itemDA[8] as String
-                        DuAnCon.TongMucDauTu = itemDA[6] as String
-                        DuAnCon.GiaTriGiaiNgan = itemDA[7] as String
-                        
-                        NhomDuAnCon.append(DuAnCon)
-                        
-                        self.DSDA.remove(at: self.DSDA.index(where: { $0.IdDA! == itemDA[5] })!)
-                        NhomDuAn?.DuAnCon=NhomDuAnCon
-                        self.DSDA.append(NhomDuAn!)
-                    }
-                }
-                
-                DispatchQueue.global(qos: .userInitiated).async {
-                    DispatchQueue.main.async {
-                        self.m_DSDA = self.DSDA
-                        self.tbDSDA.reloadData()
-                    }
-                }
-                
-            }
-        }
-    }
-    
-    
-    
-    func AlertError(error : Error) {
-        let message = error.localizedDescription
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
+    var tbDSDA : UITableView?
+    var uiViewDSDA : UIViewController?
   
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetDuAn"
-        //let szUser=lblName.
-        let params : String = "{\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
-        
-        ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)    }
-    
-    
-    @IBAction func backLogin(_ sender: Any) {
+    // MARK: - Table view data source
+   init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController){
+        super.init()
+        self.DSDA = arrDSDA
+        self.tbDSDA = tbvDSDA
+        self.uiViewDSDA = tbvcDSDA
         
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+     
+     func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return self.DSDA.count
     }
-    
-    //Table
-    
-    /*  func numberOfSections(in tableView: UITableView) -> Int {
-     return 1
-     }
-     */
-    func numberOfSections(in tableView: UITableView) -> Int {
+
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        if(self.indexGroupDuAnCon.contains(section))
+        {
+            return 0
+        }
+        else {
+            return self.DSDA[section].DuAnCon!.count
+        }    }
+
+    /* func numberOfSections(_ tableView: UITableView) -> Int {
         return self.DSDA.count
     }
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if(self.indexGroupDuAnCon.contains(section))
         {
             return 0
@@ -136,7 +58,7 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         }
     }
     
-    
+    */
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
@@ -154,7 +76,7 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         let labelWidth = cell.lblTenDuAn.frame.width
         let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
         //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
-        var height = CGFloat(labelLines * (stringSizeAsText.height + 3))
+        var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
         if height<30
         {
             height=30
@@ -162,7 +84,7 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         print(height)
         if !self.indexTrangThaiDuAnCon.contains((String)(indexPath.section)+"-"+(String)(indexPath.row)) {
             
-            return height + 13
+            return height + 2
             
         }
         return   height + 150
@@ -173,7 +95,6 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
     func getStringSizeForFont(font: UIFont, myText: String) -> CGSize {
         let fontAttributes = [NSFontAttributeName: font]
         let size = (myText as NSString).size(attributes: fontAttributes)
-        
         return size
         
     }
@@ -196,7 +117,7 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         let labelWidth = cell.lblTenDuAn.frame.width
         let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
         //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
-        var height = CGFloat(labelLines * (stringSizeAsText.height + 3))
+        var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
         
         if height<30
         {
@@ -205,7 +126,7 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         
         if !self.indexTrangThaiDuAnCha.contains(section) {
             
-            return height + 13
+            return height + 2
             
         }
         return height + 150
@@ -213,8 +134,8 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
     
     
     // */
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
         // cell.ght = 60
         //  cell.scrollEnabled = false
@@ -224,8 +145,8 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         cell.lblTenDuAn.textAlignment = NSTextAlignment.left
         cell.lblNhomDuAn.text = itemNhomDA.NhomDA!
         cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
-        cell.lblGiaTriGiaiNgan.text = itemNhomDA.GiaTriGiaiNgan!
-        cell.lblTongDauTu.text = itemNhomDA.TongMucDauTu!
+        cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!)
+        cell.lblTongDauTu.text = variableConfig.convert(itemNhomDA.TongMucDauTu!)
         cell.lblThoiGianThucHien.text = itemNhomDA.ThoiGianThucHien!
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
         cell.UiViewGroup.layer.borderWidth = 0.5
@@ -275,19 +196,19 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         var eventClick = UITapGestureRecognizer()
         
         cell.UiViewDetail.tag = section
-    //    eventClick.addTarget(self, action:  #selector(DSDA_VC.duAnChaClickDetail(sender: )))
+        eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.duAnChaClickDetail(sender: )))
         cell.UiViewDetail.addGestureRecognizer(eventClick)
         cell.UiViewDetail.isUserInteractionEnabled = true;
         
         eventClick = UITapGestureRecognizer()
         cell.imgGroup.tag = section
-     //   eventClick.addTarget(self, action:  #selector(DSDA_VC.duAnChaClickGroup(sender: )))
+        eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.duAnChaClickGroup(sender: )))
         cell.imgGroup.addGestureRecognizer(eventClick)
         cell.imgGroup.isUserInteractionEnabled = true;
         
         eventClick = UITapGestureRecognizer()
         
-   //     eventClick.addTarget(self, action:  #selector(DSDA_VC.ClickTenDuAn(sender:)))
+        eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.ClickTenDuAn(sender:)))
         cell.lblTenDuAn.tag = (Int)(itemNhomDA.IdDA!)!
         cell.lblTenDuAn.accessibilityLabel = (itemNhomDA.TenDA!)
         cell.lblTenDuAn.addGestureRecognizer(eventClick)
@@ -319,7 +240,7 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         
         // self.tbDSDA.beginUpdates()
         //    self.tbDSDA.endUpdates()
-        self.tbDSDA.reloadData()
+        self.tbDSDA?.reloadData()
     }
     
     func duAnChaClickDetail(sender: UITapGestureRecognizer)
@@ -334,9 +255,8 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
             self.indexTrangThaiDuAnCha.insert(value!)
             
         }
-        self.tbDSDA.beginUpdates()
-        self.tbDSDA.endUpdates()
-        self.tbDSDA.reloadData()
+        
+        self.tbDSDA?.reloadData()
     }
     
     
@@ -365,8 +285,8 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         
         cell.lblNhomDuAn.text = itemDuAnCon.NhomDA!
         cell.lblGiaiDoan.text = itemDuAnCon.GiaiDoan!
-        cell.lblGiaTriGiaiNgan.text = itemDuAnCon.GiaTriGiaiNgan!
-        cell.lblTongDauTu.text = itemDuAnCon.TongMucDauTu!
+        cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemDuAnCon.GiaTriGiaiNgan!)
+        cell.lblTongDauTu.text = variableConfig.convert(itemDuAnCon.TongMucDauTu!)
         cell.lblThoiGianThucHien.text = itemDuAnCon.ThoiGianThucHien!
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
@@ -416,21 +336,21 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
         let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
         cell.UiViewDetail.accessibilityLabel = value
         print(indexPath.row)
-   //     eventClick.addTarget(self, action:  #selector(DSDA_VC.duAnConClickDetail(sender: )))
+        eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.duAnConClickDetail(sender: )))
         
         cell.UiViewDetail.addGestureRecognizer(eventClick)
         cell.UiViewDetail.isUserInteractionEnabled = true;
         
         eventClick = UITapGestureRecognizer()
         
-    //    eventClick.addTarget(self, action:  #selector(DSDA_VC.ClickTenDuAn(sender:)))
+        eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.ClickTenDuAn(sender:)))
         cell.lblTenDuAn.accessibilityLabel = (itemDuAnCon.TenDA!)
         cell.lblTenDuAn.tag = (Int)(itemDuAnCon.IdDA!)!
         cell.lblTenDuAn.addGestureRecognizer(eventClick)
         cell.lblTenDuAn.isUserInteractionEnabled = true;
         
         cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCon.contains(value)
-        //  print("ssssss")
+        print("ssssss")
         return cell
     }
     
@@ -448,37 +368,17 @@ var itemInfo = IndicatorInfo(title: "Thông tin chung")
             self.indexTrangThaiDuAnCon.insert(value)
             
         }
-        self.tbDSDA.beginUpdates()
-        self.tbDSDA.endUpdates()
-        self.tbDSDA.reloadData()
+        self.tbDSDA?.beginUpdates()
+        self.tbDSDA?.endUpdates()
+        self.tbDSDA?.reloadData()
     }
     func ClickTenDuAn(sender: UITapGestureRecognizer)
     {
         let value : String = (sender.view?.accessibilityLabel)!
         variableConfig.m_szIdDuAn = (sender.view?.tag)!
         variableConfig.m_szTenDuAn = value
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-
-    init(itemInfo: IndicatorInfo) {
-        self.itemInfo = itemInfo
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    
-    // MARK: - UITableViewDataSource
-    
-    
-    
-    // MARK: - IndicatorInfoProvider
-    
-    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return itemInfo
+        let vc = uiViewDSDA?.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
+        uiViewDSDA?.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

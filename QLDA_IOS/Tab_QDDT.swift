@@ -173,7 +173,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                                 lable.text = arrlblTTDA[icount-1]
                                 
-                                lable.frame = CGRect(x: 10, y: 0 , width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
+                                lable.frame = CGRect(x: 10, y: 3 , width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
                                 lable.numberOfLines = 0
                                 lable.sizeToFit()
                                 uiView.addSubview(lable)
