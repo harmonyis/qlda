@@ -9,6 +9,7 @@
 import UIKit
 import SwiftR
 import FileBrowser
+import ImageViewer
 
 class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     fileprivate let cellId = "cellId"
@@ -308,6 +309,63 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(8, 0, 0, 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let galleryViewController = GalleryViewController(startIndex: indexPath.item, itemsDatasource: self, displacedViewsDatasource: nil, configuration: galleryConfiguration())
+        
+        self.presentImageGallery(galleryViewController)
+    }
+    
+    func galleryConfiguration() -> GalleryConfiguration {
+        
+        return [
+            
+            GalleryConfigurationItem.closeButtonMode(.builtIn),
+            
+            
+            GalleryConfigurationItem.pagingMode(.standard),
+            GalleryConfigurationItem.presentationStyle(.displacement),
+            GalleryConfigurationItem.hideDecorationViewsOnLaunch(false),
+            
+            //GalleryConfigurationItem.swipeToDismissMode(.vertical),
+            //GalleryConfigurationItem.toggleDecorationViewsBySingleTap(false),
+            
+            GalleryConfigurationItem.overlayColor(UIColor(white: 0.035, alpha: 1)),
+            GalleryConfigurationItem.overlayColorOpacity(1),
+            GalleryConfigurationItem.overlayBlurOpacity(1),
+            GalleryConfigurationItem.overlayBlurStyle(UIBlurEffectStyle.light),
+            
+            GalleryConfigurationItem.thumbnailsButtonMode(.none),
+            
+            GalleryConfigurationItem.maximumZoolScale(8),
+            GalleryConfigurationItem.swipeToDismissThresholdVelocity(500),
+            
+            GalleryConfigurationItem.doubleTapToZoomDuration(0.15),
+            
+            GalleryConfigurationItem.blurPresentDuration(0.5),
+            GalleryConfigurationItem.blurPresentDelay(0),
+            GalleryConfigurationItem.colorPresentDuration(0.25),
+            GalleryConfigurationItem.colorPresentDelay(0),
+            
+            GalleryConfigurationItem.blurDismissDuration(0.1),
+            GalleryConfigurationItem.blurDismissDelay(0.4),
+            GalleryConfigurationItem.colorDismissDuration(0.45),
+            GalleryConfigurationItem.colorDismissDelay(0),
+            
+            GalleryConfigurationItem.itemFadeDuration(0.3),
+            GalleryConfigurationItem.decorationViewsFadeDuration(0.15),
+            GalleryConfigurationItem.rotationDuration(0.15),
+            
+            GalleryConfigurationItem.displacementDuration(0.55),
+            GalleryConfigurationItem.reverseDisplacementDuration(0.25),
+            GalleryConfigurationItem.displacementTransitionStyle(.springBounce(0.7)),
+            GalleryConfigurationItem.displacementTimingCurve(.linear),
+            
+            GalleryConfigurationItem.statusBarHidden(true),
+            GalleryConfigurationItem.displacementKeepOriginalInPlace(false),
+            GalleryConfigurationItem.displacementInsetMargin(50)
+        ]
     }
     
     func getMessage(){
@@ -659,4 +717,19 @@ class BaseCell: UICollectionViewCell {
     
     func setupViews() {
     }
+}
+
+
+extension Chat_VC: GalleryItemsDatasource {
+    
+    func itemCount() -> Int {
+        return 1
+        //return items.count
+    }
+    
+    func provideGalleryItem(_ index: Int) -> GalleryItem {
+        
+        return GalleryItem.image{$0(self.messages[index].ImageMsg)}
+    }
+    
 }
