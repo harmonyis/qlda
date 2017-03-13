@@ -58,7 +58,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
                         ViewQDDT.frame = CGRect(x: 3,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width , height: 25)
                         self.totalHeight = self.totalHeight + ViewQDDT.frame.height
-                        self.totalHeight = self.totalHeight + 30
+                        self.totalHeight = self.totalHeight + 10
                         self.UiViewQDDT.addSubview(ViewQDDT)
                         
                         var ViewGroupTTCQDDT = UIView()
@@ -284,7 +284,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
                         ViewQDDT.frame = CGRect(x: 3,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width , height: 25)
                         self.totalHeight = self.totalHeight + ViewQDDT.frame.height
-                        self.totalHeight = self.totalHeight + 30
+                        self.totalHeight = self.totalHeight + 10
                         self.UiViewQDDT.addSubview(ViewQDDT)
                         
                         var ViewGroupTTCQDDT = UIView()

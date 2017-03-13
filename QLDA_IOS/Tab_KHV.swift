@@ -19,11 +19,17 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
     @IBOutlet weak var UiviewKHV: UIView!
     @IBOutlet weak var UiviewKHVDC: UIView!
     
+    let m_date = Date()
+    let m_calendar = Calendar.current
+    var m_IdKHV : String = ""
+    
+    
    
     override func viewDidLoad() {
         super.viewDidLoad()
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetKeHoachVon"
-        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        let m_year = self.m_calendar.component(.year, from: self.m_date)
+        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"nam\" : \""+(String)(m_year)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         
         ApiService.Post(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: Error)
     }
@@ -49,6 +55,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 let arrlblTTDA = ["Số quyết định","Ngày ban hành","Niên độ","Tổng giá trị phê duyệt"]
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
+                    self.m_IdKHV = arrTTDA[0]
                         var icount = 0
                         let style = NSMutableParagraphStyle()
                         style.alignment = NSTextAlignment.right
@@ -68,7 +75,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
                         ViewQDDT.frame = CGRect(x: 3,y: self.totalHeight + 5,width: self.UiviewKHV.frame.width , height: 25)
                         self.totalHeight = self.totalHeight + ViewQDDT.frame.height
-                        self.totalHeight = self.totalHeight + 30
+                        self.totalHeight = self.totalHeight + 10
                         self.UiviewKHV.addSubview(ViewQDDT)
                         
                         var ViewGroupTTCQDDT = UIView()
@@ -190,12 +197,10 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                                 lable.numberOfLines = 0
                                 lable.sizeToFit()
                                 uiView.addSubview(lable)
-                                var haftWidth : CGFloat = (self.UiviewKHV.frame.width - 10)/2
-                                if !(icount%4==3){
-                                    haftWidth = 0
-                                }
+                                var haftWidth : CGFloat = self.UiviewKHV.frame.width - 10
+                                
                                 uiView.backgroundColor = UIColor(netHex: 0xdddddd)
-                                uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiviewKHV.frame.width - 10)/2 , height: 25)
+                                uiView.frame = CGRect(x: 5 ,y: self.totalHeight ,width: self.UiviewKHV.frame.width - 10 , height: 25)
                                 self.totalHeight = self.totalHeight + 25
                                 ViewGroupTTCQDDT.addSubview(uiView)
                                 
@@ -209,33 +214,29 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                                 lblTenDuAn.text =  variableConfig.convert(arrTTDA[icount + 1])
                                     //variableConfig.convert(itemTTDA)
                                 
-                                lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiviewKHV.frame.width)/2, height: CGFloat.greatestFiniteMagnitude)
+                                lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiviewKHV.frame.width), height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
                                 lblTenDuAn.sizeToFit()
                                 
-                                lblTenDuAn.frame = CGRect(x:  self.UiviewKHV.frame.width/2 - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiviewKHV.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
+                                lblTenDuAn.frame = CGRect(x:  self.UiviewKHV.frame.width - lblTenDuAn.frame.width - 20, y: 25 , width: (self.UiviewKHV.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
                                 lblTenDuAn.sizeToFit()
                                 lblTenDuAn.textAlignment = NSTextAlignment.right
                                 
                                 uiView.addSubview(lblTenDuAn)
-                                uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiviewKHV.frame.width - 10)/2, height: 25)
+                                uiView.frame = CGRect(x: 5 ,y: self.totalHeight ,width: (self.UiviewKHV.frame.width - 10), height: 25)
                                 
                                 var calHeight : CGFloat = 26
                                 let borderBottom = CALayer()
                                 let borderWidth = CGFloat(1)
                                 borderBottom.borderColor =  self.myColorBoder.cgColor
                                 borderBottom.borderWidth = borderWidth
-                                borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiviewKHV.frame.width)/2, height: 1)
+                                borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiviewKHV.frame.width), height: 1)
                                 uiView.layer.addSublayer(borderBottom)
                                 uiView.layer.masksToBounds = true
-                                if (icount%4==3) {
+                               
                                     self.totalHeight = self.totalHeight + 25
-                                }
-                                else{
-                                    self.totalHeight = self.totalHeight - 25
-                                    
-                                }
+                                
                                 ViewGroupTTCQDDT.addSubview(uiView)
                                     }
                                   icount = 1 + icount
@@ -245,21 +246,16 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                             
                             icount = 1 + icount
                         }
-                        if !(count%2==0) {
-                            var uiView = UIView()
-                            uiView.backgroundColor = UIColor(netHex: 0xdddddd)
-                            uiView.frame = CGRect(x: 0 + (self.UiviewKHV.frame.width)/2 , y: self.totalHeight ,width: (self.UiviewKHV.frame.width)/2 - 5, height: 50)
-                            ViewGroupTTCQDDT.addSubview(uiView)
-                            self.totalHeight = self.totalHeight + 50
-                        }
+                        
                         self.UiviewKHV.addSubview(ViewGroupTTCQDDT)
                         //     let heightConstraint = self.UiviewKHV.heightAnchor.constraint(equalToConstant: 1600)
                         //      self.UiviewKHV.isUserInteractionEnabled = true
                         //        NSLayoutConstraint.activate([heightConstraint])
                         // gọi hàm lấy dữ liệu về tổng dự toán từ service
                         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetDieuChinhKeHoachVon"
+                        let m_year = self.m_calendar.component(.year, from: self.m_date)
                         //let szUser=lblName.
-                        let params : String = "{\"szIdKHV\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"nam\" : \"2017\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+                        let params : String = "{\"szIdKHV\" : \""+(String)(self.m_IdKHV)+"\",\"nam\" : \""+(String)(m_year)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
                         // gọi hàm lấy dự liệu tổng dự toán
                         ApiService.Post(url: ApiUrl, params: params, callback: self.GetDataTDT, errorCallBack: self.Error)
                         
@@ -301,7 +297,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
                         ViewQDDT.frame = CGRect(x: 3,y: self.totalHeight + 5,width: self.UiviewKHV.frame.width , height: 25)
                         self.totalHeight = self.totalHeight + ViewQDDT.frame.height
-                        self.totalHeight = self.totalHeight + 30
+                        self.totalHeight = self.totalHeight + 10
                         self.UiviewKHV.addSubview(ViewQDDT)
                         
                         var ViewGroupTTCQDDT = UIView()
@@ -416,15 +412,12 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                                 lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                                 lable.text = arrTTDA[icount]
                                 
-                                lable.frame = CGRect(x: 10, y: 0 , width: (self.UiviewKHV.frame.width - 10)/2, height: 25)
+                                lable.frame = CGRect(x: 10, y: 0 , width: (self.UiviewKHV.frame.width - 10), height: 25)
                                 lable.numberOfLines = 0
                                 lable.sizeToFit()
                                 uiView.addSubview(lable)
-                                var haftWidth : CGFloat = (self.UiviewKHV.frame.width - 10)/2
-                                if !(icount%4==3){
-                                    haftWidth = 0
-                                }
-                                uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiviewKHV.frame.width - 10)/2 , height: 25)
+                               
+                                uiView.frame = CGRect(x: 5 ,y: self.totalHeight ,width: (self.UiviewKHV.frame.width - 10) , height: 25)
                                 self.totalHeight = self.totalHeight + 25
                                 ViewGroupTTCQDDT.addSubview(uiView)
                                 
@@ -439,33 +432,29 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                                 lblTenDuAn.text =  variableConfig.convert(arrTTDA[icount + 1])
                                     //variableConfig.convert(itemTTDA)
                                 
-                                lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiviewKHV.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
+                                lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiviewKHV.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
                                 lblTenDuAn.sizeToFit()
                                 
-                                lblTenDuAn.frame = CGRect(x:  self.UiviewKHV.frame.width/2 - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiviewKHV.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
+                                lblTenDuAn.frame = CGRect(x:  self.UiviewKHV.frame.width - lblTenDuAn.frame.width - 20, y: 25 , width: (self.UiviewKHV.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
                                 lblTenDuAn.numberOfLines = 0
                                 lblTenDuAn.sizeToFit()
                                 lblTenDuAn.textAlignment = NSTextAlignment.right
                                 
                                 uiView.addSubview(lblTenDuAn)
-                                uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiviewKHV.frame.width - 10)/2, height: 25)
+                                uiView.frame = CGRect(x: 5 ,y: self.totalHeight ,width: (self.UiviewKHV.frame.width - 10), height: 25)
                                 
                                 var calHeight : CGFloat = 26
                                 let borderBottom = CALayer()
                                 let borderWidth = CGFloat(1)
                                 borderBottom.borderColor =  self.myColorBoder.cgColor
                                 borderBottom.borderWidth = borderWidth
-                                borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiviewKHV.frame.width)/2, height: 1)
+                                borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiviewKHV.frame.width), height: 1)
                                 uiView.layer.addSublayer(borderBottom)
                                 uiView.layer.masksToBounds = true
-                                if (icount%4==3) {
+                              
                                     self.totalHeight = self.totalHeight + 25
-                                }
-                                else{
-                                    self.totalHeight = self.totalHeight - 25
-                                    
-                                }
+                               
                                      ViewGroupTTCQDDT.addSubview(uiView)
                                 }
                                
@@ -477,10 +466,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                             icount = 1 + icount
                         }
                         if !(count%2==0) {
-                            var uiView = UIView()
-                            uiView.backgroundColor = UIColor(netHex: 0xdddddd)
-                            uiView.frame = CGRect(x: 0 + (self.UiviewKHV.frame.width)/2 , y: self.totalHeight ,width: (self.UiviewKHV.frame.width)/2 - 5, height: 50)
-                            ViewGroupTTCQDDT.addSubview(uiView)
+                          
                             self.totalHeight = self.totalHeight + 50
                         }
                         self.UiviewKHV.addSubview(ViewGroupTTCQDDT)

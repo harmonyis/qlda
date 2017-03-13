@@ -229,13 +229,16 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
             
             
             
-            var heightTieuDe = cell.lblTenGoiThau.frame.height + 16
+            var heightTieuDe = cell.lblTenGoiThau.frame.height + 10
             var heightHTLCNT = cell.lblHinhThucLCNT.frame.height + 14
             var heightPTLCNT = cell.lblPhuongThucLCNT.frame.height
             var heightLoaiHD = cell.lblLoaiHD.frame.height + 14
             
-            if heightTieuDe < 31 {
-                heightTieuDe = 30
+           
+            
+            
+            if heightTieuDe < 29 {
+                heightTieuDe = 28
             }
             if heightHTLCNT < 31 {
                 heightHTLCNT = 30
@@ -246,11 +249,7 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
             if heightLoaiHD < 31 {
                 heightLoaiHD = 30            }
             
-            print("__________________")
-             print("__________________")
-             print("__________________")
-             print("__________________")
-           
+          
             
             cell.uiViewSTT.backgroundColor = myColorBackgroud
             cell.uiViewSTT.layer.borderColor = myColorBoder.cgColor
@@ -283,11 +282,7 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
             eventClick.addTarget(self, action:  #selector(DSDA_VC.duAnConClickDetail(sender: )))
             cell.uiViewDetail.addGestureRecognizer(eventClick)
             cell.uiViewDetail.isUserInteractionEnabled = true;
-
-//  let heightC1 =  cell.uiViewThongTinCT.heightAnchor.constraint(equalToConstant:  150 )
-//    NSLayoutConstraint.activate([heightC1])
-
-// /*
+            
  cell.uiViewThongTinCT.isHidden = !self.indexTrangThaiGoiThau.contains((Int)(m_dsGoiThau[index - 4].IdGT!)!)
 
             
@@ -310,32 +305,26 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
             constraint.constant = heightTieuDe
         }
     }
- /*
- let size = heightTieuDe
- 
-    let heightC3 =  cell.uiViewTieuDe.heightAnchor.constraint(equalToConstant:  heightTieuDe )
-    NSLayoutConstraint.deactivate([heightC3])
-    NSLayoutConstraint.activate([heightC3])
     
- let heightC2 =  cell.uiViewThongTinCT.heightAnchor.constraint(equalToConstant:  0 )
-     let heightC2_dis =  cell.uiViewThongTinCT.heightAnchor.constraint(equalToConstant:  heightHTLCNT + heightPTLCNT + heightLoaiHD )
-    NSLayoutConstraint.deactivate([heightC2_dis])
- NSLayoutConstraint.activate([heightC2])
- 
- 
- 
- let heightC =  cell.uiViewGoiThau.heightAnchor.constraint(equalToConstant: size)
-    let heightC1 =  cell.uiViewGoiThau.heightAnchor.constraint(equalToConstant:  heightTieuDe + heightHTLCNT + heightPTLCNT + heightLoaiHD )
-    NSLayoutConstraint.deactivate([heightC1])
-    NSLayoutConstraint.activate([heightC])
-   //  cell.uiViewGoiThau.removeConstraints(<#T##constraints: [NSLayoutConstraint]##[NSLayoutConstraint]#>)
-     */
+    for constraint in cell.uiViewTenGoiThau.constraints as [NSLayoutConstraint] {
+        if constraint.identifier == "idConstrainTopTenGT" {
+            constraint.constant = 5
+              }
+    }
  }
  else
  {
+  //  heightTieuDe = heightTieuDe + 2
+    for constraint in cell.uiViewTenGoiThau.constraints as [NSLayoutConstraint] {
+        if constraint.identifier == "idConstrainTopTenGT" {
+            constraint.constant = 5
+                  }
+    }
+
+    
     for constraint in cell.uiViewTieuDe.constraints as [NSLayoutConstraint] {
         if constraint.identifier == "idConstrainHeightTieuDe" {
-            constraint.constant = heightTieuDe
+        //    constraint.constant = heightTieuDe
         }
     }
     for constraint in cell.uiViewThongTinCT.constraints as [NSLayoutConstraint] {
@@ -348,27 +337,6 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
             constraint.constant = heightTieuDe + heightHTLCNT + heightPTLCNT + heightLoaiHD
         }
     }
-
-    /*
-    let size = heightTieuDe + heightHTLCNT + heightPTLCNT + heightLoaiHD
-    let heightC3 =  cell.uiViewTieuDe.heightAnchor.constraint(equalToConstant:  heightTieuDe )
-    NSLayoutConstraint.deactivate([heightC3])
-    NSLayoutConstraint.activate([heightC3])
-    
-    let heightC2 =  cell.uiViewThongTinCT.heightAnchor.constraint(equalToConstant:  heightHTLCNT + heightPTLCNT + heightLoaiHD )
-    let heightC2_dis =  cell.uiViewThongTinCT.heightAnchor.constraint(equalToConstant: 0 )
-    NSLayoutConstraint.deactivate([heightC2_dis])
-    NSLayoutConstraint.activate([heightC2])
-    
-    
-    
-    let heightC =  cell.uiViewGoiThau.heightAnchor.constraint(equalToConstant:  size )
-    let heightC1 =  cell.uiViewGoiThau.heightAnchor.constraint(equalToConstant:  heightTieuDe )
-    NSLayoutConstraint.deactivate([heightC1])
-    NSLayoutConstraint.activate([heightC])
-            }
-            
-            // */
  }
  return cell
  }
