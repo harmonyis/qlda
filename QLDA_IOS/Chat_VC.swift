@@ -18,6 +18,10 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     @IBOutlet weak var viewBottom: UIView!
     @IBOutlet weak var txtMessage: UITextField!
+    @IBOutlet weak var btnToggle: UIButton!
+    
+    @IBOutlet weak var constraintLeftMessage: NSLayoutConstraint!
+    
     var messages: [ChatMessage] = [ChatMessage]()
     var contactID : Int!
     var contactType : Int32!
@@ -28,11 +32,14 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     var isClose : Bool! = false
     
     var bottomConstraint: NSLayoutConstraint?
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        toggleButton(false)
         imagePicker.delegate = self
+        
         if(contactType == 2){
             addRightBar()
         }
@@ -66,7 +73,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             
             bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
             
-
+            
             UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                 
                 self.view.layoutIfNeeded()
@@ -90,11 +97,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
+        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -106,13 +113,13 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         DispatchQueue.main.async() { () -> Void in
             self.collectionView.reloadData()
-           // self.scrollToBottom(animate: false)
+            // self.scrollToBottom(animate: false)
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,7 +129,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         ChatCommon.currentChatType = contactType
         
         if(ChatCommon.checkCloseView){
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController!.popViewController(animated: true)
             ChatCommon.checkCloseView = false
         }
     }
@@ -141,7 +148,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        
         return messages.count
     }
     
@@ -199,8 +206,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             case 1 :
                 cell.messageImageView.isHidden = false
                 cell.messageTextView.isHidden = true
-
-            
+                
+                
                 if(msg.ImageMsg != nil){
                     cell.messageImageView.image = msg.ImageMsg
                     var h = msg.ImageMsg?.size.height
@@ -217,7 +224,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         cell.messageImageView.frame = CGRect(x: view.frame.width - w! - 38 - 4, y: 0 + 12, width: w! + 16, height: h! + 20)
                         
                         cell.bubbleImageView.frame = CGRect(x: view.frame.width - w! - 50 - 4, y: 0, width: w! + 46, height: h! + 44)
-
+                        
                         cell.bubbleImageView.image = Chat_Cell.rightBubbleImage
                         cell.bubbleImageView.tintColor = UIColor(netHex: 0xFEA21C)
                     }
@@ -238,12 +245,12 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                             
                             cell.bubbleImageView.frame = CGRect(x: 0, y: 10, width: w! + 48, height: h! + 44)
                         }
-
+                        
                         cell.bubbleImageView.image = Chat_Cell.leftBubbleImage
                         cell.bubbleImageView.tintColor = UIColor(netHex: 0x8ABEFA)
                     }
                 }
-       
+                
             //case 2 :
             default:
                 print("none")
@@ -285,7 +292,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         w = wView
                         h = h! * w! / wOld!
                     }
-
+                    
                     if(msg.IsMe)!{
                         return CGSize(width: view.frame.width, height: h! + 20 + 24)
                     }
@@ -306,15 +313,18 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         return CGSize(width: view.frame.width, height: 100)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(8, 0, 0, 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let galleryViewController = GalleryViewController(startIndex: indexPath.item, itemsDatasource: self, displacedViewsDatasource: nil, configuration: galleryConfiguration())
-        
-        self.presentImageGallery(galleryViewController)
+        let msg = messages[indexPath.item]
+        if msg.MessageType == 1{
+            let galleryViewController = GalleryViewController(startIndex: indexPath.item, itemsDatasource: self, displacedViewsDatasource: nil, configuration: galleryConfiguration())
+            
+            self.presentImageGallery(galleryViewController)
+        }
     }
     
     func galleryConfiguration() -> GalleryConfiguration {
@@ -369,7 +379,6 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func getMessage(){
-        print("data: ", contactID, contactName, contactType)
         if contactType == 1 {
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetPrivateMessage?senderID=\(ChatHub.userID)&receiverID=\(String(contactID))"
             ApiService.Get(url: apiUrl, callback: callbackGetMsg, errorCallBack: errorGetMsg)
@@ -406,7 +415,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 msg.Created = Date(jsonDate: item["Created"] as! String)
                 msg.setImageMsg()
                 self.messages.append(msg)
-
+                
             }
         }
         DispatchQueue.main.async() { () -> Void in
@@ -443,7 +452,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBAction func txtMessageEditingChanged(_ sender: UITextField) {
         makeReadMsg()
     }
-
+    
     @IBAction func txtMessageTouchDown(_ sender: UITextField) {
         makeReadMsg()
     }
@@ -501,7 +510,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         }
                     }
                     self.isRead = false
-                }                
+                }
             }
         }
         
@@ -544,7 +553,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             //self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
-
+    
     func makeReadMsg(){
         if !self.isRead{
             if self.lastInboxID != nil{
@@ -559,6 +568,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         }
         
     }
+    
     
     func addRightBar(){
         let btnInfoMenu = UIButton(type: UIButtonType.system)
@@ -587,7 +597,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             if contactType == 1{
                 sv = "Chat_SendPrivateImage"
             }
-
+            
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/\(sv)"
             print(String(ChatHub.userID), ChatHub.userName, String(contactID), contactName!)
             let params : String = "{\"senderID\" : \"\(String(ChatHub.userID))\", \"senderName\": \"\(ChatHub.userName)\",\"receiverID\" : \"\(String(contactID))\", \"receiverName\": \"\(contactName!)\", \"imageData\":\(array)}"
@@ -614,7 +624,35 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
     }
     
-    @IBAction func btnOpenImage(_ sender: Any) {
+    
+    @IBAction func btnToggleButton(_ sender: UIButton) {
+        
+        if constraintLeftMessage.constant == 42{
+            toggleButton(true)
+            
+        }
+        else{
+            toggleButton(false)
+        }
+    }
+    
+    
+    func toggleButton(_ expanded : Bool){
+        if expanded{
+            self.constraintLeftMessage.constant = 156
+            btnToggle.setImage(#imageLiteral(resourceName: "ic_minus2"), for: .normal)
+        }
+        else{
+            self.constraintLeftMessage.constant = 42
+            btnToggle.setImage(#imageLiteral(resourceName: "ic_add"), for: .normal)
+        }
+    }
+    
+    @IBAction func btnOpenCamera(_ sender: UIButton) {
+
+    }
+    
+    @IBAction func btnOpenImage(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum){
             imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
             imagePicker.allowsEditing = false
@@ -623,11 +661,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         }
     }
     
-    @IBAction func btnOpenFile(_ sender: Any) {
+    @IBAction func btnOpenFile(_ sender: UIButton) {
         let fileBrowser = FileBrowser()
         present(fileBrowser, animated: true, completion: nil)
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-       
+            
             print(file.displayName)
         }
     }
@@ -697,7 +735,7 @@ class Chat_Cell: BaseCell {
         addSubview(messageTextView)
         addSubview(messageImageView)
         
-       
+        
         //textBubbleView.addConstraintsWithFormat("H:|[v0]|", views: bubbleImageView)
         //textBubbleView.addConstraintsWithFormat("V:|[v0]|", views: bubbleImageView)
     }

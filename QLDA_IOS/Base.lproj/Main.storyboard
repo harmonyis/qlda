@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8nb-LZ-jCf">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8nb-LZ-jCf">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -498,17 +498,17 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell_KHLCNT_R1" rowHeight="60" id="Tpf-Dk-U5D" customClass="Cell_KHLCNT_R1" customModule="QLDA_IOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="Tpf-Dk-U5D" id="KwO-mP-hwv">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tpf-Dk-U5D" id="KwO-mP-hwv">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZWo-xt-XpL">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZWo-xt-XpL">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WWO-KX-ndV">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WWO-KX-ndV">
                                                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NQ-3h-RWL">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NQ-3h-RWL">
                                                                     <rect key="frame" x="10" y="6" width="310" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="25" id="BVF-uv-Mnv"/>
@@ -517,7 +517,7 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBS-Ul-z94">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBS-Ul-z94">
                                                                     <rect key="frame" x="10" y="31" width="310" height="25"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                     <nil key="textColor"/>
@@ -1570,7 +1570,7 @@
                                     <constraint firstAttribute="width" constant="320" id="TKY-Du-5hS"/>
                                     <constraint firstAttribute="height" constant="44" id="YKt-nG-m9k"/>
                                 </constraints>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="j44-pT-GIf" id="7G0-fT-77a"/>
                                 </connections>
@@ -2512,7 +2512,7 @@
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="8Df-XH-Q0S">
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="D2j-5b-dnE" id="zWs-3D-e53"/>
                                 </connections>
@@ -2605,7 +2605,7 @@
                                         <rect key="frame" x="8" y="8" width="266" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkS-rU-7nd">
                                         <rect key="frame" x="282" y="8" width="30" height="30"/>
@@ -2880,7 +2880,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 <connections>
                                                     <action selector="txtGroupChanged:" destination="7SL-VF-aan" eventType="editingChanged" id="bmm-am-leB"/>
                                                     <outlet property="delegate" destination="7SL-VF-aan" id="Z3h-Bm-TtY"/>
@@ -2955,46 +2955,64 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6w-AW-Ki8">
                                 <rect key="frame" x="0.0" y="530" width="320" height="38"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lvi-b6-uHZ">
-                                        <rect key="frame" x="82" y="4" width="170" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2u-MG-y5i">
+                                        <rect key="frame" x="4" y="4" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="ic_add"/>
+                                        <connections>
+                                            <action selector="btnToggleButton:" destination="9P1-YK-rft" eventType="touchUpInside" id="uzu-H5-f8k"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNR-9y-XwI">
+                                        <rect key="frame" x="42" y="4" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" image="ic_camera"/>
+                                        <connections>
+                                            <action selector="btnOpenCamera:" destination="9P1-YK-rft" eventType="touchUpInside" id="Mzk-69-iuz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovs-AW-yVF">
+                                        <rect key="frame" x="80" y="4" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" image="ic_image"/>
+                                        <connections>
+                                            <action selector="btnOpenImage:" destination="9P1-YK-rft" eventType="touchUpInside" id="KIH-Th-0WR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jpp-9B-0d0">
+                                        <rect key="frame" x="118" y="4" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="ic_attach"/>
+                                        <connections>
+                                            <action selector="btnOpenFile:" destination="9P1-YK-rft" eventType="touchUpInside" id="1vQ-vf-MlR"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tin nhắn" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lvi-b6-uHZ">
+                                        <rect key="frame" x="156" y="4" width="118" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="170" id="W8E-nr-f87"/>
+                                            <constraint firstAttribute="width" constant="118" id="W8E-nr-f87"/>
                                             <constraint firstAttribute="height" constant="30" id="c8N-pz-Tsh"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         <connections>
                                             <action selector="txtMessageEditingChanged:" destination="9P1-YK-rft" eventType="editingChanged" id="t94-g9-hzX"/>
                                             <action selector="txtMessageTouchDown:" destination="9P1-YK-rft" eventType="touchDown" id="FXN-cd-pwn"/>
                                             <outlet property="delegate" destination="9P1-YK-rft" id="i2X-Go-8DJ"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jO-v1-d9c">
-                                        <rect key="frame" x="260" y="4" width="52" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jO-v1-d9c">
+                                        <rect key="frame" x="282" y="4" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="JyI-YG-2AJ"/>
-                                            <constraint firstAttribute="width" constant="52" id="Y3D-0Z-RBz"/>
+                                            <constraint firstAttribute="width" constant="30" id="Y3D-0Z-RBz"/>
                                         </constraints>
-                                        <state key="normal" title="Gửi"/>
+                                        <state key="normal" image="ic_send"/>
                                         <connections>
                                             <action selector="btnSendTouchUpInside:" destination="9P1-YK-rft" eventType="touchUpInside" id="son-0K-2Xq"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jpp-9B-0d0">
-                                        <rect key="frame" x="6" y="4" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="File"/>
-                                        <connections>
-                                            <action selector="btnOpenFile:" destination="9P1-YK-rft" eventType="touchUpInside" id="aRL-f2-6ns"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovs-AW-yVF">
-                                        <rect key="frame" x="44" y="4" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Img"/>
-                                        <connections>
-                                            <action selector="btnOpenImage:" destination="9P1-YK-rft" eventType="touchUpInside" id="jOA-hd-9oW"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3003,7 +3021,7 @@
                                     <constraint firstAttribute="bottom" secondItem="4jO-v1-d9c" secondAttribute="bottom" constant="4" id="45C-RY-wHP"/>
                                     <constraint firstAttribute="height" constant="38" id="7p8-8K-OIa"/>
                                     <constraint firstAttribute="width" constant="320" id="CRc-L3-a1E"/>
-                                    <constraint firstItem="lvi-b6-uHZ" firstAttribute="leading" secondItem="V6w-AW-Ki8" secondAttribute="leading" constant="82" id="FRK-g4-6IM"/>
+                                    <constraint firstItem="lvi-b6-uHZ" firstAttribute="leading" secondItem="V6w-AW-Ki8" secondAttribute="leading" constant="156" id="FRK-g4-6IM"/>
                                     <constraint firstItem="4jO-v1-d9c" firstAttribute="top" secondItem="V6w-AW-Ki8" secondAttribute="top" constant="4" id="JI8-SL-RUz"/>
                                     <constraint firstAttribute="bottom" secondItem="lvi-b6-uHZ" secondAttribute="bottom" constant="4" id="QBF-z4-8XD"/>
                                     <constraint firstItem="4jO-v1-d9c" firstAttribute="leading" secondItem="lvi-b6-uHZ" secondAttribute="trailing" constant="8" id="jTj-Yt-5sL"/>
@@ -3027,7 +3045,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="5Oj-u4-g0S"/>
                     <connections>
+                        <outlet property="btnToggle" destination="S2u-MG-y5i" id="JqB-ir-mGF"/>
                         <outlet property="collectionView" destination="Jjd-7L-i8K" id="1Xn-3K-jdO"/>
+                        <outlet property="constraintLeftMessage" destination="FRK-g4-6IM" id="Qdd-AD-mYq"/>
                         <outlet property="txtMessage" destination="lvi-b6-uHZ" id="Evz-jh-1QO"/>
                         <outlet property="viewBottom" destination="V6w-AW-Ki8" id="6Ix-4y-KCy"/>
                         <segue destination="eRd-Tg-Dzc" kind="push" id="pnC-Yw-Iq3"/>
@@ -3749,10 +3769,15 @@
     </scenes>
     <resources>
         <image name="AvatarIcon" width="128" height="128"/>
+        <image name="ic_add" width="250" height="250"/>
+        <image name="ic_attach" width="250" height="250"/>
+        <image name="ic_camera" width="250" height="250"/>
         <image name="ic_detail" width="8" height="8"/>
+        <image name="ic_image" width="250" height="250"/>
         <image name="ic_logo" width="400" height="400"/>
         <image name="ic_minus" width="8" height="8"/>
         <image name="ic_online" width="24" height="24"/>
+        <image name="ic_send" width="250" height="250"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

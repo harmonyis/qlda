@@ -14,7 +14,7 @@ class ChatCreateGroup_Cell: UITableViewCell{
     @IBOutlet weak var btnCheck: UIButton!
 }
 
-class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
     
     @IBOutlet weak var tblListContact: UITableView!
     var listUserChecked : [Int] = []

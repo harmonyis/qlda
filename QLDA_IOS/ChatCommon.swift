@@ -13,6 +13,7 @@ class ChatCommon{
     static var currentChatType: Int32?
     
     static var listContact : [UserContact] = [UserContact]()
+    //static var listImageMessage : [ImageMessage] = [ImageMessage]()
     
     static var checkCloseView : Bool = false
     

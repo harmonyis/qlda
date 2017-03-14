@@ -50,5 +50,34 @@ class ChatMessage{
             }            
         }
     }
+    /*
+    func setImageMsg(){
+        let result = ChatCommon.listImageMessage.filter(){
+            if $0.InboxID == self.ID{
+                return true
+            }
+            return false
+        }
+        if result.count == 0{
+            if(MessageType == 1){
+                if let url = NSURL(string: UrlPreFix.Root.rawValue + self.Message!) {
+                    if let data = NSData(contentsOf: url as URL) {
+                        if let pic : UIImage =  UIImage(data: data as Data){
+                            
+                            self.ImageMsg = pic
+                            let newImageMsg : ImageMessage = ImageMessage()
+                            newImageMsg.Image = self.ImageMsg
+                            newImageMsg.InboxID = self.ID!
+                            ChatCommon.listImageMessage.append(newImageMsg)
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            self.ImageMsg = result.first?.Image
+        }
+        
+    }*/
 }
 
