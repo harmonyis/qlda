@@ -107,7 +107,15 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
         filtered = listContact.filter() {
             var name = ($0 as UserContact).Name! as String
             var key : String = searchText
-            return name.toUnsign().contains(key.toUnsign())
+            let s1 : String = name.toUnsign()
+            let s2 : String = key.toUnsign()
+            if s1.contains(s2) {
+                return true
+            }
+            else{
+                return false
+            }
+           // return name.toUnsign().contains(key.toUnsign())
         }
         if(searchText.characters.count == 0){
             searchActive = false;
@@ -120,7 +128,12 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : ChatAddUser_Cell = tableView.dequeueReusableCell(withIdentifier: "cellContact") as! ChatAddUser_Cell
         var contact : UserContact
-        contact = listContact[indexPath.row]
+        if(searchActive){
+            contact = filtered[indexPath.row]
+        }
+        else{
+            contact = listContact[indexPath.row]
+        }
         //cell.btnCheck.layer.cornerRadius = 12
         if(listUserChecked.contains(contact.ContactID!)){
             cell.btnCheck.setImage(#imageLiteral(resourceName: "ic_check"), for: UIControlState.normal)
