@@ -59,26 +59,26 @@ class Base_VC: UIViewController {
     }
     
     func addRightBarButton(){
-        let btnNotiMenu = UIButton(type: UIButtonType.system)
+        let btnNotiMenu = UIButton(type: UIButtonType.custom)
         btnNotiMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        btnNotiMenu.setImage(UIImage(named: "ic_noti"), for: UIControlState())
+        btnNotiMenu.setImage(#imageLiteral(resourceName: "ic_noti"), for: UIControlState())
         btnNotiMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let customNotiBarItem = UIBarButtonItem(customView: btnNotiMenu)
         
-        let btnChatMenu = UIButton(type: UIButtonType.system)
+        let btnChatMenu = UIButton(type: UIButtonType.custom)
         btnChatMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         btnChatMenu.addTarget(self, action: #selector(Base_VC.onChatBarPressesd(_:)), for: UIControlEvents.touchUpInside)
-        btnChatMenu.setImage(UIImage(named: "HomeIcon"), for: UIControlState())
+        btnChatMenu.setImage(#imageLiteral(resourceName: "ic_chat"), for: UIControlState())
         btnChatMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let frame = CGRect(x: 18, y: -4, width: 15, height: 15)
         createBadge(parent: btnChatMenu, tag: 200, number: 0, frame: frame)
         //btnChatMenu.createBadge(tag: 200, number: 0, frame: frame)
         let customChatBarItem = UIBarButtonItem(customView: btnChatMenu)
         
-        let btnMapMenu = UIButton(type: UIButtonType.system)
+        let btnMapMenu = UIButton(type: UIButtonType.custom)
         btnMapMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         btnMapMenu.addTarget(self, action: #selector(Base_VC.onMapBarPressesd(_:)), for: UIControlEvents.touchUpInside)
-        btnMapMenu.setImage(UIImage(named: "ic_map"), for: UIControlState())
+        btnMapMenu.setImage(#imageLiteral(resourceName: "ic_map"), for: UIControlState())
         btnMapMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let customMapBarItem = UIBarButtonItem(customView: btnMapMenu)
         
