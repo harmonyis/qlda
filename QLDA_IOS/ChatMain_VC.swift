@@ -23,7 +23,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     var listContact = [UserContact]()
     
     var passContactID:Int!
-    var passContactType:Int32!
+    var passContactType:Int!
     var passContactName:String!
     var passIsRead : Bool!
     var passLastInboxID : Int64!
@@ -155,6 +155,30 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         else{
             cell.imgOnline.isHidden = false
         }
+        
+        if(contact.TypeOfMessage == nil){
+            return cell
+        }
+        
+        switch contact.TypeOfMessage!{
+        case 1:
+            if ChatHub.userID == contact.SenderOfMessage!{
+                cell.lblLastMessage.text = "Bạn đã gửi một hình ảnh";
+            }
+            else{
+                cell.lblLastMessage.text = "Bạn đã nhận một hình ảnh";
+            }
+        case 2:
+            if ChatHub.userID == contact.SenderOfMessage!{
+                cell.lblLastMessage.text = "Bạn đã gửi một tệp tin";
+            }
+            else{
+                cell.lblLastMessage.text = "Bạn đã nhận một tệp tin";
+            }
+        default: cell.lblLastMessage.text = contact.LatestMessage
+        }
+        
+        
         return cell
     }
     

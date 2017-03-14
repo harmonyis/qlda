@@ -40,7 +40,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
         tblListContact.tableFooterView = UIView(frame: .zero)
         
         listContact = ChatCommon.listContact.filter() {
-            if let contactType = ($0 as UserContact).TypeOfContact as Int32! {
+            if let contactType = ($0 as UserContact).TypeOfContact {
                 return contactType == 1
             } else {
                 return false

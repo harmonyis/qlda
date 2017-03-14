@@ -10,7 +10,7 @@ import Foundation
 class ChatCommon{
     
     static var currentChatID : Int?
-    static var currentChatType: Int32?
+    static var currentChatType: Int?
     
     static var listContact : [UserContact] = [UserContact]()
     //static var listImageMessage : [ImageMessage] = [ImageMessage]()
@@ -41,9 +41,9 @@ class ChatCommon{
                 contact.PictureUrl = item["PictureUrl"] as? String
                 contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
                 contact.SenderOfMessage = item["SenderOfMessage"] as? Int
-                contact.TypeOfContact = item["TypeOfContact"] as? Int32
+                contact.TypeOfContact = item["TypeOfContact"] as? Int
                 contact.TypeOfMessage = item["TypeOfMessage"] as? Int
-                
+                print(contact.TypeOfMessage )
                 contact.setPicture()
                 listContact.append(contact)
             }
@@ -96,7 +96,7 @@ class ChatCommon{
         }
     }
     
-    static func updateReceiveMessage(args : [Any]?, contactType : Int32){
+    static func updateReceiveMessage(args : [Any]?, contactType : Int){
         
         let sender = args?[0] as? [Any]
         let receiver = args?[1] as? [Any]
@@ -220,7 +220,7 @@ class ChatCommon{
     
     static func updateMakeReadMessage(args : [Any]?){
         let contactID = args?[0] as? Int
-        let contactType = args?[1] as? Int32
+        let contactType = args?[1] as? Int
         let user : UserContact = listContact.filter() {
             let contact = $0 as UserContact
             if contact.ContactID == contactID && contact.TypeOfContact == contactType{

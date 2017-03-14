@@ -12,6 +12,8 @@ import FileBrowser
 import ImageViewer
 
 class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    //var items: [DataImageMsg] = []
+    
     fileprivate let cellId = "cellId"
     
     var imagePicker = UIImagePickerController()
@@ -24,7 +26,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     var messages: [ChatMessage] = [ChatMessage]()
     var contactID : Int!
-    var contactType : Int32!
+    var contactType : Int!
     var contactName : String!
     var isRead : Bool!
     var lastInboxID : Int64!
@@ -320,6 +322,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let msg = messages[indexPath.item]
+        
         if msg.MessageType == 1{
             let galleryViewController = GalleryViewController(startIndex: indexPath.item, itemsDatasource: self, displacedViewsDatasource: nil, configuration: galleryConfiguration())
             
@@ -416,6 +419,10 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 msg.setImageMsg()
                 self.messages.append(msg)
                 
+                /*
+                if msg.MessageType == 1{
+                    items.append(DataImageMsg(inboxID: msg.ID!, image: msg.ImageMsg!))
+                }*/
             }
         }
         DispatchQueue.main.async() { () -> Void in
@@ -770,4 +777,10 @@ extension Chat_VC: GalleryItemsDatasource {
         return GalleryItem.image{$0(self.messages[index].ImageMsg)}
     }
     
+}
+
+struct DataImageMsg {
+    let inboxID : Int64
+    let image: UIImage
+
 }

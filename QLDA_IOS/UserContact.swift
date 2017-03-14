@@ -36,7 +36,7 @@ class UserContact{
     var LatestMessage : String?
     var LatestMessageID : Int64?
     var TimeOfLatestMessage : Date?
-    var TypeOfContact : Int32?
+    var TypeOfContact : Int?
     var TypeOfMessage : Int?
     var Online : Bool?
     var SenderOfMessage : Int?
