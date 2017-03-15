@@ -9,17 +9,24 @@
 import UIKit
 import SwiftR
 import FileBrowser
+import ImageViewer
 
 class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    //var items: [DataImageMsg] = []
+    
     fileprivate let cellId = "cellId"
     
     var imagePicker = UIImagePickerController()
     
     @IBOutlet weak var viewBottom: UIView!
     @IBOutlet weak var txtMessage: UITextField!
+    @IBOutlet weak var btnToggle: UIButton!
+    
+    @IBOutlet weak var constraintLeftMessage: NSLayoutConstraint!
+    
     var messages: [ChatMessage] = [ChatMessage]()
     var contactID : Int!
-    var contactType : Int32!
+    var contactType : Int!
     var contactName : String!
     var isRead : Bool!
     var lastInboxID : Int64!
@@ -27,11 +34,14 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     var isClose : Bool! = false
     
     var bottomConstraint: NSLayoutConstraint?
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        toggleButton(false)
         imagePicker.delegate = self
+        
         if(contactType == 2){
             addRightBar()
         }
@@ -65,7 +75,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             
             bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
             
-
+            
             UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                 
                 self.view.layoutIfNeeded()
@@ -89,11 +99,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
+        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,13 +115,13 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         DispatchQueue.main.async() { () -> Void in
             self.collectionView.reloadData()
-           // self.scrollToBottom(animate: false)
+            // self.scrollToBottom(animate: false)
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,7 +131,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         ChatCommon.currentChatType = contactType
         
         if(ChatCommon.checkCloseView){
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController!.popViewController(animated: true)
             ChatCommon.checkCloseView = false
         }
     }
@@ -140,7 +150,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+        
         return messages.count
     }
     
@@ -165,22 +175,20 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 cell.contactNameLabel.isHidden = true
                 cell.contactNameLabel.text = ""
                 if (msg.IsMe)!{
-                    cell.messageTextView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 8 - 8 - 8, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                    cell.messageTextView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 28 - 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                     
-                    cell.textBubbleView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 16 - 8 - 8, y: 0, width: estimatedFrame.width + 16 + 8, height: estimatedFrame.height + 20)
+                    cell.bubbleImageView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 40, y: 0, width: estimatedFrame.width + 32, height: estimatedFrame.height + 20)
                     
-                    cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
-                    //cell.bubbleImageView.image = ChatLogMessageCell.blueBubbleImage
-                    //cell.bubbleImageView.tintColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
-                    cell.messageTextView.textColor = UIColor.white
+                    cell.bubbleImageView.image = Chat_Cell.rightBubbleImage
+                    cell.bubbleImageView.tintColor = UIColor(netHex: 0xFEA21C)
                     
                 } else {
                     
                     if msg.ContactType == 1{
                         
-                        cell.messageTextView.frame = CGRect(x: 8 + 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                        cell.messageTextView.frame = CGRect(x: 12, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                         
-                        cell.textBubbleView.frame = CGRect(x: 4, y: 0, width: estimatedFrame.width + 8 + 8 + 16, height: estimatedFrame.height + 20)
+                        cell.bubbleImageView.frame = CGRect(x: 0, y: 0, width: estimatedFrame.width + 32, height: estimatedFrame.height + 20)
                     }
                     else{
                         cell.contactNameLabel.isHidden = false
@@ -188,24 +196,20 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         
                         let estimatedFrameContactName = NSString(string: msg.SenderName!).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 10)], context: nil)
                         
-                        cell.contactNameLabel.frame = CGRect(x: 4, y: 0, width: estimatedFrameContactName.width + 16, height: 10)
+                        cell.contactNameLabel.frame = CGRect(x: 8, y: 0, width: estimatedFrameContactName.width, height: 10)
+                        cell.messageTextView.frame = CGRect(x: 12, y: 10, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
                         
-                        cell.messageTextView.frame = CGRect(x: 8 + 4, y: 0 + 10, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
-                        
-                        cell.textBubbleView.frame = CGRect(x: 4, y: 0 + 10, width: estimatedFrame.width + 8 + 8 + 16, height: estimatedFrame.height + 20)
+                        cell.bubbleImageView.frame = CGRect(x: 0, y: 10, width: estimatedFrame.width + 32, height: estimatedFrame.height + 20)
                     }
                     
-                    cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-                    //cell.bubbleImageView.image = ChatLogMessageCell.grayBubbleImage
-                    //cell.bubbleImageView.tintColor = UIColor(white: 0.95, alpha: 1)
-                    cell.messageTextView.textColor = UIColor.black
+                    cell.bubbleImageView.image = Chat_Cell.leftBubbleImage
+                    cell.bubbleImageView.tintColor = UIColor(netHex: 0x8ABEFA)
                 }
             case 1 :
                 cell.messageImageView.isHidden = false
                 cell.messageTextView.isHidden = true
-
                 
-                //cell.messageImageView.downloadImage(url: UrlPreFix.Root.rawValue + messageText)
+                
                 if(msg.ImageMsg != nil){
                     cell.messageImageView.image = msg.ImageMsg
                     var h = msg.ImageMsg?.size.height
@@ -217,17 +221,20 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         h = h! * w! / wOld!
                     }
                     let size = CGSize(width: wView, height: 1000)
+                    cell.contactNameLabel.isHidden = true
                     if(msg.IsMe)!{
-                        cell.messageImageView.frame = CGRect(x: view.frame.width - w! - 16 - 16 - 6, y: 0 + 12, width: w! + 16, height: h! + 20)
+                        cell.messageImageView.frame = CGRect(x: view.frame.width - w! - 38 - 4, y: 0 + 12, width: w! + 16, height: h! + 20)
                         
-                        cell.textBubbleView.frame = CGRect(x: view.frame.width - w! - 16 - 16 - 8 - 10, y: 0, width: w! + 8 + 8 + 16 + 8, height: h! + 20 + 24)
-                        cell.textBubbleView.backgroundColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
+                        cell.bubbleImageView.frame = CGRect(x: view.frame.width - w! - 50 - 4, y: 0, width: w! + 46, height: h! + 44)
+                        
+                        cell.bubbleImageView.image = Chat_Cell.rightBubbleImage
+                        cell.bubbleImageView.tintColor = UIColor(netHex: 0xFEA21C)
                     }
                     else{
                         if msg.ContactType == 1{
-                            cell.messageImageView.frame = CGRect(x: 8 + 4 + 4, y: 0 + 12, width: w! + 16, height: h! + 20)
+                            cell.messageImageView.frame = CGRect(x: 18, y: 0 + 12, width: w! + 16, height: h! + 20)
                             
-                            cell.textBubbleView.frame = CGRect(x: 4, y: 0, width: w! + 8 + 8 + 16 + 8, height: h! + 20 + 24)
+                            cell.bubbleImageView.frame = CGRect(x: 0, y: 0, width: w! + 48, height: h! + 44)
                         }
                         else{
                             cell.contactNameLabel.isHidden = false
@@ -235,15 +242,17 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                             
                             let estimatedFrameContactName = NSString(string: msg.SenderName!).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 10)], context: nil)
                             
-                            cell.contactNameLabel.frame = CGRect(x: 4, y: 0, width: estimatedFrameContactName.width + 16, height: 10)
-                            cell.messageImageView.frame = CGRect(x: 8 + 4 + 4, y: 0 + 12 + 10, width: w! + 16, height: h! + 20)
+                            cell.contactNameLabel.frame = CGRect(x: 8, y: 0, width: estimatedFrameContactName.width, height: 10)
+                            cell.messageImageView.frame = CGRect(x: 18, y: 22, width: w! + 16, height: h! + 20)
                             
-                            cell.textBubbleView.frame = CGRect(x: 4, y: 0 + 10, width: w! + 8 + 8 + 16 + 8, height: h! + 20 + 24)
+                            cell.bubbleImageView.frame = CGRect(x: 0, y: 10, width: w! + 48, height: h! + 44)
                         }
-                        cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+                        
+                        cell.bubbleImageView.image = Chat_Cell.leftBubbleImage
+                        cell.bubbleImageView.tintColor = UIColor(netHex: 0x8ABEFA)
                     }
                 }
-       
+                
             //case 2 :
             default:
                 print("none")
@@ -285,7 +294,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         w = wView
                         h = h! * w! / wOld!
                     }
-
+                    
                     if(msg.IsMe)!{
                         return CGSize(width: view.frame.width, height: h! + 20 + 24)
                     }
@@ -306,13 +315,73 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         return CGSize(width: view.frame.width, height: 100)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(8, 0, 0, 0)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let msg = messages[indexPath.item]
+        
+        if msg.MessageType == 1{
+            let galleryViewController = GalleryViewController(startIndex: indexPath.item, itemsDatasource: self, displacedViewsDatasource: nil, configuration: galleryConfiguration())
+            
+            self.presentImageGallery(galleryViewController)
+        }
+    }
+    
+    func galleryConfiguration() -> GalleryConfiguration {
+        
+        return [
+            
+            GalleryConfigurationItem.closeButtonMode(.builtIn),
+            
+            
+            GalleryConfigurationItem.pagingMode(.standard),
+            GalleryConfigurationItem.presentationStyle(.displacement),
+            GalleryConfigurationItem.hideDecorationViewsOnLaunch(false),
+            
+            //GalleryConfigurationItem.swipeToDismissMode(.vertical),
+            //GalleryConfigurationItem.toggleDecorationViewsBySingleTap(false),
+            
+            GalleryConfigurationItem.overlayColor(UIColor(white: 0.035, alpha: 1)),
+            GalleryConfigurationItem.overlayColorOpacity(1),
+            GalleryConfigurationItem.overlayBlurOpacity(1),
+            GalleryConfigurationItem.overlayBlurStyle(UIBlurEffectStyle.light),
+            
+            GalleryConfigurationItem.thumbnailsButtonMode(.none),
+            
+            GalleryConfigurationItem.maximumZoolScale(8),
+            GalleryConfigurationItem.swipeToDismissThresholdVelocity(500),
+            
+            GalleryConfigurationItem.doubleTapToZoomDuration(0.15),
+            
+            GalleryConfigurationItem.blurPresentDuration(0.5),
+            GalleryConfigurationItem.blurPresentDelay(0),
+            GalleryConfigurationItem.colorPresentDuration(0.25),
+            GalleryConfigurationItem.colorPresentDelay(0),
+            
+            GalleryConfigurationItem.blurDismissDuration(0.1),
+            GalleryConfigurationItem.blurDismissDelay(0.4),
+            GalleryConfigurationItem.colorDismissDuration(0.45),
+            GalleryConfigurationItem.colorDismissDelay(0),
+            
+            GalleryConfigurationItem.itemFadeDuration(0.3),
+            GalleryConfigurationItem.decorationViewsFadeDuration(0.15),
+            GalleryConfigurationItem.rotationDuration(0.15),
+            
+            GalleryConfigurationItem.displacementDuration(0.55),
+            GalleryConfigurationItem.reverseDisplacementDuration(0.25),
+            GalleryConfigurationItem.displacementTransitionStyle(.springBounce(0.7)),
+            GalleryConfigurationItem.displacementTimingCurve(.linear),
+            
+            GalleryConfigurationItem.statusBarHidden(true),
+            GalleryConfigurationItem.displacementKeepOriginalInPlace(false),
+            GalleryConfigurationItem.displacementInsetMargin(50)
+        ]
+    }
+    
     func getMessage(){
-        print("data: ", contactID, contactName, contactType)
         if contactType == 1 {
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetPrivateMessage?senderID=\(ChatHub.userID)&receiverID=\(String(contactID))"
             ApiService.Get(url: apiUrl, callback: callbackGetMsg, errorCallBack: errorGetMsg)
@@ -349,7 +418,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 msg.Created = Date(jsonDate: item["Created"] as! String)
                 msg.setImageMsg()
                 self.messages.append(msg)
-
+                
+                /*
+                if msg.MessageType == 1{
+                    items.append(DataImageMsg(inboxID: msg.ID!, image: msg.ImageMsg!))
+                }*/
             }
         }
         DispatchQueue.main.async() { () -> Void in
@@ -386,7 +459,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBAction func txtMessageEditingChanged(_ sender: UITextField) {
         makeReadMsg()
     }
-
+    
     @IBAction func txtMessageTouchDown(_ sender: UITextField) {
         makeReadMsg()
     }
@@ -444,7 +517,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                         }
                     }
                     self.isRead = false
-                }                
+                }
             }
         }
         
@@ -487,7 +560,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             //self.tblConversation.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
-
+    
     func makeReadMsg(){
         if !self.isRead{
             if self.lastInboxID != nil{
@@ -502,6 +575,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         }
         
     }
+    
     
     func addRightBar(){
         let btnInfoMenu = UIButton(type: UIButtonType.system)
@@ -526,17 +600,19 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             //imageView.image = image
             let data = UIImageJPEGRepresentation(newImg, 1.0)
             let array = [UInt8](data!)
-            
+            var sv = "Chat_SendGroupImage"
             if contactType == 1{
-                let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_SendPrivateImage"
-                print(String(ChatHub.userID), ChatHub.userName, String(contactID), contactName!)
-                let params : String = "{\"senderID\" : \"\(String(ChatHub.userID))\", \"senderName\": \"\(ChatHub.userName)\",\"receiverID\" : \"\(String(contactID))\", \"receiverName\": \"\(contactName!)\", \"imageData\":\(array)}"
-            
-                ApiService.Post(url: apiUrl, params: params, callback: callbackSendImage, errorCallBack: { (error) in
-                    print("error")
-                    print(error.localizedDescription)
-                })
+                sv = "Chat_SendPrivateImage"
             }
+            
+            let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/\(sv)"
+            print(String(ChatHub.userID), ChatHub.userName, String(contactID), contactName!)
+            let params : String = "{\"senderID\" : \"\(String(ChatHub.userID))\", \"senderName\": \"\(ChatHub.userName)\",\"receiverID\" : \"\(String(contactID))\", \"receiverName\": \"\(contactName!)\", \"imageData\":\(array)}"
+            
+            ApiService.Post(url: apiUrl, params: params, callback: callbackSendImage, errorCallBack: { (error) in
+                print("error")
+                print(error.localizedDescription)
+            })
         } else{
             print("Something went wrong")
         }
@@ -555,7 +631,35 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
     }
     
-    @IBAction func btnOpenImage(_ sender: Any) {
+    
+    @IBAction func btnToggleButton(_ sender: UIButton) {
+        
+        if constraintLeftMessage.constant == 42{
+            toggleButton(true)
+            
+        }
+        else{
+            toggleButton(false)
+        }
+    }
+    
+    
+    func toggleButton(_ expanded : Bool){
+        if expanded{
+            self.constraintLeftMessage.constant = 156
+            btnToggle.setImage(#imageLiteral(resourceName: "ic_minus2"), for: .normal)
+        }
+        else{
+            self.constraintLeftMessage.constant = 42
+            btnToggle.setImage(#imageLiteral(resourceName: "ic_add"), for: .normal)
+        }
+    }
+    
+    @IBAction func btnOpenCamera(_ sender: UIButton) {
+
+    }
+    
+    @IBAction func btnOpenImage(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum){
             imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
             imagePicker.allowsEditing = false
@@ -564,11 +668,11 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         }
     }
     
-    @IBAction func btnOpenFile(_ sender: Any) {
+    @IBAction func btnOpenFile(_ sender: UIButton) {
         let fileBrowser = FileBrowser()
         present(fileBrowser, animated: true, completion: nil)
         fileBrowser.didSelectFile = { (file: FBFile) -> Void in
-       
+            
             print(file.displayName)
         }
     }
@@ -594,13 +698,15 @@ class Chat_Cell: BaseCell {
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.text = "Sample message"
         textView.backgroundColor = UIColor.clear
+        textView.textColor = UIColor.black
         return textView
     }()
     
     let textBubbleView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        view.layer.cornerRadius = 15
+        view.backgroundColor = UIColor.clear
+        //view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        //view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
         return view
     }()
@@ -615,18 +721,30 @@ class Chat_Cell: BaseCell {
     
     let messageImageView: UIImageView = {
         let view = UIImageView()
-        view.image = ChatCommon.downLoadImage("http://harmonysoft.vn:8089/QLDA_Services/ImageMessage/12577.jpg")
-        //view.backgroundColor = UIColor.clear
-        //view.backgroundColor = UIColor.black
         return view
+    }()
+    
+    static let rightBubbleImage = #imageLiteral(resourceName: "ic_BubbleChatRight").resizableImage(withCapInsets: UIEdgeInsetsMake(22, 26, 22, 26)).withRenderingMode(.alwaysTemplate)
+    static let leftBubbleImage = #imageLiteral(resourceName: "ic_BubbleChatLeft").resizableImage(withCapInsets: UIEdgeInsetsMake(22, 26, 22, 26)).withRenderingMode(.alwaysTemplate)
+    
+    let bubbleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = Chat_Cell.leftBubbleImage
+        imageView.tintColor = UIColor(white: 0.90, alpha: 1)
+        return imageView
     }()
     
     override func setupViews() {
         super.setupViews()
         addSubview(contactNameLabel)
-        addSubview(textBubbleView)
+        //addSubview(textBubbleView)
+        addSubview(bubbleImageView)
         addSubview(messageTextView)
         addSubview(messageImageView)
+        
+        
+        //textBubbleView.addConstraintsWithFormat("H:|[v0]|", views: bubbleImageView)
+        //textBubbleView.addConstraintsWithFormat("V:|[v0]|", views: bubbleImageView)
     }
     
     
@@ -644,4 +762,25 @@ class BaseCell: UICollectionViewCell {
     
     func setupViews() {
     }
+}
+
+
+extension Chat_VC: GalleryItemsDatasource {
+    
+    func itemCount() -> Int {
+        return 1
+        //return items.count
+    }
+    
+    func provideGalleryItem(_ index: Int) -> GalleryItem {
+        
+        return GalleryItem.image{$0(self.messages[index].ImageMsg)}
+    }
+    
+}
+
+struct DataImageMsg {
+    let inboxID : Int64
+    let image: UIImage
+
 }

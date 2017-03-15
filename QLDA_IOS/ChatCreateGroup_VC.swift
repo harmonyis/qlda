@@ -14,7 +14,7 @@ class ChatCreateGroup_Cell: UITableViewCell{
     @IBOutlet weak var btnCheck: UIButton!
 }
 
-class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
     
     @IBOutlet weak var tblListContact: UITableView!
     var listUserChecked : [Int] = []
@@ -40,7 +40,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
         tblListContact.tableFooterView = UIView(frame: .zero)
         
         listContact = ChatCommon.listContact.filter() {
-            if let contactType = ($0 as UserContact).TypeOfContact as Int32! {
+            if let contactType = ($0 as UserContact).TypeOfContact {
                 return contactType == 1
             } else {
                 return false

@@ -127,7 +127,15 @@ class ChatHub {
                 return
             }
             let identifier = "\(senderID + 1000)"
-            UserNotificationManager.share.addNotificationWithTimeIntervalTrigger(identifier: identifier, title: senderName, body: msg)
+            
+            var body = ""
+            switch msgType{
+            case 1: body = "Bạn đã nhận một hình ảnh"
+            case 2: body = "Bạn đã nhận một tệp tin"
+            default: body = msg
+            }
+            
+            UserNotificationManager.share.addNotificationWithTimeIntervalTrigger(identifier: identifier, title: senderName, body: body)
         
         }
         
@@ -161,7 +169,12 @@ class ChatHub {
             if senderID == ChatHub.userID{
                 return
             }
-            let body = "\(senderName) : \(msg)"
+            var body = ""
+            switch msgType{
+            case 1: body = "Bạn đã nhận một hình ảnh"
+            case 2: body = "Bạn đã nhận một tệp tin"
+            default: body = "\(senderName) : \(msg)"
+            }
             let identifier = "\(-receiverID - 1000)"
             UserNotificationManager.share.addNotificationWithTimeIntervalTrigger(identifier: identifier, title: receiverName, body: body)
         }

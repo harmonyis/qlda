@@ -110,7 +110,7 @@ class Login_VC: UIViewController {
                 contact.PictureUrl = item["PictureUrl"] as? String
                 contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
                 contact.SenderOfMessage = item["SenderOfMessage"] as? Int
-                contact.TypeOfContact = item["TypeOfContact"] as? Int32
+                contact.TypeOfContact = item["TypeOfContact"] as? Int
                 contact.TypeOfMessage = item["TypeOfMessage"] as? Int
                 
                 contact.setPicture()
