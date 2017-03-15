@@ -32,7 +32,13 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
         if(Config.profilePicture != nil){
             imgProfile.image = Config.profilePicture
         }
-        self.lblUserName.text = Config.userName
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                self.lblUserName.text = Config.userName
+                
+            }
+        }
         updateArrayMenuOptions()
     }
     
@@ -93,7 +99,15 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
         Config.SelectMenuIndex = index
 
         if(index == 8){
-            performSegue(withIdentifier: "logout", sender: self)
+            let alert = UIAlertController(title: "Thông báo", message: "Bạn thực sự muốn thoát?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Huỷ", style: UIAlertActionStyle.default, handler: nil))
+            
+            let action = UIAlertAction(title: "OK", style: .destructive) { action in
+                self.performSegue(withIdentifier: "logout", sender: self)
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            
         }
     }
     

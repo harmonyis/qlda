@@ -44,7 +44,13 @@ class Login_VC: UIViewController {
                     variableConfig.m_szUserName = self.szTenDangNhap
                     variableConfig.m_szPassWord = self.szMatKhau
                     getContacts()
-                    Config.GetCurrentUser()
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        DispatchQueue.main.async {
+                            Config.GetCurrentUser()
+                        }
+                    }
+                    
                 }
                 else {
                     DispatchQueue.global(qos: .userInitiated).async {
