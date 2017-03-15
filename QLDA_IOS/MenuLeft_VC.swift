@@ -10,12 +10,14 @@ import UIKit
 
 class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate{
 
+    @IBOutlet weak var lblUserName: UILabel!
+    @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var tblMenuLeft: UITableView!
     var arrayMenu = [Dictionary<String,String>]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.imgProfile.maskCircle()
         self.tblMenuLeft.tableFooterView = UIView()
         self.tblMenuLeft.separatorStyle = UITableViewCellSeparatorStyle.none
     }
@@ -27,6 +29,10 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if(Config.profilePicture != nil){
+            imgProfile.image = Config.profilePicture
+        }
+        self.lblUserName.text = Config.userName
         updateArrayMenuOptions()
     }
     

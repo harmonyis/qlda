@@ -19,4 +19,11 @@ extension UIImageView {
         // fix rotation.
         self.image = anyImage
     }
+    
+    public func maskCircle() {
+        self.contentMode = UIViewContentMode.scaleAspectFill
+        self.layer.cornerRadius = self.frame.height / 2
+        self.layer.masksToBounds = false
+        self.clipsToBounds = true
+    }
 }

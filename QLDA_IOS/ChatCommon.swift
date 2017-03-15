@@ -51,7 +51,7 @@ class ChatCommon{
                 contact.SenderOfMessage = item["SenderOfMessage"] as? Int
                 contact.TypeOfContact = item["TypeOfContact"] as? Int
                 contact.TypeOfMessage = item["TypeOfMessage"] as? Int
-                print(contact.TypeOfMessage )
+              
                 contact.setPicture()
                 listContact.append(contact)
             }

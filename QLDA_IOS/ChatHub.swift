@@ -197,10 +197,7 @@ class ChatHub {
             if host != Config.userID{
                 UserNotificationManager.share.addNotificationWithTimeIntervalTrigger(identifier: identifier, title: groupName, body: "Bạn vừa được thêm vào nhóm")
             }
-           
-            
         }
-
     }
     
     static func pushView(){
