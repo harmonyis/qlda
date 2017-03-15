@@ -1955,6 +1955,7 @@
                     </view>
                     <connections>
                         <outlet property="tblMenuLeft" destination="WtL-ss-HLq" id="Wc6-xY-LLs"/>
+                        <segue destination="8nb-LZ-jCf" kind="custom" identifier="logout" customClass="SWRevealViewControllerSeguePushController" id="pio-eo-iem"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RYp-im-a61" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2069,6 +2070,7 @@
         <!--Menu View Controller-->
         <scene sceneID="oAI-Zr-I1s">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VYJ-2J-Owr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MenuViewController" id="vKR-Bu-tXq" customClass="MenuViewController" customModule="QLDA_IOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WVi-ws-AL4"/>
@@ -2154,7 +2156,6 @@
                         <outlet property="tblMenuOptions" destination="hLi-dH-Jyb" id="MI1-nH-epI"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VYJ-2J-Owr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2234" y="1972"/>
         </scene>
@@ -2533,7 +2534,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdA-xR-Oiu">
-                                                    <rect key="frame" x="49" y="0.0" width="214" height="20"/>
+                                                    <rect key="frame" x="49" y="23" width="214" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

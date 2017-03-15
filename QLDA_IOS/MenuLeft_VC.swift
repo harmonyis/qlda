@@ -72,22 +72,33 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
         }
         
         if(Int32(indexPath.row) == 7){
-            //cell.layer.borderWidth = 1.0
-            //cell.layer.borderColor = UIColor.gray.cgColor
+            let lineView = UIView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: 0.5))
+            lineView.backgroundColor=UIColor(netHex: 0xDFDFE3)
+            cell.addSubview(lineView)
         }
-        
+    
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let cell : UITableViewCell = tblMenuLeft.cellForRow(at: indexPath)!
         
-        
         let index = Int32(indexPath.row)
         Config.SelectMenuIndex = index
+
+        if(index == 8){
+            performSegue(withIdentifier: "logout", sender: self)
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "logout") {
+            Config.InitApp()
+        }
+    }
+    
 }

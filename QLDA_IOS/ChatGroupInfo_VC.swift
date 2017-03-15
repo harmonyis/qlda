@@ -75,7 +75,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
             
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_ChangeGroupPicture"
             
-            let params : String = "{\"groupID\" : \"\(String(groupID!))\", \"userID\": \"\(String(ChatHub.userID))\", \"imageData\":\(array)}"
+            let params : String = "{\"groupID\" : \"\(String(groupID!))\", \"userID\": \"\(String(Config.userID))\", \"imageData\":\(array)}"
             //let params : String = "{\"groupID\" : \"\(String(groupID!))\", \"userID\": \"\(String(ChatHub.userID))\"}"
             ApiService.Post(url: apiUrl, params: params, callback: callbackChagePictureGroup, errorCallBack: { (error) in
                 print("error")
@@ -214,7 +214,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         alert.addAction(UIAlertAction(title: "Huỷ", style: UIAlertActionStyle.default, handler: nil))
 
         let action = UIAlertAction(title: "Ok", style: .default) { action in
-            self.removeUserFromGroup(userID: ChatHub.userID, groupID: self.groupID!)
+            self.removeUserFromGroup(userID: Config.userID, groupID: self.groupID!)
             ChatCommon.checkCloseView = true
             self.navigationController?.popViewController(animated: true)
             /*
@@ -296,7 +296,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
             let userID = args?[0] as! Int
             let groupID = args?[1] as! Int
             
-            if(userID == ChatHub.userID && groupID == self.groupID)
+            if(userID == Config.userID && groupID == self.groupID)
             {
                 //khi user hiện tại bị bị xoá khỏi nhóm
             }

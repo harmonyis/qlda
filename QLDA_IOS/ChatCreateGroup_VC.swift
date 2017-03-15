@@ -87,7 +87,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func btnCreateGroupTouchUpInside(_ sender: Any) {
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_CreateGroupChat"
 
-        let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(ChatHub.userID)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
+        let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(Config.userID)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
         ApiService.Post(url: apiUrl, params: params, callback: callbackCreateGroup, errorCallBack: errorCreateGroup)
     }
     
@@ -141,10 +141,10 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
                 i += 1
             }
             if(listUserChecked.count > 0){
-                groupName = ChatHub.userName + ", " + groupName
+                groupName = Config.userName + ", " + groupName
             }
             else{
-                groupName = ChatHub.userName
+                groupName = Config.userName
             }
         }
         
@@ -162,10 +162,10 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
             i += 1
         }
         if(listUserChecked.count > 0){
-            userIDs = String(ChatHub.userID) + "," + userIDs
+            userIDs = String(Config.userID) + "," + userIDs
         }
         else{
-            userIDs = String(ChatHub.userID)
+            userIDs = String(Config.userID)
         }
         return userIDs
     }
