@@ -204,20 +204,20 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
             
             cell.lblGiaTriTT.text = variableConfig.convert(m_dsGoiThau[index - 4].GiaGT!)
             
-            var targetString : String = "Hình thức LCNT : \(m_dsGoiThau[index - 4].HinhThucLCNT!)"
+            var targetString : String = "Hình thức LCNT: \(m_dsGoiThau[index - 4].HinhThucLCNT!)"
             var range = NSMakeRange(16, targetString.characters.count - 16 )
             cell.lblHinhThucLCNT.attributedText = attributedString(from: targetString, nonBoldRange: range)
             
             cell.lblHinhThucLCNT.numberOfLines = 0
             cell.lblHinhThucLCNT.sizeToFit()
             
-            targetString = "Phương thức LCNT : \(m_dsGoiThau[index - 4].PhuongThucLCNT!)"
+            targetString = "Phương thức LCNT: \(m_dsGoiThau[index - 4].PhuongThucLCNT!)"
             range = NSMakeRange(19, targetString.characters.count - 19 )
             cell.lblPhuongThucLCNT.attributedText = attributedString(from: targetString, nonBoldRange: range)
              cell.lblPhuongThucLCNT.numberOfLines = 0
             cell.lblPhuongThucLCNT.sizeToFit()
             
-            targetString = "Loại hợp đồng : \(m_dsGoiThau[index - 4].LoaiHopDong!)"
+            targetString = "Loại hợp đồng: \(m_dsGoiThau[index - 4].LoaiHopDong!)"
             range = NSMakeRange(16, targetString.characters.count - 16 )
             cell.lblLoaiHD.attributedText = attributedString(from: targetString, nonBoldRange: range)
 

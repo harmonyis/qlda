@@ -36,6 +36,9 @@ class CustomCellDSDATableViewCell: UITableViewCell {
         }
     }
 
+    @IBOutlet weak var constraintHeightDA: NSLayoutConstraint!
+    @IBOutlet weak var constrainHeightTTCT: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightTieuDe: NSLayoutConstraint!
     @IBOutlet weak var UiViewContent: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
