@@ -11,6 +11,8 @@
 		1B655B941E6D4145007A615B /* YAxisValueFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */; };
 		244937621E76470E00929B6F /* TableDSDA_ Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */; };
 		244937641E76820500929B6F /* TableDSDA_Lanscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244937631E76820500929B6F /* TableDSDA_Lanscape.swift */; };
+		2449376D1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2449376B1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift */; };
+		2449376E1E76953A00929B6F /* CustomCellDSDA_Lanscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2449376C1E76953A00929B6F /* CustomCellDSDA_Lanscape.xib */; };
 		24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAE801E6979D8008F205C /* AppDelegate.swift */; };
 		24BEAE861E6979D8008F205C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE841E6979D8008F205C /* Main.storyboard */; };
 		24BEAE881E6979D8008F205C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE871E6979D8008F205C /* Assets.xcassets */; };
@@ -126,6 +128,8 @@
 		1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YAxisValueFormatted.swift; sourceTree = "<group>"; };
 		244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableDSDA_ Portrait.swift"; sourceTree = "<group>"; };
 		244937631E76820500929B6F /* TableDSDA_Lanscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDSDA_Lanscape.swift; sourceTree = "<group>"; };
+		2449376B1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellDSDA_Lanscape.swift; sourceTree = "<group>"; };
+		2449376C1E76953A00929B6F /* CustomCellDSDA_Lanscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellDSDA_Lanscape.xib; sourceTree = "<group>"; };
 		24BEAE7D1E6979D8008F205C /* QLDA_IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLDA_IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BEAE801E6979D8008F205C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24BEAE851E6979D8008F205C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -479,6 +483,8 @@
 				24BEAFAA1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift */,
 				24BEAFAC1E6FAF98008F205C /* Cell_KHLCNT_R2.swift */,
 				24BEAFAE1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift */,
+				2449376B1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift */,
+				2449376C1E76953A00929B6F /* CustomCellDSDA_Lanscape.xib */,
 			);
 			name = CustomCell;
 			sourceTree = "<group>";
@@ -639,6 +645,7 @@
 				24BEAE8B1E6979D8008F205C /* LaunchScreen.storyboard in Resources */,
 				24BEAE881E6979D8008F205C /* Assets.xcassets in Resources */,
 				24BEAE861E6979D8008F205C /* Main.storyboard in Resources */,
+				2449376E1E76953A00929B6F /* CustomCellDSDA_Lanscape.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,6 +837,7 @@
 				BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */,
 				24BEAEF31E697AA6008F205C /* DuAn.swift in Sources */,
 				24BEAF091E697AA6008F205C /* variableConfig.swift in Sources */,
+				2449376D1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift in Sources */,
 				24BEAFAF1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift in Sources */,
 				24BEAFA21E6EA0EA008F205C /* Tab_KHGN.swift in Sources */,
 				BAF1E4891E72459300F28FE9 /* UIFont.swift in Sources */,

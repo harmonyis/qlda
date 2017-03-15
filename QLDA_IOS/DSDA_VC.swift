@@ -19,14 +19,13 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     var indexTrangThaiDuAnCha = Set<Int>()
     var indexGroupDuAnCon = Set<Int>()
     var indexTrangThaiDuAnCon = Set<String>()
-    var dataSource : TableDSDA_Portrait?
+    var dataSource_Portrait : TableDSDA_Portrait?
+    var dataSource_Lanscape : TableDSDA_Lanscape?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tbDSDA.separatorColor = UIColor.clear
-        
-        //self.tbDSDA.rowHeight = UITableViewAutomaticDimension
-        
-        
+        self.tbDSDA.register(UINib(nibName: "CustomCellDSDA_Lanscape", bundle: nil), forCellReuseIdentifier: "CustomCellDSDA_Lanscape")
+       
         self.automaticallyAdjustsScrollViewInsets = false
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetDuAn"
         //let szUser=lblName.
@@ -34,32 +33,20 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         
         ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
         
-        //     self.tbDSDA.sectionHeaderHeight = UITableViewAutomaticDimension
-        //     self.tbDSDA.rowHeight = UITableViewAutomaticDimension
-        //     self.tbDSDA.estimatedRowHeight = 50
-        //   self.tbDSDA.estimatedSectionHeaderHeight = 50
         
-        //    self.tbDSDA.alwaysBounceVertical = false
-        
-        //self.addSlideMenuButton()
+     
+            self.tbDSDA.sectionFooterHeight = 0;
+             self.tbDSDA.sectionHeaderHeight = UITableViewAutomaticDimension
+             self.tbDSDA.rowHeight = UITableViewAutomaticDimension
+             self.tbDSDA.estimatedRowHeight = 30
+            self.tbDSDA.estimatedSectionHeaderHeight = 30
+      
     }
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        var text=""
-        switch UIDevice.current.orientation{
-        case .portrait:
-            print("1 - SSS   SSSSSSS")
-        case .portraitUpsideDown:
-            print("2 - SSS   SSSSSSS")
-        case .landscapeLeft:
-           print("3 - SSS   SSSSSSS")
-        case .landscapeRight:
-          print("4 - SSS   SSSSSSS")
-        default:
-            text="5 - SSS   SSSSSSS"
-        }
-      //  NSLog("You have moved: \(text)")
+
+    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+        LoadTableView()
     }
-    
+
     func Alert(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
@@ -106,10 +93,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                     DispatchQueue.main.async {
                         self.DSDA = self.DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
                         self.m_DSDA = self.DSDA
-                        self.dataSource = TableDSDA_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self)
-                        self.tbDSDA.dataSource = self.dataSource
-                        self.tbDSDA.delegate = self.dataSource
-                        self.tbDSDA.reloadData()
+                         self.LoadTableView()
                        
                                          }
                 }
@@ -215,13 +199,26 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         {
             self.DSDA = self.m_DSDA
         }
-        self.dataSource = TableDSDA_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self)
-        self.tbDSDA.dataSource = self.dataSource
-        self.tbDSDA.delegate = self.dataSource
-        self.tbDSDA.reloadData()
+        LoadTableView()
         
     }
     
+    func LoadTableView(){
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            self.dataSource_Lanscape = TableDSDA_Lanscape(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self)
+            self.tbDSDA.dataSource = self.dataSource_Lanscape
+            self.tbDSDA.delegate = self.dataSource_Lanscape
+            self.tbDSDA.reloadData()
+            
+        }
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+            self.dataSource_Portrait = TableDSDA_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self)
+            self.tbDSDA.dataSource = self.dataSource_Portrait
+            self.tbDSDA.delegate = self.dataSource_Portrait
+            self.tbDSDA.reloadData()
+        }
+
+    }
     func  ConvertToUnsign(_ sztext: String) -> String
     {
         var signs : [String] = [
@@ -266,12 +263,6 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    //Table
-    
-    /*  func numberOfSections(in tableView: UITableView) -> Int {
-     return 1
-     }
-     */
-   
+      
     
 }

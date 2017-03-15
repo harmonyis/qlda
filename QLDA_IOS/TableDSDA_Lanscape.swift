@@ -59,10 +59,10 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
      }
      
      */
+    /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
-        
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
+       
         let itemNhomDA :DanhSachDA = self.DSDA[indexPath.section]
         let itemDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
         
@@ -73,7 +73,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 13), myText: msg)
         
-        let labelWidth = cell.lblTenDuAn.frame.width
+        let labelWidth = cell.lblTenDA.frame.width
         let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
         //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
         var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
@@ -106,15 +106,15 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
      */
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
+    
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
         
         let itemNhomDA :DanhSachDA = self.DSDA[section]
         let msg  = itemNhomDA.TenDA!
         
         let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 13), myText: msg)
         
-        let labelWidth = cell.lblTenDuAn.frame.width
+        let labelWidth = cell.lblTenDA.frame.width
         let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
         //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
         var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
@@ -132,27 +132,34 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         return height + 150
     }
     
-    
+    */
     // */
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
         // cell.ght = 60
         //  cell.scrollEnabled = false
         let itemNhomDA :DanhSachDA = self.DSDA[section]
-        cell.lblTenDuAn.text = itemNhomDA.TenDA!
-        cell.lblTenDuAn.font = UIFont.systemFont(ofSize: 13)
-        cell.lblTenDuAn.textAlignment = NSTextAlignment.left
-        cell.lblNhomDuAn.text = itemNhomDA.NhomDA!
+        cell.lblTenDA.text = itemNhomDA.TenDA!
+        cell.lblTenDA.font = UIFont.systemFont(ofSize: 13)
+        cell.lblTenDA.textAlignment = NSTextAlignment.left
+       // cell.lblTenDA.sizeToFit()
+        
+         let heightTD = calulaterTextSize(text: itemNhomDA.TenDA!, size: CGSize(width: cell.lblTenDA.frame.width , height: 1000))
+        cell.lblNhomDA.text = itemNhomDA.NhomDA!
+       // cell.lblNhomDA.sizeToFit()
         cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
-        cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!)
-        cell.lblTongDauTu.text = variableConfig.convert(itemNhomDA.TongMucDauTu!)
-        cell.lblThoiGianThucHien.text = itemNhomDA.ThoiGianThucHien!
-        cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewGroup.layer.borderWidth = 0.5
+       // cell.lblGiaiDoan.sizeToFit()
+        cell.lblGTGN.text = variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!)
+       // cell.lblGTGN.sizeToFit()
+        cell.lblTMDT.text = variableConfig.convert(itemNhomDA.TongMucDauTu!)
+       // cell.lblTMDT.sizeToFit()
+        cell.lblTGTH.text = itemNhomDA.ThoiGianThucHien!
+      //  cell.lblTGTH.sizeToFit()
+        cell.uiViewGroup.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewGroup.layer.borderWidth = 0.5
         cell.imgGroup.isHidden = false
-        cell.UiViewDetail.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewDetail.layer.borderWidth = 0.5
+       
         var image : UIImage = UIImage(named:"ic_minus")!
         if (itemNhomDA.DuAnCon?.count)!>0 {
             
@@ -174,33 +181,30 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         //  cell.UIViewTieuDe.layer.borderWidth=1
         
-        cell.UiViewTenDuAn.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewTenDuAn.layer.borderWidth = 0.5
+        cell.uiViewTGTH.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewTGTH.layer.borderWidth = 0.5
+        
+       
+        
+        cell.uiViewTenDA.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewTenDA.layer.borderWidth = 0.5
+        
+        cell.uiViewGTGN.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewGTGN.layer.borderWidth = 0.5
+        
+        cell.uiViewTMDT.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewTMDT.layer.borderWidth = 0.5
+        
+        cell.uiViewNhomDA.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewNhomDA.layer.borderWidth = 0.5
+        
+        cell.uiViewGiaiDoan.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewGiaiDoan.layer.borderWidth = 0.5
         
         
-        let borderBottom = CALayer()
-        let borderWidth = CGFloat(1)
-        borderBottom.borderColor =  myColorBoder.cgColor
-        borderBottom.borderWidth = borderWidth
-        borderBottom.frame = CGRect(x: 0, y: cell.UiViewBDThongTinCT.frame.height - 1, width: cell.UiViewBDThongTinCT.frame.width, height: 1)
-        cell.UiViewBDThongTinCT.layer.addSublayer(borderBottom)
-        cell.UiViewBDThongTinCT.layer.masksToBounds = true
-        
-        
-        
-        cell.UiViewThongTinChiTiet.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewThongTinChiTiet.layer.borderWidth = 0.5
-        cell.UiViewBDThongTin.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewBDThongTin.layer.borderWidth = 0.5
         
         var eventClick = UITapGestureRecognizer()
         
-        cell.UiViewDetail.tag = section
-        eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.duAnChaClickDetail(sender: )))
-        cell.UiViewDetail.addGestureRecognizer(eventClick)
-        cell.UiViewDetail.isUserInteractionEnabled = true;
-        
-        eventClick = UITapGestureRecognizer()
         cell.imgGroup.tag = section
         eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.duAnChaClickGroup(sender: )))
         cell.imgGroup.addGestureRecognizer(eventClick)
@@ -209,19 +213,15 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         eventClick = UITapGestureRecognizer()
         
         eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.ClickTenDuAn(sender:)))
-        cell.lblTenDuAn.tag = (Int)(itemNhomDA.IdDA!)!
-        cell.lblTenDuAn.accessibilityLabel = (itemNhomDA.TenDA!)
-        cell.lblTenDuAn.addGestureRecognizer(eventClick)
-        cell.lblTenDuAn.isUserInteractionEnabled = true;
+        cell.lblTenDA.tag = (Int)(itemNhomDA.IdDA!)!
+        cell.lblTenDA.accessibilityLabel = (itemNhomDA.TenDA!)
+        cell.lblTenDA.addGestureRecognizer(eventClick)
+        cell.lblTenDA.isUserInteractionEnabled = true;
         
+        cell.autoresizingMask = .flexibleWidth
+        cell.autoresizingMask = .flexibleHeight
         
-        cell.UIViewTieuDe.autoresizingMask = UIViewAutoresizing.flexibleTopMargin
-        cell.UIViewTieuDe.autoresizingMask = UIViewAutoresizing.flexibleBottomMargin
-        
-        cell.UIViewTieuDe.autoresizesSubviews = true
-        
-        cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCha.contains(section)
-        
+         cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
         
         return cell
     }
@@ -270,88 +270,75 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         //tableView.scrollToRow(at: indexPath, at: .top, animated: false)
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell", for: indexPath) as! CustomCellDSDATableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape", for: indexPath) as! CustomCellDSDA_Lanscape
         let itemNhomDA :DanhSachDA = self.DSDA[indexPath.section]
         let itemDSDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
         let itemDuAnCon : DuAn = itemDSDuAnCon[indexPath.row]
         
         //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
         // cell.lblTenDuAn=label
-        cell.lblTenDuAn.text = itemDuAnCon.TenDA!
-        cell.lblTenDuAn.numberOfLines = 0
-        cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
-        cell.lblTenDuAn.textAlignment = NSTextAlignment.left
+        cell.lblTenDA.text = itemDuAnCon.TenDA!
+        cell.lblTenDA.numberOfLines = 0
+        cell.lblTenDA.font = UIFont.italicSystemFont(ofSize: 13)
+        cell.lblTenDA.textAlignment = NSTextAlignment.left
+      //  cell.lblTenDA.sizeToFit()
+         let heightTD = calulaterTextSize(text: itemDuAnCon.TenDA!, size: CGSize(width: cell.lblTenDA.frame.width , height: 1000))
+        
+        
         //  cell.lblTenDuAn.lineBreakMode = wrap
         
-        cell.lblNhomDuAn.text = itemDuAnCon.NhomDA!
+        cell.lblNhomDA.text = itemDuAnCon.NhomDA!
+     //   cell.lblNhomDA.sizeToFit()
         cell.lblGiaiDoan.text = itemDuAnCon.GiaiDoan!
-        cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemDuAnCon.GiaTriGiaiNgan!)
-        cell.lblTongDauTu.text = variableConfig.convert(itemDuAnCon.TongMucDauTu!)
-        cell.lblThoiGianThucHien.text = itemDuAnCon.ThoiGianThucHien!
+    //    cell.lblGiaiDoan.sizeToFit()
+        cell.lblGTGN.text = variableConfig.convert(itemDuAnCon.GiaTriGiaiNgan!)
+    //    cell.lblGTGN.sizeToFit()
+        cell.lblTMDT.text = variableConfig.convert(itemDuAnCon.TongMucDauTu!)
+     //   cell.lblTMDT.sizeToFit()
+        cell.lblTGTH.text = itemDuAnCon.ThoiGianThucHien!
+     //   cell.lblTGTH.sizeToFit()
+        cell.uiViewGroup.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewGroup.layer.borderWidth = 0.5
         
-        cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewGroup.layer.borderWidth = 0.5
+        cell.uiViewTGTH.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewTGTH.layer.borderWidth = 0.5
         
-        cell.UiViewDetail.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewDetail.layer.borderWidth = 0.5
         // if !cell.imgGroup.isHidden
         cell.imgGroup.isHidden=true
         
         //  cell.UIViewTieuDe.layer.borderWidth=1
         
-        cell.UiViewTenDuAn.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewTenDuAn.layer.borderWidth = 0.5
+        cell.uiViewTenDA.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewTenDA.layer.borderWidth = 0.5
+        
+        cell.uiViewGTGN.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewGTGN.layer.borderWidth = 0.5
+        
+        cell.uiViewTMDT.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewTMDT.layer.borderWidth = 0.5
+        
+        cell.uiViewNhomDA.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewNhomDA.layer.borderWidth = 0.5
+        
+        cell.uiViewGiaiDoan.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewGiaiDoan.layer.borderWidth = 0.5
         
         
-        let borderBottom = CALayer()
-        let borderWidth = CGFloat(1)
-        borderBottom.borderColor =  myColorBoder.cgColor
-        borderBottom.borderWidth = borderWidth
-        borderBottom.frame = CGRect(x: 0, y: cell.UiViewBDThongTinCT.frame.height - 1, width: cell.UiViewBDThongTinCT.frame.width, height: 1)
-        cell.UiViewBDThongTinCT.layer.addSublayer(borderBottom)
-        cell.UiViewBDThongTinCT.layer.masksToBounds = true
-        
-        
-        cell.UiViewThongTinChiTiet.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewThongTinChiTiet.layer.borderWidth = 0.5
-        //   cell.UiViewThongTinChiTiet.layer.masksToBounds=true
-        
-        cell.UiViewBDThongTin.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewBDThongTin.layer.borderWidth = 0.5
-        
-        //  cell.UiViewContent.layer.borderWidth=1
-        /* if let image = feedEntry.image {
-         cell.trackAlbumArtworkView.image = image
-         } else {
-         feedManager.fetchImageAtIndex(index: indexPath.row, completion: { (index) in
-         self.handleImageLoadForIndex(index: index)
-         })
-         }
-         
-         cell.audioPlaybackView.isHidden = !expandedCellPaths.contains(indexPath)
-         */
-        
-        // cell.imgDetail.addTarget(self, action: #selector(DSDA_VC.tappedMe()))
         var eventClick = UITapGestureRecognizer()
         let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
-        cell.UiViewDetail.accessibilityLabel = value
-        print(indexPath.row)
-        eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.duAnConClickDetail(sender: )))
-        
-        cell.UiViewDetail.addGestureRecognizer(eventClick)
-        cell.UiViewDetail.isUserInteractionEnabled = true;
         
         eventClick = UITapGestureRecognizer()
         
         eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.ClickTenDuAn(sender:)))
-        cell.lblTenDuAn.accessibilityLabel = (itemDuAnCon.TenDA!)
-        cell.lblTenDuAn.tag = (Int)(itemDuAnCon.IdDA!)!
-        cell.lblTenDuAn.addGestureRecognizer(eventClick)
-        cell.lblTenDuAn.isUserInteractionEnabled = true;
+        cell.lblTenDA.accessibilityLabel = (itemDuAnCon.TenDA!)
+        cell.lblTenDA.tag = (Int)(itemDuAnCon.IdDA!)!
+        cell.lblTenDA.addGestureRecognizer(eventClick)
+        cell.lblTenDA.isUserInteractionEnabled = true;
         
-        cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCon.contains(value)
-        print("ssssss")
-        return cell
+        print(heightTD.height)
+         cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
+                
+               return cell
     }
     
     func duAnConClickDetail(sender: UITapGestureRecognizer)
@@ -379,6 +366,12 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         variableConfig.m_szTenDuAn = value
         let vc = uiViewDSDA?.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
         uiViewDSDA?.navigationController?.pushViewController(vc, animated: true)
+    }
+    // Hàm tính size text
+    func calulaterTextSize(text : String, size : CGSize) -> CGRect{
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
+        return estimatedFrame
     }
     
 }

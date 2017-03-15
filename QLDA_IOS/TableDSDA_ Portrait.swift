@@ -9,7 +9,7 @@
 import UIKit
 
 class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
-
+    
     
     var m_arrDSDA : [[String]] = []
     var DSDA = [DanhSachDA]()
@@ -18,22 +18,22 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     var indexTrangThaiDuAnCon = Set<String>()
     var tbDSDA : UITableView?
     var uiViewDSDA : UIViewController?
-  
+    
     // MARK: - Table view data source
-   init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController){
+    init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController){
         super.init()
         self.DSDA = arrDSDA
         self.tbDSDA = tbvDSDA
         self.uiViewDSDA = tbvcDSDA
         
     }
-     
-     func numberOfSections(in tableView: UITableView) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return self.DSDA.count
     }
-
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if(self.indexGroupDuAnCon.contains(section))
         {
@@ -42,112 +42,47 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         else {
             return self.DSDA[section].DuAnCon!.count
         }    }
-
-    /* func numberOfSections(_ tableView: UITableView) -> Int {
-        return self.DSDA.count
-    }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        if(self.indexGroupDuAnCon.contains(section))
-        {
-            return 0
-        }
-        else {
-            return self.DSDA[section].DuAnCon!.count
-        }
-    }
-    
-    */
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
         
-        let itemNhomDA :DanhSachDA = self.DSDA[indexPath.section]
-        let itemDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
         
-        
-        //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
-        // cell.lblTenDuAn=label
-        let msg  = itemDuAnCon[indexPath.row].TenDA!
-        
-        let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 13), myText: msg)
-        
-        let labelWidth = cell.lblTenDuAn.frame.width
-        let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
-        //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
-        var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
-        if height<30
-        {
-            height=30
-        }
-        print(height)
-        if !self.indexTrangThaiDuAnCon.contains((String)(indexPath.section)+"-"+(String)(indexPath.row)) {
-            
-            return height + 2
-            
-        }
-        return   height + 150
-        
-    }
-    
-    
-    func getStringSizeForFont(font: UIFont, myText: String) -> CGSize {
-        let fontAttributes = [NSFontAttributeName: font]
-        let size = (myText as NSString).size(attributes: fontAttributes)
-        return size
-        
-    }
-    
-    /*
-     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-     return UITableViewAutomaticDimension
-     }
-     */
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
-        
-        let itemNhomDA :DanhSachDA = self.DSDA[section]
-        let msg  = itemNhomDA.TenDA!
-        
-        let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 13), myText: msg)
-        
-        let labelWidth = cell.lblTenDuAn.frame.width
-        let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
-        //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
-        var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
-        
-        if height<30
-        {
-            height=30
-        }
-        
-        if !self.indexTrangThaiDuAnCha.contains(section) {
-            
-            return height + 2
-            
-        }
-        return height + 150
-    }
-    
-    
-    // */
-   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    
-        let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
-        // cell.ght = 60
-        //  cell.scrollEnabled = false
         let itemNhomDA :DanhSachDA = self.DSDA[section]
         cell.lblTenDuAn.text = itemNhomDA.TenDA!
         cell.lblTenDuAn.font = UIFont.systemFont(ofSize: 13)
         cell.lblTenDuAn.textAlignment = NSTextAlignment.left
-        cell.lblNhomDuAn.text = itemNhomDA.NhomDA!
-        cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
-        cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!)
-        cell.lblTongDauTu.text = variableConfig.convert(itemNhomDA.TongMucDauTu!)
-        cell.lblThoiGianThucHien.text = itemNhomDA.ThoiGianThucHien!
+        
+        let heightTD = calulaterTextSize(text: itemNhomDA.TenDA!, size: CGSize(width: cell.lblTenDuAn.frame.width , height: 1000))
+        
+        
+        var targetString : String = "Nhóm: \(itemNhomDA.NhomDA!)"
+        var range = NSMakeRange(6, targetString.characters.count - 6 )
+        cell.lblNhomDuAn.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        
+        
+        //  cell.lblNhomDuAn.text = itemNhomDA.NhomDA!
+        targetString  = "Giai đoạn: \(itemNhomDA.GiaiDoan!)"
+        range = NSMakeRange(10, targetString.characters.count - 10 )
+        cell.lblGiaiDoan.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        //cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
+        
+        targetString  = "Giá trị giải ngân: \(variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!))"
+        range = NSMakeRange(18, targetString.characters.count - 18 )
+        cell.lblGiaTriGiaiNgan.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        // cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!)
+        
+        targetString  = "Tổng mức đầu tư: \(variableConfig.convert(itemNhomDA.TongMucDauTu!))"
+        range = NSMakeRange(16, targetString.characters.count - 16 )
+        cell.lblTongDauTu.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        // cell.lblTongDauTu.text = variableConfig.convert(itemNhomDA.TongMucDauTu!)
+        
+        targetString  = "Thời gian thực hiện: \(itemNhomDA.ThoiGianThucHien!)"
+        range = NSMakeRange(20, targetString.characters.count - 20 )
+        cell.lblThoiGianThucHien.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        //     cell.lblThoiGianThucHien.text = itemNhomDA.ThoiGianThucHien!
+        
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
         cell.UiViewGroup.layer.borderWidth = 0.5
         cell.imgGroup.isHidden = false
@@ -178,18 +113,10 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.UiViewTenDuAn.layer.borderWidth = 0.5
         
         
-        let borderBottom = CALayer()
-        let borderWidth = CGFloat(1)
-        borderBottom.borderColor =  myColorBoder.cgColor
-        borderBottom.borderWidth = borderWidth
-        borderBottom.frame = CGRect(x: 0, y: cell.UiViewBDThongTinCT.frame.height - 1, width: cell.UiViewBDThongTinCT.frame.width, height: 1)
-        cell.UiViewBDThongTinCT.layer.addSublayer(borderBottom)
-        cell.UiViewBDThongTinCT.layer.masksToBounds = true
-        
-        
-        
         cell.UiViewThongTinChiTiet.layer.borderColor = myColorBoder.cgColor
         cell.UiViewThongTinChiTiet.layer.borderWidth = 0.5
+        
+        
         cell.UiViewBDThongTin.layer.borderColor = myColorBoder.cgColor
         cell.UiViewBDThongTin.layer.borderWidth = 0.5
         
@@ -221,6 +148,20 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.UIViewTieuDe.autoresizesSubviews = true
         
         cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCha.contains(section)
+        
+        if self.indexTrangThaiDuAnCha.contains(section) {
+            cell.constraintHeightDA.constant = CGFloat(heightTD.height) + CGFloat(150) + 10
+            cell.constraintHeightTieuDe.constant = CGFloat(heightTD.height) + 10
+            cell.constrainHeightTTCT.constant = 150
+            
+            
+        }
+        else
+        {
+            cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 10
+            cell.constraintHeightTieuDe.constant = CGFloat(heightTD.height) + 10
+            cell.constrainHeightTTCT.constant = 0
+        }
         
         
         return cell
@@ -260,10 +201,7 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    /*    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     return self.DSDA.count
-     }
-     */
+    
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -282,12 +220,35 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
         cell.lblTenDuAn.textAlignment = NSTextAlignment.left
         //  cell.lblTenDuAn.lineBreakMode = wrap
+        let heightTD = calulaterTextSize(text: itemDuAnCon.TenDA!, size: CGSize(width: cell.lblTenDuAn.frame.width , height: 1000))
         
-        cell.lblNhomDuAn.text = itemDuAnCon.NhomDA!
-        cell.lblGiaiDoan.text = itemDuAnCon.GiaiDoan!
-        cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemDuAnCon.GiaTriGiaiNgan!)
-        cell.lblTongDauTu.text = variableConfig.convert(itemDuAnCon.TongMucDauTu!)
-        cell.lblThoiGianThucHien.text = itemDuAnCon.ThoiGianThucHien!
+        
+        var targetString : String = "Nhóm: \(itemNhomDA.NhomDA!)"
+        var range = NSMakeRange(6, targetString.characters.count - 6 )
+        cell.lblNhomDuAn.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        
+        
+        //  cell.lblNhomDuAn.text = itemNhomDA.NhomDA!
+        targetString  = "Giai đoạn: \(itemDuAnCon.GiaiDoan!)"
+        range = NSMakeRange(10, targetString.characters.count - 10 )
+        cell.lblGiaiDoan.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        //cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
+        
+        targetString  = "Giá trị giải ngân: \(variableConfig.convert(itemDuAnCon.GiaTriGiaiNgan!))"
+        range = NSMakeRange(18, targetString.characters.count - 18 )
+        cell.lblGiaTriGiaiNgan.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        // cell.lblGiaTriGiaiNgan.text = variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!)
+        
+        targetString  = "Tổng mức đầu tư: \(variableConfig.convert(itemDuAnCon.TongMucDauTu!))"
+        range = NSMakeRange(16, targetString.characters.count - 16 )
+        cell.lblTongDauTu.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        // cell.lblTongDauTu.text = variableConfig.convert(itemNhomDA.TongMucDauTu!)
+        
+        targetString  = "Thời gian thực hiện: \(itemDuAnCon.ThoiGianThucHien!)"
+        range = NSMakeRange(20, targetString.characters.count - 20 )
+        cell.lblThoiGianThucHien.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        
+        
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
         cell.UiViewGroup.layer.borderWidth = 0.5
@@ -307,31 +268,19 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         let borderWidth = CGFloat(1)
         borderBottom.borderColor =  myColorBoder.cgColor
         borderBottom.borderWidth = borderWidth
-        borderBottom.frame = CGRect(x: 0, y: cell.UiViewBDThongTinCT.frame.height - 1, width: cell.UiViewBDThongTinCT.frame.width, height: 1)
-        cell.UiViewBDThongTinCT.layer.addSublayer(borderBottom)
-        cell.UiViewBDThongTinCT.layer.masksToBounds = true
+        borderBottom.frame = CGRect(x: 0, y: cell.UiViewThongTinChiTiet.frame.height + 1, width: cell.UiViewThongTinChiTiet.frame.width, height: 1)
+        cell.UiViewThongTinChiTiet.layer.addSublayer(borderBottom)
+        cell.UiViewThongTinChiTiet.layer.masksToBounds = true
         
         
         cell.UiViewThongTinChiTiet.layer.borderColor = myColorBoder.cgColor
-        cell.UiViewThongTinChiTiet.layer.borderWidth = 0.5
+        cell.UiViewThongTinChiTiet.layer.borderWidth = 1
         //   cell.UiViewThongTinChiTiet.layer.masksToBounds=true
         
         cell.UiViewBDThongTin.layer.borderColor = myColorBoder.cgColor
         cell.UiViewBDThongTin.layer.borderWidth = 0.5
         
-        //  cell.UiViewContent.layer.borderWidth=1
-        /* if let image = feedEntry.image {
-         cell.trackAlbumArtworkView.image = image
-         } else {
-         feedManager.fetchImageAtIndex(index: indexPath.row, completion: { (index) in
-         self.handleImageLoadForIndex(index: index)
-         })
-         }
-         
-         cell.audioPlaybackView.isHidden = !expandedCellPaths.contains(indexPath)
-         */
         
-        // cell.imgDetail.addTarget(self, action: #selector(DSDA_VC.tappedMe()))
         var eventClick = UITapGestureRecognizer()
         let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
         cell.UiViewDetail.accessibilityLabel = value
@@ -350,7 +299,21 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.lblTenDuAn.isUserInteractionEnabled = true;
         
         cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCon.contains(value)
-        print("ssssss")
+        
+        if self.indexTrangThaiDuAnCon.contains(value) {
+            cell.constraintHeightDA.constant = CGFloat(heightTD.height) + CGFloat(150) + 10
+            cell.constraintHeightTieuDe.constant = CGFloat(heightTD.height) + 10
+            cell.constrainHeightTTCT.constant = 150
+            
+            
+        }
+        else
+        {
+            cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 10
+            cell.constraintHeightTieuDe.constant = CGFloat(heightTD.height) + 10
+            cell.constrainHeightTTCT.constant = 0
+        }
+        
         return cell
     }
     
@@ -380,5 +343,28 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         let vc = uiViewDSDA?.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
         uiViewDSDA?.navigationController?.pushViewController(vc, animated: true)
     }
-
+    // Hàm set chữ bold
+    func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
+        let fontSize = UIFont.systemFontSize
+        let attrs = [
+            NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize),
+            NSForegroundColorAttributeName: UIColor.black
+        ]
+        let nonBoldAttribute = [
+            NSFontAttributeName: UIFont.systemFont(ofSize: fontSize),
+            ]
+        let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
+        if let range = nonBoldRange {
+            attrStr.setAttributes(nonBoldAttribute, range: range)
+        }
+        return attrStr
+    }
+    // Hàm tính size text
+    func calulaterTextSize(text : String, size : CGSize) -> CGRect{
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
+        return estimatedFrame
+    }
+    
+    
 }
