@@ -15,8 +15,13 @@ class Map_VC: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var tbDSDA: UITableView!
    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var uiSearchDA: UISearchBar!
+    
+    @IBOutlet weak var lblHeader: UILabel!
+    
+    var checkLoadView : Int = 0
     
     var m_arrDSDA : [[String]] = []
     var DSDA = [DanhSachDA]()
@@ -35,6 +40,10 @@ class Map_VC: UIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        toggleView()
         
         let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 21.101884872388879, longitude: 105.72625648970795, zoom: 6.0)
          UiMapView.camera = camera
@@ -107,6 +116,8 @@ class Map_VC: UIViewController, UISearchBarDelegate {
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
+                        self.checkLoadView += 1
+                        self.toggleView()
                         self.DSDA = self.DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
                         self.m_DSDA = self.DSDA
                         self.LoadTableView()
@@ -308,6 +319,8 @@ class Map_VC: UIViewController, UISearchBarDelegate {
         
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
+                self.checkLoadView += 1
+                self.toggleView()
                 self.createMarker()
             }
         }
@@ -372,6 +385,22 @@ class Map_VC: UIViewController, UISearchBarDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    // Danh sach du an
+    
+    func toggleView(){
+        
+        if checkLoadView == 2{
+            activityIndicator.stopAnimating()
+            UiMapView.isHidden = false
+            lblHeader.isHidden = false
+            uiSearchDA.isHidden = false
+            tbDSDA.isHidden = false
+        }
+        else{
+            UiMapView.isHidden = true
+            lblHeader.isHidden = true
+            uiSearchDA.isHidden = true
+            tbDSDA.isHidden = true
+        }
+    }
 
 }

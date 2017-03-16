@@ -16,6 +16,7 @@ class Base_VC: UIViewController {
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
         self.addRightBarButton()
+
     }
     
     override func didReceiveMemoryWarning() {

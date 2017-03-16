@@ -11,6 +11,7 @@ import Charts
 
 class BDGiaiNgan_VC: Base_VC {
 
+    @IBOutlet weak var activityIndicartor: UIActivityIndicatorView!
   
     @IBOutlet weak var barCharGN: BarChartView!
     
@@ -21,6 +22,9 @@ class BDGiaiNgan_VC: Base_VC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicartor.startAnimating()
+        activityIndicartor.hidesWhenStopped = true
+        barCharGN.isHidden = true
 
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoGiaiNgan"
         //let szUser=lblName.
@@ -46,6 +50,8 @@ class BDGiaiNgan_VC: Base_VC {
         
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
+                self.activityIndicartor.stopAnimating()
+                self.barCharGN.isHidden = false
                 self.setChart()
             }
         }

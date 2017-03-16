@@ -82,6 +82,7 @@
 		9F34B56EEC1973EE57EF0B1C /* Pods_QLDA_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E42F0C1058275E72661BB7E /* Pods_QLDA_IOS.framework */; };
 		BA18F9B81E7A424600E53946 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18F9B71E7A424600E53946 /* UIButton.swift */; };
 		BA18F9BA1E7A738900E53946 /* Notification_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18F9B91E7A738900E53946 /* Notification_VC.swift */; };
+		BA18F9BC1E7A805E00E53946 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18F9BB1E7A805E00E53946 /* UIViewController.swift */; };
 		BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */; };
 		BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */; };
 		BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */; };
@@ -214,6 +215,7 @@
 		8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDA_IOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA18F9B71E7A424600E53946 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		BA18F9B91E7A738900E53946 /* Notification_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification_VC.swift; sourceTree = "<group>"; };
+		BA18F9BB1E7A805E00E53946 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfo_VC.swift; sourceTree = "<group>"; };
 		BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAddUser_VC.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				BAB6284A1E71535E002472D6 /* String.swift */,
 				BAF1E4881E72459300F28FE9 /* UIFont.swift */,
 				BA7E1DEC1E738C9C00140811 /* UIImage.swift */,
+				BA18F9BB1E7A805E00E53946 /* UIViewController.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				24BEAEE21E697AA6008F205C /* BDNVDT_VC.swift in Sources */,
 				24BEAEE51E697AA6008F205C /* Chat_VC.swift in Sources */,
 				24BEAEEA1E697AA6008F205C /* ChatMessage.swift in Sources */,
+				BA18F9BC1E7A805E00E53946 /* UIViewController.swift in Sources */,
 				24BEAF081E697AA6008F205C /* UserContact.swift in Sources */,
 				24BEAEE81E697AA6008F205C /* ChatHub.swift in Sources */,
 				24BEAEEE1E697AA6008F205C /* DanhSachDA.swift in Sources */,
