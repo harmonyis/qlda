@@ -12,7 +12,10 @@ import GoogleMaps
 class Map_VC: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var  UiMapView: GMSMapView!
+    
     @IBOutlet weak var tbDSDA: UITableView!
+   
+    
     @IBOutlet weak var uiSearchDA: UISearchBar!
     
     var m_arrDSDA : [[String]] = []
