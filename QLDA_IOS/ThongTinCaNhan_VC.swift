@@ -8,22 +8,26 @@
 
 import UIKit
 
-class ThongTinCaNhan_VC: Base_VC, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ThongTinCaNhan_VC: Base_VC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var btnProfile: UIButton!
     //@IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblUserName: UILabel!
     
+    @IBOutlet weak var viewAll: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var lblMsg: UILabel!
     @IBOutlet weak var txtCurrentPass: UITextField!
     @IBOutlet weak var txtNewPass: UITextField!
     @IBOutlet weak var txtConfirmPass: UITextField!
     @IBOutlet weak var btnChangePass: UIButton!
+    @IBOutlet weak var viewPassword: UIView!
     
     var newPass : String?
     var imagePicker = UIImagePickerController()
     
     var imageTemp : UIImage?
+    var bottomConstraint: NSLayoutConstraint?
     
     @IBAction func btnChangePassTouch(_ sender: UIButton) {
         if txtCurrentPass.text != Config.passWord{
@@ -132,6 +136,38 @@ class ThongTinCaNhan_VC: Base_VC, UIImagePickerControllerDelegate, UINavigationC
         lblUserName.text = Config.userName
         lblMsg.text = ""
         imagePicker.delegate = self
+        
+        //toggle bàn phím và hiện thị ô chat
+        bottomConstraint = NSLayoutConstraint(item: viewAll, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        view.addConstraint(bottomConstraint!)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func handleKeyboardNotification(_ notification: Notification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+            //print(keyboardFrame)
+            
+            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            
+            bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
+            
+            
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                
+                self.view.layoutIfNeeded()
+                
+            }, completion: { (completed) in
+                
+            })
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
