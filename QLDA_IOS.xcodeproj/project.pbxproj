@@ -81,6 +81,7 @@
 		7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B9331E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift */; };
 		9F34B56EEC1973EE57EF0B1C /* Pods_QLDA_IOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E42F0C1058275E72661BB7E /* Pods_QLDA_IOS.framework */; };
 		BA18F9B81E7A424600E53946 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18F9B71E7A424600E53946 /* UIButton.swift */; };
+		BA18F9BA1E7A738900E53946 /* Notification_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18F9B91E7A738900E53946 /* Notification_VC.swift */; };
 		BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */; };
 		BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */; };
 		BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */; };
@@ -212,6 +213,7 @@
 		7CA6B9331E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDanhSachDuAnDatasource.swift; sourceTree = "<group>"; };
 		8055A99A8426B7805C614234 /* Pods_QLDA_IOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDA_IOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA18F9B71E7A424600E53946 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		BA18F9B91E7A738900E53946 /* Notification_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification_VC.swift; sourceTree = "<group>"; };
 		BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfo_VC.swift; sourceTree = "<group>"; };
 		BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAddUser_VC.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				24BEAEC71E697AA5008F205C /* Lich_VC.swift */,
 				24BEAEC81E697AA5008F205C /* Login_VC.swift */,
 				24BEAEC91E697AA5008F205C /* Map_VC.swift */,
+				BA18F9B91E7A738900E53946 /* Notification_VC.swift */,
 				24BEAED01E697AA6008F205C /* QLHinhAnh_VC.swift */,
 				24BEAED51E697AA6008F205C /* ThongTinCaNhan_VC.swift */,
 				24BEAED31E697AA6008F205C /* Tab_.swift */,
@@ -877,6 +880,7 @@
 				24BEAEEF1E697AA6008F205C /* Date.swift in Sources */,
 				24BEAEE61E697AA6008F205C /* ChatCommon.swift in Sources */,
 				24BEAEFE1E697AA6008F205C /* QLHinhAnh_VC.swift in Sources */,
+				BA18F9BA1E7A738900E53946 /* Notification_VC.swift in Sources */,
 				244937621E76470E00929B6F /* TableDSDA_ Portrait.swift in Sources */,
 				24BEAEE41E697AA6008F205C /* CanhBao_VC.swift in Sources */,
 				24BEAF071E697AA6008F205C /* UrlPreFix.swift in Sources */,
