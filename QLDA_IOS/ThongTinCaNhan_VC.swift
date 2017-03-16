@@ -10,9 +10,12 @@ import UIKit
 
 class ThongTinCaNhan_VC: Base_VC {
 
+    @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var lblUserName: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        imgProfile.maskCircle()
+        lblUserName.text = Config.userName
         // Do any additional setup after loading the view.
     }
 
@@ -20,16 +23,15 @@ class ThongTinCaNhan_VC: Base_VC {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                if(Config.profilePicture != nil){
+                    self.imgProfile.image = Config.profilePicture
+                }
+            }
+        }
     }
-    */
-
 }

@@ -21,7 +21,6 @@
 		24BEAEA11E6979D8008F205C /* QLDA_IOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAEA01E6979D8008F205C /* QLDA_IOSUITests.swift */; };
 		24BEAEDE1E697AA6008F205C /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAEAF1E697AA5008F205C /* ApiService.swift */; };
 		24BEAEDF1E697AA6008F205C /* Base_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAEB01E697AA5008F205C /* Base_VC.swift */; };
-		24BEAEE01E697AA6008F205C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAEB11E697AA5008F205C /* BaseViewController.swift */; };
 		24BEAEE11E697AA6008F205C /* BDGiaiNgan_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAEB21E697AA5008F205C /* BDGiaiNgan_VC.swift */; };
 		24BEAEE21E697AA6008F205C /* BDNVDT_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAEB31E697AA5008F205C /* BDNVDT_VC.swift */; };
 		24BEAEE31E697AA6008F205C /* BDTMDT_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAEB41E697AA5008F205C /* BDTMDT_VC.swift */; };
@@ -47,7 +46,6 @@
 		24BEAEF81E697AA6008F205C /* Map_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAEC91E697AA5008F205C /* Map_VC.swift */; };
 		24BEAEF91E697AA6008F205C /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAECA1E697AA5008F205C /* MapItem.swift */; };
 		24BEAEFA1E697AA6008F205C /* MenuLeft_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAECB1E697AA5008F205C /* MenuLeft_VC.swift */; };
-		24BEAEFB1E697AA6008F205C /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAECC1E697AA5008F205C /* MenuViewController.swift */; };
 		24BEAEFC1E697AA6008F205C /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAECD1E697AA5008F205C /* MyCollectionViewCell.swift */; };
 		24BEAEFD1E697AA6008F205C /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAECE1E697AA5008F205C /* PaddingLabel.swift */; };
 		24BEAEFE1E697AA6008F205C /* QLHinhAnh_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAED01E697AA6008F205C /* QLHinhAnh_VC.swift */; };
@@ -144,7 +142,6 @@
 		24BEAEA21E6979D8008F205C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24BEAEAF1E697AA5008F205C /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		24BEAEB01E697AA5008F205C /* Base_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base_VC.swift; sourceTree = "<group>"; };
-		24BEAEB11E697AA5008F205C /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		24BEAEB21E697AA5008F205C /* BDGiaiNgan_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDGiaiNgan_VC.swift; sourceTree = "<group>"; };
 		24BEAEB31E697AA5008F205C /* BDNVDT_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDNVDT_VC.swift; sourceTree = "<group>"; };
 		24BEAEB41E697AA5008F205C /* BDTMDT_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDTMDT_VC.swift; sourceTree = "<group>"; };
@@ -170,7 +167,6 @@
 		24BEAEC91E697AA5008F205C /* Map_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map_VC.swift; sourceTree = "<group>"; };
 		24BEAECA1E697AA5008F205C /* MapItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
 		24BEAECB1E697AA5008F205C /* MenuLeft_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuLeft_VC.swift; sourceTree = "<group>"; };
-		24BEAECC1E697AA5008F205C /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		24BEAECD1E697AA5008F205C /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		24BEAECE1E697AA5008F205C /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		24BEAED01E697AA6008F205C /* QLHinhAnh_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QLHinhAnh_VC.swift; sourceTree = "<group>"; };
@@ -366,9 +362,8 @@
 		24BEAF131E697C6F008F205C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				24BEAEB11E697AA5008F205C /* BaseViewController.swift */,
-				24BEAECC1E697AA5008F205C /* MenuViewController.swift */,
 				24BEAEB01E697AA5008F205C /* Base_VC.swift */,
+				24BEAECB1E697AA5008F205C /* MenuLeft_VC.swift */,
 				24BEAEB21E697AA5008F205C /* BDGiaiNgan_VC.swift */,
 				24BEAEB31E697AA5008F205C /* BDNVDT_VC.swift */,
 				24BEAEB41E697AA5008F205C /* BDTMDT_VC.swift */,
@@ -383,7 +378,6 @@
 				24BEAEC71E697AA5008F205C /* Lich_VC.swift */,
 				24BEAEC81E697AA5008F205C /* Login_VC.swift */,
 				24BEAEC91E697AA5008F205C /* Map_VC.swift */,
-				24BEAECB1E697AA5008F205C /* MenuLeft_VC.swift */,
 				24BEAED01E697AA6008F205C /* QLHinhAnh_VC.swift */,
 				24BEAED51E697AA6008F205C /* ThongTinCaNhan_VC.swift */,
 				24BEAED31E697AA6008F205C /* Tab_.swift */,
@@ -813,13 +807,11 @@
 				24BEAEFC1E697AA6008F205C /* MyCollectionViewCell.swift in Sources */,
 				24BEAFA51E6EB0EC008F205C /* CustomCellKHGN.swift in Sources */,
 				24BEAEF71E697AA6008F205C /* Login_VC.swift in Sources */,
-				24BEAEFB1E697AA6008F205C /* MenuViewController.swift in Sources */,
 				24BEAEF01E697AA6008F205C /* DSDA_VC.swift in Sources */,
 				24BEAEFD1E697AA6008F205C /* PaddingLabel.swift in Sources */,
 				24BEAF011E697AA6008F205C /* Tab_TTC.swift in Sources */,
 				244937641E76820500929B6F /* TableDSDA_Lanscape.swift in Sources */,
 				24BEAEDF1E697AA6008F205C /* Base_VC.swift in Sources */,
-				24BEAEE01E697AA6008F205C /* BaseViewController.swift in Sources */,
 				BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */,
 				7C71ED301E6FD71A0089BC0D /* VanBanEntity.swift in Sources */,
 				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
