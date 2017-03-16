@@ -85,6 +85,17 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     }
         
     @IBAction func btnCreateGroupTouchUpInside(_ sender: Any) {
+        if listUserChecked.count < 2{
+            let n : Int = 2 - listUserChecked.count
+            var count : String = ""
+            switch n {
+            case 2: count = "hai"
+            default: count = "một"
+            }
+            self.view.makeToast("Vui lòng thêm tối thiểu \(count) người nữa để tạo thành một nhóm", duration: 2.0, position: .center)
+            return;
+        }
+        
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_CreateGroupChat"
 
         let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(Config.userID)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
@@ -94,7 +105,8 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     func callbackCreateGroup(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
-            if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
+            //if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
+            if (dic["Chat_CreateGroupChatResult"] as? Int) != nil {
                 DispatchQueue.main.async(execute: { () -> Void in
                     self.navigationController?.popViewController(animated: true)
                 })
