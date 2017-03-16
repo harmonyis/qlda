@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B5C6B021E7A522800851D0C /* TableDSDAMap_Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */; };
 		1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B911E6D4145007A615B /* ConvertDVT.swift */; };
 		1B655B941E6D4145007A615B /* YAxisValueFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */; };
 		244937621E76470E00929B6F /* TableDSDA_ Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */; };
@@ -123,6 +124,7 @@
 
 /* Begin PBXFileReference section */
 		18481FBDFADDC304EFED2593 /* Pods-QLDA_IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDSDAMap_Portrait.swift; sourceTree = "<group>"; };
 		1B655B911E6D4145007A615B /* ConvertDVT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertDVT.swift; sourceTree = "<group>"; };
 		1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YAxisValueFormatted.swift; sourceTree = "<group>"; };
 		244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableDSDA_ Portrait.swift"; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 		24BEAF181E697CE8008F205C /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */,
 				24BEAECA1E697AA5008F205C /* MapItem.swift */,
 			);
 			name = Map;
@@ -829,6 +832,7 @@
 				24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */,
 				24BEAF041E697AA6008F205C /* UIImageView.swift in Sources */,
 				BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */,
+				1B5C6B021E7A522800851D0C /* TableDSDAMap_Portrait.swift in Sources */,
 				BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */,
 				24BEAEF31E697AA6008F205C /* DuAn.swift in Sources */,
 				24BEAF091E697AA6008F205C /* variableConfig.swift in Sources */,
