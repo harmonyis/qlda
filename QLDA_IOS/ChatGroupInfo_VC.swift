@@ -25,6 +25,8 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     var listUser : [UserContact] = [UserContact]()
     var arrUser : [Int]? = []
    
+    var imageTemp : UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Thông tin nhóm"
@@ -67,10 +69,10 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            let newImg = resizeImage(image: image, newWidth: 540)
-            btnGroupPicture.setBackgroundImage(newImg, for: .normal)
+            imageTemp = resizeImage(image: image, newWidth: 540)
+            
             //imageView.image = image
-            let data = UIImageJPEGRepresentation(newImg, 1.0)
+            let data = UIImageJPEGRepresentation(imageTemp!, 1.0)
             let array = [UInt8](data!)            
             
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_ChangeGroupPicture"
@@ -97,7 +99,12 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func callbackChagePictureGroup(data : Data) {
-    
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                self.btnGroupPicture.setBackgroundImage(self.imageTemp, for: .normal)
+            }
+        }
+        
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
