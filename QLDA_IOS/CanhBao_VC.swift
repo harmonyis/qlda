@@ -82,7 +82,7 @@ class CanhBao_VC: Base_VC {
                     }) {
                         print(canhBao.titleSection)
                         if item[0] == "0" {
-                            canhBao.arrSection.append(HopDong(type: 0, tenHD: item[2], ngayBD: item[3], thoiGianTH: item[4], ngayKT: item[5], ngayCham: item[6]))
+                            canhBao.arrSection.append(TTHopDong(type: 0, tenHD: item[2], ngayBD: item[3], thoiGianTH: item[4], ngayKT: item[5], ngayCham: item[6]))
                         } else if item[0] == "1" {
                             canhBao.arrSection.append(ChamNHSQT(type: 1, ngayKyBB: item[2], thoiGianQD: item[4], ngayDuKienTrinh: addMonth(date: item[2], month: item[4]), ngayCham: item[5], ghiChu: "Dự án chưa phê duyệt HSQT"))
                         } else if item[0] == "2" {
@@ -98,7 +98,7 @@ class CanhBao_VC: Base_VC {
                         var arrSection : [Section] = []
                         if item[0] == "0" {
                             arrSection.append(CTHHDSection(type: -1, title: "Chậm thực hiện hợp đồng"))
-                            arrSection.append(HopDong(type: 0, tenHD: item[2], ngayBD: item[3], thoiGianTH: item[4], ngayKT: item[5], ngayCham: item[6]))
+                            arrSection.append(TTHopDong(type: 0, tenHD: item[2], ngayBD: item[3], thoiGianTH: item[4], ngayKT: item[5], ngayCham: item[6]))
                         } else if item[0] == "1" {
                             arrSection.append(ChamNHSQT(type: 1, ngayKyBB: item[2], thoiGianQD: item[4], ngayDuKienTrinh: addMonth(date: item[2], month: item[4]), ngayCham: item[5], ghiChu: "Dự án chưa phê duyệt HSQT"))
                         } else if item[0] == "2" {

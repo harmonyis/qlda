@@ -78,7 +78,7 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
         } else if type == 0 {
             if !setClick.contains(indexString) {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellHDHidden", for: indexPath) as! CellHopDongHiddenTableViewCell
-                let item = arrCanhBao[indexPath.section].arrSection[indexPath.row] as! HopDong
+                let item = arrCanhBao[indexPath.section].arrSection[indexPath.row] as! TTHopDong
                 cell.lblTenHD.text = item.tenHD
                 
                 cell.layer.borderWidth = 0.5
@@ -100,7 +100,7 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
             } else {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "cellHD", for: indexPath) as! CellHopDongTableViewCell
-                let item = arrCanhBao[indexPath.section].arrSection[indexPath.row] as! HopDong
+                let item = arrCanhBao[indexPath.section].arrSection[indexPath.row] as! TTHopDong
                 cell.lblTenHD.text = "\(item.tenHD)"
                 
                 var targetString : String = "Ngày bắt đầu: \(item.ngayBD)"
