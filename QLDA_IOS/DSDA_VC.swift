@@ -471,8 +471,8 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                 wTMDT = max(wTMDT, temp)
             }
         }
-        wGN = wGN + 15
-        wTMDT = wTMDT + 15
+        wGN = wGN + 10
+        wTMDT = wTMDT + 10
         print(wGN,wTMDT)
     }
 }

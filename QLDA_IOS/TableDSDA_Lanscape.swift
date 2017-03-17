@@ -244,7 +244,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.autoresizingMask = .flexibleWidth
         cell.autoresizingMask = .flexibleHeight
         
-         cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
+      //   cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
         
         return cell
     }
@@ -383,8 +383,8 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.lblTenDA.addGestureRecognizer(eventClick)
         cell.lblTenDA.isUserInteractionEnabled = true;
         
-        print(heightTD.height)
-         cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
+      //  print(heightTD.height)
+        // cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
                 
                return cell
     }
