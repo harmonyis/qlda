@@ -14,14 +14,14 @@
         <tableViewCell contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomCellDSDA_Lanscape" rowHeight="40" id="KGk-i7-Jjw" customClass="CustomCellDSDA_Lanscape" customModule="QLDA_IOS" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="570" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="570" height="39"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bg6-8q-Ijl">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bg6-8q-Ijl">
                         <rect key="frame" x="0.0" y="0.0" width="570" height="40"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="CustomCellDSDA_Lanscape" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8eu-Mc-sOa" customClass="CustomCellDSDA_Lanscape" customModule="QLDA_IOS" customModuleProvider="target">
+                            <view contentMode="scaleToFill" restorationIdentifier="CustomCellDSDA_Lanscape" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8eu-Mc-sOa" customClass="CustomCellDSDA_Lanscape" customModule="QLDA_IOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="20" height="40"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_minus" translatesAutoresizingMaskIntoConstraints="NO" id="Jzy-cn-atj">
@@ -34,10 +34,10 @@
                                     <constraint firstAttribute="width" constant="20" id="fMW-sX-BQO"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hM0-Q0-oQZ">
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hM0-Q0-oQZ">
                                 <rect key="frame" x="20" y="0.0" width="180" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3d-oz-oxV">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3d-oz-oxV">
                                         <rect key="frame" x="10" y="5" width="165" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.1070804211" green="0.62826214000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -52,10 +52,10 @@
                                     <constraint firstAttribute="bottom" secondItem="f3d-oz-oxV" secondAttribute="bottom" constant="5" id="kmN-f5-9Gs"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YSJ-Zw-EGY">
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YSJ-Zw-EGY">
                                 <rect key="frame" x="200" y="0.0" width="60" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMA-RZ-x9X">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMA-RZ-x9X">
                                         <rect key="frame" x="10" y="5" width="45" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.1070804211" green="0.62826214000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -70,10 +70,10 @@
                                     <constraint firstAttribute="trailing" secondItem="DMA-RZ-x9X" secondAttribute="trailing" constant="5" id="rHe-bv-wVq"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uqs-Y4-CFV">
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uqs-Y4-CFV">
                                 <rect key="frame" x="260" y="0.0" width="80" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmq-ei-6qn">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmq-ei-6qn">
                                         <rect key="frame" x="10" y="5" width="65" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.1070804211" green="0.62826214000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -88,10 +88,10 @@
                                     <constraint firstAttribute="bottom" secondItem="qmq-ei-6qn" secondAttribute="bottom" constant="5" id="sji-tk-YeZ"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peW-4Y-9dx">
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peW-4Y-9dx">
                                 <rect key="frame" x="340" y="0.0" width="70" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dve-jK-4Db">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dve-jK-4Db">
                                         <rect key="frame" x="10" y="5" width="55" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.1070804211" green="0.62826214000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -107,10 +107,10 @@
                                     <constraint firstItem="dve-jK-4Db" firstAttribute="top" secondItem="peW-4Y-9dx" secondAttribute="top" constant="5" id="znA-n8-EjR"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EzC-9i-nR8">
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EzC-9i-nR8">
                                 <rect key="frame" x="410" y="0.0" width="80" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozX-UW-mTG">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozX-UW-mTG">
                                         <rect key="frame" x="10" y="5" width="65" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.1070804211" green="0.62826214000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -119,16 +119,16 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ozX-UW-mTG" secondAttribute="trailing" constant="5" id="0Yb-ao-wz9"/>
-                                    <constraint firstAttribute="bottom" secondItem="ozX-UW-mTG" secondAttribute="bottom" constant="5" id="JT2-MW-Gdn"/>
-                                    <constraint firstItem="ozX-UW-mTG" firstAttribute="top" secondItem="EzC-9i-nR8" secondAttribute="top" constant="5" id="csS-XN-G4m"/>
-                                    <constraint firstItem="ozX-UW-mTG" firstAttribute="leading" secondItem="EzC-9i-nR8" secondAttribute="leading" constant="10" id="tbf-dc-2HF"/>
+                                    <constraint firstItem="ozX-UW-mTG" firstAttribute="leading" secondItem="EzC-9i-nR8" secondAttribute="leading" constant="10" id="2h6-UM-Hfq"/>
+                                    <constraint firstItem="ozX-UW-mTG" firstAttribute="top" secondItem="EzC-9i-nR8" secondAttribute="top" constant="5" id="KEX-Uh-Iry"/>
+                                    <constraint firstAttribute="trailing" secondItem="ozX-UW-mTG" secondAttribute="trailing" constant="5" id="KO0-sB-8ZP"/>
+                                    <constraint firstAttribute="bottom" secondItem="ozX-UW-mTG" secondAttribute="bottom" constant="5" id="qXR-V9-455"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FAV-kQ-lZi">
+                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FAV-kQ-lZi">
                                 <rect key="frame" x="490" y="0.0" width="80" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILx-Yh-snx">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILx-Yh-snx">
                                         <rect key="frame" x="10" y="5" width="65" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.1070804211" green="0.62826214000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -163,7 +163,6 @@
                             <constraint firstItem="YSJ-Zw-EGY" firstAttribute="top" secondItem="uqs-Y4-CFV" secondAttribute="top" id="Uhl-fx-HVK"/>
                             <constraint firstItem="8eu-Mc-sOa" firstAttribute="bottom" secondItem="hM0-Q0-oQZ" secondAttribute="bottom" id="a3C-MS-voP"/>
                             <constraint firstItem="FAV-kQ-lZi" firstAttribute="top" secondItem="bg6-8q-Ijl" secondAttribute="top" id="dep-oI-Uyk"/>
-                            <constraint firstAttribute="trailing" secondItem="EzC-9i-nR8" secondAttribute="trailing" constant="80" id="dpW-TY-6kL"/>
                             <constraint firstItem="YSJ-Zw-EGY" firstAttribute="leading" secondItem="bg6-8q-Ijl" secondAttribute="leading" constant="200" id="eqf-nH-EVR"/>
                             <constraint firstItem="hM0-Q0-oQZ" firstAttribute="top" secondItem="bg6-8q-Ijl" secondAttribute="top" id="ik0-OA-2Zp"/>
                             <constraint firstItem="peW-4Y-9dx" firstAttribute="leading" secondItem="uqs-Y4-CFV" secondAttribute="trailing" id="j20-aa-PXa"/>

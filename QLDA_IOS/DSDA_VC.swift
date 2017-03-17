@@ -104,8 +104,9 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                     DispatchQueue.main.async {
                         self.DSDA = self.DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
                         self.m_DSDA = self.DSDA
-                        self.LoadTableView()
                         self.computeWidthCell()
+                        self.LoadTableView()
+                        
                     }
                 }
                 
@@ -469,7 +470,9 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                 temp = calulaterTextSize(text: variableConfig.convert(child.TongMucDauTu!), size: CGSize(width: 1000 , height: 30)).width
                 wTMDT = max(wTMDT, temp)
             }
-        }        
+        }
+        wGN = wGN + 15
+        wTMDT = wTMDT + 15
         print(wGN,wTMDT)
     }
 }

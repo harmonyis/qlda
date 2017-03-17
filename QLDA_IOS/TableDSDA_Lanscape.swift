@@ -148,7 +148,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
         let width = tableView.frame.width - 20
-        
+        print(width)
         let wTotal = width - wGN! - wTMDT!
         
         cell.constrainWidthGroup.constant = 20
@@ -298,7 +298,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         let width = tableView.frame.width - 20
         cell.constrainWidthGroup.constant = 20
         cell.constrainWidthTenDuAn.constant = 20
-        
+        print(width)
         let wTotal = width - wGN! - wTMDT!
         
         cell.constrainWidthGroup.constant = 20
