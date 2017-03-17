@@ -326,6 +326,15 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellHeader") as! CBHeaderTableViewCell
         cell.lblHeader.text = "\(arrCanhBao[section].titleSection)"
+        if self.setHeaderClick.contains("\(section)") {
+            cell.imgHeaderIcon.image = UIImage(named: "arrow_down")
+        }
+        
+        
+        cell.imgIcon.layer.borderColor = myColorBoder.cgColor
+        cell.imgIcon.layer.borderWidth = 0.5
+        cell.layer.borderColor = myColorBoder.cgColor
+        cell.layer.borderWidth = 0.5
         
         let eventClick : UITapGestureRecognizer = UITapGestureRecognizer()
         cell.accessibilityLabel = "\(section)"
