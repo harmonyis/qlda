@@ -519,6 +519,8 @@
 				24BEAEBF1E697AA5008F205C /* DanhSachDA.swift */,
 				24BEAEC41E697AA5008F205C /* DuAn.swift */,
 				24BEAFB31E6FEC0E008F205C /* GoiThau.swift */,
+				244937771E7A8F3000929B6F /* HopDong.swift */,
+				244937791E7A8F4300929B6F /* NhomHopDong.swift */,
 				7C22592D1E76A03500626051 /* CanhBaoEntity.swift */,
 			);
 			name = Entity;
@@ -534,6 +536,11 @@
 				24BEAFAA1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift */,
 				24BEAFAC1E6FAF98008F205C /* Cell_KHLCNT_R2.swift */,
 				24BEAFAE1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift */,
+				2449376B1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift */,
+				2449376C1E76953A00929B6F /* CustomCellDSDA_Lanscape.xib */,
+				2449376F1E7A372E00929B6F /* Cell_KHGN_R1.swift */,
+				244937711E7A374D00929B6F /* Cell_KHGN_R2.swift */,
+				244937731E7A376400929B6F /* Cell_KHGN_R3.swift */,
 				7C2259271E76481900626051 /* CanhBaoTableViewCell.swift */,
 				7C2259281E76481900626051 /* CanhBaoTableViewCell.xib */,
 				7C0A09BE1E77EFC30026F1C1 /* CellHopDongTableViewCell.swift */,
@@ -964,6 +971,7 @@
 				244937621E76470E00929B6F /* TableDSDA_ Portrait.swift in Sources */,
 				24BEAEE41E697AA6008F205C /* CanhBao_VC.swift in Sources */,
 				24BEAF071E697AA6008F205C /* UrlPreFix.swift in Sources */,
+				244937761E7A3F9E00929B6F /* TableKHGN_Portrait.swift in Sources */,
 				7C22592E1E76A03500626051 /* CanhBaoEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
