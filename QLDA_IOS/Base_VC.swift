@@ -16,6 +16,7 @@ class Base_VC: UIViewController {
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
         self.addRightBarButton()
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,6 +62,7 @@ class Base_VC: UIViewController {
     func addRightBarButton(){
         let btnNotiMenu = UIButton(type: UIButtonType.custom)
         btnNotiMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        btnNotiMenu.addTarget(self, action: #selector(Base_VC.onNotiBarPressesd(_:)), for: UIControlEvents.touchUpInside)
         btnNotiMenu.setImage(#imageLiteral(resourceName: "ic_noti"), for: UIControlState())
         btnNotiMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let customNotiBarItem = UIBarButtonItem(customView: btnNotiMenu)
@@ -98,6 +100,12 @@ class Base_VC: UIViewController {
     func onMapBarPressesd(_ sender : UIButton){
         Config.SelectMenuIndex = -1
         let vc = storyboard?.instantiateViewController(withIdentifier: "Map") as! Map_VC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func onNotiBarPressesd(_ sender : UIButton){
+        Config.SelectMenuIndex = -1
+        let vc = storyboard?.instantiateViewController(withIdentifier: "Noti") as! Notification_VC
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

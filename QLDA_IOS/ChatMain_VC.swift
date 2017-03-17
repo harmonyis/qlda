@@ -162,14 +162,14 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
         
         switch contact.TypeOfMessage!{
         case 1:
-            if ChatHub.userID == contact.SenderOfMessage!{
+            if Config.userID == contact.SenderOfMessage!{
                 cell.lblLastMessage.text = "Bạn đã gửi một hình ảnh";
             }
             else{
                 cell.lblLastMessage.text = "Bạn đã nhận một hình ảnh";
             }
         case 2:
-            if ChatHub.userID == contact.SenderOfMessage!{
+            if Config.userID == contact.SenderOfMessage!{
                 cell.lblLastMessage.text = "Bạn đã gửi một tệp tin";
             }
             else{
@@ -304,8 +304,8 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     func makeReadMsg(contactID : Int, contactType : Int, lastInboxID: Int64){
         if let hub = ChatHub.chatHub {
             do {
-                print(ChatHub.userID, contactID, contactType, lastInboxID)
-                try hub.invoke("MakeReadMessage", arguments: [ChatHub.userID, contactID, contactType, lastInboxID])
+                print(Config.userID, contactID, contactType, lastInboxID)
+                try hub.invoke("MakeReadMessage", arguments: [Config.userID, contactID, contactType, lastInboxID])
             } catch {
                 print(error)
             }

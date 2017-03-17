@@ -17,9 +17,17 @@ class ChatCommon{
     
     static var checkCloseView : Bool = false
     
+    
+    static func reset(){
+        currentChatID = 0
+        currentChatType = 0
+        listContact = [UserContact]()
+        checkCloseView = false
+    }
+    
     static func getContacts(){
         listContact = [UserContact]()
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(Config.userID)"
         ApiService.Get(url: apiUrl, callback: callbackGetContacts, errorCallBack: errorGetContacts)
     }
 
@@ -43,7 +51,7 @@ class ChatCommon{
                 contact.SenderOfMessage = item["SenderOfMessage"] as? Int
                 contact.TypeOfContact = item["TypeOfContact"] as? Int
                 contact.TypeOfMessage = item["TypeOfMessage"] as? Int
-                print(contact.TypeOfMessage )
+              
                 contact.setPicture()
                 listContact.append(contact)
             }
@@ -116,7 +124,7 @@ class ChatCommon{
         }
         else{
             contactID = senderID
-            if senderID == ChatHub.userID{
+            if senderID == Config.userID{
                 contactID = receiverID
             }
         }
@@ -152,7 +160,7 @@ class ChatCommon{
             newContact.SenderOfMessage = senderID;
             newContact.ReceiverOfMessage = receiverID
             newContact.TypeOfMessage = messageType;
-            if senderID == ChatHub.userID{
+            if senderID == Config.userID{
                   newContact.NumberOfNewMessage = 0
             }else{
                  newContact.NumberOfNewMessage = newContact.NumberOfNewMessage! + 1
@@ -194,7 +202,7 @@ class ChatCommon{
         if(filter.count == 0){
             let newContact : UserContact = UserContact()
             newContact.ContactID = groupID
-            if(host == ChatHub.userID){
+            if(host == Config.userID){
                 newContact.LatestMessage = "Bạn vừa tạo nhóm"
                 newContact.NumberOfNewMessage = 0
             }
@@ -245,7 +253,7 @@ class ChatCommon{
     static func removedFromGroup(args : [Any]?){
         let userID : Int = args?[0] as! Int
         let groupID : Int = args?[1] as! Int
-        if userID == ChatHub.userID{
+        if userID == Config.userID{
             ChatCommon.listContact = ChatCommon.listContact.filter(){
                 if($0.ContactID == groupID && $0.TypeOfContact == 2){
                     return false

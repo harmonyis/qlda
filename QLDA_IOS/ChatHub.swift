@@ -13,8 +13,8 @@ import UserNotifications
 class ChatHub {
     static var chatHub: Hub!
     static var connection: SignalR!
-    static var userID = 59
-    static var userName = "demo2"
+    //static var userID = 59
+    //static var userName = "demo2"
     static var navicontroller : UINavigationController?
     static func addChatHub(hub : Hub){
         connection.addHub(hub)
@@ -22,17 +22,12 @@ class ChatHub {
     }
     
     static func initChatHub(){
-        connection = SignalR("http://harmonysoft.vn:8089/QLDA_Services/")
+        connection = SignalR(UrlPreFix.Root.rawValue)
        // connection.useWKWebView = true
         connection.signalRVersion = .v2_2_0
         
         chatHub = Hub("chatHub")
-        /*
-        chatHub.on("receivePrivateMessage") {
-            if let name = args?[0] as? String, let message = args?[1] as? String{
-                print("Connection ID\(name + message)")
-            }
-        }*/
+
         connection.addHub(chatHub)
         
         // SignalR events
@@ -72,7 +67,7 @@ class ChatHub {
         if let hub = chatHub {
             
             do {
-                try hub.invoke("Connect", arguments: [userID, userName])
+                try hub.invoke("Connect", arguments: [Config.userID, Config.userName])
             } catch {
                 //print(error)
             }
@@ -120,10 +115,10 @@ class ChatHub {
             
 
             
-            if ChatCommon.currentChatID == senderID && ChatHub.userID == receiverID {
+            if ChatCommon.currentChatID == senderID && Config.userID == receiverID {
                 return
             }
-            if senderID == ChatHub.userID{
+            if senderID == Config.userID{
                 return
             }
             let identifier = "\(senderID + 1000)"
@@ -166,7 +161,7 @@ class ChatHub {
             if ChatCommon.currentChatID == receiverID {
                 return
             }
-            if senderID == ChatHub.userID{
+            if senderID == Config.userID{
                 return
             }
             var body = ""
@@ -199,13 +194,10 @@ class ChatHub {
             }
             
             let identifier = "\(-groupID - 1000)"
-            if host != ChatHub.userID{
+            if host != Config.userID{
                 UserNotificationManager.share.addNotificationWithTimeIntervalTrigger(identifier: identifier, title: groupName, body: "Bạn vừa được thêm vào nhóm")
             }
-           
-            
         }
-
     }
     
     static func pushView(){
@@ -224,5 +216,13 @@ class ChatHub {
         
         let request = UNNotificationRequest(identifier: "test", content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
+    
+    static func stopHub(){
+        if(connection != nil){
+            connection.stop()
+            connection = nil
+            chatHub = nil
+        }
     }
 }

@@ -383,7 +383,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     func getMessage(){
         if contactType == 1 {
-            let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetPrivateMessage?senderID=\(ChatHub.userID)&receiverID=\(String(contactID))"
+            let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetPrivateMessage?senderID=\(Config.userID)&receiverID=\(String(contactID))"
             ApiService.Get(url: apiUrl, callback: callbackGetMsg, errorCallBack: errorGetMsg)
         }
         else{
@@ -401,9 +401,9 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 msg.MessageType = item["TypeMessage"] as? Int
                 msg.ContactType = item["Type"] as? Int
                 msg.SenderID = item["SenderID"] as? Int
-                if msg.SenderID == ChatHub.userID {
+                if msg.SenderID == Config.userID {
                     msg.IsMe = true
-                    msg.SenderName = ChatHub.userName
+                    msg.SenderName = Config.userName
                 }
                 else{
                     msg.IsMe = false
@@ -445,7 +445,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 funcName = "SendGroupMessage"
             }
             //print(ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!)
-            try ChatHub.chatHub.invoke(funcName, arguments: [ChatHub.userID, ChatHub.userName, contactID, contactName, txtMessage.text!])
+            try ChatHub.chatHub.invoke(funcName, arguments: [Config.userID, Config.userName, contactID, contactName, txtMessage.text!])
             txtMessage.text = ""
         } catch {
             print(error)
@@ -479,7 +479,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                 let msgType = (inbox![1] as? Int)!
                 let inboxID = (inbox![2] as? Int64)!
                 
-                if ((receiverID == ChatHub.userID && senderID == self.contactID) || (receiverID == self.contactID && senderID == ChatHub.userID )){
+                if ((receiverID == Config.userID && senderID == self.contactID) || (receiverID == self.contactID && senderID == Config.userID )){
                     
                     self.receiveMessage(senderID: senderID, senderName: senderName, receiverID: receiverID, receiverName: receiverName, message: msg, messageType: msgType, inboxID: inboxID, contactType: 1)
                     
@@ -538,7 +538,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         let newChat : ChatMessage = ChatMessage()
         newChat.ContactType = contactType
         newChat.ID = inboxID
-        if ChatHub.userID == senderID{
+        if Config.userID == senderID{
             newChat.IsMe = true
         }
         else {
@@ -565,8 +565,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         if !self.isRead{
             if self.lastInboxID != nil{
                 do {
-                    print(ChatHub.userID, self.contactID!, self.contactType!, self.lastInboxID!)
-                    try ChatHub.chatHub.invoke("MakeReadMessage", arguments: [ChatHub.userID, self.contactID!, self.contactType!, self.lastInboxID!])
+                    print(Config.userID, self.contactID!, self.contactType!, self.lastInboxID!)
+                    try ChatHub.chatHub.invoke("MakeReadMessage", arguments: [Config.userID, self.contactID!, self.contactType!, self.lastInboxID!])
                 } catch {
                     print(error)
                 }
@@ -606,8 +606,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             }
             
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/\(sv)"
-            print(String(ChatHub.userID), ChatHub.userName, String(contactID), contactName!)
-            let params : String = "{\"senderID\" : \"\(String(ChatHub.userID))\", \"senderName\": \"\(ChatHub.userName)\",\"receiverID\" : \"\(String(contactID))\", \"receiverName\": \"\(contactName!)\", \"imageData\":\(array)}"
+            print(String(Config.userID), Config.userName, String(contactID), contactName!)
+            let params : String = "{\"senderID\" : \"\(String(Config.userID))\", \"senderName\": \"\(Config.userName)\",\"receiverID\" : \"\(String(contactID))\", \"receiverName\": \"\(contactName!)\", \"imageData\":\(array)}"
             
             ApiService.Post(url: apiUrl, params: params, callback: callbackSendImage, errorCallBack: { (error) in
                 print("error")
@@ -656,7 +656,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     @IBAction func btnOpenCamera(_ sender: UIButton) {
-
+       // self.view.makeToast("Mở Camera !", duration: 3.0, position: .center)
     }
     
     @IBAction func btnOpenImage(_ sender: UIButton) {
