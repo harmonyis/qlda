@@ -20,6 +20,7 @@ class Login_VC: UIViewController {
     }
     var szMatKhau : String = ""
     var szTenDangNhap : String = ""
+
     @IBAction func Login(_ sender: Any) {
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/CheckUser"
         //let szUser=lblName.
@@ -36,17 +37,20 @@ class Login_VC: UIViewController {
             if let idUser = dic["CheckUserResult"] as? String {
                 let nIdUser:Int = Int(idUser)!
                 if nIdUser > 0 {
+                    Config.userID = nIdUser
+                    Config.userName = szTenDangNhap
+                    Config.passWord = szMatKhau               
+                    
+                    variableConfig.m_szUserName = self.szTenDangNhap
+                    variableConfig.m_szPassWord = self.szMatKhau
                     getContacts()
-                    /*
+                    
                     DispatchQueue.global(qos: .userInitiated).async {
                         DispatchQueue.main.async {
-                            ChatHub.initChatHub()
-                            variableConfig.m_szUserName = self.szTenDangNhap
-                            variableConfig.m_szPassWord = self.szMatKhau
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            Config.GetCurrentUser()
                         }
-                    }*/
+                    }
+                    
                 }
                 else {
                     DispatchQueue.global(qos: .userInitiated).async {
@@ -88,7 +92,9 @@ class Login_VC: UIViewController {
     
     func getContacts(){
         ChatCommon.listContact = [UserContact]()
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
+        
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(Config.userID)"
+        print(apiUrl)
         ApiService.Get(url: apiUrl, callback: callbackGetContacts, errorCallBack: errorGetContacts)
     }
     
@@ -110,7 +116,7 @@ class Login_VC: UIViewController {
                 contact.PictureUrl = item["PictureUrl"] as? String
                 contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
                 contact.SenderOfMessage = item["SenderOfMessage"] as? Int
-                contact.TypeOfContact = item["TypeOfContact"] as? Int32
+                contact.TypeOfContact = item["TypeOfContact"] as? Int
                 contact.TypeOfMessage = item["TypeOfMessage"] as? Int
                 
                 contact.setPicture()
@@ -120,12 +126,10 @@ class Login_VC: UIViewController {
         
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
-            ChatHub.initChatHub()
-            ChatHub.initEvent()
-            variableConfig.m_szUserName = self.szTenDangNhap
-            variableConfig.m_szPassWord = self.szMatKhau
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
-            self.navigationController?.pushViewController(vc, animated: true)
+                ChatHub.initChatHub()
+                ChatHub.initEvent()
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "DSDA") as! DSDA_VC
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

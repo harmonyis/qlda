@@ -36,15 +36,14 @@ class UserContact{
     var LatestMessage : String?
     var LatestMessageID : Int64?
     var TimeOfLatestMessage : Date?
-    var TypeOfContact : Int32?
+    var TypeOfContact : Int?
     var TypeOfMessage : Int?
     var Online : Bool?
     var SenderOfMessage : Int?
     var ReceiverOfMessage : Int?
     var NumberOfNewMessage: Int?
     
-    func setPicture(){
-        
+    func setPicture(){        
         if let path : String = PictureUrl{
             if let url = NSURL(string: path) {
                 if let data = NSData(contentsOf: url as URL) {

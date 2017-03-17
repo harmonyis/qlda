@@ -14,7 +14,7 @@ class ChatCreateGroup_Cell: UITableViewCell{
     @IBOutlet weak var btnCheck: UIButton!
 }
 
-class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
     
     @IBOutlet weak var tblListContact: UITableView!
     var listUserChecked : [Int] = []
@@ -40,7 +40,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
         tblListContact.tableFooterView = UIView(frame: .zero)
         
         listContact = ChatCommon.listContact.filter() {
-            if let contactType = ($0 as UserContact).TypeOfContact as Int32! {
+            if let contactType = ($0 as UserContact).TypeOfContact {
                 return contactType == 1
             } else {
                 return false
@@ -85,16 +85,28 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     }
         
     @IBAction func btnCreateGroupTouchUpInside(_ sender: Any) {
+        if listUserChecked.count < 2{
+            let n : Int = 2 - listUserChecked.count
+            var count : String = ""
+            switch n {
+            case 2: count = "hai"
+            default: count = "một"
+            }
+            self.view.makeToast("Vui lòng thêm tối thiểu \(count) người nữa để tạo thành một nhóm", duration: 2.0, position: .center)
+            return;
+        }
+        
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_CreateGroupChat"
 
-        let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(ChatHub.userID)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
+        let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(Config.userID)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
         ApiService.Post(url: apiUrl, params: params, callback: callbackCreateGroup, errorCallBack: errorCreateGroup)
     }
     
     func callbackCreateGroup(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
-            if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
+            //if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
+            if (dic["Chat_CreateGroupChatResult"] as? Int) != nil {
                 DispatchQueue.main.async(execute: { () -> Void in
                     self.navigationController?.popViewController(animated: true)
                 })
@@ -141,10 +153,10 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
                 i += 1
             }
             if(listUserChecked.count > 0){
-                groupName = ChatHub.userName + ", " + groupName
+                groupName = Config.userName + ", " + groupName
             }
             else{
-                groupName = ChatHub.userName
+                groupName = Config.userName
             }
         }
         
@@ -162,10 +174,10 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
             i += 1
         }
         if(listUserChecked.count > 0){
-            userIDs = String(ChatHub.userID) + "," + userIDs
+            userIDs = String(Config.userID) + "," + userIDs
         }
         else{
-            userIDs = String(ChatHub.userID)
+            userIDs = String(Config.userID)
         }
         return userIDs
     }

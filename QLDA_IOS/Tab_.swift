@@ -24,7 +24,7 @@ class Tab_:ButtonBarPagerTabStripViewController {
         settings.style.buttonBarBackgroundColor = graySpotifyColor
         settings.style.buttonBarItemBackgroundColor = graySpotifyColor
         settings.style.selectedBarBackgroundColor = UIColor(netHex: 0x0e83d5)
-        settings.style.buttonBarItemFont = UIFont(name: "HelveticaNeue-Light", size:14) ?? UIFont.systemFont(ofSize: 14)
+        settings.style.buttonBarItemFont = UIFont(name: "HelveticaNeue-Bold", size:14) ?? UIFont.systemFont(ofSize: 14)
         settings.style.selectedBarHeight = 1.0
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
@@ -148,8 +148,10 @@ class Tab_:ButtonBarPagerTabStripViewController {
         child_KHLCNT.blackTheme = true
         let child_QLHA = self.storyboard?.instantiateViewController(withIdentifier: "Tab_QLHA") as! QLHinhAnh_VC
         child_QDDT.blackTheme = true
+        let child_KHGN = self.storyboard?.instantiateViewController(withIdentifier: "Tab_KHGN") as! Tab_KHGN
+        //child_KHGN.blackTheme = true
         let child_VBDA = self.storyboard?.instantiateViewController(withIdentifier: "Tab_VBDA") as! Tab_VanBanDuAnVC
-        return [child_TTC,child_QDDT,child_KHV,child_KHLCNT,child_VBDA,child_QLHA]
+        return [child_TTC,child_QDDT,child_KHV,child_KHLCNT,child_KHGN,child_VBDA,child_QLHA]
     }
     
     // MARK: - Actions

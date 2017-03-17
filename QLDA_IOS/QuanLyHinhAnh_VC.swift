@@ -602,13 +602,13 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         
         eventClick = UITapGestureRecognizer()
         cell.imgGroup.tag = section
-        eventClick.addTarget(self, action:  #selector(DSDA_VC.duAnChaClickGroup(sender: )))
+        eventClick.addTarget(self, action:  #selector(QuanLyHinhAnh_VC.duAnChaClickGroup(sender: )))
         cell.imgGroup.addGestureRecognizer(eventClick)
         cell.imgGroup.isUserInteractionEnabled = true;
         
         eventClick = UITapGestureRecognizer()
         
-        eventClick.addTarget(self, action:  #selector(DSDA_VC.ClickTenDuAn(sender:)))
+        eventClick.addTarget(self, action:  #selector(QuanLyHinhAnh_VC.ClickTenDuAn(sender:)))
         cell.lblTenDuAn.tag = (Int)(itemNhomDA.IdDA!)!
         cell.lblTenDuAn.accessibilityLabel = (itemNhomDA.TenDA!)
         cell.lblTenDuAn.addGestureRecognizer(eventClick)
@@ -753,7 +753,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
       
         
-        eventClick.addTarget(self, action:  #selector(DSDA_VC.ClickTenDuAn(sender:)))
+        eventClick.addTarget(self, action:  #selector(QuanLyHinhAnh_VC.ClickTenDuAn(sender:)))
         cell.lblTenDuAn.accessibilityLabel = (itemDuAnCon.TenDA!)
         cell.lblTenDuAn.tag = (Int)(itemDuAnCon.IdDA!)!
         cell.lblTenDuAn.addGestureRecognizer(eventClick)

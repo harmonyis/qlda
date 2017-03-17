@@ -11,6 +11,7 @@ import Charts
 
 class BDNVDT_VC: Base_VC{
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
    
     @IBOutlet weak var pieCharNV: PieChartView!
 
@@ -24,6 +25,11 @@ class BDNVDT_VC: Base_VC{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        pieCharNV.isHidden = true
+        viewLegend.isHidden = true
+        
         
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoNguonVon"
         let params : String = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
@@ -46,6 +52,9 @@ class BDNVDT_VC: Base_VC{
         
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating() 
+                self.pieCharNV.isHidden = false
+                self.viewLegend.isHidden = false
                 self.setChart()
             }
         }

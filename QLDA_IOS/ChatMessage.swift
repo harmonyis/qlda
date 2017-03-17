@@ -20,8 +20,9 @@ class ChatMessage{
         SenderName = ""
         MessageType = 0
         ContactType = 1
+        ImageMsg = nil
     }
-    //var Myclass : _myclass?
+
     var ID : Int64?
     var IsMe : Bool?
     var Message : String?
@@ -30,8 +31,53 @@ class ChatMessage{
     var SenderName : String?
     var MessageType : Int?
     var ContactType : Int?
+    var ImageMsg : UIImage?
     
     deinit{        
         print("Thông báo deinit")
     }
+    
+    func setImageMsg(){
+        if(MessageType == 1){
+            if let url = NSURL(string: UrlPreFix.Root.rawValue + self.Message!) {
+                if let data = NSData(contentsOf: url as URL) {
+                    if let pic : UIImage =  UIImage(data: data as Data){
+                        
+                        self.ImageMsg = pic
+                        
+                    }
+                }
+            }            
+        }
+    }
+    /*
+    func setImageMsg(){
+        let result = ChatCommon.listImageMessage.filter(){
+            if $0.InboxID == self.ID{
+                return true
+            }
+            return false
+        }
+        if result.count == 0{
+            if(MessageType == 1){
+                if let url = NSURL(string: UrlPreFix.Root.rawValue + self.Message!) {
+                    if let data = NSData(contentsOf: url as URL) {
+                        if let pic : UIImage =  UIImage(data: data as Data){
+                            
+                            self.ImageMsg = pic
+                            let newImageMsg : ImageMessage = ImageMessage()
+                            newImageMsg.Image = self.ImageMsg
+                            newImageMsg.InboxID = self.ID!
+                            ChatCommon.listImageMessage.append(newImageMsg)
+                        }
+                    }
+                }
+            }
+        }
+        else{
+            self.ImageMsg = result.first?.Image
+        }
+        
+    }*/
 }
+

@@ -58,7 +58,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
                         ViewQDDT.frame = CGRect(x: 3,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width , height: 25)
                         self.totalHeight = self.totalHeight + ViewQDDT.frame.height
-                        self.totalHeight = self.totalHeight + 30
+                        self.totalHeight = self.totalHeight + 10
                         self.UiViewQDDT.addSubview(ViewQDDT)
                         
                         var ViewGroupTTCQDDT = UIView()
@@ -173,7 +173,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                                 lable.text = arrlblTTDA[icount-1]
                                 
-                                lable.frame = CGRect(x: 10, y: 0 , width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
+                                lable.frame = CGRect(x: 10, y: 3 , width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
                                 lable.numberOfLines = 0
                                 lable.sizeToFit()
                                 uiView.addSubview(lable)
@@ -284,7 +284,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
                         ViewQDDT.frame = CGRect(x: 3,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width , height: 25)
                         self.totalHeight = self.totalHeight + ViewQDDT.frame.height
-                        self.totalHeight = self.totalHeight + 30
+                        self.totalHeight = self.totalHeight + 10
                         self.UiViewQDDT.addSubview(ViewQDDT)
                         
                         var ViewGroupTTCQDDT = UIView()

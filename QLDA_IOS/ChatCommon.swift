@@ -10,15 +10,24 @@ import Foundation
 class ChatCommon{
     
     static var currentChatID : Int?
-    static var currentChatType: Int32?
+    static var currentChatType: Int?
     
     static var listContact : [UserContact] = [UserContact]()
+    //static var listImageMessage : [ImageMessage] = [ImageMessage]()
     
     static var checkCloseView : Bool = false
     
+    
+    static func reset(){
+        currentChatID = 0
+        currentChatType = 0
+        listContact = [UserContact]()
+        checkCloseView = false
+    }
+    
     static func getContacts(){
         listContact = [UserContact]()
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(ChatHub.userID)"
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(Config.userID)"
         ApiService.Get(url: apiUrl, callback: callbackGetContacts, errorCallBack: errorGetContacts)
     }
 
@@ -40,9 +49,9 @@ class ChatCommon{
                 contact.PictureUrl = item["PictureUrl"] as? String
                 contact.ReceiverOfMessage = item["ReceiverOfMessage"] as? Int
                 contact.SenderOfMessage = item["SenderOfMessage"] as? Int
-                contact.TypeOfContact = item["TypeOfContact"] as? Int32
+                contact.TypeOfContact = item["TypeOfContact"] as? Int
                 contact.TypeOfMessage = item["TypeOfMessage"] as? Int
-                
+              
                 contact.setPicture()
                 listContact.append(contact)
             }
@@ -53,6 +62,25 @@ class ChatCommon{
     static func errorGetContacts(error : Error) {        
     }
     
+    
+    static func downLoadImage(_ path : String) -> UIImage?{
+        if let url = NSURL(string: path) {
+            if let data = NSData(contentsOf: url as URL) {
+                if let pic : UIImage =  UIImage(data: data as Data){
+                    return pic
+                }
+                else{
+                    return nil
+                }
+            }
+            else{
+                return nil
+            }
+        }
+        else{
+            return nil
+        }
+    }
     
     //function change data chat
     static func updateOnConnect(userID : Int){
@@ -76,7 +104,7 @@ class ChatCommon{
         }
     }
     
-    static func updateReceiveMessage(args : [Any]?, contactType : Int32){
+    static func updateReceiveMessage(args : [Any]?, contactType : Int){
         
         let sender = args?[0] as? [Any]
         let receiver = args?[1] as? [Any]
@@ -96,7 +124,7 @@ class ChatCommon{
         }
         else{
             contactID = senderID
-            if senderID == ChatHub.userID{
+            if senderID == Config.userID{
                 contactID = receiverID
             }
         }
@@ -132,7 +160,7 @@ class ChatCommon{
             newContact.SenderOfMessage = senderID;
             newContact.ReceiverOfMessage = receiverID
             newContact.TypeOfMessage = messageType;
-            if senderID == ChatHub.userID{
+            if senderID == Config.userID{
                   newContact.NumberOfNewMessage = 0
             }else{
                  newContact.NumberOfNewMessage = newContact.NumberOfNewMessage! + 1
@@ -174,7 +202,7 @@ class ChatCommon{
         if(filter.count == 0){
             let newContact : UserContact = UserContact()
             newContact.ContactID = groupID
-            if(host == ChatHub.userID){
+            if(host == Config.userID){
                 newContact.LatestMessage = "Bạn vừa tạo nhóm"
                 newContact.NumberOfNewMessage = 0
             }
@@ -200,7 +228,7 @@ class ChatCommon{
     
     static func updateMakeReadMessage(args : [Any]?){
         let contactID = args?[0] as? Int
-        let contactType = args?[1] as? Int32
+        let contactType = args?[1] as? Int
         let user : UserContact = listContact.filter() {
             let contact = $0 as UserContact
             if contact.ContactID == contactID && contact.TypeOfContact == contactType{
@@ -211,10 +239,21 @@ class ChatCommon{
         user.NumberOfNewMessage = 0
     }
     
+    static func chageGroupName(args : [Any]?){
+        let groupID : Int = args?[0] as! Int
+        let newName : String = args?[1] as! String
+        listContact = listContact.filter(){
+            if $0.ContactID == groupID && $0.TypeOfContact == 2 {
+                $0.Name = newName
+            }
+            return true
+        }
+    }
+    
     static func removedFromGroup(args : [Any]?){
         let userID : Int = args?[0] as! Int
         let groupID : Int = args?[1] as! Int
-        if userID == ChatHub.userID{
+        if userID == Config.userID{
             ChatCommon.listContact = ChatCommon.listContact.filter(){
                 if($0.ContactID == groupID && $0.TypeOfContact == 2){
                     return false

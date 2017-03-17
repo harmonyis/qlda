@@ -5,6 +5,7 @@ import Charts
 
 class BDTMDT_VC: Base_VC {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var pieChartTMDT: PieChartView!
     
@@ -17,7 +18,13 @@ class BDTMDT_VC: Base_VC {
     let arrColors = [0x3399FF,0xFF33FF,0x996666,0xFFFF33,0xFF3366,0xFF9900,0x00CC99]
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        pieChartTMDT.isHidden = true
+        viewLegendRight.isHidden = true
+        viewLegendLeft.isHidden = true
+        
+        
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoTMDT"
         //let szUser=lblName.
         let params : String = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
@@ -39,8 +46,11 @@ class BDTMDT_VC: Base_VC {
         
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
-                
-               self.setChart()
+                self.activityIndicator.stopAnimating()
+                self.pieChartTMDT.isHidden = false
+                self.viewLegendRight.isHidden = false
+                self.viewLegendLeft.isHidden = false
+                self.setChart()
             }
         }
     }
