@@ -656,7 +656,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     @IBAction func btnOpenCamera(_ sender: UIButton) {
-
+       // self.view.makeToast("Mở Camera !", duration: 3.0, position: .center)
     }
     
     @IBAction func btnOpenImage(_ sender: UIButton) {

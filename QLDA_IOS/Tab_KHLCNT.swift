@@ -79,8 +79,16 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
     
     func GetKeHoachLCNT(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        if let dic = json as? [String:Any] {
-            
+        if var dic = json as? [String:Any] {
+            if let check = dic["GetKeHoachLuaChonNhaThauResult"] as? [String] {
+            }
+            else{
+                dic["GetKeHoachLuaChonNhaThauResult"] = ["GetKeHoachLuaChonNhaThauResult":(
+                    "",
+                    "",
+                    "",
+                    "")]
+            }
             if let arrGoiThau = dic["GetKeHoachLuaChonNhaThauResult"] as? [String] {
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {

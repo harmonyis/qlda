@@ -28,6 +28,14 @@ class CustomCellDSDA_Lanscape: UITableViewCell {
     @IBOutlet weak var lblTenDA: UILabel!
     @IBOutlet weak var uiViewTenDA: UIView!
     
+    
+    @IBOutlet weak var constrainWidthGTGN: NSLayoutConstraint!
+    @IBOutlet weak var constrainWidthTMDT: NSLayoutConstraint!
+    @IBOutlet weak var constrainWidthTGTH: NSLayoutConstraint!
+    @IBOutlet weak var constrainWidthGiaiDoan: NSLayoutConstraint!
+    @IBOutlet weak var constrainWidthNhomDA: NSLayoutConstraint!
+    @IBOutlet weak var constrainWidthTenDuAn: NSLayoutConstraint!
+    @IBOutlet weak var constrainWidthGroup: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
