@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B5747AA1E7B7B8E00F140E1 /* TableNotifications_Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5747A91E7B7B8E00F140E1 /* TableNotifications_Portrait.swift */; };
+		1B5747AD1E7B857600F140E1 /* CustomTableNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5747AC1E7B857600F140E1 /* CustomTableNotificationCell.swift */; };
 		1B5C6B021E7A522800851D0C /* TableDSDAMap_Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */; };
+		1B5C6B071E7A87A600851D0C /* NotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C6B061E7A87A600851D0C /* NotificationItem.swift */; };
 		1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B911E6D4145007A615B /* ConvertDVT.swift */; };
 		1B655B941E6D4145007A615B /* YAxisValueFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */; };
 		244937621E76470E00929B6F /* TableDSDA_ Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */; };
@@ -125,7 +128,10 @@
 
 /* Begin PBXFileReference section */
 		18481FBDFADDC304EFED2593 /* Pods-QLDA_IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1B5747A91E7B7B8E00F140E1 /* TableNotifications_Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableNotifications_Portrait.swift; sourceTree = "<group>"; };
+		1B5747AC1E7B857600F140E1 /* CustomTableNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableNotificationCell.swift; sourceTree = "<group>"; };
 		1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDSDAMap_Portrait.swift; sourceTree = "<group>"; };
+		1B5C6B061E7A87A600851D0C /* NotificationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationItem.swift; sourceTree = "<group>"; };
 		1B655B911E6D4145007A615B /* ConvertDVT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertDVT.swift; sourceTree = "<group>"; };
 		1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YAxisValueFormatted.swift; sourceTree = "<group>"; };
 		244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableDSDA_ Portrait.swift"; sourceTree = "<group>"; };
@@ -252,6 +258,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B5747AB1E7B854A00F140E1 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				1B5747AC1E7B857600F140E1 /* CustomTableNotificationCell.swift */,
+			);
+			name = CustomCell;
+			sourceTree = "<group>";
+		};
+		1B5C6B051E7A878600851D0C /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				1B5747AB1E7B854A00F140E1 /* CustomCell */,
+				1B5C6B061E7A87A600851D0C /* NotificationItem.swift */,
+				1B5747A91E7B7B8E00F140E1 /* TableNotifications_Portrait.swift */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
 		244937601E7646A800929B6F /* CustomTable */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +427,7 @@
 		24BEAF141E697CCB008F205C /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				1B5C6B051E7A878600851D0C /* Notification */,
 				24BEAF181E697CE8008F205C /* Map */,
 				24BEAF171E697CE4008F205C /* Camera */,
 				24BEAF161E697CDF008F205C /* Chat */,
@@ -826,6 +851,7 @@
 				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
 				24BEAEEC1E697AA6008F205C /* CustomCellDSDATableViewCell.swift in Sources */,
 				24BEAFAD1E6FAF98008F205C /* Cell_KHLCNT_R2.swift in Sources */,
+				1B5747AA1E7B7B8E00F140E1 /* TableNotifications_Portrait.swift in Sources */,
 				24BEAEEB1E697AA6008F205C /* Config.swift in Sources */,
 				24BEAEF51E697AA6008F205C /* ExtendtionUItableViewCell.swift in Sources */,
 				24BEAF061E697AA6008F205C /* UIView.swift in Sources */,
@@ -870,6 +896,7 @@
 				BAF1E48D1E72AB9B00F28FE9 /* ImageMessage.swift in Sources */,
 				24BEAF051E697AA6008F205C /* UIImageViewExtension.swift in Sources */,
 				24BEAEE91E697AA6008F205C /* ChatMain_VC.swift in Sources */,
+				1B5C6B071E7A87A600851D0C /* NotificationItem.swift in Sources */,
 				24BEAFAB1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift in Sources */,
 				24BEAF021E697AA6008F205C /* ThongTinCaNhan_VC.swift in Sources */,
 				7CA6B9311E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift in Sources */,
@@ -883,6 +910,7 @@
 				BA18F9BA1E7A738900E53946 /* Notification_VC.swift in Sources */,
 				244937621E76470E00929B6F /* TableDSDA_ Portrait.swift in Sources */,
 				24BEAEE41E697AA6008F205C /* CanhBao_VC.swift in Sources */,
+				1B5747AD1E7B857600F140E1 /* CustomTableNotificationCell.swift in Sources */,
 				24BEAF071E697AA6008F205C /* UrlPreFix.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
