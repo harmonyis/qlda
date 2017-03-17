@@ -137,6 +137,16 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
+        let width = tableView.frame.width - 20
+        cell.constrainWidthGroup.constant = 20
+        cell.constrainWidthTenDuAn.constant = 20
+        
+        cell.constrainWidthNhomDA.constant = (CGFloat)(200*width/550)
+        cell.constrainWidthGiaiDoan.constant = (CGFloat)(260*width/550)
+        cell.constrainWidthTGTH.constant = (CGFloat)(340*width/550)
+        cell.constrainWidthTMDT.constant = (CGFloat)(410*width/550)
+        cell.constrainWidthGTGN.constant = (CGFloat)(490*width/550)
+        
         // cell.ght = 60
         //  cell.scrollEnabled = false
         let itemNhomDA :DanhSachDA = self.DSDA[section]
@@ -271,6 +281,19 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape", for: indexPath) as! CustomCellDSDA_Lanscape
+     
+        let width = tableView.frame.width - 20
+        cell.constrainWidthGroup.constant = 20
+        cell.constrainWidthTenDuAn.constant = 20
+        
+        cell.constrainWidthNhomDA.constant = (CGFloat)(180*width/550) + 20
+        cell.constrainWidthGiaiDoan.constant = (CGFloat)(240*width/550) + 20
+        cell.constrainWidthTGTH.constant = (CGFloat)(320*width/550) + 20
+        cell.constrainWidthTMDT.constant = (CGFloat)(390*width/550) + 20
+        cell.constrainWidthGTGN.constant = (CGFloat)(470*width/550) + 20
+        
+        
+        
         let itemNhomDA :DanhSachDA = self.DSDA[indexPath.section]
         let itemDSDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
         let itemDuAnCon : DuAn = itemDSDuAnCon[indexPath.row]

@@ -11,6 +11,8 @@ import UIKit
 
 class DSDA_VC: Base_VC , UISearchBarDelegate{
     
+    @IBOutlet weak var constraintHeightHeader: NSLayoutConstraint!
+    @IBOutlet weak var uiViewHeaderDSDA: UIView!
     @IBOutlet weak var uiSearchTDA: UISearchBar!
     @IBOutlet weak var tbDSDA: UITableView!
     var m_arrDSDA : [[String]] = []
@@ -21,8 +23,12 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     var indexTrangThaiDuAnCon = Set<String>()
     var dataSource_Portrait : TableDSDA_Portrait?
     var dataSource_Lanscape : TableDSDA_Lanscape?
+    var widthDSDA : CGFloat = 0
+    var heightDSDA : CGFloat = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.register(UINib(nibName: "CustomCellDSDA_Lanscape", bundle: nil), forCellReuseIdentifier: "CustomCellDSDA_Lanscape")
        
@@ -43,9 +49,10 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
       
     }
 
-    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         LoadTableView()
     }
+    
 
     func Alert(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -202,9 +209,158 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         LoadTableView()
         
     }
-    
+    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     func LoadTableView(){
+   /*     if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            widthDSDA = self.view.frame.width
+            heightDSDA = self.view.frame.height
+        }
+        
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+            widthDSDA = self.view.frame.height
+            heightDSDA = self.view.frame.width
+        }
+        */
+        widthDSDA = self.view.bounds.size.width
+        heightDSDA = self.view.bounds.size.height
+        print(widthDSDA)
+        print(heightDSDA)
+        print("_________________")
+        
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            
+         //   uiViewHeaderDSDA.viewWithTag(100)?.removeFromSuperview()
+            
+            for item in uiViewHeaderDSDA.subviews {
+            if item.tag == 100 {
+                item.removeFromSuperview()
+                }
+            }
+            let width = self.heightDSDA - 20
+            constraintHeightHeader.constant = 50
+            uiViewHeaderDSDA.backgroundColor = UIColor(netHex: 0x21AFFA)
+            
+            var uiView:UIView = UIView()
+           
+ 
+            uiView.frame = CGRect(x: 0, y: 0 , width: 20, height: 50)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+
+            self.uiViewHeaderDSDA.addSubview(uiView)
+            
+            var lable:UILabel = UILabel()
+            
+           
+            uiView = UIView()
+            uiView.frame = CGRect(x: (20), y: 0 , width: (180*width/550), height: 50)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+            
+            lable = UILabel()
+            lable.textColor = UIColor.white
+            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+            lable.text = "Tên dự án"
+            lable.textAlignment = .center
+            lable.frame = CGRect(x: 0, y: 0 , width: (180*width/550), height: 50)
+            lable.numberOfLines = 0
+            
+            uiView.addSubview(lable)
+            
+            self.uiViewHeaderDSDA.addSubview(uiView)
+            
+            uiView = UIView()
+            uiView.frame = CGRect(x: (200*width/550), y: 0 , width: (60*width/550), height: 50)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+            
+            lable = UILabel()
+            lable.textColor = UIColor.white
+            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+            lable.text = "Nhóm"
+            lable.textAlignment = .center
+            lable.frame = CGRect(x: 0, y: 0 , width: (60*width/550), height: 50)
+            lable.numberOfLines = 0
+            
+            uiView.addSubview(lable)
+            self.uiViewHeaderDSDA.addSubview(uiView)
+            
+            uiView = UIView()
+            uiView.frame = CGRect(x: (260*width/550), y: 0 , width: (80*width/550), height: 50)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+            
+            lable = UILabel()
+            lable.textColor = UIColor.white
+            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+            lable.text = "Giai đoạn"
+            lable.textAlignment = .center
+            lable.frame = CGRect(x: 0, y: 0 , width: (80*width/550), height: 50)
+            lable.numberOfLines = 0
+            
+            uiView.addSubview(lable)
+            self.uiViewHeaderDSDA.addSubview(uiView)
+            
+            uiView = UIView()
+            uiView.frame = CGRect(x: (340*width/550), y: 0 , width: (70*width/550), height: 50)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+            
+            lable = UILabel()
+            lable.textColor = UIColor.white
+            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+            lable.text = "Thời gian thực hiện"
+            lable.textAlignment = .center
+            lable.frame = CGRect(x: 0, y: 0 , width: (70*width/550), height: 50)
+            lable.numberOfLines = 0
+            
+            uiView.addSubview(lable)
+            self.uiViewHeaderDSDA.addSubview(uiView)
+            
+            
+            uiView = UIView()
+            uiView.frame = CGRect(x: (410*width/550), y: 0 , width: (80*width/550), height: 50)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+            
+            lable = UILabel()
+            lable.textColor = UIColor.white
+            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+            lable.text = "Tổng mức đầu tư"
+            lable.textAlignment = .center
+            lable.frame = CGRect(x: 0, y: 0 , width: (80*width/550), height: 50)
+            lable.numberOfLines = 0
+            
+            uiView.addSubview(lable)
+            self.uiViewHeaderDSDA.addSubview(uiView)
+            
+            uiView = UIView()
+            uiView.frame = CGRect(x: (490*width/550), y: 0 , width: (80*width/550), height: 50)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+            
+            lable = UILabel()
+            lable.textColor = UIColor.white
+            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+            lable.text = "Giá trị giải ngân"
+            lable.textAlignment = .center
+            lable.frame = CGRect(x: 0, y: 0 , width: (80*width/550), height: 50)
+            lable.numberOfLines = 0
+            
+            uiView.addSubview(lable)
+            self.uiViewHeaderDSDA.addSubview(uiView)
+            
+           
+           // self.uiViewHeaderDSDA.frame = CGRect(x: 0,y: 116 ,width: self.widthDSDA , height: 30)
+           // uiViewHeader.tag = 100
+            
             self.dataSource_Lanscape = TableDSDA_Lanscape(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self)
             self.tbDSDA.dataSource = self.dataSource_Lanscape
             self.tbDSDA.delegate = self.dataSource_Lanscape
@@ -212,7 +368,29 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
         }
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
-            self.dataSource_Portrait = TableDSDA_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self)
+            for item in uiViewHeaderDSDA.subviews {
+                if item.tag == 100 {
+                    item.removeFromSuperview()
+                }
+            }
+            constraintHeightHeader.constant = 30
+            var uiViewHeader:UIView = UIView()
+            var lable:UILabel = UILabel()
+            lable.textColor = UIColor.white
+            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+            lable.text = "Danh sách dự án"
+            lable.textAlignment = .center
+            lable.frame = CGRect(x: 10, y: 0 , width: 300, height: 30)
+            lable.numberOfLines = 0
+            lable.tag = 100
+            uiViewHeaderDSDA.backgroundColor = UIColor(netHex: 0x21AFFA)
+            
+            
+            // self.uiViewHeaderDSDA.frame = CGRect(x: 0,y: 116 ,width: self.widthDSDA , height: 30)
+            // uiViewHeader.tag = 100
+            self.uiViewHeaderDSDA.addSubview(lable)
+                
+                       self.dataSource_Portrait = TableDSDA_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self)
             self.tbDSDA.dataSource = self.dataSource_Portrait
             self.tbDSDA.delegate = self.dataSource_Portrait
             self.tbDSDA.reloadData()
