@@ -24,7 +24,7 @@ class CTHHDSection : Section {
         self.title = title
     }
 }
-class HopDong : Section {
+class TTHopDong : Section {
     var tenHD : String = ""
     var ngayBD : String = ""
     var thoiGianTH  : String = ""
