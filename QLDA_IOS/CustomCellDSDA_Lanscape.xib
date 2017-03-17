@@ -56,7 +56,7 @@
                                 <rect key="frame" x="200" y="0.0" width="60" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMA-RZ-x9X">
-                                        <rect key="frame" x="10" y="5" width="45" height="30"/>
+                                        <rect key="frame" x="5" y="5" width="50" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.1070804211" green="0.62826214000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -66,7 +66,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="DMA-RZ-x9X" secondAttribute="bottom" constant="5" id="AgZ-7R-L2G"/>
                                     <constraint firstItem="DMA-RZ-x9X" firstAttribute="top" secondItem="YSJ-Zw-EGY" secondAttribute="top" constant="5" id="D74-pb-nuZ"/>
-                                    <constraint firstItem="DMA-RZ-x9X" firstAttribute="leading" secondItem="YSJ-Zw-EGY" secondAttribute="leading" constant="10" id="VaY-mG-nSU"/>
+                                    <constraint firstItem="DMA-RZ-x9X" firstAttribute="leading" secondItem="YSJ-Zw-EGY" secondAttribute="leading" constant="5" id="VaY-mG-nSU"/>
                                     <constraint firstAttribute="trailing" secondItem="DMA-RZ-x9X" secondAttribute="trailing" constant="5" id="rHe-bv-wVq"/>
                                 </constraints>
                             </view>
@@ -74,7 +74,7 @@
                                 <rect key="frame" x="260" y="0.0" width="80" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmq-ei-6qn">
-                                        <rect key="frame" x="10" y="5" width="65" height="30"/>
+                                        <rect key="frame" x="5" y="5" width="70" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.1070804211" green="0.62826214000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -84,7 +84,7 @@
                                 <constraints>
                                     <constraint firstItem="qmq-ei-6qn" firstAttribute="top" secondItem="uqs-Y4-CFV" secondAttribute="top" constant="5" id="bgp-ma-hVa"/>
                                     <constraint firstAttribute="trailing" secondItem="qmq-ei-6qn" secondAttribute="trailing" constant="5" id="fSM-qN-H5X"/>
-                                    <constraint firstItem="qmq-ei-6qn" firstAttribute="leading" secondItem="uqs-Y4-CFV" secondAttribute="leading" constant="10" id="rcA-co-YAb"/>
+                                    <constraint firstItem="qmq-ei-6qn" firstAttribute="leading" secondItem="uqs-Y4-CFV" secondAttribute="leading" constant="5" id="rcA-co-YAb"/>
                                     <constraint firstAttribute="bottom" secondItem="qmq-ei-6qn" secondAttribute="bottom" constant="5" id="sji-tk-YeZ"/>
                                 </constraints>
                             </view>
@@ -92,7 +92,7 @@
                                 <rect key="frame" x="340" y="0.0" width="70" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dve-jK-4Db">
-                                        <rect key="frame" x="10" y="5" width="55" height="30"/>
+                                        <rect key="frame" x="5" y="5" width="60" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.1070804211" green="0.62826214000000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -102,7 +102,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="dve-jK-4Db" secondAttribute="trailing" constant="5" id="NKP-3b-BYM"/>
-                                    <constraint firstItem="dve-jK-4Db" firstAttribute="leading" secondItem="peW-4Y-9dx" secondAttribute="leading" constant="10" id="aea-LV-ZgC"/>
+                                    <constraint firstItem="dve-jK-4Db" firstAttribute="leading" secondItem="peW-4Y-9dx" secondAttribute="leading" constant="5" id="aea-LV-ZgC"/>
                                     <constraint firstAttribute="bottom" secondItem="dve-jK-4Db" secondAttribute="bottom" constant="5" id="tMS-0A-QTf"/>
                                     <constraint firstItem="dve-jK-4Db" firstAttribute="top" secondItem="peW-4Y-9dx" secondAttribute="top" constant="5" id="znA-n8-EjR"/>
                                 </constraints>
