@@ -861,6 +861,7 @@
 				2449377A1E7A8F4300929B6F /* NhomHopDong.swift in Sources */,
 				24BEAF041E697AA6008F205C /* UIImageView.swift in Sources */,
 				BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */,
+				1B5C6B021E7A522800851D0C /* TableDSDAMap_Portrait.swift in Sources */,
 				244937781E7A8F3000929B6F /* HopDong.swift in Sources */,
 				BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */,
 				24BEAEF31E697AA6008F205C /* DuAn.swift in Sources */,
