@@ -11,6 +11,8 @@ import UIKit
 
 class DSDA_VC: Base_VC , UISearchBarDelegate{
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var constraintHeightHeader: NSLayoutConstraint!
     @IBOutlet weak var uiViewHeaderDSDA: UIView!
     @IBOutlet weak var uiSearchTDA: UISearchBar!
@@ -32,6 +34,11 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        uiViewHeaderDSDA.isHidden = true
+        uiSearchTDA.isHidden = true
+        tbDSDA.isHidden = true
         
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.register(UINib(nibName: "CustomCellDSDA_Lanscape", bundle: nil), forCellReuseIdentifier: "CustomCellDSDA_Lanscape")
@@ -106,7 +113,10 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                         self.m_DSDA = self.DSDA
                         self.computeWidthCell()
                         self.LoadTableView()
-                        
+                        self.activityIndicator.stopAnimating()
+                        self.uiViewHeaderDSDA.isHidden = false
+                        self.uiSearchTDA.isHidden = false
+                        self.tbDSDA.isHidden = false
                     }
                 }
                 
