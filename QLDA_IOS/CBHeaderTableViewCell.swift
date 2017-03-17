@@ -12,6 +12,7 @@ class CBHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var lblHeader: UILabel!
     @IBOutlet weak var viewExpand: UIView!
     @IBOutlet weak var imgIcon: UIView!
+    @IBOutlet weak var imgHeaderIcon: UIImageView!
     override func awakeFromNib() {
         
         super.awakeFromNib()
