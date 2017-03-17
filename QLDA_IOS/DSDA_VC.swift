@@ -458,26 +458,31 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     }
     
     // Hàm tính size text
+    /*
     func calulaterTextSize(text : String, size : CGSize) -> CGRect{
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
         return estimatedFrame
-    }
+    }*/
     
     func computeWidthCell(){
         var temp : CGFloat = 0
+        let size = CGSize(width: 1000 , height: 30)
         for item in DSDA{
-            temp = calulaterTextSize(text: variableConfig.convert(item.GiaTriGiaiNgan!), size: CGSize(width: 1000 , height: 30)).width
+            temp = variableConfig.convert(item.GiaTriGiaiNgan!).computeTextSize(size).width
+            //temp = calulaterTextSize(text: variableConfig.convert(item.GiaTriGiaiNgan!), size: CGSize(width: 1000 , height: 30)).width
             wGN = max(wGN, temp)
-            
-            temp = calulaterTextSize(text: variableConfig.convert(item.TongMucDauTu!), size: CGSize(width: 1000 , height: 30)).width
+            temp = variableConfig.convert(item.TongMucDauTu!).computeTextSize(size).width
+            //temp = calulaterTextSize(text: variableConfig.convert(item.TongMucDauTu!), size: CGSize(width: 1000 , height: 30)).width
             wTMDT = max(wTMDT, temp)
             
             for child in item.DuAnCon!{
-                temp = calulaterTextSize(text: variableConfig.convert(child.GiaTriGiaiNgan!), size: CGSize(width: 1000 , height: 30)).width
+                temp = variableConfig.convert(child.GiaTriGiaiNgan!).computeTextSize(size).width
+                //temp = calulaterTextSize(text: variableConfig.convert(child.GiaTriGiaiNgan!), size: CGSize(width: 1000 , height: 30)).width
                 wGN = max(wGN, temp)
                 
-                temp = calulaterTextSize(text: variableConfig.convert(child.TongMucDauTu!), size: CGSize(width: 1000 , height: 30)).width
+                temp = variableConfig.convert(child.TongMucDauTu!).computeTextSize(size).width
+                //temp = calulaterTextSize(text: variableConfig.convert(child.TongMucDauTu!), size: CGSize(width: 1000 , height: 30)).width
                 wTMDT = max(wTMDT, temp)
             }
         }

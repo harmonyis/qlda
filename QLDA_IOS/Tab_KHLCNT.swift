@@ -21,6 +21,8 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
     var blackTheme = false
     var itemInfo = IndicatorInfo(title: "KHLCNT")
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

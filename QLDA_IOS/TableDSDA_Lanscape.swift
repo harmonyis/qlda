@@ -18,8 +18,8 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
     var indexTrangThaiDuAnCon = Set<String>()
     var tbDSDA : UITableView?
     var uiViewDSDA : UIViewController?
-    var wTMDT : CGFloat?
-    var wGN : CGFloat?
+    var wTMDT : CGFloat = 0
+    var wGN : CGFloat = 0
     
     // MARK: - Table view data source
     init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController){
@@ -149,7 +149,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
         let width = tableView.frame.width - 20
         print(width)
-        let wTotal = width - wGN! - wTMDT!
+        let wTotal = width - wGN - wTMDT
         
         cell.constrainWidthGroup.constant = 20
         cell.constrainWidthTenDuAn.constant = 20
@@ -158,7 +158,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.constrainWidthGiaiDoan.constant = 20 + 60*wTotal/100
         cell.constrainWidthTGTH.constant = 20 + 80*wTotal/100
         cell.constrainWidthTMDT.constant = 20 + wTotal
-        cell.constrainWidthGTGN.constant = 20 + wTotal + wTMDT!
+        cell.constrainWidthGTGN.constant = 20 + wTotal + wTMDT
         
         // cell.ght = 60
         //  cell.scrollEnabled = false
@@ -299,7 +299,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.constrainWidthGroup.constant = 20
         cell.constrainWidthTenDuAn.constant = 20
         print(width)
-        let wTotal = width - wGN! - wTMDT!
+        let wTotal = width - wGN - wTMDT
         
         cell.constrainWidthGroup.constant = 20
         cell.constrainWidthTenDuAn.constant = 20
@@ -308,7 +308,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.constrainWidthGiaiDoan.constant = 20 + 60*wTotal/100
         cell.constrainWidthTGTH.constant = 20 + 80*wTotal/100
         cell.constrainWidthTMDT.constant = 20 + wTotal
-        cell.constrainWidthGTGN.constant = 20 + wTotal + wTMDT!
+        cell.constrainWidthGTGN.constant = 20 + wTotal + wTMDT
         
         /*
         cell.constrainWidthNhomDA.constant = (CGFloat)(180*width/550) + 20
