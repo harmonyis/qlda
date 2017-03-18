@@ -276,7 +276,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     
     func showMenu(index:Int) {
         // 1
-        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         // 2
         let detailAction = UIAlertAction(title: "Chi tiết", style: .default, handler: {
@@ -296,8 +296,23 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                         if let array = dataResult["DataResult"] as? [String:Any] {
                             message = "Dự án: \(array["DuAn"] as! String) \nTên ảnh: \(array["Name"] as! String) \nNgười tạo: \(array["CreatedBy"] as! String) \nNgày tạo: \(array["Created"] as! String) \nKích thước: \(array["Size"] as! String) \nĐộ phân giải:\(array["Dimensions"] as! String)"
                             
+                            let paragraphStyle = NSMutableParagraphStyle()
+                            paragraphStyle.alignment = NSTextAlignment.left
+                            
                             let alert = UIAlertController(title: "Chi tiết:", message: message, preferredStyle: UIAlertControllerStyle.alert)
                             alert.addAction(UIAlertAction(title: "Đóng", style: UIAlertActionStyle.default, handler: nil))
+                            
+                            let messageText = NSMutableAttributedString(
+                                string: message,
+                                attributes: [
+                                    NSParagraphStyleAttributeName: paragraphStyle,
+                                    NSFontAttributeName : UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
+                                    NSForegroundColorAttributeName : UIColor.black
+                                ]
+                            )
+                            
+                            alert.setValue(messageText, forKey: "attributedMessage")
+                            
                             self.present(alert, animated: true, completion: nil)
                             
                         }
@@ -816,7 +831,10 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
             ApiService.Post(url: ApiUrl, params: params, callback: GetDSHAByIdSuccess, errorCallBack: GetDSHAError)
             self.DuAnSelected = String(idDuAn)
         } else {
+            self.view.hideToastActivity()
+            
             self.view.makeToast("Dự án không có ảnh!", duration: 1.5, position: .bottom)
+            
             
         }
         let label:UILabel = (sender.view!) as! UILabel

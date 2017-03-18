@@ -22,6 +22,7 @@ class CanhBao_VC: Base_VC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("reload")
         var nib = UINib(nibName: "CanhBaoTableViewCell", bundle: nil)
         self.tbCanhBao.register(nib, forCellReuseIdentifier: "cell")
         nib = UINib(nibName: "CellHopDongTableViewCell", bundle: nil)
@@ -130,7 +131,14 @@ class CanhBao_VC: Base_VC {
         }
 
     }
-
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+        } else {
+            print("Portrait")
+        }
+    }
     
     func addMonth(date:String, month : String) -> String {
         let dateFormatter = DateFormatter()
