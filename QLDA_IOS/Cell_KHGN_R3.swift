@@ -15,7 +15,12 @@ class Cell_KHGN_R3: UITableViewCell {
     @IBOutlet weak var lblDVTH: UILabel!
     @IBOutlet weak var uiViewHopDong_TTCT_Right: UIView!
     @IBOutlet weak var uiViewHopDong_TTCT_Left: UIView!
-    @IBOutlet weak var uiViewHopDong_TTCT: UIView!
+    @IBOutlet weak var uiViewHopDong_TTCT: UIView! {
+        didSet {
+            uiViewHopDong_TTCT.isHidden = false
+        }
+    }
+
     @IBOutlet weak var lblLKGTTT: UILabel!
     @IBOutlet weak var lblGTHD: UILabel!
     @IBOutlet weak var lblTenHD: UILabel!
