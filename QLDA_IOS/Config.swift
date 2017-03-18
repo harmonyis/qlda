@@ -16,7 +16,9 @@ class Config{
     static var profifePictureUrl = ""
     static var profilePicture : UIImage? = nil
     static var loginName : String = ""
-
+    static var nTotalNotificationNotRead : Int32 = 0
+    static var bCheckRead : Bool = false
+    
     static func InitApp(){
         SelectMenuIndex = 0
         userID = 0
@@ -25,6 +27,8 @@ class Config{
         profifePictureUrl = ""
         profilePicture = nil
         loginName = ""
+        nTotalNotificationNotRead = 0
+        bCheckRead = false
         
         ChatHub.stopHub()        
         ChatCommon.reset()

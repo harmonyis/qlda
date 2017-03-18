@@ -11,6 +11,8 @@ import UIKit
 
 class DSDA_VC: Base_VC , UISearchBarDelegate{
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var constraintHeightHeader: NSLayoutConstraint!
     @IBOutlet weak var uiViewHeaderDSDA: UIView!
     @IBOutlet weak var uiSearchTDA: UISearchBar!
@@ -25,9 +27,18 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     var dataSource_Lanscape : TableDSDA_Lanscape?
     var widthDSDA : CGFloat = 0
     var heightDSDA : CGFloat = 0
+    
+    var wGN : CGFloat = 0
+    var wTMDT : CGFloat = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        uiViewHeaderDSDA.isHidden = true
+        uiSearchTDA.isHidden = true
+        tbDSDA.isHidden = true
         
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.register(UINib(nibName: "CustomCellDSDA_Lanscape", bundle: nil), forCellReuseIdentifier: "CustomCellDSDA_Lanscape")
@@ -100,9 +111,13 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                     DispatchQueue.main.async {
                         self.DSDA = self.DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
                         self.m_DSDA = self.DSDA
-                         self.LoadTableView()
-                       
-                                         }
+                        self.computeWidthCell()
+                        self.LoadTableView()
+                        self.activityIndicator.stopAnimating()
+                        self.uiViewHeaderDSDA.isHidden = false
+                        self.uiSearchTDA.isHidden = false
+                        self.tbDSDA.isHidden = false
+                    }
                 }
                 
             }
@@ -236,7 +251,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                 item.removeFromSuperview()
                 }
             }
-            let width = self.heightDSDA - 20
+            let width = max(self.heightDSDA, self.widthDSDA) - 20
             constraintHeightHeader.constant = 50
             uiViewHeaderDSDA.backgroundColor = UIColor(netHex: 0x21AFFA)
             
@@ -252,9 +267,10 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             var lable:UILabel = UILabel()
             
+            let wTotal = width - wGN - wTMDT
            
             uiView = UIView()
-            uiView.frame = CGRect(x: (20), y: 0 , width: (180*width/550), height: 50)
+            uiView.frame = CGRect(x: (20), y: 0 , width: (45*wTotal/100), height: 50)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
@@ -264,7 +280,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Tên dự án"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (180*width/550), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (45*wTotal/100), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
@@ -272,7 +288,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             self.uiViewHeaderDSDA.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (200*width/550), y: 0 , width: (60*width/550), height: 50)
+            uiView.frame = CGRect(x: (20 + 45*wTotal/100), y: 0 , width: (15*wTotal/100), height: 50)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
@@ -282,14 +298,14 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Nhóm"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (60*width/550), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (15*wTotal/100), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
             self.uiViewHeaderDSDA.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (260*width/550), y: 0 , width: (80*width/550), height: 50)
+            uiView.frame = CGRect(x: (20 + 60*wTotal/100), y: 0 , width: (20*wTotal/100), height: 50)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
@@ -299,14 +315,14 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Giai đoạn"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (80*width/550), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (20*wTotal/100), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
             self.uiViewHeaderDSDA.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (340*width/550), y: 0 , width: (70*width/550), height: 50)
+            uiView.frame = CGRect(x: (20 + 80*wTotal/100), y: 0 , width: (20*wTotal/100), height: 50)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
@@ -316,7 +332,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Thời gian thực hiện"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (70*width/550), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (20*wTotal/100), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
@@ -324,7 +340,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (410*width/550), y: 0 , width: (80*width/550), height: 50)
+            uiView.frame = CGRect(x: (20 + wTotal), y: 0 , width: (wTMDT), height: 50)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
@@ -334,14 +350,14 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Tổng mức đầu tư"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (80*width/550), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (wTMDT), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
             self.uiViewHeaderDSDA.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (490*width/550), y: 0 , width: (80*width/550), height: 50)
+            uiView.frame = CGRect(x: (20 + wTotal + wTMDT), y: 0 , width: (wGN), height: 50)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
@@ -351,7 +367,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Giá trị giải ngân"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (80*width/550), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (wGN), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
@@ -361,7 +377,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
            // self.uiViewHeaderDSDA.frame = CGRect(x: 0,y: 116 ,width: self.widthDSDA , height: 30)
            // uiViewHeader.tag = 100
             
-            self.dataSource_Lanscape = TableDSDA_Lanscape(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self)
+            self.dataSource_Lanscape = TableDSDA_Lanscape(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self, wTMDT : wTMDT, wGN : wGN)
             self.tbDSDA.dataSource = self.dataSource_Lanscape
             self.tbDSDA.delegate = self.dataSource_Lanscape
             self.tbDSDA.reloadData()
@@ -441,6 +457,38 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-      
+    // Hàm tính size text
+    /*
+    func calulaterTextSize(text : String, size : CGSize) -> CGRect{
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
+        return estimatedFrame
+    }*/
     
+    func computeWidthCell(){
+        var temp : CGFloat = 0
+        let size = CGSize(width: 1000 , height: 30)
+        let font = UIFont.boldSystemFont(ofSize: 13)
+        for item in DSDA{
+            temp = variableConfig.convert(item.GiaTriGiaiNgan!).computeTextSize(size : size, font : font).width
+            //temp = calulaterTextSize(text: variableConfig.convert(item.GiaTriGiaiNgan!), size: CGSize(width: 1000 , height: 30)).width
+            wGN = max(wGN, temp)
+            temp = variableConfig.convert(item.TongMucDauTu!).computeTextSize(size : size, font : font).width
+            //temp = calulaterTextSize(text: variableConfig.convert(item.TongMucDauTu!), size: CGSize(width: 1000 , height: 30)).width
+            wTMDT = max(wTMDT, temp)
+            
+            for child in item.DuAnCon!{
+                temp = variableConfig.convert(child.GiaTriGiaiNgan!).computeTextSize(size : size, font : font).width
+                //temp = calulaterTextSize(text: variableConfig.convert(child.GiaTriGiaiNgan!), size: CGSize(width: 1000 , height: 30)).width
+                wGN = max(wGN, temp)
+                
+                temp = variableConfig.convert(child.TongMucDauTu!).computeTextSize(size : size, font : font).width
+                //temp = calulaterTextSize(text: variableConfig.convert(child.TongMucDauTu!), size: CGSize(width: 1000 , height: 30)).width
+                wTMDT = max(wTMDT, temp)
+            }
+        }
+        wGN = wGN + 10
+        wTMDT = wTMDT + 10
+        print(wGN,wTMDT)
+    }
 }

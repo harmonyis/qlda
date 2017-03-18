@@ -10,6 +10,7 @@ import UIKit
 
 class Cell_KHLCNT_R3: UITableViewCell {
 
+    @IBOutlet weak var constraintLeftTenGoiThau: NSLayoutConstraint!
  
     @IBOutlet weak var uiViewGoiThau: UIStackView!
     @IBOutlet weak var uiViewTieuDe: UIView!

@@ -8,7 +8,7 @@
 
 import Foundation
 extension String {
-    mutating func  toUnsign() -> String
+    mutating func toUnsign() -> String
     {
         var signs : [String] = [
             "aAeEoOuUiIdDyY",
@@ -35,5 +35,11 @@ extension String {
             }
         }
         return self.lowercased();
+    }
+    
+    func computeTextSize(size : CGSize, font : UIFont) -> CGRect{
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let estimatedFrame = NSString(string: self).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: font], context: nil)
+        return estimatedFrame
     }
 }
