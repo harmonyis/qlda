@@ -9,6 +9,8 @@
 import UIKit
 
 class Cell_KHLCNT_R2: UITableViewCell {
+    @IBOutlet weak var constraintLeftTongGiaTri: NSLayoutConstraint!
+    @IBOutlet weak var constraintLeftTenGoiThau: NSLayoutConstraint!
 
     @IBOutlet weak var stkView_R2: UIStackView!
    
