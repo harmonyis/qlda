@@ -28,6 +28,9 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.rowHeight = UITableViewAutomaticDimension
         self.tbDSDA.estimatedRowHeight = 60
+        
+        
+        
         //let szUser=lblName.
         let params : String = "{\"szIdDA\": \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetGoiThau"
