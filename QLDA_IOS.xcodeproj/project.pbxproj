@@ -579,6 +579,18 @@
 				2449376F1E7A372E00929B6F /* Cell_KHGN_R1.swift */,
 				244937711E7A374D00929B6F /* Cell_KHGN_R2.swift */,
 				244937731E7A376400929B6F /* Cell_KHGN_R3.swift */,
+				7C2259271E76481900626051 /* CanhBaoTableViewCell.swift */,
+				7C2259281E76481900626051 /* CanhBaoTableViewCell.xib */,
+				7C0A09BE1E77EFC30026F1C1 /* CellHopDongTableViewCell.swift */,
+				7C0A09BF1E77EFC30026F1C1 /* CellHopDongTableViewCell.xib */,
+				7C7CB7A91E7A30A300A27018 /* CBHeaderTableViewCell.swift */,
+				7C7CB7AA1E7A30A300A27018 /* CBHeaderTableViewCell.xib */,
+				7C3DED5F1E7A71FC0038BE5D /* CBChamQTTableViewCell.swift */,
+				7C3DED601E7A71FC0038BE5D /* CBChamQTTableViewCell.xib */,
+				7CF6A28B1E7B87B800C5050E /* CellHopDongHiddenTableViewCell.swift */,
+				7CF6A28C1E7B87B800C5050E /* CellHopDongHiddenTableViewCell.xib */,
+				7CF6A28F1E7B917F00C5050E /* CBChamQTHiddenTableViewCell.swift */,
+				7CF6A2901E7B917F00C5050E /* CBChamQTHiddenTableViewCell.xib */,
 				2449377B1E7B9A5600929B6F /* Cell_KHGN_R4.swift */,
 				24ADE7791E7CC98500415499 /* CustomCell_KHGN_Header_Landscape.swift */,
 				24ADE77A1E7CC98500415499 /* CustomCell_KHGN_Header_Landscape.xib */,
@@ -752,14 +764,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		24BEAE8F1E6979D8008F205C /* Resources */ = {
+				7C0A09C11E77EFC30026F1C1 /* CellHopDongTableViewCell.xib in Resources */,
+				7C22592A1E76481900626051 /* CanhBaoTableViewCell.xib in Resources */,
+				7C3DED621E7A71FC0038BE5D /* CBChamQTTableViewCell.xib in Resources */,
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		24BEAE9A1E6979D8008F205C /* Resources */ = {
+				7CF6A2921E7B917F00C5050E /* CBChamQTHiddenTableViewCell.xib in Resources */,
+				7CF6A28E1E7B87B800C5050E /* CellHopDongHiddenTableViewCell.xib in Resources */,
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -919,6 +934,8 @@
 				244937741E7A376400929B6F /* Cell_KHGN_R3.swift in Sources */,
 				24BEAEF71E697AA6008F205C /* Login_VC.swift in Sources */,
 				244937721E7A374D00929B6F /* Cell_KHGN_R2.swift in Sources */,
+				24BEAEFB1E697AA6008F205C /* MenuViewController.swift in Sources */,
+				7C22592C1E768D8400626051 /* ApiEntity.swift in Sources */,
 				24BEAEF01E697AA6008F205C /* DSDA_VC.swift in Sources */,
 				7C3DED611E7A71FC0038BE5D /* CBChamQTTableViewCell.swift in Sources */,
 				24BEAEFD1E697AA6008F205C /* PaddingLabel.swift in Sources */,
@@ -1003,8 +1020,9 @@
 				24BEAEE41E697AA6008F205C /* CanhBao_VC.swift in Sources */,
 				1B5747AD1E7B857600F140E1 /* CustomTableNotificationCell.swift in Sources */,
 				24BEAF071E697AA6008F205C /* UrlPreFix.swift in Sources */,
-				244937761E7A3F9E00929B6F /* TableKHGN_Portrait.swift in Sources */,
-				7C22592E1E76A03500626051 /* CanhBaoEntity.swift in Sources */,
+				7C0A09C01E77EFC30026F1C1 /* CellHopDongTableViewCell.swift in Sources */,
+				24ADE7821E7CD6A100415499 /* TableKHGN_Lanscape.swift in Sources */,
+				24ADE77F1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
