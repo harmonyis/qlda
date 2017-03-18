@@ -98,7 +98,7 @@ class Base_VC: UIViewController {
         
         updateBadgeChat()
         
-        
+        updateBadgeNotification()
     }
     
     func onChatBarPressesd(_ sender : UIButton){
@@ -137,6 +137,16 @@ class Base_VC: UIViewController {
         ChatHub.chatHub.on("makeReadMessage"){args in
             ChatCommon.updateMakeReadMessage(args: args)
             self.updateBadgeChat()
+        }
+        ChatHub.chatHub.on("notification") {args in
+            self.updateBadgeNotification()
+        }
+        ChatHub.chatHub.on("makeReadAllNotification") {args in
+            self.updateBadgeNotification()
+        }
+        
+        ChatHub.chatHub.on("makeReadAllNotification") {args in
+            self.updateBadgeNotification()
         }
         
     }

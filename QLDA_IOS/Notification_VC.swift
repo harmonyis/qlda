@@ -116,7 +116,7 @@ class Notification_VC: Base_VC {
                 notificationItemNew.NotificationCreated = dateString
                 
                 notificationItemNew.NotificationisRead = false
-                self._notificationItems?.append(notificationItemNew)
+                self._notificationItems?.insert( notificationItemNew, at: 0)
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
