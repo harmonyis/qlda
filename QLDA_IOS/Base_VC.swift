@@ -4,6 +4,11 @@ import UIKit
 class Base_VC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(Config.bCheckRead == false){
+            getTotalNofiticationNotRead()
+        }
+        
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
                 ChatHub.addChatHub(hub: ChatHub.chatHub)
@@ -65,6 +70,8 @@ class Base_VC: UIViewController {
         btnNotiMenu.addTarget(self, action: #selector(Base_VC.onNotiBarPressesd(_:)), for: UIControlEvents.touchUpInside)
         btnNotiMenu.setImage(#imageLiteral(resourceName: "ic_noti"), for: UIControlState())
         btnNotiMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+        let frameNoti = CGRect(x: 18, y: -4, width: 15, height: 15)
+        createBadge(parent: btnNotiMenu, tag: 200, number: 0, frame: frameNoti)
         let customNotiBarItem = UIBarButtonItem(customView: btnNotiMenu)
         
         let btnChatMenu = UIButton(type: UIButtonType.custom)
@@ -82,13 +89,16 @@ class Base_VC: UIViewController {
         btnMapMenu.addTarget(self, action: #selector(Base_VC.onMapBarPressesd(_:)), for: UIControlEvents.touchUpInside)
         btnMapMenu.setImage(#imageLiteral(resourceName: "ic_map"), for: UIControlState())
         btnMapMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+        
         let customMapBarItem = UIBarButtonItem(customView: btnMapMenu)
         
         
         //self.navigationItem.rightBarButtonItems = [customNotiBarItem, customChatBarItem, customMapBarItem]
         self.navigationItem.setRightBarButtonItems([customNotiBarItem, customChatBarItem, customMapBarItem], animated: true)
         
-        updateBadgeChat()        
+        updateBadgeChat()
+        
+        
     }
     
     func onChatBarPressesd(_ sender : UIButton){
@@ -128,8 +138,36 @@ class Base_VC: UIViewController {
             ChatCommon.updateMakeReadMessage(args: args)
             self.updateBadgeChat()
         }
+        
+    }
+    func getTotalNofiticationNotRead(){
+        // lay tong so notification chua doc
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getTotalNotificationsNotRead"
+        let params : String = "{\"nUserID\" : \(Config.userID)}"
+        ApiService.Post(url: apiUrl, params: params, callback: callbackGetTotalNotiNotRead, errorCallBack: errorGetTotalNotiNotRead)
     }
     
+    func callbackGetTotalNotiNotRead(data : Data) {
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dic = json as? [String : Any] {
+            let nCount = dic["getTotalNotificationsNotReadResult"] as? String
+            Config.nTotalNotificationNotRead = Int32(nCount!)!
+            Config.bCheckRead = true
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    self.updateBadgeNotification()
+                }
+            }
+        }
+    }
+    
+    func errorGetTotalNotiNotRead(error : Error) {
+        let message = error.localizedDescription
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     func updateBadgeChat(){
         let btn : UIBarButtonItem = (self.navigationItem.rightBarButtonItems?[1])! as UIBarButtonItem
     
@@ -144,6 +182,21 @@ class Base_VC: UIViewController {
             label.isHidden = true
         }
     }
+    
+    func updateBadgeNotification(){
+        let btn : UIBarButtonItem = (self.navigationItem.rightBarButtonItems?[0])! as UIBarButtonItem
+        let label : UILabel = btn.customView?.viewWithTag(200) as! UILabel
+        let count = getNumberBadgeNotification()
+        if(count > 0){
+            label.text = String(count)
+            label.isHidden = false
+        }
+        else{
+            label.text = ""
+            label.isHidden = true
+        }
+    }
+    
     private func getNumberBadgeChat() -> Int{
         let list = ChatCommon.listContact.filter(){
             if $0.NumberOfNewMessage! > 0 {
@@ -153,6 +206,11 @@ class Base_VC: UIViewController {
             }
         }
         return list.count
+    }
+    
+    private func getNumberBadgeNotification() -> Int{
+        let nCount = Config.nTotalNotificationNotRead
+        return Int(nCount)
     }
     
     func createBadge(parent : UIView, tag : Int, number : Int, frame : CGRect){

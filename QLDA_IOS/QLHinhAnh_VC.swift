@@ -339,7 +339,7 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
     
     func showMenu(index:Int) {
         // 1
-        let optionMenu = UIAlertController(title: nil, message: "Choose Option", preferredStyle: .actionSheet)
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         // 2
         let detailAction = UIAlertAction(title: "Chi tiết", style: .default, handler: {
@@ -359,8 +359,24 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
                         if let array = dataResult["DataResult"] as? [String:Any] {
                             message = "Dự án: \(array["DuAn"] as! String) \nTên ảnh: \(array["Name"] as! String) \nNgười tạo: \(array["CreatedBy"] as! String) \nNgày tạo: \(array["Created"] as! String) \nKích thước: \(array["Size"] as! String) \nĐộ phân giải:\(array["Dimensions"] as! String)"
                             
+
+                            let paragraphStyle = NSMutableParagraphStyle()
+                            paragraphStyle.alignment = NSTextAlignment.left
+                            
                             let alert = UIAlertController(title: "Chi tiết:", message: message, preferredStyle: UIAlertControllerStyle.alert)
                             alert.addAction(UIAlertAction(title: "Đóng", style: UIAlertActionStyle.default, handler: nil))
+                            
+                            let messageText = NSMutableAttributedString(
+                                string: message,
+                                attributes: [
+                                    NSParagraphStyleAttributeName: paragraphStyle,
+                                    NSFontAttributeName : UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
+                                    NSForegroundColorAttributeName : UIColor.black
+                                ]
+                            )
+                            
+                            alert.setValue(messageText, forKey: "attributedMessage")
+                            
                             self.present(alert, animated: true, completion: nil)
                             
                         }
