@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8nb-LZ-jCf">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8nb-LZ-jCf">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -231,6 +231,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="H6t-xm-Gca">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <color key="color" red="0.076014270509999995" green="0.71971434320000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="GF5-xN-g5p">
                                 <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -487,8 +491,10 @@
                             <constraint firstItem="Nw3-f7-G8g" firstAttribute="top" secondItem="GF5-xN-g5p" secondAttribute="bottom" id="RkD-J3-mPK"/>
                             <constraint firstItem="GF5-xN-g5p" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="d94-l9-oju"/>
                             <constraint firstItem="zFD-Hb-0v1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iKm-nc-LdA"/>
+                            <constraint firstItem="H6t-xm-Gca" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jJD-qU-fQR"/>
                             <constraint firstItem="GF5-xN-g5p" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mF2-vE-B56"/>
                             <constraint firstItem="zFD-Hb-0v1" firstAttribute="top" secondItem="Nw3-f7-G8g" secondAttribute="bottom" id="o7F-px-Xaw"/>
+                            <constraint firstItem="H6t-xm-Gca" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ut3-XA-wAP"/>
                             <constraint firstAttribute="trailing" secondItem="GF5-xN-g5p" secondAttribute="trailing" id="vyU-xD-XnT"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zFD-Hb-0v1" secondAttribute="bottom" constant="1" id="xpe-jc-tkF"/>
                             <constraint firstAttribute="trailing" secondItem="zFD-Hb-0v1" secondAttribute="trailing" id="y43-gi-kzU"/>
@@ -496,6 +502,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="2sL-tj-kMq"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="H6t-xm-Gca" id="CvR-qW-ynP"/>
                         <outlet property="constraintHeightHeader" destination="M1d-3V-tkl" id="54d-0G-vgY"/>
                         <outlet property="tbDSDA" destination="zFD-Hb-0v1" id="HR2-jZ-Sqj"/>
                         <outlet property="uiSearchTDA" destination="GF5-xN-g5p" id="BtM-IE-Aw4"/>
@@ -1182,6 +1189,7 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HMX-Pw-cDw" secondAttribute="trailing" constant="-8" id="44Q-dP-daq"/>
                                                 <constraint firstItem="HMX-Pw-cDw" firstAttribute="top" secondItem="2Dt-LW-hnb" secondAttribute="top" id="Vuz-KL-wNs"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="HMX-Pw-cDw" secondAttribute="bottom" constant="-10" id="iCr-c2-DwF"/>
                                                 <constraint firstItem="HMX-Pw-cDw" firstAttribute="leading" secondItem="2Dt-LW-hnb" secondAttribute="leading" id="umM-98-GfF"/>
@@ -3096,7 +3104,6 @@
                             <constraint firstItem="dGL-6E-cxf" firstAttribute="leading" secondItem="pja-q4-KDu" secondAttribute="leadingMargin" constant="-16" id="l64-hL-S0R"/>
                             <constraint firstItem="1gi-WW-jtZ" firstAttribute="top" secondItem="UQL-vz-xM5" secondAttribute="bottom" id="mLs-1W-2Xf"/>
                             <constraint firstItem="UQL-vz-xM5" firstAttribute="leading" secondItem="pja-q4-KDu" secondAttribute="leading" id="oEZ-lH-s3x"/>
-                            <constraint firstItem="UQL-vz-xM5" firstAttribute="centerY" secondItem="pja-q4-KDu" secondAttribute="centerY" id="utZ-zp-UQC"/>
                             <constraint firstItem="ch6-90-0oS" firstAttribute="centerY" secondItem="pja-q4-KDu" secondAttribute="centerY" id="vhi-0R-vEJ"/>
                             <constraint firstItem="1gi-WW-jtZ" firstAttribute="top" secondItem="UQL-vz-xM5" secondAttribute="top" constant="30" id="xsC-gF-3xB"/>
                         </constraints>
@@ -4310,7 +4317,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cơ quan ban hành:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8TM-Cr-nFW">
-                                                                            <rect key="frame" x="15" y="47" width="114.5" height="16"/>
+                                                                            <rect key="frame" x="15" y="47" width="115" height="16"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
