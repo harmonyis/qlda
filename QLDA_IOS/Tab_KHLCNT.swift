@@ -11,7 +11,7 @@ import Foundation
 import XLPagerTabStrip
 
 class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate ,IndicatorInfoProvider{
-    
+
     @IBOutlet weak var tbDSDA: UITableView!
     var m_dsGoiThau = [GoiThau]()
     var m_countGoiThau : Int = 0
@@ -22,6 +22,7 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
     var itemInfo = IndicatorInfo(title: "KHLCNT")
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
     
+    var wTongGiaTri : CGFloat = 120
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +65,17 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
                 {
                     idGoiThau = ""
                 }
+                
+                //Tính kích thước tổng giái trị
+                let size = CGSize(width: 1000 , height: 30)
+                let fontTitle = UIFont.boldSystemFont(ofSize: 13)
+                let fontGiaTri = UIFont.systemFont(ofSize: 13)
+                wTongGiaTri = variableConfig.convert((String)(m_TongGiaTri)).computeTextSize(size : size, font : fontGiaTri).width
+                //So sanh với kích thước title
+                wTongGiaTri = max(wTongGiaTri, "Giá gói thầu".computeTextSize(size : size, font : fontTitle).width)
+                //Padding 10
+                wTongGiaTri += 15
+                
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
                         
@@ -172,6 +184,9 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
         }
         else if index == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_R2", for: indexPath) as! Cell_KHLCNT_R2
+            cell.constraintLeftTenGoiThau.constant = wTongGiaTri + 30
+            cell.constraintLeftTongGiaTri.constant = wTongGiaTri + 30
+            
             cell.lblGiaTri.text = variableConfig.convert((String)(m_TongGiaTri))
             cell.lblcountDSGT.text = "Danh sách gói thầu (" + (String)(m_countGoiThau - 4) + " gói thầu )"
             
@@ -206,11 +221,11 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
             let  cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_R3", for: indexPath) as! Cell_KHLCNT_R3
             cell.lblSTT.text = (String)(index - 3)
             
-           
+            cell.constraintLeftTenGoiThau.constant = wTongGiaTri + 30
 
-            cell.lblTenGoiThau.text = m_dsGoiThau[index - 4].TenGT
+            cell.lblTenGoiThau.text = m_dsGoiThau[index - 4].TenGT!
             cell.lblTenGoiThau.numberOfLines = 0
-            cell.lblTenGoiThau.sizeToFit()
+          //  cell.lblTenGoiThau.sizeToFit()
             
             cell.lblGiaTriTT.text = variableConfig.convert(m_dsGoiThau[index - 4].GiaGT!)
             
@@ -219,20 +234,20 @@ class Tab_KHLCNT: UIViewController , UITableViewDataSource, UITableViewDelegate 
             cell.lblHinhThucLCNT.attributedText = attributedString(from: targetString, nonBoldRange: range)
             
             cell.lblHinhThucLCNT.numberOfLines = 0
-            cell.lblHinhThucLCNT.sizeToFit()
+        //    cell.lblHinhThucLCNT.sizeToFit()
             
             targetString = "Phương thức LCNT: \(m_dsGoiThau[index - 4].PhuongThucLCNT!)"
             range = NSMakeRange(19, targetString.characters.count - 19 )
             cell.lblPhuongThucLCNT.attributedText = attributedString(from: targetString, nonBoldRange: range)
              cell.lblPhuongThucLCNT.numberOfLines = 0
-            cell.lblPhuongThucLCNT.sizeToFit()
+      //      cell.lblPhuongThucLCNT.sizeToFit()
             
             targetString = "Loại hợp đồng: \(m_dsGoiThau[index - 4].LoaiHopDong!)"
             range = NSMakeRange(16, targetString.characters.count - 16 )
             cell.lblLoaiHD.attributedText = attributedString(from: targetString, nonBoldRange: range)
 
             cell.lblLoaiHD.numberOfLines = 0
-            cell.lblLoaiHD.sizeToFit()
+       //     cell.lblLoaiHD.sizeToFit()
             // cell.lblPhuongThucLCNT.frame = CGRect(x: 105, y: 31 , width: cell.lblPhuongThucLCNT.frame.width, height: CGFloat.greatestFiniteMagnitude)
             
             

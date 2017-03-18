@@ -37,9 +37,9 @@ extension String {
         return self.lowercased();
     }
     
-    func computeTextSize(_ size : CGSize) -> CGRect{
+    func computeTextSize(size : CGSize, font : UIFont) -> CGRect{
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let estimatedFrame = NSString(string: self).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
+        let estimatedFrame = NSString(string: self).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: font], context: nil)
         return estimatedFrame
     }
 }
