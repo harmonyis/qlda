@@ -27,7 +27,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.14117647058823529" green="0.56862745098039214" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdW-rH-8Yc">
                         <rect key="frame" x="45" y="5" width="36" height="16"/>
@@ -47,8 +47,9 @@
                     <constraint firstItem="9Ki-Ur-ODO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="s4M-ck-oKQ"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.14117647058823529" green="0.56862745098039214" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="imgHeaderIcon" destination="fp1-Ni-XqX" id="jst-6U-rJI"/>
                 <outlet property="imgIcon" destination="9Ki-Ur-ODO" id="3UT-Io-mqh"/>
                 <outlet property="lblHeader" destination="NdW-rH-8Yc" id="kAV-vu-55U"/>
                 <outlet property="viewExpand" destination="H2p-sc-9uM" id="ztJ-R1-GtE"/>

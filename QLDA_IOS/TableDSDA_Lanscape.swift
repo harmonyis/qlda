@@ -18,6 +18,8 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
     var indexTrangThaiDuAnCon = Set<String>()
     var tbDSDA : UITableView?
     var uiViewDSDA : UIViewController?
+    var wTMDT : CGFloat = 0
+    var wGN : CGFloat = 0
     
     // MARK: - Table view data source
     init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController){
@@ -25,7 +27,15 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         self.DSDA = arrDSDA
         self.tbDSDA = tbvDSDA
         self.uiViewDSDA = tbvcDSDA
-        
+    }
+    
+    init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController, wTMDT : CGFloat, wGN : CGFloat){
+        super.init()
+        self.DSDA = arrDSDA
+        self.tbDSDA = tbvDSDA
+        self.uiViewDSDA = tbvcDSDA
+        self.wTMDT = wTMDT
+        self.wGN = wGN
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -138,14 +148,17 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
         let width = tableView.frame.width - 20
+        print(width)
+        let wTotal = width - wGN - wTMDT
+        
         cell.constrainWidthGroup.constant = 20
         cell.constrainWidthTenDuAn.constant = 20
         
-        cell.constrainWidthNhomDA.constant = (CGFloat)(200*width/550)
-        cell.constrainWidthGiaiDoan.constant = (CGFloat)(260*width/550)
-        cell.constrainWidthTGTH.constant = (CGFloat)(340*width/550)
-        cell.constrainWidthTMDT.constant = (CGFloat)(410*width/550)
-        cell.constrainWidthGTGN.constant = (CGFloat)(490*width/550)
+        cell.constrainWidthNhomDA.constant = 20 + 45*wTotal/100
+        cell.constrainWidthGiaiDoan.constant = 20 + 60*wTotal/100
+        cell.constrainWidthTGTH.constant = 20 + 80*wTotal/100
+        cell.constrainWidthTMDT.constant = 20 + wTotal
+        cell.constrainWidthGTGN.constant = 20 + wTotal + wTMDT
         
         // cell.ght = 60
         //  cell.scrollEnabled = false
@@ -231,7 +244,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.autoresizingMask = .flexibleWidth
         cell.autoresizingMask = .flexibleHeight
         
-         cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
+      //   cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
         
         return cell
     }
@@ -285,13 +298,25 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         let width = tableView.frame.width - 20
         cell.constrainWidthGroup.constant = 20
         cell.constrainWidthTenDuAn.constant = 20
+        print(width)
+        let wTotal = width - wGN - wTMDT
         
+        cell.constrainWidthGroup.constant = 20
+        cell.constrainWidthTenDuAn.constant = 20
+        
+        cell.constrainWidthNhomDA.constant = 20 + 45*wTotal/100
+        cell.constrainWidthGiaiDoan.constant = 20 + 60*wTotal/100
+        cell.constrainWidthTGTH.constant = 20 + 80*wTotal/100
+        cell.constrainWidthTMDT.constant = 20 + wTotal
+        cell.constrainWidthGTGN.constant = 20 + wTotal + wTMDT
+        
+        /*
         cell.constrainWidthNhomDA.constant = (CGFloat)(180*width/550) + 20
         cell.constrainWidthGiaiDoan.constant = (CGFloat)(240*width/550) + 20
         cell.constrainWidthTGTH.constant = (CGFloat)(320*width/550) + 20
         cell.constrainWidthTMDT.constant = (CGFloat)(390*width/550) + 20
         cell.constrainWidthGTGN.constant = (CGFloat)(470*width/550) + 20
-        
+        */
         
         
         let itemNhomDA :DanhSachDA = self.DSDA[indexPath.section]
@@ -358,8 +383,8 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.lblTenDA.addGestureRecognizer(eventClick)
         cell.lblTenDA.isUserInteractionEnabled = true;
         
-        print(heightTD.height)
-         cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
+      //  print(heightTD.height)
+        // cell.constraintHeightDA.constant = CGFloat(heightTD.height) + 20
                 
                return cell
     }

@@ -13,6 +13,7 @@ class CanhBao_VC: Base_VC {
     @IBOutlet weak var tbCanhBao: UITableView!
     
     
+    @IBOutlet weak var lblHeader: UILabel!
 
     var datasource : CanhBaoDatascource?
     var userName = variableConfig.m_szUserName
@@ -21,6 +22,7 @@ class CanhBao_VC: Base_VC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("reload")
         var nib = UINib(nibName: "CanhBaoTableViewCell", bundle: nil)
         self.tbCanhBao.register(nib, forCellReuseIdentifier: "cell")
         nib = UINib(nibName: "CellHopDongTableViewCell", bundle: nil)
@@ -66,7 +68,7 @@ class CanhBao_VC: Base_VC {
     }
     
     func loadDataSuccess(data : SuccessEntity) {
-        print("data")
+        //print("data")
         let json = try? JSONSerialization.jsonObject(with: data.data! , options: [])
         if let dic = json as? [String:Any] {
             if let jsonResult = dic["GetHopDongChamResult"] as? [[String]] {
@@ -80,7 +82,7 @@ class CanhBao_VC: Base_VC {
                             return false
                         }
                     }) {
-                        print(canhBao.titleSection)
+                        //print(canhBao.titleSection)
                         if item[0] == "0" {
                             canhBao.arrSection.append(TTHopDong(type: 0, tenHD: item[2], ngayBD: item[3], thoiGianTH: item[4], ngayKT: item[5], ngayCham: item[6]))
                         } else if item[0] == "1" {
@@ -121,7 +123,7 @@ class CanhBao_VC: Base_VC {
                         self.tbCanhBao.dataSource = self.datasource
                         self.tbCanhBao.delegate = self.datasource
                         self.tbCanhBao.reloadData()
-                        
+                        self.lblHeader.text = "Danh sách dự án cảnh báo (\(self.arrData.count) dự án)"
                     }
                 }
                 
@@ -129,7 +131,14 @@ class CanhBao_VC: Base_VC {
         }
 
     }
-
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+        } else {
+            print("Portrait")
+        }
+    }
     
     func addMonth(date:String, month : String) -> String {
         let dateFormatter = DateFormatter()
