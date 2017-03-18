@@ -198,6 +198,19 @@ class ChatHub {
                 UserNotificationManager.share.addNotificationWithTimeIntervalTrigger(identifier: identifier, title: groupName, body: "Bạn vừa được thêm vào nhóm")
             }
         }
+        chatHub.on("notification") {args in
+            
+            Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead + 1
+        }
+        chatHub.on("makeReadAllNotification") {args in
+            
+            Config.nTotalNotificationNotRead = 0
+        }
+        
+        chatHub.on("makeReadAllNotification") {args in
+            
+            Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead - 1
+        }
     }
     
     static func pushView(){

@@ -13,7 +13,7 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
     var _notificationItems = [NotificationItem]()
     var _tbNotification : UITableView?
     
-    let myColorDefault : UIColor = UIColor(netHex: 0xdddddd)
+    let myColorDefault : UIColor = UIColor(netHex: 0x000000)
     let myColorUnRead : UIColor = UIColor(netHex: 0x0e83d5)
     let mycolorSelected : UIColor = UIColor.red
     
@@ -24,12 +24,9 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
         self._notificationItems = arrNoti
         
     }
-    /*
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return self._notificationItems.count
+        return 1
     }
- */
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -40,7 +37,7 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = _tbNotification?.dequeueReusableCell(withIdentifier: "idCustomCell", for: indexPath) as! CustomTableNotificationCell
-        let itemNotification :NotificationItem = self._notificationItems[indexPath.section]
+        let itemNotification :NotificationItem = self._notificationItems[indexPath.row]
         // Kiem tra xem thong bao da doc chua
         var myColorTemp : UIColor? = nil
         if(itemNotification.NotificationisRead == false){
@@ -64,14 +61,16 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
         cell.lblTitle.isUserInteractionEnabled = true;
         //-------------------------
         // label ngay tao
+        if(itemNotification.NotificationCreated != nil){
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
         let dateString = dateFormatter.string(from: itemNotification.NotificationCreated!)
         
         cell.lblDate.text = dateString
         cell.lblDate.font = UIFont.systemFont(ofSize: 13)
-        cell.lblDate.textAlignment = NSTextAlignment.right
+            cell.lblDate.textAlignment = NSTextAlignment.right
         cell.lblDate.textColor = myColorTemp
+        }
         //-------------------------
         return cell
     }
