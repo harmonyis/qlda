@@ -20,15 +20,17 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
     var uiViewKHLCNT : UIViewController?
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
 
+    var wTongGiaTri : CGFloat = 0
     
     // MARK: - Table view data source
-    init(_ tbvKHLC: UITableView, arrGoiThau: [GoiThau], arrthongTinKHLCNT : [String] , nTongGiaTri : Int){
+    init(_ tbvKHLC: UITableView, arrGoiThau: [GoiThau], arrthongTinKHLCNT : [String] , nTongGiaTri : Int, wTongGiaTri : CGFloat){
         super.init()
         self.m_dsGoiThau = arrGoiThau
         self.tbvKHLCNT = tbvKHLC
         self.m_thongTinKHLCNT = arrthongTinKHLCNT
         self.m_TongGiaTri = nTongGiaTri
         m_countGoiThau = m_dsGoiThau.count
+        self.wTongGiaTri = wTongGiaTri
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -49,6 +51,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
         if index < 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_R1", for: indexPath) as! Cell_KHLCNT_R1
             print(self.m_thongTinKHLCNT)
+            
             cell.lblGiaTri.text = self.m_thongTinKHLCNT[index + 1]
             cell.lblTieuDe.text = arrTieuDe[index]
             
@@ -58,8 +61,8 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
         }
         else if index == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_R2", for: indexPath) as! Cell_KHLCNT_R2
-            //   cell.constraintLeftTenGoiThau.constant = wTongGiaTri + 30
-            //   cell.constraintLeftTongGiaTri.constant = wTongGiaTri + 30
+            cell.constraintLeftTenGoiThau.constant = wTongGiaTri + 30
+            cell.constraintLeftTongGiaTri.constant = wTongGiaTri + 30
             
             cell.lblGiaTri.text = variableConfig.convert((String)(m_TongGiaTri))
             cell.lblcountDSGT.text = "Danh sách gói thầu (" + (String)(m_countGoiThau) + " gói thầu )"
@@ -95,7 +98,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
             let  cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_R3", for: indexPath) as! Cell_KHLCNT_R3
             cell.lblSTT.text = (String)(index - 3)
             
-            //   cell.constraintLeftTenGoiThau.constant = wTongGiaTri + 30
+            cell.constraintRightTenGoiThau.constant = wTongGiaTri + 30
             
             cell.lblTenGoiThau.text = m_dsGoiThau[index - 4].TenGT!
             //cell.lblTenGoiThau.numberOfLines = 0

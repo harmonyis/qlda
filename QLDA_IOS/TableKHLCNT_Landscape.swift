@@ -20,15 +20,17 @@ class TableKHLCNT_Landscape : NSObject, UITableViewDelegate, UITableViewDataSour
     var uiViewKHLCNT : UIViewController?
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
     
+    var wTongGiaTri : CGFloat = 0
     
     // MARK: - Table view data source
-    init(_ tbvKHLC: UITableView, arrGoiThau: [GoiThau], arrthongTinKHLCNT : [String] , nTongGiaTri : Int){
+    init(_ tbvKHLC: UITableView, arrGoiThau: [GoiThau], arrthongTinKHLCNT : [String] , nTongGiaTri : Int, wTongGiaTri : CGFloat){
         super.init()
         self.m_dsGoiThau = arrGoiThau
         self.tbvKHLCNT = tbvKHLC
         self.m_thongTinKHLCNT = arrthongTinKHLCNT
         self.m_TongGiaTri = nTongGiaTri
         m_countGoiThau = m_dsGoiThau.count
+        self.wTongGiaTri = wTongGiaTri
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -58,9 +60,10 @@ class TableKHLCNT_Landscape : NSObject, UITableViewDelegate, UITableViewDataSour
         }
         else if index == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_Header_Landscape", for: indexPath) as! Cell_KHLCNT_Header_Landscape
-            //   cell.constraintLeftTenGoiThau.constant = wTongGiaTri + 30
-            //   cell.constraintLeftTongGiaTri.constant = wTongGiaTri + 30
             
+            cell.constraintRightTenGoiThau.constant = wTongGiaTri + 180
+            cell.constraintRightTongGiaTr.constant = wTongGiaTri + 180
+
             cell.lblTongGiaTri.text = variableConfig.convert((String)(m_TongGiaTri))
             cell.lblDSGT.text = "Danh sách gói thầu (" + (String)(m_countGoiThau) + " gói thầu )"
             
@@ -101,7 +104,7 @@ class TableKHLCNT_Landscape : NSObject, UITableViewDelegate, UITableViewDataSour
             let  cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_HD_Landscape", for: indexPath) as! Cell_KHLCNT_HD_Landscape
             cell.lblSTT.text = (String)(index - 3)
             
-            //   cell.constraintLeftTenGoiThau.constant = wTongGiaTri + 30
+            cell.constraintRightTenGT.constant = wTongGiaTri + 180 - 8
             
             cell.lblTenGT.text = m_dsGoiThau[index - 4].TenGT!
             //cell.lblTenGoiThau.numberOfLines = 0

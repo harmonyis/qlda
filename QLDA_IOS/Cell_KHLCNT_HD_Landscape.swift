@@ -10,6 +10,7 @@ import UIKit
 
 class Cell_KHLCNT_HD_Landscape: UITableViewCell {
 
+    @IBOutlet weak var constraintRightTenGT: NSLayoutConstraint!
     
     @IBOutlet weak var lblLoaiHD: UILabel!
     @IBOutlet weak var uiViewLoaiHD: UIView!

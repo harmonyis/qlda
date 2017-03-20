@@ -10,6 +10,9 @@ import UIKit
 
 class Cell_KHLCNT_Header_Landscape: UITableViewCell {
 
+    @IBOutlet weak var constraintRightTenGoiThau: NSLayoutConstraint!
+    @IBOutlet weak var constraintRightTongGiaTr: NSLayoutConstraint!
+    
     @IBOutlet weak var uiViewdetail: UIView!
     @IBOutlet weak var uiView_GiaGT: UIView!
     @IBOutlet weak var uiViewTongGiaTri: UIView!
