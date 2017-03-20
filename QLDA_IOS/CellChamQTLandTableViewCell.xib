@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="253" id="KGk-i7-Jjw" customClass="CellChamQTLandTableViewCell" customModule="QLDA_IOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="514" height="253"/>
+            <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="514" height="252"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gov-HA-raU">
+                        <rect key="frame" x="8" y="8" width="498" height="26"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ApV-cH-PP6">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="26"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="ZOb-DN-Wty"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Op7-eT-rfQ">
+                                <rect key="frame" x="40" y="0.0" width="458" height="26"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1r-V2-QcU">
+                                        <rect key="frame" x="5" y="5" width="42" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="X1r-V2-QcU" secondAttribute="trailing" constant="5" id="0cb-eD-A8b"/>
+                                    <constraint firstItem="X1r-V2-QcU" firstAttribute="leading" secondItem="Op7-eT-rfQ" secondAttribute="leading" constant="5" id="4KB-Ch-5Cm"/>
+                                    <constraint firstItem="X1r-V2-QcU" firstAttribute="top" secondItem="Op7-eT-rfQ" secondAttribute="top" constant="5" id="84k-hn-yr2"/>
+                                    <constraint firstAttribute="bottom" secondItem="X1r-V2-QcU" secondAttribute="bottom" constant="5" id="ImP-he-paE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Op7-eT-rfQ" secondAttribute="bottom" id="BB5-zf-yUm"/>
+                            <constraint firstItem="Op7-eT-rfQ" firstAttribute="top" secondItem="Gov-HA-raU" secondAttribute="top" id="ND1-Vc-UOM"/>
+                            <constraint firstItem="ApV-cH-PP6" firstAttribute="top" secondItem="Gov-HA-raU" secondAttribute="top" id="Txg-1R-Tr8"/>
+                            <constraint firstItem="ApV-cH-PP6" firstAttribute="leading" secondItem="Gov-HA-raU" secondAttribute="leading" id="kUg-1A-Q9u"/>
+                            <constraint firstItem="Op7-eT-rfQ" firstAttribute="leading" secondItem="ApV-cH-PP6" secondAttribute="trailing" id="nCv-MU-1sS"/>
+                            <constraint firstAttribute="trailing" secondItem="Op7-eT-rfQ" secondAttribute="trailing" id="pPy-Kw-nAS"/>
+                            <constraint firstAttribute="bottom" secondItem="ApV-cH-PP6" secondAttribute="bottom" id="tMB-du-eTn"/>
+                            <constraint firstAttribute="height" constant="26" id="xx8-Qe-Vxi"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrt-bF-vVa">
+                        <rect key="frame" x="8" y="34" width="498" height="210"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Gov-HA-raU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Ed8-oc-Add"/>
+                    <constraint firstItem="Gov-HA-raU" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Yai-4G-Y6k"/>
+                    <constraint firstItem="jrt-bF-vVa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ZfM-lh-ufq"/>
+                    <constraint firstItem="jrt-bF-vVa" firstAttribute="top" secondItem="Gov-HA-raU" secondAttribute="bottom" id="iM2-Zm-hih"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="jrt-bF-vVa" secondAttribute="trailing" id="jGL-se-EZB"/>
+                    <constraint firstItem="jrt-bF-vVa" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="tTI-mb-CFa"/>
+                    <constraint firstItem="Gov-HA-raU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="wFB-jF-pJ6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="37" y="166.5"/>
+        </tableViewCell>
+    </objects>
+</document>
