@@ -19,7 +19,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     var m_thongTinKHLCNT : [String] = []
     var indexTrangThaiGoiThau = Set<Int>()
     var blackTheme = false
-    
+    var dataSource_Lanscape : TableKHLCNT_Landscape?
     var dataSource_Portrait : TableKHLCNT_Portrait?
     var itemInfo = IndicatorInfo(title: "KHLCNT")
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
@@ -33,7 +33,11 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.rowHeight = UITableViewAutomaticDimension
         self.tbDSDA.estimatedRowHeight = 60
-        //let szUser=lblName.
+        
+        self.tbDSDA.register(UINib(nibName: "Cell_KHLCNT_Header_Landscape", bundle: nil), forCellReuseIdentifier: "Cell_KHLCNT_Header_Landscape")
+        
+        self.tbDSDA.register(UINib(nibName: "Cell_KHLCNT_HD_Landscape", bundle: nil), forCellReuseIdentifier: "Cell_KHLCNT_HD_Landscape")
+        
         let params : String = "{\"szIdDA\": \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetGoiThau"
         
@@ -123,6 +127,10 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
+            self.dataSource_Lanscape = TableKHLCNT_Landscape(self.tbDSDA, arrGoiThau: self.m_dsGoiThau ,arrthongTinKHLCNT : self.m_thongTinKHLCNT , nTongGiaTri : self.m_TongGiaTri, wTongGiaTri : self.wTongGiaTri)
+            self.tbDSDA.dataSource = self.dataSource_Lanscape
+            self.tbDSDA.delegate = self.dataSource_Lanscape
+            self.tbDSDA.reloadData()
             
             
         }
@@ -148,6 +156,11 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        LoadTableView()
     }
     
     
