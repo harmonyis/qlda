@@ -78,6 +78,11 @@
 		24BEAFB21E6FB580008F205C /* Tab_KHLCNT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */; };
 		24BEAFB41E6FEC0E008F205C /* GoiThau.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAFB31E6FEC0E008F205C /* GoiThau.swift */; };
 		77874250CB5F4720BEE7F789 /* Pods_QLDA_IOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535DCDAF1DDB47BDB402007B /* Pods_QLDA_IOSUITests.framework */; };
+		7C0503BE1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0503BC1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.swift */; };
+		7C0503BF1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0503BD1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.xib */; };
+		7C0503C11E7CE2C2005EF6CE /* CanhBaoLandDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0503C01E7CE2C2005EF6CE /* CanhBaoLandDatasource.swift */; };
+		7C0503C41E7CF51E005EF6CE /* CellChamQTLandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0503C21E7CF51E005EF6CE /* CellChamQTLandTableViewCell.swift */; };
+		7C0503C51E7CF51E005EF6CE /* CellChamQTLandTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0503C31E7CF51E005EF6CE /* CellChamQTLandTableViewCell.xib */; };
 		7C0A09C01E77EFC30026F1C1 /* CellHopDongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0A09BE1E77EFC30026F1C1 /* CellHopDongTableViewCell.swift */; };
 		7C0A09C11E77EFC30026F1C1 /* CellHopDongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0A09BF1E77EFC30026F1C1 /* CellHopDongTableViewCell.xib */; };
 		7C2259261E7646EA00626051 /* CanhBaoDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2259251E7646EA00626051 /* CanhBaoDatasource.swift */; };
@@ -232,6 +237,11 @@
 		572B215EA84F7B7CF9E16D67 /* Pods-QLDA_IOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSTests/Pods-QLDA_IOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		5A1182175A41F00793BBEEF5 /* Pods-QLDA_IOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		73BD672CC9788352FF0DB175 /* Pods-QLDA_IOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSTests/Pods-QLDA_IOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7C0503BC1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellHopDongLandTableViewCell.swift; sourceTree = "<group>"; };
+		7C0503BD1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHopDongLandTableViewCell.xib; sourceTree = "<group>"; };
+		7C0503C01E7CE2C2005EF6CE /* CanhBaoLandDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanhBaoLandDatasource.swift; sourceTree = "<group>"; };
+		7C0503C21E7CF51E005EF6CE /* CellChamQTLandTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellChamQTLandTableViewCell.swift; sourceTree = "<group>"; };
+		7C0503C31E7CF51E005EF6CE /* CellChamQTLandTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellChamQTLandTableViewCell.xib; sourceTree = "<group>"; };
 		7C0A09BE1E77EFC30026F1C1 /* CellHopDongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellHopDongTableViewCell.swift; sourceTree = "<group>"; };
 		7C0A09BF1E77EFC30026F1C1 /* CellHopDongTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHopDongTableViewCell.xib; sourceTree = "<group>"; };
 		7C2259251E7646EA00626051 /* CanhBaoDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanhBaoDatasource.swift; sourceTree = "<group>"; };
@@ -465,6 +475,7 @@
 				244937601E7646A800929B6F /* CustomTable */,
 				24BEAF1B1E697D33008F205C /* CustomCell */,
 				24BEAF1A1E697D2C008F205C /* Entity */,
+				7C0503C01E7CE2C2005EF6CE /* CanhBaoLandDatasource.swift */,
 				7C2259251E7646EA00626051 /* CanhBaoDatasource.swift */,
 			);
 			name = QLDA;
@@ -529,6 +540,7 @@
 		24BEAF1B1E697D33008F205C /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				7C0503BB1E7CD5B9005EF6CE /* CanhBao */,
 				7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */,
 				24BEAEBD1E697AA5008F205C /* CustomCellDSDATableViewCell.swift */,
 				24BEAEC61E697AA5008F205C /* ExtendtionUItableViewCell.swift */,
@@ -575,6 +587,17 @@
 				535DCDAF1DDB47BDB402007B /* Pods_QLDA_IOSUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C0503BB1E7CD5B9005EF6CE /* CanhBao */ = {
+			isa = PBXGroup;
+			children = (
+				7C0503BC1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.swift */,
+				7C0503BD1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.xib */,
+				7C0503C21E7CF51E005EF6CE /* CellChamQTLandTableViewCell.swift */,
+				7C0503C31E7CF51E005EF6CE /* CellChamQTLandTableViewCell.xib */,
+			);
+			name = CanhBao;
 			sourceTree = "<group>";
 		};
 		BC298B5FDBB5D32BE72F7B9C /* Pods */ = {
@@ -710,6 +733,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C0A09C11E77EFC30026F1C1 /* CellHopDongTableViewCell.xib in Resources */,
+				7C0503BF1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.xib in Resources */,
+				7C0503C51E7CF51E005EF6CE /* CellChamQTLandTableViewCell.xib in Resources */,
 				7C22592A1E76481900626051 /* CanhBaoTableViewCell.xib in Resources */,
 				7C3DED621E7A71FC0038BE5D /* CBChamQTTableViewCell.xib in Resources */,
 				24BEAEF21E697AA6008F205C /* DSDA_View.xib in Resources */,
@@ -891,7 +916,6 @@
 				244937741E7A376400929B6F /* Cell_KHGN_R3.swift in Sources */,
 				24BEAEF71E697AA6008F205C /* Login_VC.swift in Sources */,
 				244937721E7A374D00929B6F /* Cell_KHGN_R2.swift in Sources */,
-				24BEAEFB1E697AA6008F205C /* MenuViewController.swift in Sources */,
 				7C22592C1E768D8400626051 /* ApiEntity.swift in Sources */,
 				24BEAEF01E697AA6008F205C /* DSDA_VC.swift in Sources */,
 				7C3DED611E7A71FC0038BE5D /* CBChamQTTableViewCell.swift in Sources */,
@@ -908,6 +932,7 @@
 				244937701E7A372E00929B6F /* Cell_KHGN_R1.swift in Sources */,
 				24BEAEF51E697AA6008F205C /* ExtendtionUItableViewCell.swift in Sources */,
 				7CF6A28D1E7B87B800C5050E /* CellHopDongHiddenTableViewCell.swift in Sources */,
+				7C0503C41E7CF51E005EF6CE /* CellChamQTLandTableViewCell.swift in Sources */,
 				24BEAF061E697AA6008F205C /* UIView.swift in Sources */,
 				7C71ED321E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift in Sources */,
 				24BEAEDE1E697AA6008F205C /* ApiService.swift in Sources */,
@@ -917,6 +942,7 @@
 				24BEAF041E697AA6008F205C /* UIImageView.swift in Sources */,
 				7C2259261E7646EA00626051 /* CanhBaoDatasource.swift in Sources */,
 				BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */,
+				7C0503C11E7CE2C2005EF6CE /* CanhBaoLandDatasource.swift in Sources */,
 				1B5C6B021E7A522800851D0C /* TableDSDAMap_Portrait.swift in Sources */,
 				244937781E7A8F3000929B6F /* HopDong.swift in Sources */,
 				BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */,
@@ -956,6 +982,7 @@
 				BAF1E48D1E72AB9B00F28FE9 /* ImageMessage.swift in Sources */,
 				24BEAF051E697AA6008F205C /* UIImageViewExtension.swift in Sources */,
 				24BEAEE91E697AA6008F205C /* ChatMain_VC.swift in Sources */,
+				7C0503BE1E7CD5ED005EF6CE /* CellHopDongLandTableViewCell.swift in Sources */,
 				24BEAFAB1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift in Sources */,
 				24BEAF021E697AA6008F205C /* ThongTinCaNhan_VC.swift in Sources */,
 				7C0A09C01E77EFC30026F1C1 /* CellHopDongTableViewCell.swift in Sources */,
