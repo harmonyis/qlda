@@ -110,49 +110,15 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
             var range = NSMakeRange(16, targetString.characters.count - 16 )
             cell.lblHinhThucLCNT.attributedText = attributedString(from: targetString, nonBoldRange: range)
             
-            //   cell.lblHinhThucLCNT.numberOfLines = 0
-            //    cell.lblHinhThucLCNT.sizeToFit()
             
             targetString = "Phương thức LCNT: \(m_dsGoiThau[index - 4].PhuongThucLCNT!)"
             range = NSMakeRange(19, targetString.characters.count - 19 )
             cell.lblPhuongThucLCNT.attributedText = attributedString(from: targetString, nonBoldRange: range)
-            //     cell.lblPhuongThucLCNT.numberOfLines = 0
-            //      cell.lblPhuongThucLCNT.sizeToFit()
             
             targetString = "Loại hợp đồng: \(m_dsGoiThau[index - 4].LoaiHopDong!)"
             range = NSMakeRange(16, targetString.characters.count - 16 )
             cell.lblLoaiHD.attributedText = attributedString(from: targetString, nonBoldRange: range)
-            
-            //     cell.lblLoaiHD.numberOfLines = 0
-            //     cell.lblLoaiHD.sizeToFit()
-            // cell.lblPhuongThucLCNT.frame = CGRect(x: 105, y: 31 , width: cell.lblPhuongThucLCNT.frame.width, height: CGFloat.greatestFiniteMagnitude)
-            
-            
-            
-            
-            
-            /*   var heightTieuDe = cell.lblTenGoiThau.frame.height + 10
-             var heightHTLCNT = cell.lblHinhThucLCNT.frame.height + 14
-             var heightPTLCNT = cell.lblPhuongThucLCNT.frame.height
-             var heightLoaiHD = cell.lblLoaiHD.frame.height + 14
-             
-             
-             
-             
-             if heightTieuDe < 29 {
-             heightTieuDe = 28
-             }
-             if heightHTLCNT < 31 {
-             heightHTLCNT = 30
-             }
-             if heightPTLCNT < 31 {
-             heightPTLCNT = 30
-             }
-             if heightLoaiHD < 31 {
-             heightLoaiHD = 30            }
-             */
-            
-            
+        
             cell.uiViewSTT.backgroundColor = myColorBackgroud
             cell.uiViewSTT.layer.borderColor = myColorBoder.cgColor
             cell.uiViewSTT.layer.borderWidth = 0.5
