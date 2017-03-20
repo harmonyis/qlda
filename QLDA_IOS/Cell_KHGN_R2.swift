@@ -10,6 +10,7 @@ import UIKit
 
 class Cell_KHGN_R2: UITableViewCell {
 
+    @IBOutlet weak var imgGroup: UIImageView!
     @IBOutlet weak var constraintHeight_R2_LoaiGT: NSLayoutConstraint!
     @IBOutlet weak var lblLKGTTT: UILabel!
     @IBOutlet weak var lblGTHD: UILabel!

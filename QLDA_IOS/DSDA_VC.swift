@@ -468,20 +468,21 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     func computeWidthCell(){
         var temp : CGFloat = 0
         let size = CGSize(width: 1000 , height: 30)
+        let font = UIFont.boldSystemFont(ofSize: 13)
         for item in DSDA{
-            temp = variableConfig.convert(item.GiaTriGiaiNgan!).computeTextSize(size).width
+            temp = variableConfig.convert(item.GiaTriGiaiNgan!).computeTextSize(size : size, font : font).width
             //temp = calulaterTextSize(text: variableConfig.convert(item.GiaTriGiaiNgan!), size: CGSize(width: 1000 , height: 30)).width
             wGN = max(wGN, temp)
-            temp = variableConfig.convert(item.TongMucDauTu!).computeTextSize(size).width
+            temp = variableConfig.convert(item.TongMucDauTu!).computeTextSize(size : size, font : font).width
             //temp = calulaterTextSize(text: variableConfig.convert(item.TongMucDauTu!), size: CGSize(width: 1000 , height: 30)).width
             wTMDT = max(wTMDT, temp)
             
             for child in item.DuAnCon!{
-                temp = variableConfig.convert(child.GiaTriGiaiNgan!).computeTextSize(size).width
+                temp = variableConfig.convert(child.GiaTriGiaiNgan!).computeTextSize(size : size, font : font).width
                 //temp = calulaterTextSize(text: variableConfig.convert(child.GiaTriGiaiNgan!), size: CGSize(width: 1000 , height: 30)).width
                 wGN = max(wGN, temp)
                 
-                temp = variableConfig.convert(child.TongMucDauTu!).computeTextSize(size).width
+                temp = variableConfig.convert(child.TongMucDauTu!).computeTextSize(size : size, font : font).width
                 //temp = calulaterTextSize(text: variableConfig.convert(child.TongMucDauTu!), size: CGSize(width: 1000 , height: 30)).width
                 wTMDT = max(wTMDT, temp)
             }

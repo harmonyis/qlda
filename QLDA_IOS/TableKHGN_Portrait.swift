@@ -46,6 +46,8 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+        
+        if section > 0 {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHGN_R2") as! Cell_KHGN_R2
         
         
@@ -57,6 +59,8 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.lblGTHD.text = itemNhomHD.GiaTriHopDong
         cell.lblLKGTTT.text = itemNhomHD.GiaTriLK
         
+        cell.uiViewLoaiGoiThau.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewLoaiGoiThau.layer.borderWidth = 0.5
         
         cell.uiViewLoaiGoiThau_GTHD.layer.borderColor = myColorBoder.cgColor
         cell.uiViewLoaiGoiThau_GTHD.layer.borderWidth = 0.5
@@ -73,7 +77,80 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.uiViewLoaiGoiThau_LKGTTT.layer.borderColor = myColorBoder.cgColor
         cell.uiViewLoaiGoiThau_LKGTTT.layer.borderWidth = 0.5
 
+        var image : UIImage = UIImage(named:"ic_minus")!
+        if (itemNhomHD.NhomHopDong?.count)!>0 {
+            
+            if !self.indexGroupDuAnCon.contains(section)
+            {
+                image  = UIImage(named:"ic_Group-Up")!
+                cell.imgGroup.image = image
+                
+            }
+            else
+            {
+                image  = UIImage(named:"ic_Group-Down")!
+                cell.imgGroup.image = image
+                
+            }
+        }
+        
+        cell.imgGroup.image = image
+        
+       var eventClick = UITapGestureRecognizer()
+        cell.uiViewLoaiGoiThau_group.tag = section
+        eventClick.addTarget(self, action:  #selector(TableKHGN_Portrait.duAnChaClickGroup(sender: )))
+        cell.uiViewLoaiGoiThau_group.addGestureRecognizer(eventClick)
+        cell.uiViewLoaiGoiThau_group.isUserInteractionEnabled = true;
+        
                 return cell
+            }
+        else
+          {
+        
+            let cell = tableView.dequeueReusableCell(withIdentifier: "R1") as! Cell_KHGN_R1
+            
+            
+            let itemNhomHD :NhomHopDong = self.m_NhomHopDong[section]
+            
+            
+            cell.lblGTHD.text = itemNhomHD.GiaTriHopDong
+            cell.lblLKGTTT.text = itemNhomHD.GiaTriLK
+            
+            cell.uiViewHeader_R1_GTHD.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R1_GTHD.layer.borderWidth = 0.5
+            
+            cell.uiViewHeader_R1_Group.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R1_Group.layer.borderWidth = 0.5
+            
+            cell.uiViewHeader_R1_LKGTT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R1_LKGTT.layer.borderWidth = 0.5
+            
+            cell.uiViewHeader_R1_detail.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R1_detail.layer.borderWidth = 0.5
+            
+            cell.uiViewHeader_R1_NoiDung.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R1_NoiDung.layer.borderWidth = 0.5
+            
+            cell.uiViewHeader_R2_GTHD.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R2_GTHD.layer.borderWidth = 0.5
+            
+            cell.uiViewHeader_R2_Group.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R2_Group.layer.borderWidth = 0.5
+            
+            cell.uiViewHeader_R2_detail.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R2_detail.layer.borderWidth = 0.5
+            
+            cell.uiViewHeader_R2_LKGTTT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R2_LKGTTT.layer.borderWidth = 0.5
+            
+            cell.uiViewHeader_R2_TongGiaTri.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHeader_R2_TongGiaTri.layer.borderWidth = 0.5
+            
+           
+            
+            return cell
+        
+        }
     }
     func duAnChaClickGroup(sender: UITapGestureRecognizer)
     {
@@ -115,14 +192,16 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-        
+        let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
+        if self.indexTrangThaiDuAnCon.contains(value) {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHGN_R3", for: indexPath) as! Cell_KHGN_R3
         let itemNhomHD :NhomHopDong = self.m_NhomHopDong[indexPath.section]
         let itemDSHDCon :[HopDong] = itemNhomHD.NhomHopDong!
         let itemHopDongCon : HopDong = itemDSHDCon[indexPath.row]
         
-        
+        cell.lblGTHD.text = Config.convert(itemHopDongCon.GiaTriHopDong!)
+        cell.lblLKGTTT.text = Config.convert(itemHopDongCon.GiaTriLK!)
         
         var targetString : String = "Đơn vị thực hiện: \(itemHopDongCon.DonViThucHien!)"
         var range = NSMakeRange(17, targetString.characters.count - 17)
@@ -138,8 +217,13 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         cell.lblTenHD.text = itemHopDongCon.TenGoiThau!
        
+        cell.lblSTT.text = (String)(indexPath.row + 1 )
+        
         cell.uiViewHopDong_TieuDe_STT.layer.borderColor = myColorBoder.cgColor
         cell.uiViewHopDong_TieuDe_STT.layer.borderWidth = 0.5
+        
+        cell.uiViewHopDong_TieuDe_detail.layer.borderColor = myColorBoder.cgColor
+        cell.uiViewHopDong_TieuDe_detail.layer.borderWidth = 0.5
         
         cell.uiViewHopDong_TieuDe_TenHD.layer.borderColor = myColorBoder.cgColor
         cell.uiViewHopDong_TieuDe_TenHD.layer.borderWidth = 0.5
@@ -156,9 +240,63 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.uiViewHopDong_TTCT_Right.layer.borderColor = myColorBoder.cgColor
         cell.uiViewHopDong_TTCT_Right.layer.borderWidth = 0.5
         
+        var eventClick = UITapGestureRecognizer()
+        
+        cell.uiViewHopDong_TieuDe_detail.accessibilityLabel = value
+        
+        eventClick.addTarget(self, action:  #selector(TableKHGN_Portrait.duAnConClickDetail(sender: )))
+        
+        cell.uiViewHopDong_TieuDe_detail.addGestureRecognizer(eventClick)
+        cell.uiViewHopDong_TieuDe_detail.isUserInteractionEnabled = true;
+
         
         
         return cell
+           }
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "R4", for: indexPath) as! Cell_KHGN_R4
+            let itemNhomHD :NhomHopDong = self.m_NhomHopDong[indexPath.section]
+            let itemDSHDCon :[HopDong] = itemNhomHD.NhomHopDong!
+            let itemHopDongCon : HopDong = itemDSHDCon[indexPath.row]
+            
+            cell.lblGTHD.text = Config.convert(itemHopDongCon.GiaTriHopDong!)
+            cell.lblLKGTTT.text = Config.convert(itemHopDongCon.GiaTriLK!)
+            
+            cell.lblTenHD.text = itemHopDongCon.TenGoiThau!
+            
+            cell.lblSTT.text = (String)(indexPath.row + 1 )
+            
+            cell.uiView_R4_STT.layer.borderColor = myColorBoder.cgColor
+            cell.uiView_R4_STT.layer.borderWidth = 0.5
+            
+            cell.uiView_R4_TenHD.layer.borderColor = myColorBoder.cgColor
+            cell.uiView_R4_TenHD.layer.borderWidth = 0.5
+            
+            cell.uiView_R4_GTHD.layer.borderColor = myColorBoder.cgColor
+            cell.uiView_R4_GTHD.layer.borderWidth = 0.5
+            
+            cell.uiView_R4_LKGTTT.layer.borderColor = myColorBoder.cgColor
+            cell.uiView_R4_LKGTTT.layer.borderWidth = 0.5
+            
+            cell.uiView_R4_detail.layer.borderColor = myColorBoder.cgColor
+            cell.uiView_R4_detail.layer.borderWidth = 0.5
+            
+            var eventClick = UITapGestureRecognizer()
+            
+            cell.uiView_R4_detail.accessibilityLabel = value
+            
+            eventClick.addTarget(self, action:  #selector(TableKHGN_Portrait.duAnConClickDetail(sender: )))
+            
+            cell.uiView_R4_detail.addGestureRecognizer(eventClick)
+            cell.uiView_R4_detail.isUserInteractionEnabled = true;
+            
+            
+            
+            return cell
+        
+        }
+ 
     }
     
     func duAnConClickDetail(sender: UITapGestureRecognizer)

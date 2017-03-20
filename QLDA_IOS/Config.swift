@@ -16,7 +16,9 @@ class Config{
     static var profifePictureUrl = ""
     static var profilePicture : UIImage? = nil
     static var loginName : String = ""
-
+    static var nTotalNotificationNotRead : Int32 = 0
+    static var bCheckRead : Bool = false
+    
     static func InitApp(){
         SelectMenuIndex = 0
         userID = 0
@@ -25,6 +27,8 @@ class Config{
         profifePictureUrl = ""
         profilePicture = nil
         loginName = ""
+        nTotalNotificationNotRead = 0
+        bCheckRead = false
         
         ChatHub.stopHub()        
         ChatCommon.reset()
@@ -33,6 +37,35 @@ class Config{
         variableConfig.m_szTenDuAn = ""
         variableConfig.m_szUserName = ""
         variableConfig.m_szPassWord = ""
+    }
+    static var m_szIdDuAn : Int = 0
+    static var m_szTenDuAn : String = ""
+    static var m_szUserName : String = ""
+    
+    static var m_szPassWord : String = ""
+    static func convert(_ sztext: String) -> String {
+        if !(sztext==""){
+            var doubleRound = (Double)(sztext)!/1000000
+            
+            var arrDouble = String(doubleRound).components(separatedBy: ".")
+            var dou = Double(arrDouble[0])
+            var doubleFormat = Number.formatterWithSeparator.string(from: NSNumber(value: dou!)) ?? ""
+            if arrDouble[1] != "0" && arrDouble[1] != ""{
+                if arrDouble[1].characters.count<4 {
+                    doubleFormat = doubleFormat + "," + arrDouble[1]
+                }
+                else
+                {
+                    doubleFormat = doubleFormat + "," + arrDouble[1][0]  + arrDouble[1][1]  + arrDouble[1][2]
+                }
+            }
+            return doubleFormat
+        }
+        else
+        {
+            return "0"
+        }
+        
     }
     
     static func GetCurrentUser(){
