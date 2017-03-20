@@ -21,6 +21,9 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
     var dataSource_Lanscape : TableKHGN_Lanscape?
     var dGiaTriGiaiNgan : Double = 0
     var dLKThanhToan : Double = 0
+    
+    var wGTHD : CGFloat = 0
+    var wLKGTTT : CGFloat = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -133,7 +136,10 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
                 
                 itemNhomHopDong?.GiaTriHopDong = Config.convert((String)(dGiaTriGiaiNgan))
                 
-                
+                let size = CGSize(width: 1000 , height: 30)
+                let font = UIFont.systemFont(ofSize: 13)
+                wGTHD = (itemNhomHopDong?.GiaTriHopDong?.computeTextSize(size: size, font: font).width)! + 15
+                wLKGTTT = (itemNhomHopDong?.GiaTriLK?.computeTextSize(size: size, font: font).width)! + 15
                 print(m_NhomHD)
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
@@ -170,7 +176,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
             
-            self.dataSource_Lanscape = TableKHGN_Lanscape(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self)
+            self.dataSource_Lanscape = TableKHGN_Lanscape(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT)
             self.tbvKHGN.dataSource = self.dataSource_Lanscape
             self.tbvKHGN.delegate = self.dataSource_Lanscape
             self.tbvKHGN.reloadData()
@@ -179,7 +185,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
           
             
-            self.dataSource_Portrait = TableKHGN_Portrait(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self)
+            self.dataSource_Portrait = TableKHGN_Portrait(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT)
            self.tbvKHGN.dataSource = self.dataSource_Portrait
             self.tbvKHGN.delegate = self.dataSource_Portrait
             self.tbvKHGN.reloadData()

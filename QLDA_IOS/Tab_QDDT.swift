@@ -165,7 +165,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 self.UiViewQDDT.addSubview(uiView)
                             }
                             // tạo giao diện phần group
-                            if icount > 4 {
+                            if icount > 4 , icount < 12 {
                                 
                                 var uiView = UIView()
                                 var lable:UILabel = UILabel()
@@ -388,7 +388,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 self.UiViewQDDT.addSubview(uiView)
                             }
                             // tạo dữ liệu phần group tổng dự toán
-                            if icount > 4 {
+                            if icount > 4 , icount < 12{
                                 
                                 var uiView = UIView()
                                 var lable:UILabel = UILabel()

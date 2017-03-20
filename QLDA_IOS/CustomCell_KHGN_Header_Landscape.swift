@@ -9,6 +9,12 @@
 import UIKit
 
 class CustomCell_KHGN_Header_Landscape: UITableViewCell {
+    @IBOutlet weak var constraintsRightTenHD: NSLayoutConstraint!
+    @IBOutlet weak var constraintsRightDVTH: NSLayoutConstraint!
+    @IBOutlet weak var constraintsRightTGTH: NSLayoutConstraint!
+    @IBOutlet weak var constraintsRightSoNK: NSLayoutConstraint!
+    @IBOutlet weak var constraintsRightGTHD: NSLayoutConstraint!
+
 
     @IBOutlet weak var imgGroup: UIImageView!
     @IBOutlet weak var lblLKGTTT: UILabel!
