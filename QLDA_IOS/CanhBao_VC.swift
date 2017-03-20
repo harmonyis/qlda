@@ -15,7 +15,8 @@ class CanhBao_VC: Base_VC {
     
     @IBOutlet weak var lblHeader: UILabel!
 
-    var datasource : CanhBaoDatascource?
+    var datasource : CanhBaoDatasource?
+    var datasourceLand : CanhBaoLandDatasource?
     var userName = variableConfig.m_szUserName
     var password = variableConfig.m_szPassWord
     var arrData : [CanhBaoEntity] = []
@@ -37,6 +38,8 @@ class CanhBao_VC: Base_VC {
         nib = UINib(nibName: "CBChamQTTableViewCell", bundle: nil)
         self.tbCanhBao.register(nib, forCellReuseIdentifier: "cellChamQT")
         self.tbCanhBao.register(UINib(nibName: "CBChamQTHiddenTableViewCell", bundle: nil), forCellReuseIdentifier: "cellChamQTHidden")
+        
+        self.tbCanhBao.register(UINib(nibName: "CellHopDongLandTableViewCell", bundle: nil), forCellReuseIdentifier: "cellHDLand")
         
         self.tbCanhBao.rowHeight = UITableViewAutomaticDimension
         self.tbCanhBao.sectionHeaderHeight = UITableViewAutomaticDimension
@@ -119,7 +122,7 @@ class CanhBao_VC: Base_VC {
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
-                        self.datasource = CanhBaoDatascource(arr: self.arrData, table : self.tbCanhBao)
+                        self.datasource = CanhBaoDatasource(arr: self.arrData, table : self.tbCanhBao)
                         self.tbCanhBao.dataSource = self.datasource
                         self.tbCanhBao.delegate = self.datasource
                         self.tbCanhBao.reloadData()
@@ -134,7 +137,14 @@ class CanhBao_VC: Base_VC {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isLandscape {
-            print("Landscape")
+            
+            self.datasourceLand = CanhBaoLandDatasource(arrData: self.arrData, table : self.tbCanhBao)
+            self.tbCanhBao.dataSource = self.datasourceLand
+            self.tbCanhBao.delegate = self.datasourceLand
+            self.tbCanhBao.reloadData()
+            self.lblHeader.text = "Danh sách dự án cảnh báo (\(self.arrData.count) dự án)"
+ 
+            
         } else {
             print("Portrait")
         }

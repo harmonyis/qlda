@@ -91,6 +91,12 @@
 		7C71ED301E6FD71A0089BC0D /* VanBanEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */; };
 		7C71ED321E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */; };
 		7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7B15191E6E5DF500F95D99 /* Toast.swift */; };
+		7C8CD6FF1E7F72DC006A095F /* CanhBaoLandDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CD6FE1E7F72DC006A095F /* CanhBaoLandDatasource.swift */; };
+		7C8CD7051E7F7334006A095F /* CellChamQTLandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CD7011E7F7334006A095F /* CellChamQTLandTableViewCell.swift */; };
+		7C8CD7061E7F7334006A095F /* CellChamQTLandTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8CD7021E7F7334006A095F /* CellChamQTLandTableViewCell.xib */; };
+		7C8CD7071E7F7334006A095F /* CellHopDongLandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CD7031E7F7334006A095F /* CellHopDongLandTableViewCell.swift */; };
+		7C8CD7081E7F7334006A095F /* CellHopDongLandTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8CD7041E7F7334006A095F /* CellHopDongLandTableViewCell.xib */; };
+		7C8CD70A1E7F7375006A095F /* CanhBaoDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CD7091E7F7375006A095F /* CanhBaoDatasource.swift */; };
 		7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */; };
 		7CA6B9311E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B92F1E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift */; };
 		7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA6B9331E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift */; };
@@ -105,7 +111,6 @@
 		BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */; };
 		BAB6284B1E71535E002472D6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6284A1E71535E002472D6 /* String.swift */; };
 		BADA635D1E7CF7000097D73C /* ApiEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA634B1E7CF7000097D73C /* ApiEntity.swift */; };
-		BADA635E1E7CF7000097D73C /* CanhBaoDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA634C1E7CF7000097D73C /* CanhBaoDatasource.swift */; };
 		BADA635F1E7CF7000097D73C /* CanhBaoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA634D1E7CF7000097D73C /* CanhBaoEntity.swift */; };
 		BADA63601E7CF7000097D73C /* CanhBaoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA634E1E7CF7000097D73C /* CanhBaoTableViewCell.swift */; };
 		BADA63611E7CF7000097D73C /* CanhBaoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BADA634F1E7CF7000097D73C /* CanhBaoTableViewCell.xib */; };
@@ -257,6 +262,12 @@
 		7C71ED2F1E6FD71A0089BC0D /* VanBanEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VanBanEntity.swift; sourceTree = "<group>"; };
 		7C71ED311E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VanBanDuAnTableViewCell.swift; sourceTree = "<group>"; };
 		7C7B15191E6E5DF500F95D99 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Toast.swift; path = "../Pods/Toast-Swift/Toast/Toast.swift"; sourceTree = "<group>"; };
+		7C8CD6FE1E7F72DC006A095F /* CanhBaoLandDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanhBaoLandDatasource.swift; sourceTree = "<group>"; };
+		7C8CD7011E7F7334006A095F /* CellChamQTLandTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellChamQTLandTableViewCell.swift; sourceTree = "<group>"; };
+		7C8CD7021E7F7334006A095F /* CellChamQTLandTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellChamQTLandTableViewCell.xib; sourceTree = "<group>"; };
+		7C8CD7031E7F7334006A095F /* CellHopDongLandTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellHopDongLandTableViewCell.swift; sourceTree = "<group>"; };
+		7C8CD7041E7F7334006A095F /* CellHopDongLandTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHopDongLandTableViewCell.xib; sourceTree = "<group>"; };
+		7C8CD7091E7F7375006A095F /* CanhBaoDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanhBaoDatasource.swift; sourceTree = "<group>"; };
 		7CA6B92B1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuanLyHinhAnh_VC.swift; sourceTree = "<group>"; };
 		7CA6B92F1E6D47D300D70CD9 /* CameraDanhSachDuAnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDanhSachDuAnTableViewCell.swift; sourceTree = "<group>"; };
 		7CA6B9331E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDanhSachDuAnDatasource.swift; sourceTree = "<group>"; };
@@ -271,7 +282,6 @@
 		BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChangeGroupName_Modal.swift; sourceTree = "<group>"; };
 		BAB6284A1E71535E002472D6 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BADA634B1E7CF7000097D73C /* ApiEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEntity.swift; sourceTree = "<group>"; };
-		BADA634C1E7CF7000097D73C /* CanhBaoDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanhBaoDatasource.swift; sourceTree = "<group>"; };
 		BADA634D1E7CF7000097D73C /* CanhBaoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanhBaoEntity.swift; sourceTree = "<group>"; };
 		BADA634E1E7CF7000097D73C /* CanhBaoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanhBaoTableViewCell.swift; sourceTree = "<group>"; };
 		BADA634F1E7CF7000097D73C /* CanhBaoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CanhBaoTableViewCell.xib; sourceTree = "<group>"; };
@@ -358,20 +368,6 @@
 			isa = PBXGroup;
 			children = (
 				BADA634B1E7CF7000097D73C /* ApiEntity.swift */,
-				BADA634C1E7CF7000097D73C /* CanhBaoDatasource.swift */,
-				BADA634D1E7CF7000097D73C /* CanhBaoEntity.swift */,
-				BADA634E1E7CF7000097D73C /* CanhBaoTableViewCell.swift */,
-				BADA634F1E7CF7000097D73C /* CanhBaoTableViewCell.xib */,
-				BADA63501E7CF7000097D73C /* CBChamQTHiddenTableViewCell.swift */,
-				BADA63511E7CF7000097D73C /* CBChamQTHiddenTableViewCell.xib */,
-				BADA63521E7CF7000097D73C /* CBChamQTTableViewCell.swift */,
-				BADA63531E7CF7000097D73C /* CBChamQTTableViewCell.xib */,
-				BADA63541E7CF7000097D73C /* CBHeaderTableViewCell.swift */,
-				BADA63551E7CF7000097D73C /* CBHeaderTableViewCell.xib */,
-				BADA63561E7CF7000097D73C /* CellHopDongHiddenTableViewCell.swift */,
-				BADA63571E7CF7000097D73C /* CellHopDongHiddenTableViewCell.xib */,
-				BADA63581E7CF7000097D73C /* CellHopDongTableViewCell.swift */,
-				BADA63591E7CF7000097D73C /* CellHopDongTableViewCell.xib */,
 				BADA635A1E7CF7000097D73C /* CustomTableNotificationCell.swift */,
 				BADA635B1E7CF7000097D73C /* NotificationItem.swift */,
 				BADA635C1E7CF7000097D73C /* TableNotifications_Portrait.swift */,
@@ -504,6 +500,8 @@
 		24BEAF151E697CD8008F205C /* QLDA */ = {
 			isa = PBXGroup;
 			children = (
+				7C8CD6FE1E7F72DC006A095F /* CanhBaoLandDatasource.swift */,
+				7C8CD7091E7F7375006A095F /* CanhBaoDatasource.swift */,
 				1B655B911E6D4145007A615B /* ConvertDVT.swift */,
 				1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */,
 				244937601E7646A800929B6F /* CustomTable */,
@@ -560,6 +558,7 @@
 		24BEAF1A1E697D2C008F205C /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				BADA634D1E7CF7000097D73C /* CanhBaoEntity.swift */,
 				24BEAEBF1E697AA5008F205C /* DanhSachDA.swift */,
 				24BEAEC41E697AA5008F205C /* DuAn.swift */,
 				24BEAFB31E6FEC0E008F205C /* GoiThau.swift */,
@@ -572,6 +571,19 @@
 		24BEAF1B1E697D33008F205C /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				BADA634E1E7CF7000097D73C /* CanhBaoTableViewCell.swift */,
+				BADA634F1E7CF7000097D73C /* CanhBaoTableViewCell.xib */,
+				BADA63501E7CF7000097D73C /* CBChamQTHiddenTableViewCell.swift */,
+				BADA63511E7CF7000097D73C /* CBChamQTHiddenTableViewCell.xib */,
+				BADA63521E7CF7000097D73C /* CBChamQTTableViewCell.swift */,
+				BADA63531E7CF7000097D73C /* CBChamQTTableViewCell.xib */,
+				BADA63541E7CF7000097D73C /* CBHeaderTableViewCell.swift */,
+				BADA63551E7CF7000097D73C /* CBHeaderTableViewCell.xib */,
+				BADA63561E7CF7000097D73C /* CellHopDongHiddenTableViewCell.swift */,
+				BADA63571E7CF7000097D73C /* CellHopDongHiddenTableViewCell.xib */,
+				BADA63581E7CF7000097D73C /* CellHopDongTableViewCell.swift */,
+				BADA63591E7CF7000097D73C /* CellHopDongTableViewCell.xib */,
+				7C8CD7001E7F7316006A095F /* CanhBao */,
 				24BEAEBD1E697AA5008F205C /* CustomCellDSDATableViewCell.swift */,
 				24BEAEC61E697AA5008F205C /* ExtendtionUItableViewCell.swift */,
 				24BEAFA41E6EB0EC008F205C /* CustomCellKHGN.swift */,
@@ -611,6 +623,17 @@
 				535DCDAF1DDB47BDB402007B /* Pods_QLDA_IOSUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C8CD7001E7F7316006A095F /* CanhBao */ = {
+			isa = PBXGroup;
+			children = (
+				7C8CD7011E7F7334006A095F /* CellChamQTLandTableViewCell.swift */,
+				7C8CD7021E7F7334006A095F /* CellChamQTLandTableViewCell.xib */,
+				7C8CD7031E7F7334006A095F /* CellHopDongLandTableViewCell.swift */,
+				7C8CD7041E7F7334006A095F /* CellHopDongLandTableViewCell.xib */,
+			);
+			name = CanhBao;
 			sourceTree = "<group>";
 		};
 		BC298B5FDBB5D32BE72F7B9C /* Pods */ = {
@@ -756,6 +779,7 @@
 				BADA636B1E7CF7000097D73C /* CellHopDongTableViewCell.xib in Resources */,
 				BADA63631E7CF7000097D73C /* CBChamQTHiddenTableViewCell.xib in Resources */,
 				BADA63671E7CF7000097D73C /* CBHeaderTableViewCell.xib in Resources */,
+				7C8CD7061E7F7334006A095F /* CellChamQTLandTableViewCell.xib in Resources */,
 				BADA63651E7CF7000097D73C /* CBChamQTTableViewCell.xib in Resources */,
 				24BEAE881E6979D8008F205C /* Assets.xcassets in Resources */,
 				24BEAE861E6979D8008F205C /* Main.storyboard in Resources */,
@@ -934,10 +958,12 @@
 				BADA63681E7CF7000097D73C /* CellHopDongHiddenTableViewCell.swift in Sources */,
 				24BEAF011E697AA6008F205C /* Tab_TTC.swift in Sources */,
 				244937641E76820500929B6F /* TableDSDA_Lanscape.swift in Sources */,
+				7C8CD6FF1E7F72DC006A095F /* CanhBaoLandDatasource.swift in Sources */,
 				24BEAEDF1E697AA6008F205C /* Base_VC.swift in Sources */,
 				BA33292B1E6D616400F9EDDE /* UserNotificationManager.swift in Sources */,
 				7C71ED301E6FD71A0089BC0D /* VanBanEntity.swift in Sources */,
 				BADA635D1E7CF7000097D73C /* ApiEntity.swift in Sources */,
+				7C8CD7051E7F7334006A095F /* CellChamQTLandTableViewCell.swift in Sources */,
 				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
 				BADA636A1E7CF7000097D73C /* CellHopDongTableViewCell.swift in Sources */,
 				24BEAEEC1E697AA6008F205C /* CustomCellDSDATableViewCell.swift in Sources */,
@@ -971,7 +997,6 @@
 				BAF1E4891E72459300F28FE9 /* UIFont.swift in Sources */,
 				1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */,
 				BAB6284B1E71535E002472D6 /* String.swift in Sources */,
-				BADA635E1E7CF7000097D73C /* CanhBaoDatasource.swift in Sources */,
 				24BEAF0D1E697AF0008F205C /* SWRevealViewController.m in Sources */,
 				24ADE77B1E7CC98500415499 /* CustomCell_KHGN_Header_Landscape.swift in Sources */,
 				24BEAEF41E697AA6008F205C /* Entity.swift in Sources */,
@@ -1003,6 +1028,7 @@
 				24BEAEE91E697AA6008F205C /* ChatMain_VC.swift in Sources */,
 				24BEAFAB1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift in Sources */,
 				BADA636D1E7CF7000097D73C /* NotificationItem.swift in Sources */,
+				7C8CD70A1E7F7375006A095F /* CanhBaoDatasource.swift in Sources */,
 				24BEAF021E697AA6008F205C /* ThongTinCaNhan_VC.swift in Sources */,
 				24ADE7821E7CD6A100415499 /* TableKHGN_Lanscape.swift in Sources */,
 				24ADE77F1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.swift in Sources */,

@@ -19,12 +19,17 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     var tbDSDA : UITableView?
     var uiViewDSDA : UIViewController?
     
+    var wGTHD : CGFloat = 0
+    var wLKGTTT : CGFloat = 0
+    
     // MARK: - Table view data source
-    init(_ tbvDSDA: UITableView,arrNhomHopDong: [NhomHopDong], tbvcDSDA: UIViewController){
+    init(_ tbvDSDA: UITableView,arrNhomHopDong: [NhomHopDong], tbvcDSDA: UIViewController, wGTHD : CGFloat, wLKGTTT : CGFloat){
         super.init()
         self.m_NhomHopDong = arrNhomHopDong
         self.tbDSDA = tbvDSDA
         self.uiViewDSDA = tbvcDSDA
+        self.wGTHD = wGTHD
+        self.wLKGTTT = wLKGTTT
         
     }
     
@@ -49,7 +54,9 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         if section > 0 {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHGN_R2") as! Cell_KHGN_R2
-        
+            
+        cell.constraintRightGTHD.constant = wLKGTTT + 20
+        cell.constraintRightNoiDung.constant = wGTHD + wLKGTTT + 20
         
         let itemNhomHD :NhomHopDong = self.m_NhomHopDong[section]
         cell.lblTenGoiThau.text = itemNhomHD.LoaiHopDong!
@@ -112,6 +119,11 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
             
             let itemNhomHD :NhomHopDong = self.m_NhomHopDong[section]
             
+            print(wGTHD, wLKGTTT)
+            cell.constraintRightR1GTHD.constant = wLKGTTT + 20
+            cell.constraintRightR1NoiDung.constant = wGTHD + wLKGTTT + 20
+            cell.constraintRightR2GTHD.constant = wLKGTTT + 20
+            cell.constraintRightR2TongGiaTri.constant = wGTHD + wLKGTTT + 20
             
             cell.lblGTHD.text = itemNhomHD.GiaTriHopDong
             cell.lblLKGTTT.text = itemNhomHD.GiaTriLK
@@ -196,6 +208,11 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         if self.indexTrangThaiDuAnCon.contains(value) {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHGN_R3", for: indexPath) as! Cell_KHGN_R3
+            
+        cell.constraintRightGTHD.constant = wLKGTTT + 20
+        cell.constraintRightNoiDung.constant = wGTHD + wLKGTTT + 20
+            
+            
         let itemNhomHD :NhomHopDong = self.m_NhomHopDong[indexPath.section]
         let itemDSHDCon :[HopDong] = itemNhomHD.NhomHopDong!
         let itemHopDongCon : HopDong = itemDSHDCon[indexPath.row]
@@ -256,6 +273,8 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         else
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "R4", for: indexPath) as! Cell_KHGN_R4
+            cell.constraintRightGTHD.constant = wLKGTTT + 20
+            cell.constraintRightNoiDung.constant = wGTHD + wLKGTTT + 20
             let itemNhomHD :NhomHopDong = self.m_NhomHopDong[indexPath.section]
             let itemDSHDCon :[HopDong] = itemNhomHD.NhomHopDong!
             let itemHopDongCon : HopDong = itemDSHDCon[indexPath.row]
