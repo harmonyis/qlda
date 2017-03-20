@@ -26,9 +26,9 @@
 		24ADE77F1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE77D1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.swift */; };
 		24ADE7801E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24ADE77E1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.xib */; };
 		24ADE7821E7CD6A100415499 /* TableKHGN_Lanscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE7811E7CD6A100415499 /* TableKHGN_Lanscape.swift */; };
-		24ADE78E1E7F7F8F00415499 /* TableKHLCNT_Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE78D1E7F7F8F00415499 /* TableKHLCNT_Portrait.swift */; };
-		24ADE7911E7F939200415499 /* Cell_KHLCNT_Header_Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE78F1E7F939200415499 /* Cell_KHLCNT_Header_Landscape.swift */; };
-		24ADE7921E7F939200415499 /* Cell_KHLCNT_Header_Landscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24ADE7901E7F939200415499 /* Cell_KHLCNT_Header_Landscape.xib */; };
+		24ADE7941E7FB4B200415499 /* TableKHLCNT_Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE7931E7FB4B200415499 /* TableKHLCNT_Portrait.swift */; };
+		24ADE7971E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE7951E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.swift */; };
+		24ADE7981E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24ADE7961E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.xib */; };
 		24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAE801E6979D8008F205C /* AppDelegate.swift */; };
 		24BEAE861E6979D8008F205C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE841E6979D8008F205C /* Main.storyboard */; };
 		24BEAE881E6979D8008F205C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE871E6979D8008F205C /* Assets.xcassets */; };
@@ -183,9 +183,9 @@
 		24ADE77D1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell_KHGN_HD_Landscape.swift; sourceTree = "<group>"; };
 		24ADE77E1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell_KHGN_HD_Landscape.xib; sourceTree = "<group>"; };
 		24ADE7811E7CD6A100415499 /* TableKHGN_Lanscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableKHGN_Lanscape.swift; sourceTree = "<group>"; };
-		24ADE78D1E7F7F8F00415499 /* TableKHLCNT_Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableKHLCNT_Portrait.swift; sourceTree = "<group>"; };
-		24ADE78F1E7F939200415499 /* Cell_KHLCNT_Header_Landscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_Header_Landscape.swift; sourceTree = "<group>"; };
-		24ADE7901E7F939200415499 /* Cell_KHLCNT_Header_Landscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_KHLCNT_Header_Landscape.xib; sourceTree = "<group>"; };
+		24ADE7931E7FB4B200415499 /* TableKHLCNT_Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableKHLCNT_Portrait.swift; sourceTree = "<group>"; };
+		24ADE7951E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_Header_Landscape.swift; sourceTree = "<group>"; };
+		24ADE7961E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_KHLCNT_Header_Landscape.xib; sourceTree = "<group>"; };
 		24BEAE7D1E6979D8008F205C /* QLDA_IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLDA_IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BEAE801E6979D8008F205C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24BEAE851E6979D8008F205C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -333,11 +333,11 @@
 		244937601E7646A800929B6F /* CustomTable */ = {
 			isa = PBXGroup;
 			children = (
+				24ADE7931E7FB4B200415499 /* TableKHLCNT_Portrait.swift */,
 				244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */,
 				244937631E76820500929B6F /* TableDSDA_Lanscape.swift */,
 				244937751E7A3F9E00929B6F /* TableKHGN_Portrait.swift */,
 				24ADE7811E7CD6A100415499 /* TableKHGN_Lanscape.swift */,
-				24ADE78D1E7F7F8F00415499 /* TableKHLCNT_Portrait.swift */,
 			);
 			name = CustomTable;
 			sourceTree = "<group>";
@@ -571,6 +571,8 @@
 		24BEAF1B1E697D33008F205C /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
+				24ADE7951E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.swift */,
+				24ADE7961E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.xib */,
 				BADA634E1E7CF7000097D73C /* CanhBaoTableViewCell.swift */,
 				BADA634F1E7CF7000097D73C /* CanhBaoTableViewCell.xib */,
 				BADA63501E7CF7000097D73C /* CBChamQTHiddenTableViewCell.swift */,
@@ -600,8 +602,6 @@
 				24ADE77A1E7CC98500415499 /* CustomCell_KHGN_Header_Landscape.xib */,
 				24ADE77D1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.swift */,
 				24ADE77E1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.xib */,
-				24ADE78F1E7F939200415499 /* Cell_KHLCNT_Header_Landscape.swift */,
-				24ADE7901E7F939200415499 /* Cell_KHLCNT_Header_Landscape.xib */,
 			);
 			name = CustomCell;
 			sourceTree = "<group>";
@@ -772,8 +772,9 @@
 				24ADE77C1E7CC98500415499 /* CustomCell_KHGN_Header_Landscape.xib in Resources */,
 				24BEAEF21E697AA6008F205C /* DSDA_View.xib in Resources */,
 				24BEAF0A1E697AA6008F205C /* View.xib in Resources */,
-				24ADE7921E7F939200415499 /* Cell_KHLCNT_Header_Landscape.xib in Resources */,
+				7C8CD7081E7F7334006A095F /* CellHopDongLandTableViewCell.xib in Resources */,
 				BADA63691E7CF7000097D73C /* CellHopDongHiddenTableViewCell.xib in Resources */,
+				24ADE7981E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.xib in Resources */,
 				24BEAE8B1E6979D8008F205C /* LaunchScreen.storyboard in Resources */,
 				24ADE7801E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.xib in Resources */,
 				BADA636B1E7CF7000097D73C /* CellHopDongTableViewCell.xib in Resources */,
@@ -955,6 +956,7 @@
 				244937721E7A374D00929B6F /* Cell_KHGN_R2.swift in Sources */,
 				24BEAEF01E697AA6008F205C /* DSDA_VC.swift in Sources */,
 				24BEAEFD1E697AA6008F205C /* PaddingLabel.swift in Sources */,
+				24ADE7941E7FB4B200415499 /* TableKHLCNT_Portrait.swift in Sources */,
 				BADA63681E7CF7000097D73C /* CellHopDongHiddenTableViewCell.swift in Sources */,
 				24BEAF011E697AA6008F205C /* Tab_TTC.swift in Sources */,
 				244937641E76820500929B6F /* TableDSDA_Lanscape.swift in Sources */,
@@ -965,6 +967,7 @@
 				BADA635D1E7CF7000097D73C /* ApiEntity.swift in Sources */,
 				7C8CD7051E7F7334006A095F /* CellChamQTLandTableViewCell.swift in Sources */,
 				7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */,
+				24ADE7971E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.swift in Sources */,
 				BADA636A1E7CF7000097D73C /* CellHopDongTableViewCell.swift in Sources */,
 				24BEAEEC1E697AA6008F205C /* CustomCellDSDATableViewCell.swift in Sources */,
 				BADA635F1E7CF7000097D73C /* CanhBaoEntity.swift in Sources */,
@@ -974,13 +977,12 @@
 				24BEAEF51E697AA6008F205C /* ExtendtionUItableViewCell.swift in Sources */,
 				24BEAF061E697AA6008F205C /* UIView.swift in Sources */,
 				7C71ED321E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift in Sources */,
-				24ADE7911E7F939200415499 /* Cell_KHLCNT_Header_Landscape.swift in Sources */,
+				7C8CD7071E7F7334006A095F /* CellHopDongLandTableViewCell.swift in Sources */,
 				BADA63641E7CF7000097D73C /* CBChamQTTableViewCell.swift in Sources */,
 				24BEAEDE1E697AA6008F205C /* ApiService.swift in Sources */,
 				24BEAEE71E697AA6008F205C /* ChatCreateGroup_VC.swift in Sources */,
 				24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */,
 				2449377A1E7A8F4300929B6F /* NhomHopDong.swift in Sources */,
-				24ADE78E1E7F7F8F00415499 /* TableKHLCNT_Portrait.swift in Sources */,
 				BADA63601E7CF7000097D73C /* CanhBaoTableViewCell.swift in Sources */,
 				24BEAF041E697AA6008F205C /* UIImageView.swift in Sources */,
 				BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */,
