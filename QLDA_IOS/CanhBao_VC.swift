@@ -40,6 +40,8 @@ class CanhBao_VC: Base_VC {
         self.tbCanhBao.register(UINib(nibName: "CBChamQTHiddenTableViewCell", bundle: nil), forCellReuseIdentifier: "cellChamQTHidden")
         
         self.tbCanhBao.register(UINib(nibName: "CellHopDongLandTableViewCell", bundle: nil), forCellReuseIdentifier: "cellHDLand")
+        self.tbCanhBao.register(UINib(nibName: "CellChamQTLandTableViewCell", bundle: nil), forCellReuseIdentifier: "cellChamQTLand")
+        self.tbCanhBao.register(UINib(nibName: "CellHopDongTitleLandTableViewCell", bundle: nil), forCellReuseIdentifier: "cellHDTitleLand")
         
         self.tbCanhBao.rowHeight = UITableViewAutomaticDimension
         self.tbCanhBao.sectionHeaderHeight = UITableViewAutomaticDimension
@@ -122,11 +124,23 @@ class CanhBao_VC: Base_VC {
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
-                        self.datasource = CanhBaoDatasource(arr: self.arrData, table : self.tbCanhBao)
-                        self.tbCanhBao.dataSource = self.datasource
-                        self.tbCanhBao.delegate = self.datasource
-                        self.tbCanhBao.reloadData()
                         self.lblHeader.text = "Danh sách dự án cảnh báo (\(self.arrData.count) dự án)"
+                        if UIDevice.current.orientation.isLandscape {
+                            
+                            self.datasourceLand = CanhBaoLandDatasource(arrData: self.arrData, table : self.tbCanhBao)
+                            self.tbCanhBao.dataSource = self.datasourceLand
+                            self.tbCanhBao.delegate = self.datasourceLand
+                            self.tbCanhBao.reloadData()
+                            //self.lblHeader.text = "Danh sách dự án cảnh báo (\(self.arrData.count) dự án)"
+                            
+                            
+                        } else {
+                            self.datasource = CanhBaoDatasource(arr: self.arrData, table : self.tbCanhBao)
+                            self.tbCanhBao.dataSource = self.datasource
+                            self.tbCanhBao.delegate = self.datasource
+                            self.tbCanhBao.reloadData()
+                        }
+
                     }
                 }
                 
@@ -142,11 +156,14 @@ class CanhBao_VC: Base_VC {
             self.tbCanhBao.dataSource = self.datasourceLand
             self.tbCanhBao.delegate = self.datasourceLand
             self.tbCanhBao.reloadData()
-            self.lblHeader.text = "Danh sách dự án cảnh báo (\(self.arrData.count) dự án)"
+            //self.lblHeader.text = "Danh sách dự án cảnh báo (\(self.arrData.count) dự án)"
  
             
         } else {
-            print("Portrait")
+            self.datasource = CanhBaoDatasource(arr: self.arrData, table : self.tbCanhBao)
+            self.tbCanhBao.dataSource = self.datasource
+            self.tbCanhBao.delegate = self.datasource
+            self.tbCanhBao.reloadData()
         }
     }
     
