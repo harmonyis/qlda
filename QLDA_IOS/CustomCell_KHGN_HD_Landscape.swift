@@ -9,6 +9,11 @@
 import UIKit
 
 class CustomCell_KHGN_HD_Landscape: UITableViewCell {
+    @IBOutlet weak var constraintsRightTenHD: NSLayoutConstraint!
+    @IBOutlet weak var constraintsRightDVTH: NSLayoutConstraint!
+    @IBOutlet weak var constraintsRightTGTH: NSLayoutConstraint!
+    @IBOutlet weak var constraintsRightSoNK: NSLayoutConstraint!
+    @IBOutlet weak var constraintsRightGTHD: NSLayoutConstraint!
 
     @IBOutlet weak var lblSoNK: UILabel!
    
