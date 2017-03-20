@@ -29,6 +29,9 @@
 		24ADE7941E7FB4B200415499 /* TableKHLCNT_Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE7931E7FB4B200415499 /* TableKHLCNT_Portrait.swift */; };
 		24ADE7971E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE7951E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.swift */; };
 		24ADE7981E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24ADE7961E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.xib */; };
+		24ADE79B1E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE7991E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.swift */; };
+		24ADE79C1E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24ADE79A1E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.xib */; };
+		24ADE79E1E7FBB0F00415499 /* TableKHLCNT_Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ADE79D1E7FBB0F00415499 /* TableKHLCNT_Landscape.swift */; };
 		24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEAE801E6979D8008F205C /* AppDelegate.swift */; };
 		24BEAE861E6979D8008F205C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE841E6979D8008F205C /* Main.storyboard */; };
 		24BEAE881E6979D8008F205C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24BEAE871E6979D8008F205C /* Assets.xcassets */; };
@@ -188,6 +191,9 @@
 		24ADE7931E7FB4B200415499 /* TableKHLCNT_Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableKHLCNT_Portrait.swift; sourceTree = "<group>"; };
 		24ADE7951E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_Header_Landscape.swift; sourceTree = "<group>"; };
 		24ADE7961E7FB4D200415499 /* Cell_KHLCNT_Header_Landscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_KHLCNT_Header_Landscape.xib; sourceTree = "<group>"; };
+		24ADE7991E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell_KHLCNT_HD_Landscape.swift; sourceTree = "<group>"; };
+		24ADE79A1E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell_KHLCNT_HD_Landscape.xib; sourceTree = "<group>"; };
+		24ADE79D1E7FBB0F00415499 /* TableKHLCNT_Landscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableKHLCNT_Landscape.swift; sourceTree = "<group>"; };
 		24BEAE7D1E6979D8008F205C /* QLDA_IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLDA_IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BEAE801E6979D8008F205C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		24BEAE851E6979D8008F205C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -342,6 +348,7 @@
 				244937631E76820500929B6F /* TableDSDA_Lanscape.swift */,
 				244937751E7A3F9E00929B6F /* TableKHGN_Portrait.swift */,
 				24ADE7811E7CD6A100415499 /* TableKHGN_Lanscape.swift */,
+				24ADE79D1E7FBB0F00415499 /* TableKHLCNT_Landscape.swift */,
 			);
 			name = CustomTable;
 			sourceTree = "<group>";
@@ -606,6 +613,8 @@
 				24ADE77A1E7CC98500415499 /* CustomCell_KHGN_Header_Landscape.xib */,
 				24ADE77D1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.swift */,
 				24ADE77E1E7CCFC700415499 /* CustomCell_KHGN_HD_Landscape.xib */,
+				24ADE7991E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.swift */,
+				24ADE79A1E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.xib */,
 			);
 			name = CustomCell;
 			sourceTree = "<group>";
@@ -777,6 +786,7 @@
 				BADA63611E7CF7000097D73C /* CanhBaoTableViewCell.xib in Resources */,
 				24ADE77C1E7CC98500415499 /* CustomCell_KHGN_Header_Landscape.xib in Resources */,
 				24BEAEF21E697AA6008F205C /* DSDA_View.xib in Resources */,
+				24ADE79C1E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.xib in Resources */,
 				24BEAF0A1E697AA6008F205C /* View.xib in Resources */,
 				7C8CD7081E7F7334006A095F /* CellHopDongLandTableViewCell.xib in Resources */,
 				BADA63691E7CF7000097D73C /* CellHopDongHiddenTableViewCell.xib in Resources */,
@@ -1002,6 +1012,7 @@
 				24BEAF091E697AA6008F205C /* variableConfig.swift in Sources */,
 				2449376D1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift in Sources */,
 				24BEAFAF1E6FAFB4008F205C /* Cell_KHLCNT_R3.swift in Sources */,
+				24ADE79B1E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.swift in Sources */,
 				24BEAFA21E6EA0EA008F205C /* Tab_KHGN.swift in Sources */,
 				BAF1E4891E72459300F28FE9 /* UIFont.swift in Sources */,
 				1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */,
@@ -1013,6 +1024,7 @@
 				24BEAEF91E697AA6008F205C /* MapItem.swift in Sources */,
 				BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */,
 				BA18F9B81E7A424600E53946 /* UIButton.swift in Sources */,
+				24ADE79E1E7FBB0F00415499 /* TableKHLCNT_Landscape.swift in Sources */,
 				BADA636E1E7CF7000097D73C /* TableNotifications_Portrait.swift in Sources */,
 				7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */,
 				7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */,
