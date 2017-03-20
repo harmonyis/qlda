@@ -31,7 +31,7 @@
                         <rect key="frame" x="40" y="0.0" width="125" height="39"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cua-Pa-gsn">
-                                <rect key="frame" x="5" y="5" width="33" height="16"/>
+                                <rect key="frame" x="10" y="5" width="33" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,7 +40,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Cua-Pa-gsn" secondAttribute="bottom" constant="5" id="EFG-Tn-7nu"/>
-                            <constraint firstItem="Cua-Pa-gsn" firstAttribute="leading" secondItem="JLI-H8-zi3" secondAttribute="leading" constant="5" id="KGM-18-goV"/>
+                            <constraint firstItem="Cua-Pa-gsn" firstAttribute="leading" secondItem="JLI-H8-zi3" secondAttribute="leading" constant="10" id="KGM-18-goV"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Cua-Pa-gsn" secondAttribute="trailing" constant="5" id="jq9-56-4Um"/>
                             <constraint firstItem="Cua-Pa-gsn" firstAttribute="top" secondItem="JLI-H8-zi3" secondAttribute="top" constant="5" id="nDZ-g8-bjO"/>
                         </constraints>
