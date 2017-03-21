@@ -9,12 +9,12 @@
 import UIKit
 import XLPagerTabStrip
 class Tab_KHGN: UIViewController, IndicatorInfoProvider {
-var itemInfo = IndicatorInfo(title: "Giải ngân")
-   
+    var itemInfo = IndicatorInfo(title: "Giải ngân")
+    
     @IBOutlet weak var tbvKHGN: UITableView!
     @IBOutlet weak var uiViewHeaderLandscape: UIView!
     @IBOutlet weak var constraintHeightHeader: NSLayoutConstraint!
-  
+    
     var m_NhomHD = [NhomHopDong]()
     var indexTrangThaiDuAnCha = Set<Int>()
     var indexGroupDuAnCon = Set<Int>()
@@ -31,7 +31,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
         
         
         self.tbvKHGN.separatorColor = UIColor.clear
-         self.tbvKHGN.register(UINib(nibName: "CustomCell_KHGN_Header_Landscape", bundle: nil), forCellReuseIdentifier: "CustomCell_KHGN_Header_Landscape")
+        self.tbvKHGN.register(UINib(nibName: "CustomCell_KHGN_Header_Landscape", bundle: nil), forCellReuseIdentifier: "CustomCell_KHGN_Header_Landscape")
         self.tbvKHGN.register(UINib(nibName: "CustomCell_KHGN_HD_Landscape", bundle: nil), forCellReuseIdentifier: "CustomCell_KHGN_HD_Landscape")
         self.tbvKHGN.register(UINib(nibName: "Cell_KHGN_R4", bundle: nil), forCellReuseIdentifier: "Cell_KHGN_R4")
         self.automaticallyAdjustsScrollViewInsets = false
@@ -58,7 +58,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
             if let arrHD = dic["GetTheoDoiGiaiNganDSHDResult"] as? [[String]] {
-               
+                
                 let item : NhomHopDong = NhomHopDong()
                 
                 item.LoaiHopDong = "Tong"
@@ -69,13 +69,13 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
                 self.m_NhomHD.append(item)
                 
                 for itemHD in arrHD {
-                
+                    
                     if !(itemHD[1] == "") {
-                    dGiaTriGiaiNgan = dGiaTriGiaiNgan + (Double)(itemHD[1])!
-                        }
-                        
-                        if !(itemHD[7] == "") {
-                    dLKThanhToan = dLKThanhToan + (Double)(itemHD[7])!
+                        dGiaTriGiaiNgan = dGiaTriGiaiNgan + (Double)(itemHD[1])!
+                    }
+                    
+                    if !(itemHD[7] == "") {
+                        dLKThanhToan = dLKThanhToan + (Double)(itemHD[7])!
                     }
                     var itemHopDong = HopDong()
                     itemHopDong.TenGoiThau = itemHD[0]
@@ -84,43 +84,43 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
                     itemHopDong.ThoiGianThucHien = itemHD[3]
                     
                     if !(itemHD[4] == ""){
-                    itemHopDong.SoNK = itemHD[4] + ", "
+                        itemHopDong.SoNK = itemHD[4] + ", "
                     }
                     itemHopDong.SoNK = itemHopDong.SoNK! + itemHD[5]
                     itemHopDong.GiaTriLK = itemHD[7]
                     
-                   if self.m_NhomHD.contains(where: { $0.LoaiHopDong! == itemHD[6] }){
-                    
-                    let itemNhomHopDong = self.m_NhomHD.first(where: { $0.LoaiHopDong! == itemHD[6] })
-                    
-                    itemNhomHopDong?.GiaTriLK = Config.convert((String)((Float)((itemNhomHopDong?.GiaTriLK)!)! + (Float)(itemHD[7])!))
-                    
-                    itemNhomHopDong?.GiaTriHopDong = Config.convert((String)((Float)((itemNhomHopDong?.GiaTriHopDong)!)! + (Float)(itemHD[1])!))
-                    var itemHDCon = [HopDong]()
-                    itemHDCon = (itemNhomHopDong?.NhomHopDong)!
-                    
-                    itemHDCon.append(itemHopDong)
-                    itemNhomHopDong?.NhomHopDong=itemHDCon
-                    self.m_NhomHD.remove(at: self.m_NhomHD.index(where: { $0.LoaiHopDong! == itemHD[6] })!)
-                    
-                    self.m_NhomHD.append(itemNhomHopDong!)
+                    if self.m_NhomHD.contains(where: { $0.LoaiHopDong! == itemHD[6] }){
+                        
+                        let itemNhomHopDong = self.m_NhomHD.first(where: { $0.LoaiHopDong! == itemHD[6] })
+                        
+                        itemNhomHopDong?.GiaTriLK = Config.convert((String)((Float)((itemNhomHopDong?.GiaTriLK)!)! + (Float)(itemHD[7])!))
+                        
+                        itemNhomHopDong?.GiaTriHopDong = Config.convert((String)((Float)((itemNhomHopDong?.GiaTriHopDong)!)! + (Float)(itemHD[1])!))
+                        var itemHDCon = [HopDong]()
+                        itemHDCon = (itemNhomHopDong?.NhomHopDong)!
+                        
+                        itemHDCon.append(itemHopDong)
+                        itemNhomHopDong?.NhomHopDong=itemHDCon
+                        self.m_NhomHD.remove(at: self.m_NhomHD.index(where: { $0.LoaiHopDong! == itemHD[6] })!)
+                        
+                        self.m_NhomHD.append(itemNhomHopDong!)
                     }
                     else
                     {
                         let itemNhomHopDong = NhomHopDong()
                         itemNhomHopDong.LoaiHopDong = itemHD[6]
                         if itemHD[7] == ""{
-                        itemNhomHopDong.GiaTriLK = "0"
+                            itemNhomHopDong.GiaTriLK = "0"
                         }
                         else {
-                        itemNhomHopDong.GiaTriLK = itemHD[7]
+                            itemNhomHopDong.GiaTriLK = itemHD[7]
                         }
                         if itemHD[1] == "" {
-                        itemNhomHopDong.GiaTriHopDong = "0"
+                            itemNhomHopDong.GiaTriHopDong = "0"
                         }
                         else {
-                        itemNhomHopDong.GiaTriHopDong = itemHD[1]
-                            }
+                            itemNhomHopDong.GiaTriHopDong = itemHD[1]
+                        }
                         var itemHDCon = [HopDong]()
                         itemHDCon = (itemNhomHopDong.NhomHopDong)!
                         
@@ -129,7 +129,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
                         
                         self.m_NhomHD.append(itemNhomHopDong)
                     }
-                
+                    
                 }
                 
                 let itemNhomHopDong = self.m_NhomHD.first(where: { $0.LoaiHopDong! == "Tong" })
@@ -145,8 +145,8 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
                 print(m_NhomHD)
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
-                      //  self.DSDA = self.DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
-                       
+                        //  self.DSDA = self.DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
+                        
                         self.LoadTableView()
                         
                     }
@@ -168,11 +168,11 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
     }
     var searchActive : Bool = false
     var filtered = [UserContact]()
- 
+    
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     
     func LoadTableView(){
-    
+        
         print("_________________")
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
@@ -183,10 +183,12 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
                     item.removeFromSuperview()
                 }
             }
-           
-            let width = self.view.bounds.width - 20 - 8
-           
-
+            print(self.view.bounds.size.width, self.view.bounds.size.height)
+            var width = max(self.view.bounds.size.width, self.view.bounds.size.height)
+            
+            width = width - 20 - 8
+            
+            
             let wNoiDung = width - wGTHD - wLKGTTT - 70 - 60 - 80
             let wDVTH = width - wNoiDung - wGTHD - wLKGTTT  - 60 - 80
             let wTGTH = width - wNoiDung - wDVTH - wGTHD - wLKGTTT  - 80
@@ -205,28 +207,28 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             lable.numberOfLines = 0
             lable.sizeToFit()
             var height_R1_Header = lable.frame.height
-           height_R1_Header = height_R1_Header + 8
+            height_R1_Header = height_R1_Header + 8
             
             
-             uiView = UIView()
+            uiView = UIView()
             uiView.frame = CGRect(x: 0, y: 0 , width: 20, height: height_R1_Header)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
+            uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             
             
             
             self.uiViewHeaderLandscape.addSubview(uiView)
             
-          
+            
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20), y: 0 , width: wNoiDung, height: height_R1_Header)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
+            uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -244,7 +246,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
+            uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -279,7 +281,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
+            uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -297,7 +299,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
+            uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -314,7 +316,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
+            uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -325,7 +327,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             
             uiView.addSubview(lable)
             self.uiViewHeaderLandscape.addSubview(uiView)
- // add dòng thứ 2 của KHGN
+            // add dòng thứ 2 của KHGN
             uiView = UIView()
             uiView.frame = CGRect(x: (20), y: height_R1_Header , width: wNoiDung, height: 30)
             uiView.layer.borderColor = myColorBoder.cgColor
@@ -365,7 +367,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-           
+            
             self.uiViewHeaderLandscape.addSubview(uiView)
             
             
@@ -402,7 +404,7 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             
             uiView.addSubview(lable)
             self.uiViewHeaderLandscape.addSubview(uiView)
-             constraintHeightHeader.constant = height_R1_Header + 30
+            constraintHeightHeader.constant = height_R1_Header + 30
             
             self.dataSource_Lanscape = TableKHGN_Lanscape(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT)
             self.tbvKHGN.dataSource = self.dataSource_Lanscape
@@ -411,16 +413,16 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             
         }
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
-          
+            
             
             self.dataSource_Portrait = TableKHGN_Portrait(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT)
-           self.tbvKHGN.dataSource = self.dataSource_Portrait
+            self.tbvKHGN.dataSource = self.dataSource_Portrait
             self.tbvKHGN.delegate = self.dataSource_Portrait
             self.tbvKHGN.reloadData()
         }
         
     }
- 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
