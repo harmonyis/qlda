@@ -20,7 +20,8 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
         //  self.ViewData.autoresizesSubviews = true
-        
+       uiViewThongTin.layer.borderColor = myColorBoder.cgColor
+       uiViewThongTin.layer.borderWidth = 1
         
     }
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)

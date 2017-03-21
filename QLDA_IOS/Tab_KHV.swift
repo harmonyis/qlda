@@ -30,7 +30,8 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetKeHoachVon"
         let m_year = self.m_calendar.component(.year, from: self.m_date)
         let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"nam\" : \""+(String)(m_year)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
-        
+        UiviewKHV.layer.borderColor = myColorBoder.cgColor
+        UiviewKHV.layer.borderWidth = 1
         ApiService.Post(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: Error)
     }
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)

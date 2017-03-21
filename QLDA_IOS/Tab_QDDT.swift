@@ -24,14 +24,15 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
         //  self.ViewData.autoresizesSubviews = true
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetQuyetDinhDauTu"
         let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
-        
+        UiViewQDDT.layer.borderColor = myColorBoder.cgColor
+        UiViewQDDT.layer.borderWidth = 1
         ApiService.Post(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: Error)
     }
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     func GetDataQDDT(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
-            print(dic)
+          
             if var arrTTDA = dic["GetQuyetDinhDauTuResult"] as? [String] {
                 if arrTTDA.count<1 {
                     arrTTDA = ["","","","",""]
