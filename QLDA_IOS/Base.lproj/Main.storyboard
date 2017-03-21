@@ -2850,17 +2850,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8bq-3y-dZn" customClass="FSCalendar">
-                                <rect key="frame" x="0.0" y="64" width="320" height="327"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bq-3y-dZn" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="64" width="320" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="eKk-xs-r1P"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="3Hz-C0-dFH" id="pJy-qN-Ikw"/>
                                     <outlet property="delegate" destination="3Hz-C0-dFH" id="w1V-rB-fxJ"/>
                                 </connections>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_avartar" translatesAutoresizingMaskIntoConstraints="NO" id="gg8-xb-rX5">
+                                <rect key="frame" x="64" y="486" width="223" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.1342508996" blue="0.072512328629999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.3024389576" green="1" blue="0.28608937210000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8bq-3y-dZn" secondAttribute="trailing" id="5Qe-H3-XDt"/>
+                            <constraint firstItem="8bq-3y-dZn" firstAttribute="leading" secondItem="x82-uC-bE6" secondAttribute="leading" id="BtX-AS-5eT"/>
+                            <constraint firstItem="8bq-3y-dZn" firstAttribute="top" secondItem="vFm-wR-Yud" secondAttribute="bottom" id="yuV-Vv-cBi"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="V2U-K9-E6c"/>
                 </viewController>
