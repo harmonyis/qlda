@@ -183,9 +183,9 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
                     item.removeFromSuperview()
                 }
             }
-            constraintHeightHeader.constant = 100
+           
             let width = self.view.bounds.width - 20 - 8
-            uiViewHeaderLandscape.backgroundColor = UIColor(netHex: 0x21AFFA)
+           
 
             let wNoiDung = width - wGTHD - wLKGTTT - 70 - 60 - 80
             let wDVTH = width - wNoiDung - wGTHD - wLKGTTT  - 60 - 80
@@ -196,29 +196,43 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             var uiView:UIView = UIView()
             
             
-            uiView.frame = CGRect(x: 0, y: 0 , width: 20, height: 50)
+            
+            var lable:UILabel = UILabel()
+            lable = UILabel()
+            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+            lable.text = "Thời gian thực hiện (ngày)"
+            lable.frame = CGRect(x: 5, y: 2 , width: wTGTH - 10, height: 70 - 4)
+            lable.numberOfLines = 0
+            lable.sizeToFit()
+            var height_R1_Header = lable.frame.height
+           height_R1_Header = height_R1_Header + 8
+            
+            
+             uiView = UIView()
+            uiView.frame = CGRect(x: 0, y: 0 , width: 20, height: height_R1_Header)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
+             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             
             
             
             self.uiViewHeaderLandscape.addSubview(uiView)
             
-            var lable:UILabel = UILabel()
+          
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20), y: 0 , width: wNoiDung, height: 50)
+            uiView.frame = CGRect(x: (20), y: 0 , width: wNoiDung, height: height_R1_Header)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-            
+             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Nội dung"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wNoiDung - 10, height: 50 - 4)
+            lable.frame = CGRect(x: 5, y: 2 , width: wNoiDung - 10, height: height_R1_Header - 4)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
@@ -226,51 +240,52 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             self.uiViewHeaderLandscape.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung), y: 0 ,width : wDVTH, height: 50)
+            uiView.frame = CGRect(x: (20 + wNoiDung), y: 0 ,width : wDVTH, height: height_R1_Header)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-            
+             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Đơn vị thực hiện"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wDVTH - 10, height: 50 - 4)
+            lable.frame = CGRect(x: 5, y: 2 , width: wDVTH - 10, height: height_R1_Header - 4)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
             self.uiViewHeaderLandscape.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH), y: 0 , width: wTGTH, height: 50)
+            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH), y: 0 , width: wTGTH, height: height_R1_Header)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-            
+            uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Thời gian thực hiện (ngày)"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wTGTH - 10, height: 50 - 4)
+            lable.frame = CGRect(x: 5, y: 2 , width: wTGTH - 10, height: height_R1_Header - 4)
             lable.numberOfLines = 0
-            
+            lable.sizeToFit()
             uiView.addSubview(lable)
+            print(lable.frame.height)
             self.uiViewHeaderLandscape.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH), y: 0 , width: wSNK, height: 50)
+            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH), y: 0 , width: wSNK, height: height_R1_Header)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-            
+             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Số, ngày ký"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wSNK - 10, height: 50 - 4)
+            lable.frame = CGRect(x: 5, y: 2 , width: wSNK - 10, height: height_R1_Header - 4)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
@@ -278,51 +293,51 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK), y: 0 , width: wGTHD, height: 50)
+            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK), y: 0 , width: wGTHD, height: height_R1_Header)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-            
+             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Giá trị hợp đồng"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wGTHD - 10, height: 50 - 4)
+            lable.frame = CGRect(x: 5, y: 2 , width: wGTHD - 10, height: height_R1_Header - 4)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
             self.uiViewHeaderLandscape.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK + wGTHD), y: 0 , width: wLKGTTT + 8, height: 50)
+            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK + wGTHD), y: 0 , width: wLKGTTT + 8, height: height_R1_Header)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-            
+             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "LK giá trị thanh toán"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wLKGTTT + 8 - 10, height: 50 - 4)
+            lable.frame = CGRect(x: 5, y: 2 , width: wLKGTTT + 8 - 10, height: height_R1_Header - 4)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
             self.uiViewHeaderLandscape.addSubview(uiView)
  // add dòng thứ 2 của KHGN
             uiView = UIView()
-            uiView.frame = CGRect(x: (20), y: 50 , width: wNoiDung, height: 50)
+            uiView.frame = CGRect(x: (20), y: height_R1_Header , width: wNoiDung, height: 30)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
             lable = UILabel()
-            lable.textColor = UIColor.white
+            lable.textColor = UIColor.black
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "Nội dung"
+            lable.text = "Tổng giá trị"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wNoiDung - 10, height: 50 - 4)
+            lable.frame = CGRect(x: 5, y: 2 , width: wNoiDung - 10, height: 30 - 4)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
@@ -330,91 +345,64 @@ var itemInfo = IndicatorInfo(title: "Giải ngân")
             self.uiViewHeaderLandscape.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung), y: 50 ,width : wDVTH, height: 50)
+            uiView.frame = CGRect(x: (20 + wNoiDung), y: height_R1_Header ,width : wDVTH, height: 30)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+            
+            self.uiViewHeaderLandscape.addSubview(uiView)
+            
+            uiView = UIView()
+            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH), y: height_R1_Header , width: wTGTH, height: 30)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+            
+            self.uiViewHeaderLandscape.addSubview(uiView)
+            
+            uiView = UIView()
+            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH), y: height_R1_Header , width: wSNK, height: 30)
+            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderWidth = 0.5
+            uiView.tag = 100
+           
+            self.uiViewHeaderLandscape.addSubview(uiView)
+            
+            
+            uiView = UIView()
+            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK), y: height_R1_Header , width: wGTHD, height: 30)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
             lable = UILabel()
-            lable.textColor = UIColor.white
+            lable.textColor = UIColor.black
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "Đơn vị thực hiện"
+            lable.text = variableConfig.convert((String)(dGiaTriGiaiNgan))
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wDVTH - 10, height: 50 - 4)
+            lable.frame = CGRect(x: 5, y: 2 , width: wGTHD - 10, height: 30 - 4)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
             self.uiViewHeaderLandscape.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH), y: 50 , width: wTGTH, height: 50)
+            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK + wGTHD), y: height_R1_Header , width: wLKGTTT + 8, height: 30)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
             lable = UILabel()
-            lable.textColor = UIColor.white
+            lable.textColor = UIColor.black
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "Thời gian thực hiện (ngày)"
+            lable.text = variableConfig.convert((String)(dLKThanhToan))
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wTGTH - 10, height: 50 - 4)
+            lable.frame = CGRect(x: 5, y: 2 , width: wLKGTTT + 8 - 10, height: 30 - 4)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
             self.uiViewHeaderLandscape.addSubview(uiView)
-            
-            uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH), y: 50 , width: wSNK, height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
-            uiView.layer.borderWidth = 0.5
-            uiView.tag = 100
-            
-            lable = UILabel()
-            lable.textColor = UIColor.white
-            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "Số, ngày ký"
-            lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wSNK - 10, height: 50 - 4)
-            lable.numberOfLines = 0
-            
-            uiView.addSubview(lable)
-            self.uiViewHeaderLandscape.addSubview(uiView)
-            
-            
-            uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK), y: 50 , width: wGTHD, height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
-            uiView.layer.borderWidth = 0.5
-            uiView.tag = 100
-            
-            lable = UILabel()
-            lable.textColor = UIColor.white
-            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "Giá trị hợp đồng"
-            lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wGTHD - 10, height: 50 - 4)
-            lable.numberOfLines = 0
-            
-            uiView.addSubview(lable)
-            self.uiViewHeaderLandscape.addSubview(uiView)
-            
-            uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK + wGTHD), y: 50 , width: wLKGTTT + 8, height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
-            uiView.layer.borderWidth = 0.5
-            uiView.tag = 100
-            
-            lable = UILabel()
-            lable.textColor = UIColor.white
-            lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "LK giá trị thanh toán"
-            lable.textAlignment = .center
-            lable.frame = CGRect(x: 5, y: 2 , width: wLKGTTT + 8 - 10, height: 50 - 4)
-            lable.numberOfLines = 0
-            
-            uiView.addSubview(lable)
-            self.uiViewHeaderLandscape.addSubview(uiView)
-            
+             constraintHeightHeader.constant = height_R1_Header + 30
             
             self.dataSource_Lanscape = TableKHGN_Lanscape(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT)
             self.tbvKHGN.dataSource = self.dataSource_Lanscape
