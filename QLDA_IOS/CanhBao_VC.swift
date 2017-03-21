@@ -151,7 +151,6 @@ class CanhBao_VC: Base_VC {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isLandscape {
-            
             self.datasourceLand = CanhBaoLandDatasource(arrData: self.arrData, table : self.tbCanhBao)
             self.tbCanhBao.dataSource = self.datasourceLand
             self.tbCanhBao.delegate = self.datasourceLand
