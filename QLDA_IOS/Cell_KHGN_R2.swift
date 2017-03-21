@@ -9,6 +9,9 @@
 import UIKit
 
 class Cell_KHGN_R2: UITableViewCell {
+    
+    @IBOutlet weak var constraintRightNoiDung: NSLayoutConstraint!
+    @IBOutlet weak var constraintRightGTHD: NSLayoutConstraint!
 
     @IBOutlet weak var imgGroup: UIImageView!
     @IBOutlet weak var constraintHeight_R2_LoaiGT: NSLayoutConstraint!

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate {
+class CanhBaoDatasource : NSObject, UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate {
     
     /*
      typealias MethodHandler1 = (_ sampleParameter : String)  -> Void
@@ -92,7 +92,7 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
                 
                 
                 cell.viewTopRight.accessibilityLabel = indexString
-                eventClick.addTarget(self, action:  #selector(CanhBaoDatascource.evenClick(sender: )))
+                eventClick.addTarget(self, action:  #selector(CanhBaoDatasource.evenClick(sender: )))
                 cell.viewTopRight.addGestureRecognizer(eventClick)
                 cell.viewTopRight.isUserInteractionEnabled = true;
                 
@@ -136,7 +136,7 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
                 
 
                 cell.viewTopRight.accessibilityLabel = indexString
-                eventClick.addTarget(self, action:  #selector(CanhBaoDatascource.evenClick(sender: )))
+                eventClick.addTarget(self, action:  #selector(CanhBaoDatasource.evenClick(sender: )))
                 
                 cell.viewTopRight.addGestureRecognizer(eventClick)
                 cell.viewTopRight.isUserInteractionEnabled = true;
@@ -192,7 +192,7 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
                 cell.viewTopRight.layer.borderWidth = 0.5
                 
                 cell.viewTopRight.accessibilityLabel = indexString
-                eventClick.addTarget(self, action:  #selector(CanhBaoDatascource.evenClick(sender: )))
+                eventClick.addTarget(self, action:  #selector(CanhBaoDatasource.evenClick(sender: )))
                 
                 cell.viewTopRight.addGestureRecognizer(eventClick)
                 cell.viewTopRight.isUserInteractionEnabled = true;
@@ -213,7 +213,7 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
                 cell.viewTopRight.layer.borderWidth = 0.5
                 
                 cell.viewTopRight.accessibilityLabel = indexString
-                eventClick.addTarget(self, action:  #selector(CanhBaoDatascource.evenClick(sender: )))
+                eventClick.addTarget(self, action:  #selector(CanhBaoDatasource.evenClick(sender: )))
                 
                 cell.viewTopRight.addGestureRecognizer(eventClick)
                 cell.viewTopRight.isUserInteractionEnabled = true;
@@ -267,7 +267,7 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
                 cell.viewTopRight.layer.borderWidth = 0.5
                 
                 cell.viewTopRight.accessibilityLabel = indexString
-                eventClick.addTarget(self, action:  #selector(CanhBaoDatascource.evenClick(sender: )))
+                eventClick.addTarget(self, action:  #selector(CanhBaoDatasource.evenClick(sender: )))
                 
                 cell.viewTopRight.addGestureRecognizer(eventClick)
                 cell.viewTopRight.isUserInteractionEnabled = true;
@@ -288,7 +288,7 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
                 cell.viewTopRight.layer.borderWidth = 0.5
                 
                 cell.viewTopRight.accessibilityLabel = indexString
-                eventClick.addTarget(self, action:  #selector(CanhBaoDatascource.evenClick(sender: )))
+                eventClick.addTarget(self, action:  #selector(CanhBaoDatasource.evenClick(sender: )))
                 
                 cell.viewTopRight.addGestureRecognizer(eventClick)
                 cell.viewTopRight.isUserInteractionEnabled = true;
@@ -338,7 +338,7 @@ class CanhBaoDatascource : NSObject, UITableViewDelegate, UITableViewDataSource,
         
         let eventClick : UITapGestureRecognizer = UITapGestureRecognizer()
         cell.accessibilityLabel = "\(section)"
-        eventClick.addTarget(self, action:  #selector(CanhBaoDatascource.headerClick(sender: )))
+        eventClick.addTarget(self, action:  #selector(CanhBaoDatasource.headerClick(sender: )))
         
         cell.addGestureRecognizer(eventClick)
         cell.isUserInteractionEnabled = true;

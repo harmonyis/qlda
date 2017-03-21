@@ -9,6 +9,9 @@
 import UIKit
 
 class Cell_KHGN_R3: UITableViewCell {
+    
+    @IBOutlet weak var constraintRightNoiDung: NSLayoutConstraint!
+    @IBOutlet weak var constraintRightGTHD: NSLayoutConstraint!
 
     @IBOutlet weak var lblSoNK: UILabel!
     @IBOutlet weak var lblTGTH: UILabel!

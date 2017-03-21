@@ -56,7 +56,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         lableQDDT.sizeToFit()
                         ViewQDDT.addSubview(lableQDDT)
                         ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
-                        ViewQDDT.frame = CGRect(x: 3,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width , height: 25)
+                        ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width - 10 , height: 25)
                         self.totalHeight = self.totalHeight + ViewQDDT.frame.height
                         self.totalHeight = self.totalHeight + 10
                         self.UiViewQDDT.addSubview(ViewQDDT)
@@ -165,7 +165,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 self.UiViewQDDT.addSubview(uiView)
                             }
                             // tạo giao diện phần group
-                            if icount > 4 {
+                            if icount > 4 , icount < 12 {
                                 
                                 var uiView = UIView()
                                 var lable:UILabel = UILabel()
@@ -277,12 +277,12 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         
                         
                         
-                        lableQDDT.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width, height: 30)
+                        lableQDDT.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width - 10, height: 30)
                         lableQDDT.numberOfLines = 0
                         lableQDDT.sizeToFit()
                         ViewQDDT.addSubview(lableQDDT)
                         ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
-                        ViewQDDT.frame = CGRect(x: 3,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width , height: 25)
+                        ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width - 10, height: 25)
                         self.totalHeight = self.totalHeight + ViewQDDT.frame.height
                         self.totalHeight = self.totalHeight + 10
                         self.UiViewQDDT.addSubview(ViewQDDT)
@@ -388,7 +388,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                                 self.UiViewQDDT.addSubview(uiView)
                             }
                             // tạo dữ liệu phần group tổng dự toán
-                            if icount > 4 {
+                            if icount > 4 , icount < 12{
                                 
                                 var uiView = UIView()
                                 var lable:UILabel = UILabel()
