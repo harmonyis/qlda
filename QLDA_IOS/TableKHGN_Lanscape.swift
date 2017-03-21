@@ -34,7 +34,7 @@ class TableKHGN_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return self.m_NhomHopDong.count
+        return self.m_NhomHopDong.count - 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,7 +44,7 @@ class TableKHGN_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
             return 0
         }
         else {
-            return self.m_NhomHopDong[section].NhomHopDong!.count
+            return self.m_NhomHopDong[section + 1].NhomHopDong!.count
         }    }
     
     
@@ -59,7 +59,7 @@ class TableKHGN_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.constraintsRightDVTH.constant = wLKGTTT + wGTHD + 80 + 60
         cell.constraintsRightTenHD.constant = wLKGTTT + wGTHD + 80 + 60 + 70
         
-        let itemNhomHD :NhomHopDong = self.m_NhomHopDong[section]
+        let itemNhomHD :NhomHopDong = self.m_NhomHopDong[section + 1]
         cell.lblLoaiHD.text = itemNhomHD.LoaiHopDong!
         
         cell.lblGTHD.text = itemNhomHD.GiaTriHopDong
@@ -110,8 +110,10 @@ class TableKHGN_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         eventClick.addTarget(self, action:  #selector(TableKHGN_Portrait.duAnChaClickGroup(sender: )))
         cell.uiHeaderGroup.addGestureRecognizer(eventClick)
         cell.uiHeaderGroup.isUserInteractionEnabled = true;
-        
+       
         return cell
+        
+       
     }
     func duAnChaClickGroup(sender: UITapGestureRecognizer)
     {
@@ -155,7 +157,7 @@ class TableKHGN_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         //tableView.scrollToRow(at: indexPath, at: .top, animated: false)
         let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell_KHGN_HD_Landscape", for: indexPath) as! CustomCell_KHGN_HD_Landscape
-        let itemNhomHD :NhomHopDong = self.m_NhomHopDong[indexPath.section]
+        let itemNhomHD :NhomHopDong = self.m_NhomHopDong[indexPath.section + 1]
         let itemDSHDCon :[HopDong] = itemNhomHD.NhomHopDong!
         let itemHopDongCon : HopDong = itemDSHDCon[indexPath.row]
         
