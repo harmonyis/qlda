@@ -51,7 +51,30 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource {
         
     }
     
-    func getCalendarByUserAndDate(){
+    
+    
+    func getCalendarByUserAndDate(_ date : Date){
+        
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getCalendarByUserAndDate"
+        
+        let params : String = "{\"nUserID\" : \(Config.userID), \"dtDateView\": \(date)}"
+        ApiService.Post(url: apiUrl, params: params, callback: callbackCreateGroup, errorCallBack: { (error) in
+            print("error")
+            print(error.localizedDescription)
+        })
+    }
+    
+    func callbackCreateGroup(data : Data) {
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dic = json as? [String:Any] {
+            //if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
+            if (dic["Chat_CreateGroupChatResult"] as? Int) != nil {
+                DispatchQueue.main.async(execute: { () -> Void in
+                   
+                })
+                
+            }
+        }
         
     }
     
