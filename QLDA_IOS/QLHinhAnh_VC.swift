@@ -29,7 +29,7 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Danh sách hình ảnh"
+        self.navigationItem.title = "Hình ảnh dự án"
         self.idDuAn = variableConfig.m_szIdDuAn
         self.listName = "DuAn"
         self.userName = variableConfig.m_szUserName
@@ -215,8 +215,13 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
-        
-        return CGSize(width: collectionView.frame.size.width/4.08, height: collectionView.frame.size.width/4.08)
+        if UIDevice.current.orientation.isPortrait {
+            print(collectionView.frame.size.width/4.08)
+            return CGSize(width: collectionView.frame.size.width/4.08, height: collectionView.frame.size.width/4.08)
+        } else {
+            print(collectionView.frame.size.width/7.25)
+            return CGSize(width: collectionView.frame.size.width/7.2, height: collectionView.frame.size.width/7.2)
+        }
         
     }
     
@@ -236,6 +241,9 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
         let galleryViewController = GalleryViewController(startIndex: indexPath.row, itemsDatasource: self, displacedViewsDatasource: nil, configuration: galleryConfiguration())
         
         self.presentImageGallery(galleryViewController)
+    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.clv.reloadData()
     }
     func galleryConfiguration() -> GalleryConfiguration {
         

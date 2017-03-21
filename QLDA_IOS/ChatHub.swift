@@ -199,17 +199,17 @@ class ChatHub {
             }
         }
         chatHub.on("notification") {args in
-            
-            Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead + 1
+            ChatCommon.notification(args: args)
+            //Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead + 1
         }
         chatHub.on("makeReadAllNotification") {args in
-            
-            Config.nTotalNotificationNotRead = 0
+            ChatCommon.makeReadAllNotification()
+            //Config.nTotalNotificationNotRead = 0
         }
-        
-        chatHub.on("makeReadAllNotification") {args in
-            
-            Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead - 1
+        		
+        chatHub.on("makeReadNotification") {args in
+            ChatCommon.makeReadNotification(args: args)
+            //Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead - 1
         }
     }
     

@@ -98,7 +98,7 @@ class Base_VC: UIViewController {
         
         updateBadgeChat()
         
-        
+        updateBadgeNotification()
     }
     
     func onChatBarPressesd(_ sender : UIButton){
@@ -139,10 +139,29 @@ class Base_VC: UIViewController {
             self.updateBadgeChat()
         }
         
+        ChatHub.chatHub.on("notification") {args in
+            ChatCommon.notification(args: args)
+            self.updateBadgeNotification()
+            //Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead + 1
+        }
+        ChatHub.chatHub.on("makeReadAllNotification") {args in
+            ChatCommon.makeReadAllNotification()
+            self.updateBadgeNotification()
+            //Config.nTotalNotificationNotRead = 0
+        }
+        
+        ChatHub.chatHub.on("makeReadNotification") {args in
+            ChatCommon.makeReadNotification(args: args)
+            self.updateBadgeNotification()
+            //Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead - 1
+        }
     }
     func getTotalNofiticationNotRead(){
-        // lay tong so notification chua doc
-        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getTotalNotificationsNotRead"
+        //// lay tong so notification chua doc
+        //let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getTotalNotificationsNotRead"
+        
+        // lay list notification chua doc
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getListNotificationsNotRead"
         let params : String = "{\"nUserID\" : \(Config.userID)}"
         ApiService.Post(url: apiUrl, params: params, callback: callbackGetTotalNotiNotRead, errorCallBack: errorGetTotalNotiNotRead)
     }
@@ -150,9 +169,21 @@ class Base_VC: UIViewController {
     func callbackGetTotalNotiNotRead(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String : Any] {
-            let nCount = dic["getTotalNotificationsNotReadResult"] as? String
+            /*let nCount = dic["getTotalNotificationsNotReadResult"] as? String
             Config.nTotalNotificationNotRead = Int32(nCount!)!
             Config.bCheckRead = true
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    self.updateBadgeNotification()
+                }
+            }*/
+            
+            Config.bCheckRead = true
+            Config.listNotificationNotRead = [Int]()
+            let items = dic["getListNotificationsNotReadResult"] as? [Int]
+            for item in items!{
+                Config.listNotificationNotRead.append(item)
+            }
             DispatchQueue.global(qos: .userInitiated).async {
                 DispatchQueue.main.async {
                     self.updateBadgeNotification()
@@ -209,8 +240,9 @@ class Base_VC: UIViewController {
     }
     
     private func getNumberBadgeNotification() -> Int{
-        let nCount = Config.nTotalNotificationNotRead
-        return Int(nCount)
+        //let nCount = Config.nTotalNotificationNotRead
+        //return Int(nCount)
+        return Config.listNotificationNotRead.count
     }
     
     func createBadge(parent : UIView, tag : Int, number : Int, frame : CGRect){

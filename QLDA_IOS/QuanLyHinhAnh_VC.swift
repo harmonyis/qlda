@@ -11,9 +11,9 @@ import ImageViewer
 
 
 class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate  {
-
+    
     @IBOutlet weak var clv: UICollectionView!
-
+    
     @IBOutlet weak var tbDanhSachDuAn: UITableView!
     
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
@@ -36,7 +36,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     func GetDSHASuccess(data : Data) {
         //let result = String(data: data, encoding: String.Encoding.utf8)
         
-       items.removeAll()
+        items.removeAll()
         print("Lấy lại danh sách")
         
         //print(result)
@@ -64,7 +64,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                             self.clv.reloadData()
                             //print("Hoàn thành")
                             //self.clv.reloadData()
-                           // self.clv.reloadData()
+                            // self.clv.reloadData()
                         }
                     }
                 }
@@ -140,8 +140,13 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
-        
-        return CGSize(width: collectionView.frame.size.width/4.08, height: collectionView.frame.size.width/4.08)
+        if UIDevice.current.orientation.isPortrait {
+            print(collectionView.frame.size.width/4.08)
+            return CGSize(width: collectionView.frame.size.width/4.08, height: collectionView.frame.size.width/4.08)
+        } else {
+            print(collectionView.frame.size.width/7.25)
+            return CGSize(width: collectionView.frame.size.width/7.2, height: collectionView.frame.size.width/7.2)
+        }
         
     }
     
@@ -163,6 +168,9 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         let galleryViewController = GalleryViewController(startIndex: indexPath.row, itemsDatasource: self, displacedViewsDatasource: nil, configuration: galleryConfiguration())
         
         self.presentImageGallery(galleryViewController)
+    }
+        override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+            self.clv.reloadData()
     }
     func galleryConfiguration() -> GalleryConfiguration {
         
@@ -226,16 +234,16 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\"}"
         ApiService.Post(url: ApiUrl, params: params, callback: GetDSHASuccess, errorCallBack: GetDSHAError)
         
-
+        
         
         /*
-        let nib = UINib(nibName: "CameraDanhSachDuAnTableViewCell", bundle: nil)
-        tbDanhSachDuAn.register(nib, forCellReuseIdentifier: "cell")
-        let datasource = CameraDanhSachDuAnDatasource(tbView: tbDanhSachDuAn)
-        
-        tbDanhSachDuAn.dataSource = datasource
-        tbDanhSachDuAn.delegate = datasource
- */
+         let nib = UINib(nibName: "CameraDanhSachDuAnTableViewCell", bundle: nil)
+         tbDanhSachDuAn.register(nib, forCellReuseIdentifier: "cell")
+         let datasource = CameraDanhSachDuAnDatasource(tbView: tbDanhSachDuAn)
+         
+         tbDanhSachDuAn.dataSource = datasource
+         tbDanhSachDuAn.delegate = datasource
+         */
         
         self.automaticallyAdjustsScrollViewInsets = false
         
@@ -289,7 +297,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
             let params : String = "{\"userName\" : \"\(self.userName)\", \"password\": \"\(self.password)\", \"listName\":\"DuAn\", \"IDItem\":\(obj.ItemId), \"fileName\":\"\(obj.ImageName)\"}"
             ApiService.Post(url: ApiUrlDetail, params: params, callback: {(data) in
                 
-                 let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                let json = try? JSONSerialization.jsonObject(with: data, options: [])
                 print(json)
                 if let dic = json as? [String:Any] {
                     if let dataResult = dic["GetImageDetailResult"] as? [String:Any] {
@@ -320,14 +328,14 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                 }
                 
             }, errorCallBack: self.GetDSHAError)
-   
+            
         })
         
         
         //
         let cancelAction = UIAlertAction(title: "Đóng", style: .cancel, handler: {
             (alert: UIAlertAction!) -> Void in
-
+            
         })
         
         
@@ -416,7 +424,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                                     }
                                 }
                             }
-
+                            
                         }
                     }
                     
@@ -424,7 +432,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                 
                 
                 
-
+                
                 
             }
         }
@@ -554,11 +562,11 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         if self.DuAnSelected == itemNhomDA.IdDA! {
             cell.lblTenDuAn.textColor = colorSelectd
         } else
-        
-        if self.lstDuAnExists.contains(itemNhomDA.IdDA!) || itemNhomDA.IdDA! == "0"{
-            cell.lblTenDuAn.textColor = colorExistsItem
-        } else {
-            cell.lblTenDuAn.textColor = colorNotExistsItem
+            
+            if self.lstDuAnExists.contains(itemNhomDA.IdDA!) || itemNhomDA.IdDA! == "0"{
+                cell.lblTenDuAn.textColor = colorExistsItem
+            } else {
+                cell.lblTenDuAn.textColor = colorNotExistsItem
         }
         
         //cell.lblTenDuAn.textColor = colorSelectd
@@ -572,7 +580,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
         cell.UiViewGroup.layer.borderWidth = 0.5
         cell.imgGroup.isHidden = false
-                var image : UIImage = UIImage(named:"ic_minus")!
+        var image : UIImage = UIImage(named:"ic_minus")!
         if (itemNhomDA.DuAnCon?.count)!>0 {
             
             if !self.indexGroupDuAnCon.contains(section)
@@ -613,7 +621,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         
         var eventClick = UITapGestureRecognizer()
         
-       
+        
         
         eventClick = UITapGestureRecognizer()
         cell.imgGroup.tag = section
@@ -661,20 +669,20 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     func duAnChaClickDetail(sender: UITapGestureRecognizer)
     {
         /*
-        //print(sender.view?.tag)
-        let value  = (sender.view?.tag)
-        
-        if self.indexTrangThaiDuAnCha.contains(value!) {
-            self.indexTrangThaiDuAnCha.remove(value!)
-        }
-        else {
-            self.indexTrangThaiDuAnCha.insert(value!)
-            
-        }
-        self.tbDanhSachDuAn.beginUpdates()
-        self.tbDanhSachDuAn.endUpdates()
-        self.tbDanhSachDuAn.reloadData()
- */
+         //print(sender.view?.tag)
+         let value  = (sender.view?.tag)
+         
+         if self.indexTrangThaiDuAnCha.contains(value!) {
+         self.indexTrangThaiDuAnCha.remove(value!)
+         }
+         else {
+         self.indexTrangThaiDuAnCha.insert(value!)
+         
+         }
+         self.tbDanhSachDuAn.beginUpdates()
+         self.tbDanhSachDuAn.endUpdates()
+         self.tbDanhSachDuAn.reloadData()
+         */
     }
     
     
@@ -706,11 +714,11 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         if self.DuAnSelected == itemDuAnCon.IdDA! {
             cell.lblTenDuAn.textColor = colorSelectd
         } else
-        
-        if self.lstDuAnExists.contains(itemDuAnCon.IdDA!) || itemDuAnCon.IdDA! == "0" {
-            cell.lblTenDuAn.textColor = colorExistsItem
-        } else {
-            cell.lblTenDuAn.textColor = colorNotExistsItem
+            
+            if self.lstDuAnExists.contains(itemDuAnCon.IdDA!) || itemDuAnCon.IdDA! == "0" {
+                cell.lblTenDuAn.textColor = colorExistsItem
+            } else {
+                cell.lblTenDuAn.textColor = colorNotExistsItem
         }
         //cell.lblTenDuAn.textColor = colorSelectd
         
@@ -726,7 +734,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
         cell.UiViewGroup.layer.borderWidth = 0.5
         
-                // if !cell.imgGroup.isHidden
+        // if !cell.imgGroup.isHidden
         cell.imgGroup.isHidden=true
         
         //  cell.UIViewTieuDe.layer.borderWidth=1
@@ -766,7 +774,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         // cell.imgDetail.addTarget(self, action: #selector(DSDA_VC.tappedMe()))
         var eventClick = UITapGestureRecognizer()
         let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
-      
+        
         
         eventClick.addTarget(self, action:  #selector(QuanLyHinhAnh_VC.ClickTenDuAn(sender:)))
         cell.lblTenDuAn.accessibilityLabel = (itemDuAnCon.TenDA!)
@@ -782,34 +790,34 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     func duAnConClickDetail(sender: UITapGestureRecognizer)
     {
         /*
-        //print(sender.view?.tag)
-        let value : String = (sender.view?.accessibilityLabel)!
-        // print(value)
-        
-        //  print(self.expandedCellPaths)
-        if self.indexTrangThaiDuAnCon.contains(value) {
-            self.indexTrangThaiDuAnCon.remove(value)
-        }
-        else {
-            self.indexTrangThaiDuAnCon.insert(value)
-            
-        }
-        self.tbDanhSachDuAn.beginUpdates()
-        self.tbDanhSachDuAn.endUpdates()
-        self.tbDanhSachDuAn.reloadData()
- */
+         //print(sender.view?.tag)
+         let value : String = (sender.view?.accessibilityLabel)!
+         // print(value)
+         
+         //  print(self.expandedCellPaths)
+         if self.indexTrangThaiDuAnCon.contains(value) {
+         self.indexTrangThaiDuAnCon.remove(value)
+         }
+         else {
+         self.indexTrangThaiDuAnCon.insert(value)
+         
+         }
+         self.tbDanhSachDuAn.beginUpdates()
+         self.tbDanhSachDuAn.endUpdates()
+         self.tbDanhSachDuAn.reloadData()
+         */
     }
     func ClickTenDuAn(sender: UITapGestureRecognizer)
     {
-         //variableConfig.m_szIdDuAn = (sender.view?.tag)!
+        //variableConfig.m_szIdDuAn = (sender.view?.tag)!
         
         /*
-        let value : String = (sender.view?.accessibilityLabel)!
-        variableConfig.m_szIdDuAn = (sender.view?.tag)!
-        variableConfig.m_szTenDuAn = value
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
-        self.navigationController?.pushViewController(vc, animated: true)
- */
+         let value : String = (sender.view?.accessibilityLabel)!
+         variableConfig.m_szIdDuAn = (sender.view?.tag)!
+         variableConfig.m_szTenDuAn = value
+         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
+         self.navigationController?.pushViewController(vc, animated: true)
+         */
         
         //let url = "GetAllFileUploadByID"
         //let param = ""
@@ -824,32 +832,32 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
             self.DuAnSelected = String(idDuAn)
             //print("ádasdasdsa")
         } else
-        if self.lstDuAnExists.contains(String(idDuAn)) {
-            DuAnSelected = String(idDuAn)
-            ApiUrl = "\(UrlPreFix.Camera.rawValue)/GetAllFileUploadByID"
-            let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\", \"listName\":\"DuAn\", \"IDItem\":\(idDuAn)}"
-            ApiService.Post(url: ApiUrl, params: params, callback: GetDSHAByIdSuccess, errorCallBack: GetDSHAError)
-            self.DuAnSelected = String(idDuAn)
-        } else {
-            self.view.hideToastActivity()
-            
-            self.view.makeToast("Dự án không có ảnh!", duration: 1.5, position: .bottom)
-            
-            
+            if self.lstDuAnExists.contains(String(idDuAn)) {
+                DuAnSelected = String(idDuAn)
+                ApiUrl = "\(UrlPreFix.Camera.rawValue)/GetAllFileUploadByID"
+                let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\", \"listName\":\"DuAn\", \"IDItem\":\(idDuAn)}"
+                ApiService.Post(url: ApiUrl, params: params, callback: GetDSHAByIdSuccess, errorCallBack: GetDSHAError)
+                self.DuAnSelected = String(idDuAn)
+            } else {
+                self.view.hideToastActivity()
+                
+                self.view.makeToast("Dự án không có ảnh!", duration: 1.5, position: .bottom)
+                
+                
         }
         let label:UILabel = (sender.view!) as! UILabel
         label.textColor = colorSelectd
-       
+        
         MauMacDinh()
         
         
         
-
-        
-
         
         
-
+        
+        
+        
+        
         
         //print(params)
         
@@ -857,33 +865,33 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     }
     
     // hết hiển thị danh sách dự án
-
+    
     func MauMacDinh() {
         /*
-        print(tbDanhSachDuAn.numberOfSections)
-        //for item in tbDanhSachDuAn.row
-        
-        for section in 0..<tbDanhSachDuAn.numberOfSections {
-            let header = tbDanhSachDuAn.headerView(forSection: section)
-            tbDanhSachDuAn.section
-            
-            
-            print(header)
-            for row in 0..<tbDanhSachDuAn.numberOfRows(inSection: section) {
-                
-                let indexPath = IndexPath(row: row, section: section)
-                let cell = tbDanhSachDuAn.cellForRow(at: indexPath)
-                print(cell)
-                // do what you want with the cell
-                
-            }
-        }
-        
-        
-        for cell in tbDanhSachDuAn.visibleCells {
-            print(cell)
-        }
- */
+         print(tbDanhSachDuAn.numberOfSections)
+         //for item in tbDanhSachDuAn.row
+         
+         for section in 0..<tbDanhSachDuAn.numberOfSections {
+         let header = tbDanhSachDuAn.headerView(forSection: section)
+         tbDanhSachDuAn.section
+         
+         
+         print(header)
+         for row in 0..<tbDanhSachDuAn.numberOfRows(inSection: section) {
+         
+         let indexPath = IndexPath(row: row, section: section)
+         let cell = tbDanhSachDuAn.cellForRow(at: indexPath)
+         print(cell)
+         // do what you want with the cell
+         
+         }
+         }
+         
+         
+         for cell in tbDanhSachDuAn.visibleCells {
+         print(cell)
+         }
+         */
         tbDanhSachDuAn.reloadData()
     }
     
