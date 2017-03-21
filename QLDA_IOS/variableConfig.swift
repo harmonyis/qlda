@@ -12,6 +12,8 @@ public class variableConfig {
     static var m_szIdDuAn : Int = 0
     static var m_szTenDuAn : String = ""
     static var m_szUserName : String = ""
+    static var m_heightScreen : CGFloat = 0
+    static var m_widthScreen : CGFloat = 0
     
     static var m_szPassWord : String = ""
     static func convert(_ sztext: String) -> String {

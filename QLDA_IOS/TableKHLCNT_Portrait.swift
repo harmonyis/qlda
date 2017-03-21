@@ -33,6 +33,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
         self.wTongGiaTri = wTongGiaTri
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         return self.m_dsGoiThau.count + 4
@@ -40,6 +41,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
         
     }
   
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {}
     
     
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
