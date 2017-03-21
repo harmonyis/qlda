@@ -21,6 +21,10 @@ class Tab_:ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
         // change selected bar color
         
+        //if(Config.bCheckRead == false){
+        getTotalNofiticationNotRead()
+        //}
+        
         settings.style.buttonBarBackgroundColor = graySpotifyColor
         settings.style.buttonBarItemBackgroundColor = graySpotifyColor
         settings.style.selectedBarBackgroundColor = UIColor(netHex: 0x0e83d5)
@@ -116,7 +120,7 @@ class Tab_:ButtonBarPagerTabStripViewController {
     func addRightBarButton(){        
         let btnNotiMenu = UIButton(type: UIButtonType.custom)
         btnNotiMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        btnNotiMenu.addTarget(self, action: #selector(Base_VC.onNotiBarPressesd(_:)), for: UIControlEvents.touchUpInside)
+        btnNotiMenu.addTarget(self, action: #selector(Tab_.onNotiBarPressesd(_:)), for: UIControlEvents.touchUpInside)
         btnNotiMenu.setImage(#imageLiteral(resourceName: "ic_noti"), for: UIControlState())
         btnNotiMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let frameNoti = CGRect(x: 18, y: -4, width: 15, height: 15)
@@ -125,7 +129,7 @@ class Tab_:ButtonBarPagerTabStripViewController {
         
         let btnChatMenu = UIButton(type: UIButtonType.custom)
         btnChatMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        btnChatMenu.addTarget(self, action: #selector(Base_VC.onChatBarPressesd(_:)), for: UIControlEvents.touchUpInside)
+        btnChatMenu.addTarget(self, action: #selector(Tab_.onChatBarPressesd(_:)), for: UIControlEvents.touchUpInside)
         btnChatMenu.setImage(#imageLiteral(resourceName: "ic_chat"), for: UIControlState())
         btnChatMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let frame = CGRect(x: 18, y: -4, width: 15, height: 15)
@@ -135,7 +139,7 @@ class Tab_:ButtonBarPagerTabStripViewController {
         
         let btnMapMenu = UIButton(type: UIButtonType.custom)
         btnMapMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        btnMapMenu.addTarget(self, action: #selector(Base_VC.onMapBarPressesd(_:)), for: UIControlEvents.touchUpInside)
+        btnMapMenu.addTarget(self, action: #selector(Tab_.onMapBarPressesd(_:)), for: UIControlEvents.touchUpInside)
         btnMapMenu.setImage(#imageLiteral(resourceName: "ic_map"), for: UIControlState())
         btnMapMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         
@@ -151,6 +155,18 @@ class Tab_:ButtonBarPagerTabStripViewController {
     func onChatBarPressesd(_ sender : UIButton){
         Config.SelectMenuIndex = -1
         let vc = storyboard?.instantiateViewController(withIdentifier: "ChatMain") as! ChatMain_VC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func onMapBarPressesd(_ sender : UIButton){
+        Config.SelectMenuIndex = -1
+        let vc = storyboard?.instantiateViewController(withIdentifier: "Map") as! Map_VC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func onNotiBarPressesd(_ sender : UIButton){
+        Config.SelectMenuIndex = -1
+        let vc = storyboard?.instantiateViewController(withIdentifier: "Noti") as! Notification_VC
         self.navigationController?.pushViewController(vc, animated: true)
     }
     // MARK: - PagerTabStripDataSource
@@ -201,7 +217,43 @@ class Tab_:ButtonBarPagerTabStripViewController {
             ChatCommon.updateMakeReadMessage(args: args)
             self.updateBadgeChat()
         }
-        
+        ChatHub.chatHub.on("notification") {args in
+            self.updateBadgeNotification()
+        }
+        ChatHub.chatHub.on("makeReadAllNotification") {args in
+            self.updateBadgeNotification()
+        }
+        ChatHub.chatHub.on("makeReadNotification") {args in
+            self.updateBadgeNotification()
+        }
+    }
+    
+    func getTotalNofiticationNotRead(){
+        // lay tong so notification chua doc
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getTotalNotificationsNotRead"
+        let params : String = "{\"nUserID\" : \(Config.userID)}"
+        ApiService.Post(url: apiUrl, params: params, callback: callbackGetTotalNotiNotRead, errorCallBack: errorGetTotalNotiNotRead)
+    }
+    
+    func callbackGetTotalNotiNotRead(data : Data) {
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dic = json as? [String : Any] {
+            let nCount = dic["getTotalNotificationsNotReadResult"] as? String
+            Config.nTotalNotificationNotRead = Int32(nCount!)!
+            Config.bCheckRead = true
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    self.updateBadgeNotification()
+                }
+            }
+        }
+    }
+    
+    func errorGetTotalNotiNotRead(error : Error) {
+        let message = error.localizedDescription
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func updateBadgeChat(){
@@ -209,6 +261,20 @@ class Tab_:ButtonBarPagerTabStripViewController {
         
         let label : UILabel = btn.customView?.viewWithTag(200) as! UILabel
         let count = getNumberBadgeChat()
+        if(count > 0){
+            label.text = String(count)
+            label.isHidden = false
+        }
+        else{
+            label.text = ""
+            label.isHidden = true
+        }
+    }
+    
+    func updateBadgeNotification(){
+        let btn : UIBarButtonItem = (self.navigationItem.rightBarButtonItems?[0])! as UIBarButtonItem
+        let label : UILabel = btn.customView?.viewWithTag(200) as! UILabel
+        let count = getNumberBadgeNotification()
         if(count > 0){
             label.text = String(count)
             label.isHidden = false
@@ -228,6 +294,11 @@ class Tab_:ButtonBarPagerTabStripViewController {
             }
         }
         return list.count
+    }
+    
+    private func getNumberBadgeNotification() -> Int{
+        let nCount = Config.nTotalNotificationNotRead
+        return Int(nCount)
     }
     
     func createBadge(parent : UIView, tag : Int, number : Int, frame : CGRect){

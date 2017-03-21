@@ -15,11 +15,23 @@ extension UILabel {
         tagger.string = self.text
         let lang      = tagger.tag(at: 0, scheme: NSLinguisticTagSchemeLanguage,
                                    tokenRange: nil, sentenceRange: nil)
-        
-      
-            self.textAlignment = NSTextAlignment.right
+        self.textAlignment = NSTextAlignment.right
        
-}}
+    }
+    
+    static public var idNotification : Int? = 0
+    
+    func SetNotification(v:Int){
+        UILabel.idNotification = v
+    }
+    func GetNotification() -> Int{
+        return UILabel.idNotification!
+    }
+}
+
+
+
+
 extension String {
     subscript(pos: Int) -> String {
         precondition(pos >= 0, "character position can't be negative")
