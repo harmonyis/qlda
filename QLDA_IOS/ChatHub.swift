@@ -206,8 +206,8 @@ class ChatHub {
             
             Config.nTotalNotificationNotRead = 0
         }
-        
-        chatHub.on("makeReadAllNotification") {args in
+        		
+        chatHub.on("makeReadNotification") {args in
             
             Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead - 1
         }

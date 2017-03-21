@@ -9,18 +9,19 @@
 import UIKit
 import SwiftR
 
-class Notification_VC: Base_VC {
+class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tbNotification: UITableView!
-    
-   
-    
+
     @IBOutlet weak var btAllRead: UIButton!
     
     let _nSizePage = 14
-    let _currentPage = 1
+    var _currentPage = 1
     var _notificationItems : [NotificationItem]? = nil
-    
     var dataSource_Portrait : TableNotifications_Portrait?
+    var firstRun : Bool? = true
+    let myColorDefault : UIColor = UIColor(netHex: 0x000000)
+    let myColorUnRead : UIColor = UIColor(netHex: 0x0e83d5)
+    let mycolorSelected : UIColor = UIColor.red
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,19 +32,27 @@ class Notification_VC: Base_VC {
         self.tbNotification.rowHeight = UITableViewAutomaticDimension
         self.tbNotification.estimatedRowHeight = 30
         self.tbNotification.estimatedSectionHeaderHeight = 30
-
+        
+        btAllRead.layer.borderWidth = 1
+        btAllRead.layer.borderColor = UIColor.white.cgColor
+        
         LoadNotificationNew()
     }
     
     func getNotifications(){
-        
         let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getRecentNotifications"
-        
+        let params : String = "{\"nUserID\" : \(Config.userID), \"nCurrentPage\": \(_currentPage), \"nPageSize\":\(_nSizePage)}"
+
+        ApiService.Post(url: apiUrl, params: params, callback: callbackGetMsg, errorCallBack: errorGetMsg)
+     
+    }
+    func getNotificationReloads(){
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getRecentNotifications"
         let params : String = "{\"nUserID\" : \(Config.userID), \"nCurrentPage\": \(_currentPage), \"nPageSize\":\(_nSizePage)}"
         
-        ApiService.Post(url: apiUrl, params: params, callback: callbackGetMsg, errorCallBack: errorGetMsg)
+        ApiService.Post(url: apiUrl, params: params, callback: callbackGetMsgReload, errorCallBack: errorGetMsg)
+        
     }
-    
     func callbackGetMsg(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dics = json as? [String:Any] {
@@ -71,12 +80,42 @@ class Notification_VC: Base_VC {
         
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
-            
                 self.LoadTableView()
-                
             }
         }
     }
+    func callbackGetMsgReload(data : Data) {
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dics = json as? [String:Any] {
+            if let dic = dics["getRecentNotificationsResult"] as? [[String:Any]] {
+                for item in dic{
+                    var notificationItem = NotificationItem()
+                    
+                    let notificationID = item["NotificationID"] as? Int
+                    let notificationTitle = item["NotificationTitle"] as? String
+                    let notificationisRead = item["NotificationisRead"] as? Bool
+                    let notificationCreated = Date.init(jsonDate: (item["NotificationCreated"] as? String)!)
+                    let notificationProID = item["NotificationProID"] as? Int
+                    
+                    notificationItem.NotificationID = notificationID
+                    notificationItem.NotificationProID = notificationProID
+                    notificationItem.NotificationTitle = notificationTitle
+                    notificationItem.NotificationCreated = notificationCreated
+                    notificationItem.NotificationisRead = notificationisRead
+                    
+                    _notificationItems?.append(notificationItem)
+                }
+            }
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                self.LoadTableView()
+            }
+        }
+        loadingData = false
+    }
+    
     
     func errorGetMsg(error : Error) {
         let message = error.localizedDescription
@@ -86,20 +125,12 @@ class Notification_VC: Base_VC {
     }
     
     func LoadTableView(){
-        
-        var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        let dateString = dateFormatter.date(from: ("2017-03-17 15:37:58"))
-        print(dateString)
-        
-        
-        self.dataSource_Portrait = TableNotifications_Portrait(self.tbNotification, arrNoti: self._notificationItems!)
-            self.tbNotification.dataSource = self.dataSource_Portrait
-            self.tbNotification.delegate = self.dataSource_Portrait
-            self.tbNotification.reloadData()
+        self.tbNotification.dataSource = self
+        self.tbNotification.delegate = self
+        self.tbNotification.reloadData()
         
     }
-    
+    // load khi co tin nhan moi
     func LoadNotificationNew(){
         ChatHub.addChatHub(hub: ChatHub.chatHub)
             ChatHub.chatHub.on("notification") { args in
@@ -116,7 +147,7 @@ class Notification_VC: Base_VC {
                 notificationItemNew.NotificationCreated = dateString
                 
                 notificationItemNew.NotificationisRead = false
-                self._notificationItems?.append(notificationItemNew)
+                self._notificationItems?.insert( notificationItemNew, at: 0)
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
@@ -166,4 +197,142 @@ class Notification_VC: Base_VC {
         // Dispose of any resources that can be recreated.
     }
     
+    //------------------------------------------------------------------------------------
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return self._notificationItems!.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tbNotification?.dequeueReusableCell(withIdentifier: "idCustomCell", for: indexPath) as! CustomTableNotificationCell
+        let itemNotification :NotificationItem = self._notificationItems![indexPath.row]
+        // Kiem tra xem thong bao da doc chua
+        var myColorTemp : UIColor? = nil
+        if(itemNotification.NotificationisRead == false){
+            myColorTemp = myColorUnRead
+        }
+        else{
+            myColorTemp = myColorDefault
+        }
+        // label thong bao
+        cell.lblTitle.text = itemNotification.NotificationTitle
+        cell.lblTitle.font = UIFont.systemFont(ofSize: 13)
+        cell.lblTitle.textAlignment = NSTextAlignment.left
+        cell.lblTitle.textColor = myColorTemp
+        
+        var eventClick = UITapGestureRecognizer()
+        
+        eventClick.addTarget(self, action:  #selector(TableNotifications_Portrait.ClickCell(sender:)))
+        cell.lblTitle.accessibilityLabel = (itemNotification.NotificationTitle!)
+        cell.lblTitle.tag = (Int)(itemNotification.NotificationProID!)
+        cell.lblTitle.addGestureRecognizer(eventClick)
+        cell.lblTitle.isUserInteractionEnabled = true;
+        cell.lblTitle.SetNotification(v: (Int)(itemNotification.NotificationID!))
+                //-------------------------
+        // label ngay tao
+        if(itemNotification.NotificationCreated != nil){
+            var dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+            dateFormatter.timeZone = TimeZone(secondsFromGMT : 7)
+            let dateString = dateFormatter.string(from: itemNotification.NotificationCreated!)
+            
+            cell.lblDate.text = dateString
+            cell.lblDate.font = UIFont.systemFont(ofSize: 13)
+            cell.lblDate.textAlignment = NSTextAlignment.right
+            cell.lblDate.textColor = myColorTemp
+            
+        }
+        //-------------------------
+        return cell
+    }
+    
+    // khi keo table xuong cuoi cung thi se load them data
+    var loadingData = false
+    
+    func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let lastElement = (_notificationItems?.count)! - 1
+        if(!loadingData && indexPath.row == lastElement){
+            _currentPage += 1
+            getNotificationReloads()
+            loadingData = true
+        }
+    }
+    //-----------------------------------------------------
+    // su kien nhan vao title notification
+    var _idDuAnClick :Int? = 0
+    
+    func ClickCell(sender: UITapGestureRecognizer)
+    {
+        let idDuAn = (sender.view?.tag)!
+        _idDuAnClick = idDuAn
+        let value : String = (sender.view?.accessibilityLabel)!
+        let ulLabel = sender.view as? UILabel
+        let idNotification = ulLabel?.GetNotification()
+        
+        self.tbNotification?.reloadData()
+        // lay ten du an
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getTenDuAnByID"
+        let params : String = "{\"nDuAnID\" : \(idDuAn), \"szUsername\": \""+variableConfig.m_szUserName+"\", \"szPassword\":\""+variableConfig.m_szPassWord+"\"}"
+        
+        ApiService.Post(url: apiUrl, params: params, callback: callbackGetNameDuAn, errorCallBack: errorGetNameDuAn)
+        
+        //await _chatHubProxy.Invoke("MakeReadNotification", _nCurrentUserID, nNotificationID);
+        //update trong co so du lieu
+        do{
+            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, idNotification])
+        }
+        catch {}
+        
+    }
+    func callbackGetNameDuAn(data : Data) {
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dics = json as? [String:Any] {
+            let szTenDuAn = (dics["getTenDuAnByIDResult"] as? String)!
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    // chuyen qua tab du an
+                    variableConfig.m_szIdDuAn = self._idDuAnClick!
+                    variableConfig.m_szTenDuAn = szTenDuAn
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
+    
+    func errorGetNameDuAn(error : Error) {
+        let message = error.localizedDescription
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        //self.present(alert, animated: true, completion: nil)
+    }
+    
+    // Hàm set chữ bold
+    func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
+        let fontSize = UIFont.systemFontSize
+        let attrs = [
+            NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize),
+            NSForegroundColorAttributeName: UIColor.black
+        ]
+        let nonBoldAttribute = [
+            NSFontAttributeName: UIFont.systemFont(ofSize: fontSize),
+            ]
+        let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
+        if let range = nonBoldRange {
+            attrStr.setAttributes(nonBoldAttribute, range: range)
+        }
+        return attrStr
+    }
+    
+    // Hàm tính size text
+    func calulaterTextSize(text : String, size : CGSize) -> CGRect{
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
+        return estimatedFrame
+    }
 }

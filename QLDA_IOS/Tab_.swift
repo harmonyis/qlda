@@ -21,6 +21,10 @@ class Tab_:ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
         // change selected bar color
         
+        //if(Config.bCheckRead == false){
+        getTotalNofiticationNotRead()
+        //}
+        
         settings.style.buttonBarBackgroundColor = graySpotifyColor
         settings.style.buttonBarItemBackgroundColor = graySpotifyColor
         settings.style.selectedBarBackgroundColor = UIColor(netHex: 0x0e83d5)
@@ -201,7 +205,43 @@ class Tab_:ButtonBarPagerTabStripViewController {
             ChatCommon.updateMakeReadMessage(args: args)
             self.updateBadgeChat()
         }
-        
+        ChatHub.chatHub.on("notification") {args in
+            self.updateBadgeNotification()
+        }
+        ChatHub.chatHub.on("makeReadAllNotification") {args in
+            self.updateBadgeNotification()
+        }
+        ChatHub.chatHub.on("makeReadNotification") {args in
+            self.updateBadgeNotification()
+        }
+    }
+    
+    func getTotalNofiticationNotRead(){
+        // lay tong so notification chua doc
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getTotalNotificationsNotRead"
+        let params : String = "{\"nUserID\" : \(Config.userID)}"
+        ApiService.Post(url: apiUrl, params: params, callback: callbackGetTotalNotiNotRead, errorCallBack: errorGetTotalNotiNotRead)
+    }
+    
+    func callbackGetTotalNotiNotRead(data : Data) {
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        if let dic = json as? [String : Any] {
+            let nCount = dic["getTotalNotificationsNotReadResult"] as? String
+            Config.nTotalNotificationNotRead = Int32(nCount!)!
+            Config.bCheckRead = true
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    self.updateBadgeNotification()
+                }
+            }
+        }
+    }
+    
+    func errorGetTotalNotiNotRead(error : Error) {
+        let message = error.localizedDescription
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func updateBadgeChat(){
@@ -209,6 +249,20 @@ class Tab_:ButtonBarPagerTabStripViewController {
         
         let label : UILabel = btn.customView?.viewWithTag(200) as! UILabel
         let count = getNumberBadgeChat()
+        if(count > 0){
+            label.text = String(count)
+            label.isHidden = false
+        }
+        else{
+            label.text = ""
+            label.isHidden = true
+        }
+    }
+    
+    func updateBadgeNotification(){
+        let btn : UIBarButtonItem = (self.navigationItem.rightBarButtonItems?[0])! as UIBarButtonItem
+        let label : UILabel = btn.customView?.viewWithTag(200) as! UILabel
+        let count = getNumberBadgeNotification()
         if(count > 0){
             label.text = String(count)
             label.isHidden = false
@@ -228,6 +282,11 @@ class Tab_:ButtonBarPagerTabStripViewController {
             }
         }
         return list.count
+    }
+    
+    private func getNumberBadgeNotification() -> Int{
+        let nCount = Config.nTotalNotificationNotRead
+        return Int(nCount)
     }
     
     func createBadge(parent : UIView, tag : Int, number : Int, frame : CGRect){
