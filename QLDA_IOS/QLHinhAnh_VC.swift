@@ -29,7 +29,7 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Danh sách hình ảnh"
+        self.navigationItem.title = "Hình ảnh dự án"
         self.idDuAn = variableConfig.m_szIdDuAn
         self.listName = "DuAn"
         self.userName = variableConfig.m_szUserName

@@ -170,7 +170,7 @@ class CanhBao_VC: Base_VC {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         let dateTime = dateFormatter.date(from: date)
-        let dateTimeAdded = Calendar.current.date(byAdding: .month, value: 2, to: dateTime!)
+        let dateTimeAdded = Calendar.current.date(byAdding: .month, value: Int(month)!, to: dateTime!)
         return dateFormatter.string(from: dateTimeAdded!)
     }
     func loadDataError(error : ErrorEntity) {
