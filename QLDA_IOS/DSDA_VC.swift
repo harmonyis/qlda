@@ -348,7 +348,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "Tổng mức đầu tư"
+            lable.text = "Giá trị giải ngân"
             lable.textAlignment = .center
             lable.frame = CGRect(x: 0, y: 0 , width: (wTMDT), height: 50)
             lable.numberOfLines = 0
@@ -365,7 +365,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "Giá trị giải ngân"
+            lable.text = "Tổng mức đầu tư"
             lable.textAlignment = .center
             lable.frame = CGRect(x: 0, y: 0 , width: (wGN), height: 50)
             lable.numberOfLines = 0

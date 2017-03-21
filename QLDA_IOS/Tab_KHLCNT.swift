@@ -11,7 +11,7 @@ import Foundation
 import XLPagerTabStrip
 
 class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
-
+    
     @IBOutlet weak var tbDSDA: UITableView!
     var m_dsGoiThau = [GoiThau]()
     var m_countGoiThau : Int = 0
@@ -19,7 +19,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     var m_thongTinKHLCNT : [String] = []
     var indexTrangThaiGoiThau = Set<Int>()
     var blackTheme = false
-    
+    var dataSource_Lanscape : TableKHLCNT_Landscape?
     var dataSource_Portrait : TableKHLCNT_Portrait?
     var itemInfo = IndicatorInfo(title: "KHLCNT")
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
@@ -33,7 +33,11 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.rowHeight = UITableViewAutomaticDimension
         self.tbDSDA.estimatedRowHeight = 60
-        //let szUser=lblName.
+        
+        self.tbDSDA.register(UINib(nibName: "Cell_KHLCNT_Header_Landscape", bundle: nil), forCellReuseIdentifier: "Cell_KHLCNT_Header_Landscape")
+        
+        self.tbDSDA.register(UINib(nibName: "Cell_KHLCNT_HD_Landscape", bundle: nil), forCellReuseIdentifier: "Cell_KHLCNT_HD_Landscape")
+        
         let params : String = "{\"szIdDA\": \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetGoiThau"
         
@@ -72,6 +76,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
                 let size = CGSize(width: 1000 , height: 30)
                 let fontTitle = UIFont.boldSystemFont(ofSize: 13)
                 let fontGiaTri = UIFont.systemFont(ofSize: 13)
+                //m_TongGiaTri = 10000000000000000
                 wTongGiaTri = variableConfig.convert((String)(m_TongGiaTri)).computeTextSize(size : size, font : fontGiaTri).width
                 //So sanh với kích thước title
                 wTongGiaTri = max(wTongGiaTri, "Giá gói thầu".computeTextSize(size : size, font : fontTitle).width)
@@ -109,7 +114,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
                         self.m_thongTinKHLCNT = arrGoiThau
-                      self.LoadTableView()
+                        self.LoadTableView()
                     }
                 }
             }
@@ -122,20 +127,24 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
+            self.dataSource_Lanscape = TableKHLCNT_Landscape(self.tbDSDA, arrGoiThau: self.m_dsGoiThau ,arrthongTinKHLCNT : self.m_thongTinKHLCNT , nTongGiaTri : self.m_TongGiaTri, wTongGiaTri : self.wTongGiaTri)
+            self.tbDSDA.dataSource = self.dataSource_Lanscape
+            self.tbDSDA.delegate = self.dataSource_Lanscape
+            self.tbDSDA.reloadData()
             
             
         }
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
             
             
-            self.dataSource_Portrait = TableKHLCNT_Portrait(self.tbDSDA, arrGoiThau: self.m_dsGoiThau ,arrthongTinKHLCNT : self.m_thongTinKHLCNT , nTongGiaTri : self.m_TongGiaTri)
+            self.dataSource_Portrait = TableKHLCNT_Portrait(self.tbDSDA, arrGoiThau: self.m_dsGoiThau ,arrthongTinKHLCNT : self.m_thongTinKHLCNT , nTongGiaTri : self.m_TongGiaTri, wTongGiaTri : self.wTongGiaTri)
             self.tbDSDA.dataSource = self.dataSource_Portrait
             self.tbDSDA.delegate = self.dataSource_Portrait
             self.tbDSDA.reloadData()
         }
         
     }
-
+    
     
     func AlertError(error : Error) {
         let message = error.localizedDescription
@@ -147,6 +156,11 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        LoadTableView()
     }
     
     
@@ -163,7 +177,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     //  func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
     //    return    150
     //  }
-  
+    
     func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
         let fontSize = UIFont.systemFontSize
         let attrs = [
@@ -179,36 +193,36 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
         }
         return attrStr
     }
- func duAnConClickDetail(sender: UITapGestureRecognizer)
- {
- //print(sender.view?.tag)
- let value : Int = (sender.view?.tag)!
- // print(value)
- 
- //  print(self.expandedCellPaths)
- if self.indexTrangThaiGoiThau.contains(value) {
- self.indexTrangThaiGoiThau.remove(value)
- }
- else {
- self.indexTrangThaiGoiThau.insert(value)
- 
- }
-    self.tbDSDA.rowHeight = UITableViewAutomaticDimension
-    self.tbDSDA.estimatedRowHeight = 60
-    self.tbDSDA.beginUpdates()
-    self.tbDSDA.endUpdates()
- self.tbDSDA.reloadData()
- }
- 
- init(itemInfo: IndicatorInfo) {
- self.itemInfo = itemInfo
- super.init(nibName: nil, bundle: nil)
- }
- 
- required init?(coder aDecoder: NSCoder) {
- super.init(coder: aDecoder)
- }
- func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
- return itemInfo
- }
- }
+    func duAnConClickDetail(sender: UITapGestureRecognizer)
+    {
+        //print(sender.view?.tag)
+        let value : Int = (sender.view?.tag)!
+        // print(value)
+        
+        //  print(self.expandedCellPaths)
+        if self.indexTrangThaiGoiThau.contains(value) {
+            self.indexTrangThaiGoiThau.remove(value)
+        }
+        else {
+            self.indexTrangThaiGoiThau.insert(value)
+            
+        }
+        self.tbDSDA.rowHeight = UITableViewAutomaticDimension
+        self.tbDSDA.estimatedRowHeight = 60
+        self.tbDSDA.beginUpdates()
+        self.tbDSDA.endUpdates()
+        self.tbDSDA.reloadData()
+    }
+    
+    init(itemInfo: IndicatorInfo) {
+        self.itemInfo = itemInfo
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return itemInfo
+    }
+}

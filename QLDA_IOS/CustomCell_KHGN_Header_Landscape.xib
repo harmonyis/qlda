@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -41,7 +41,7 @@
                         <rect key="frame" x="20" y="0.0" width="160" height="39"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPE-8H-4Zd">
-                                <rect key="frame" x="5" y="0.0" width="150" height="39"/>
+                                <rect key="frame" x="5" y="5" width="150" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -49,9 +49,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="dPE-8H-4Zd" secondAttribute="bottom" id="4sA-oj-NfD"/>
+                            <constraint firstAttribute="bottom" secondItem="dPE-8H-4Zd" secondAttribute="bottom" constant="5" id="4sA-oj-NfD"/>
                             <constraint firstAttribute="trailing" secondItem="dPE-8H-4Zd" secondAttribute="trailing" constant="5" id="7qZ-vO-4sR"/>
-                            <constraint firstItem="dPE-8H-4Zd" firstAttribute="top" secondItem="sO7-fB-YRC" secondAttribute="top" id="B6M-wf-kfJ"/>
+                            <constraint firstItem="dPE-8H-4Zd" firstAttribute="top" secondItem="sO7-fB-YRC" secondAttribute="top" constant="5" id="B6M-wf-kfJ"/>
                             <constraint firstItem="dPE-8H-4Zd" firstAttribute="leading" secondItem="sO7-fB-YRC" secondAttribute="leading" constant="5" id="JBU-VZ-Ahg"/>
                         </constraints>
                     </view>
@@ -71,7 +71,7 @@
                         <rect key="frame" x="410" y="0.0" width="80" height="39"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0U2-ht-SNl">
-                                <rect key="frame" x="5" y="0.0" width="70" height="39"/>
+                                <rect key="frame" x="5" y="5" width="70" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -80,8 +80,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0U2-ht-SNl" firstAttribute="leading" secondItem="82U-uF-rNT" secondAttribute="leading" constant="5" id="dF0-p6-cdS"/>
-                            <constraint firstAttribute="bottom" secondItem="0U2-ht-SNl" secondAttribute="bottom" id="gU5-wP-wYX"/>
-                            <constraint firstItem="0U2-ht-SNl" firstAttribute="top" secondItem="82U-uF-rNT" secondAttribute="top" id="lxU-f7-efU"/>
+                            <constraint firstAttribute="bottom" secondItem="0U2-ht-SNl" secondAttribute="bottom" constant="5" id="gU5-wP-wYX"/>
+                            <constraint firstItem="0U2-ht-SNl" firstAttribute="top" secondItem="82U-uF-rNT" secondAttribute="top" constant="5" id="lxU-f7-efU"/>
                             <constraint firstAttribute="trailing" secondItem="0U2-ht-SNl" secondAttribute="trailing" constant="5" id="qSk-0Z-Iln"/>
                         </constraints>
                     </view>
@@ -89,7 +89,7 @@
                         <rect key="frame" x="490" y="0.0" width="80" height="39"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydq-p8-VRq">
-                                <rect key="frame" x="5" y="0.0" width="70" height="39"/>
+                                <rect key="frame" x="5" y="5" width="70" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -98,8 +98,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Ydq-p8-VRq" secondAttribute="trailing" constant="5" id="2Do-Tc-Orl"/>
-                            <constraint firstAttribute="bottom" secondItem="Ydq-p8-VRq" secondAttribute="bottom" id="OOQ-pe-4nv"/>
-                            <constraint firstItem="Ydq-p8-VRq" firstAttribute="top" secondItem="ldJ-PM-iGQ" secondAttribute="top" id="aMp-uA-saX"/>
+                            <constraint firstAttribute="bottom" secondItem="Ydq-p8-VRq" secondAttribute="bottom" constant="5" id="OOQ-pe-4nv"/>
+                            <constraint firstItem="Ydq-p8-VRq" firstAttribute="top" secondItem="ldJ-PM-iGQ" secondAttribute="top" constant="5" id="aMp-uA-saX"/>
                             <constraint firstItem="Ydq-p8-VRq" firstAttribute="leading" secondItem="ldJ-PM-iGQ" secondAttribute="leading" constant="5" id="nua-mf-T4Y"/>
                         </constraints>
                     </view>

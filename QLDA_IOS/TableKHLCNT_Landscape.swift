@@ -1,5 +1,5 @@
 //
-//  TableKHLCNT_Portrait.swift
+//  TableKHLCNT_Landscape.swift
 //  QLDA_IOS
 //
 //  Created by Hoang The Anh on 20/03/2017.
@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
+class TableKHLCNT_Landscape : NSObject, UITableViewDelegate, UITableViewDataSource {
     
     
     var m_dsGoiThau = [GoiThau]()
@@ -19,7 +19,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
     var tbvKHLCNT : UITableView?
     var uiViewKHLCNT : UIViewController?
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
-
+    
     var wTongGiaTri : CGFloat = 0
     
     // MARK: - Table view data source
@@ -39,7 +39,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
         
         
     }
-  
+    
     
     
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
@@ -51,7 +51,6 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
         if index < 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_R1", for: indexPath) as! Cell_KHLCNT_R1
             print(self.m_thongTinKHLCNT)
-            
             cell.lblGiaTri.text = self.m_thongTinKHLCNT[index + 1]
             cell.lblTieuDe.text = arrTieuDe[index]
             
@@ -60,99 +59,89 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
             return cell
         }
         else if index == 3 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_R2", for: indexPath) as! Cell_KHLCNT_R2
-            cell.constraintLeftTenGoiThau.constant = wTongGiaTri + 30
-            cell.constraintLeftTongGiaTri.constant = wTongGiaTri + 30
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_Header_Landscape", for: indexPath) as! Cell_KHLCNT_Header_Landscape
             
-            cell.lblGiaTri.text = variableConfig.convert((String)(m_TongGiaTri))
-            cell.lblcountDSGT.text = "Danh sách gói thầu (" + (String)(m_countGoiThau) + " gói thầu )"
+            cell.constraintRightTenGoiThau.constant = wTongGiaTri + 180
+            cell.constraintRightTongGiaTr.constant = wTongGiaTri + 180
+
+            cell.lblTongGiaTri.text = variableConfig.convert((String)(m_TongGiaTri))
+            cell.lblDSGT.text = "Danh sách gói thầu (" + (String)(m_countGoiThau) + " gói thầu )"
             
             
-            cell.uiView_R2.layer.borderColor = myColorBoder.cgColor
-            cell.uiView_R2.layer.borderWidth = 0.5
+            cell.uiViewLHD.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewLHD.layer.borderWidth = 0.5
             
-            cell.uiView_R2_STT.layer.borderColor = myColorBoder.cgColor
-            cell.uiView_R2_STT.layer.borderWidth = 0.5
+            cell.uiViewSTT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewSTT.layer.borderWidth = 0.5
             
-            cell.uiView_R2_TenGT.layer.borderColor = myColorBoder.cgColor
-            cell.uiView_R2_TenGT.layer.borderWidth = 0.5
+            cell.uiViewDSGT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewDSGT.layer.borderWidth = 0.5
             
-            cell.uiView_R2_GiaGoiThau.layer.borderColor = myColorBoder.cgColor
-            cell.uiView_R2_GiaGoiThau.layer.borderWidth = 0.5
+            cell.uiView_GiaGT.layer.borderColor = myColorBoder.cgColor
+            cell.uiView_GiaGT.layer.borderWidth = 0.5
             
-            cell.uiView_R2_Detail.layer.borderColor = myColorBoder.cgColor
-            cell.uiView_R2_Detail.layer.borderWidth = 0.5
+            cell.uiViewGiaGoiThau.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewGiaGoiThau.layer.borderWidth = 0.5
             
-            cell.uiViewTongGT.layer.borderColor = myColorBoder.cgColor
-            cell.uiViewTongGT.layer.borderWidth = 0.5
+            cell.uiViewdetail.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewdetail.layer.borderWidth = 0.5
             
-            cell.uiViewTongGT_C1.layer.borderColor = myColorBoder.cgColor
-            cell.uiViewTongGT_C1.layer.borderWidth = 0.5
+            cell.uiViewHTLCNT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHTLCNT.layer.borderWidth = 0.5
             
-            cell.uiViewTongGT_C2.layer.borderColor = myColorBoder.cgColor
-            cell.uiViewTongGT_C2.layer.borderWidth = 0.5
+            cell.uiViewPTLCNT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewPTLCNT.layer.borderWidth = 0.5
+            
+            cell.uiViewTenGoiThau.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewTenGoiThau.layer.borderWidth = 0.5
+            
+            cell.uiViewTongGiaTri.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewTongGiaTri.layer.borderWidth = 0.5
             return cell
             
         }
         else {
-            let  cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_R3", for: indexPath) as! Cell_KHLCNT_R3
+            let  cell = tableView.dequeueReusableCell(withIdentifier: "Cell_KHLCNT_HD_Landscape", for: indexPath) as! Cell_KHLCNT_HD_Landscape
             cell.lblSTT.text = (String)(index - 3)
             
-            cell.constraintRightTenGoiThau.constant = wTongGiaTri + 30
+            cell.constraintRightTenGT.constant = wTongGiaTri + 180 - 8
             
-            cell.lblTenGoiThau.text = m_dsGoiThau[index - 4].TenGT!
+            cell.lblTenGT.text = m_dsGoiThau[index - 4].TenGT!
             //cell.lblTenGoiThau.numberOfLines = 0
             //  cell.lblTenGoiThau.sizeToFit()
             
-            cell.lblGiaTriTT.text = variableConfig.convert(m_dsGoiThau[index - 4].GiaGT!)
+            cell.lblGiaGT.text = variableConfig.convert(m_dsGoiThau[index - 4].GiaGT!)
             
-            var targetString : String = "Hình thức LCNT: \(m_dsGoiThau[index - 4].HinhThucLCNT!)"
-            var range = NSMakeRange(16, targetString.characters.count - 16 )
-            cell.lblHinhThucLCNT.attributedText = attributedString(from: targetString, nonBoldRange: range)
+          
+            cell.lblHTLCNT.text = m_dsGoiThau[index - 4].HinhThucLCNT!
             
             
-            targetString = "Phương thức LCNT: \(m_dsGoiThau[index - 4].PhuongThucLCNT!)"
-            range = NSMakeRange(19, targetString.characters.count - 19 )
-            cell.lblPhuongThucLCNT.attributedText = attributedString(from: targetString, nonBoldRange: range)
+            cell.lblPHLCNT.text = m_dsGoiThau[index - 4].PhuongThucLCNT!
+           
+            cell.lblLoaiHD.text = m_dsGoiThau[index - 4].LoaiHopDong!
             
-            targetString = "Loại hợp đồng: \(m_dsGoiThau[index - 4].LoaiHopDong!)"
-            range = NSMakeRange(16, targetString.characters.count - 16 )
-            cell.lblLoaiHD.attributedText = attributedString(from: targetString, nonBoldRange: range)
-        
-            cell.uiViewSTT.backgroundColor = myColorBackgroud
+          
             cell.uiViewSTT.layer.borderColor = myColorBoder.cgColor
             cell.uiViewSTT.layer.borderWidth = 0.5
             
-            cell.uiViewTenGoiThau.backgroundColor = myColorBackgroud
-            cell.uiViewTenGoiThau.layer.borderColor = myColorBoder.cgColor
-            cell.uiViewTenGoiThau.layer.borderWidth = 0.5
+            cell.uiViewPTLCNT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewPTLCNT.layer.borderWidth = 0.5
             
-            cell.uiViewGiaTriTT.backgroundColor = myColorBackgroud
-            cell.uiViewGiaTriTT.layer.borderColor = myColorBoder.cgColor
-            cell.uiViewGiaTriTT.layer.borderWidth = 0.5
+            cell.uiViewHTLCNT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewHTLCNT.layer.borderWidth = 0.5
             
-            cell.uiViewThongTinCT.layer.borderColor = myColorBoder.cgColor
-            cell.uiViewThongTinCT.layer.borderWidth = 0.5
+            cell.uiViewGiaGT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewGiaGT.layer.borderWidth = 0.5
             
-            cell.UiViewBDLeftTTCT.layer.borderColor = myColorBoder.cgColor
-            cell.UiViewBDLeftTTCT.layer.borderWidth = 0.5
+            cell.uiViewTenGT.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewTenGT.layer.borderWidth = 0.5
             
-            cell.uiViewDetail.backgroundColor = myColorBackgroud
-            cell.uiViewDetail.layer.borderColor = myColorBoder.cgColor
-            cell.uiViewDetail.layer.borderWidth = 0.5
+       //     cell.uiViewDetail.backgroundColor = myColorBackgroud
+            cell.uiViewLoaiHD.layer.borderColor = myColorBoder.cgColor
+            cell.uiViewLoaiHD.layer.borderWidth = 0.5
             
-            cell.uiViewTieuDe.layer.borderColor = myColorBoder.cgColor
-            cell.uiViewTieuDe.layer.borderWidth = 0.5
-         
-            let eventClick = UITapGestureRecognizer()
+          
             
-            cell.uiViewDetail.tag = (Int)(m_dsGoiThau[index - 4].IdGT!)!
-            eventClick.addTarget(self, action:  #selector(TableKHLCNT_Portrait.duAnConClickDetail(sender: )))
-            cell.uiViewDetail.addGestureRecognizer(eventClick)
-            cell.uiViewDetail.isUserInteractionEnabled = true;
-            
-            cell.uiViewThongTinCT.isHidden = !self.indexTrangThaiGoiThau.contains((Int)(m_dsGoiThau[index - 4].IdGT!)!)
-         
             return cell
         }
         

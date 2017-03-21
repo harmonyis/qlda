@@ -150,9 +150,9 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCha.contains(section)
         
         if self.indexTrangThaiDuAnCha.contains(section) {
-            cell.constraintHeightDA.constant = CGFloat(heightTD.height) + CGFloat(150) + 10
+            cell.constraintHeightDA.constant = CGFloat(heightTD.height) + CGFloat(92) + 10
             cell.constraintHeightTieuDe.constant = CGFloat(heightTD.height) + 10
-            cell.constrainHeightTTCT.constant = 150
+            cell.constrainHeightTTCT.constant = 92
             
             
         }
@@ -301,9 +301,9 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.UiViewThongTinChiTiet.isHidden = !self.indexTrangThaiDuAnCon.contains(value)
         
         if self.indexTrangThaiDuAnCon.contains(value) {
-            cell.constraintHeightDA.constant = CGFloat(heightTD.height) + CGFloat(150) + 10
+            cell.constraintHeightDA.constant = CGFloat(heightTD.height) + CGFloat(92) + 10
             cell.constraintHeightTieuDe.constant = CGFloat(heightTD.height) + 10
-            cell.constrainHeightTTCT.constant = 150
+            cell.constrainHeightTTCT.constant = 92
             
             
         }
