@@ -19,8 +19,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
     var m_arrKHV : [String] = [String]()
      var m_arrDCKHV : [String] = [String]()
     @IBOutlet weak var UiviewKHV: UIView!
-    @IBOutlet weak var UiviewKHVDC: UIView!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     let m_date = Date()
     let m_calendar = Calendar.current
     var m_IdKHV : String = ""
@@ -29,6 +28,12 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        
+        UiviewKHV.isHidden = true
+        
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetKeHoachVon"
         let m_year = self.m_calendar.component(.year, from: self.m_date)
         let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"nam\" : \""+(String)(m_year)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
@@ -85,6 +90,10 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
                
+                self.activityIndicator.stopAnimating()
+                
+                self.UiviewKHV.isHidden = false
+                
                 var icount = 0
                 let style = NSMutableParagraphStyle()
                 style.alignment = NSTextAlignment.right
