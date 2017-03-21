@@ -155,7 +155,7 @@ class CanhBaoDatasource : NSObject, UITableViewDelegate, UITableViewDataSource,U
                 var range = NSMakeRange(42, targetString.characters.count - 42)
                 cell.lblNgayNhan.attributedText = attributedString(from: targetString, nonBoldRange: range)
                 
-                targetString = "Thời gian quy định (ngày): \(item.thoiGianQD)"
+                targetString = "Thời gian quy định (tháng): \(item.thoiGianQD)"
                 range = NSMakeRange(26, targetString.characters.count - 26)
                 cell.lblThoiGianQD.attributedText = attributedString(from: targetString, nonBoldRange: range)
                 
@@ -231,7 +231,7 @@ class CanhBaoDatasource : NSObject, UITableViewDelegate, UITableViewDataSource,U
                 var range = NSMakeRange(30, targetString.characters.count - 30)
                 cell.lblNgayNhan.attributedText = attributedString(from: targetString, nonBoldRange: range)
                 
-                targetString = "Thời gian quy định (ngày): \(item.thoiGianQD)"
+                targetString = "Thời gian quy định (tháng): \(item.thoiGianQD)"
                 range = NSMakeRange(26, targetString.characters.count - 26)
                 cell.lblThoiGianQD.attributedText = attributedString(from: targetString, nonBoldRange: range)
                 
