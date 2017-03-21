@@ -16,7 +16,8 @@ class Config{
     static var profifePictureUrl = ""
     static var profilePicture : UIImage? = nil
     static var loginName : String = ""
-    static var nTotalNotificationNotRead : Int32 = 0
+    //static var nTotalNotificationNotRead : Int32 = 0
+    static var listNotificationNotRead : [Int] = [Int]()
     static var bCheckRead : Bool = false
     
     static func InitApp(){
@@ -27,7 +28,8 @@ class Config{
         profifePictureUrl = ""
         profilePicture = nil
         loginName = ""
-        nTotalNotificationNotRead = 0
+        //nTotalNotificationNotRead = 0
+        listNotificationNotRead = [Int]()
         bCheckRead = false
         
         ChatHub.stopHub()        

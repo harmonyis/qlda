@@ -301,6 +301,8 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
             cell.uiView_R4_detail.layer.borderColor = myColorBoder.cgColor
             cell.uiView_R4_detail.layer.borderWidth = 0.5
             
+           
+            
             var eventClick = UITapGestureRecognizer()
             
             cell.uiView_R4_detail.accessibilityLabel = value
