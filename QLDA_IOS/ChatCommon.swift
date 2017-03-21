@@ -263,4 +263,37 @@ class ChatCommon{
         }      
         
     }
+    
+    // update notification
+    static func notification(args : [Any]?){
+        let obj = args?[0] as? [Any]
+        
+        let notiID = (obj![2] as? Int)!
+        print(notiID)
+        let check = Config.listNotificationNotRead.filter(){
+            if $0 == notiID {
+                return true
+            }
+            return false
+        }
+        if check.count == 0{
+            Config.listNotificationNotRead.append(notiID)
+        }
+    }
+    static func makeReadAllNotification(){
+        if Config.listNotificationNotRead.count > 0{
+            Config.listNotificationNotRead = [Int]()
+        }
+    }
+    
+    static func makeReadNotification(args : [Any]?){
+        let notiID = (args?[0] as? Int)!
+        print(notiID)
+        Config.listNotificationNotRead = Config.listNotificationNotRead.filter(){
+            if $0 == notiID {
+                return false
+            }
+            return true
+        }
+    }
 }

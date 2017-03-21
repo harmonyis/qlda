@@ -218,19 +218,22 @@ class Tab_:ButtonBarPagerTabStripViewController {
             self.updateBadgeChat()
         }
         ChatHub.chatHub.on("notification") {args in
+            ChatCommon.notification(args: args)
             self.updateBadgeNotification()
         }
         ChatHub.chatHub.on("makeReadAllNotification") {args in
+            ChatCommon.makeReadAllNotification()
             self.updateBadgeNotification()
         }
+        
         ChatHub.chatHub.on("makeReadNotification") {args in
+            ChatCommon.makeReadNotification(args: args)
             self.updateBadgeNotification()
         }
     }
-    
     func getTotalNofiticationNotRead(){
-        // lay tong so notification chua doc
-        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getTotalNotificationsNotRead"
+        // lay list notification chua doc
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getListNotificationsNotRead"
         let params : String = "{\"nUserID\" : \(Config.userID)}"
         ApiService.Post(url: apiUrl, params: params, callback: callbackGetTotalNotiNotRead, errorCallBack: errorGetTotalNotiNotRead)
     }
@@ -238,9 +241,12 @@ class Tab_:ButtonBarPagerTabStripViewController {
     func callbackGetTotalNotiNotRead(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String : Any] {
-            let nCount = dic["getTotalNotificationsNotReadResult"] as? String
-            Config.nTotalNotificationNotRead = Int32(nCount!)!
             Config.bCheckRead = true
+            Config.listNotificationNotRead = [Int]()
+            let items = dic["getListNotificationsNotReadResult"] as? [Int]
+            for item in items!{
+                Config.listNotificationNotRead.append(item)
+            }
             DispatchQueue.global(qos: .userInitiated).async {
                 DispatchQueue.main.async {
                     self.updateBadgeNotification()
@@ -255,7 +261,7 @@ class Tab_:ButtonBarPagerTabStripViewController {
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     func updateBadgeChat(){
         let btn : UIBarButtonItem = (self.navigationItem.rightBarButtonItems?[1])! as UIBarButtonItem
         
@@ -297,8 +303,7 @@ class Tab_:ButtonBarPagerTabStripViewController {
     }
     
     private func getNumberBadgeNotification() -> Int{
-        let nCount = Config.nTotalNotificationNotRead
-        return Int(nCount)
+        return Config.listNotificationNotRead.count
     }
     
     func createBadge(parent : UIView, tag : Int, number : Int, frame : CGRect){
