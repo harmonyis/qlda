@@ -46,7 +46,8 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
         self.tbvKHGN.rowHeight = UITableViewAutomaticDimension
         self.tbvKHGN.estimatedRowHeight = 30
         self.tbvKHGN.estimatedSectionHeaderHeight = 30
-        
+         print("--------")
+     print(self.tbvKHGN.bounds.size.height, self.tbvKHGN.bounds.size.width)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -183,8 +184,8 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
                     item.removeFromSuperview()
                 }
             }
-            print(self.view.bounds.size.width, self.view.bounds.size.height)
-            var width = max(self.view.bounds.size.width, self.view.bounds.size.height)
+            print(self.navigationController!.navigationBar.frame.width, self.tbvKHGN.bounds.size.width)
+            var width = variableConfig.m_widthScreen
             
             width = width - 20 - 8
             
@@ -414,7 +415,7 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
         }
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
             
-            
+            constraintHeightHeader.constant = 0
             self.dataSource_Portrait = TableKHGN_Portrait(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT)
             self.tbvKHGN.dataSource = self.dataSource_Portrait
             self.tbvKHGN.delegate = self.dataSource_Portrait
