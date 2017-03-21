@@ -13,11 +13,12 @@ import XLPagerTabStrip
 class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate, IndicatorInfoProvider, UIGestureRecognizerDelegate  {
     
     @IBOutlet weak var clv: UICollectionView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     var imagePicker = UIImagePickerController()
     
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     var items : [ImageEntity] = []
-    var itemInfo = IndicatorInfo(title: "Quản lý hình ảnh")
+    var itemInfo = IndicatorInfo(title: "Hình ảnh dự án")
     let ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/GetAllFileUpload"
     
     var idDuAn : Int = 0
@@ -29,6 +30,10 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.clv.isHidden = true
+        self.view.viewWithTag(1)!.isHidden = true
+        self.indicator.startAnimating()
+        
         self.navigationItem.title = "Hình ảnh dự án"
         self.idDuAn = variableConfig.m_szIdDuAn
         self.listName = "DuAn"
@@ -49,7 +54,7 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
         lpgr.allowableMovement = CGFloat(600)
         self.clv!.addGestureRecognizer(lpgr)
         //activityIndicatorStart()
-        print("aaaaa")
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,6 +90,9 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
             
             //print(params)
             
+            self.clv.isHidden = true
+            self.view.viewWithTag(1)!.isHidden = true
+            self.indicator.startAnimating()
             
             let ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/UploadImage"
             
@@ -92,6 +100,7 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
                 print("error")
                 print(error.localizedDescription)
             })
+            
             
             
         } else{
@@ -118,6 +127,10 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
                             //self.items.append(imgEntity)
                             
                             self.clv.reloadData()
+                            
+                            self.clv.isHidden = false
+                            self.view.viewWithTag(1)!.isHidden = false
+                            self.indicator.stopAnimating()
                         }
                         
                     }
@@ -175,6 +188,10 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
                         DispatchQueue.main.async {
                             
                             self.clv.reloadData()
+                            
+                            self.clv.isHidden = false
+                            self.view.viewWithTag(1)!.isHidden = false
+                            self.indicator.stopAnimating()
                         }
                     }
                 }
@@ -328,7 +345,6 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
         if gestureReconizer.state != UIGestureRecognizerState.began {
             return
         }
-        print("đã đc")
         
         let point = gestureReconizer.location(in: self.clv)
         let indexPath = self.clv.indexPathForItem(at: point)
@@ -407,7 +423,6 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
                 ApiService.Post(url: ApiUrlDetail, params: params, callback: {(data) in
                     
                     let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
                     
                     self.items.remove(at: index)
                     DispatchQueue.global(qos: .userInitiated).async {
@@ -415,6 +430,9 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
                         DispatchQueue.main.async {
                             
                             self.clv.reloadData()
+                            
+
+                            
                         }
                         
                     }
