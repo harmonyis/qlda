@@ -11,7 +11,7 @@ import SwiftR
 
 class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tbNotification: UITableView!
-
+    
     @IBOutlet weak var btAllRead: UIButton!
     
     let _nSizePage = 14
@@ -42,9 +42,9 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     func getNotifications(){
         let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getRecentNotifications"
         let params : String = "{\"nUserID\" : \(Config.userID), \"nCurrentPage\": \(_currentPage), \"nPageSize\":\(_nSizePage)}"
-
+        
         ApiService.Post(url: apiUrl, params: params, callback: callbackGetMsg, errorCallBack: errorGetMsg)
-     
+        
     }
     func getNotificationReloads(){
         let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getRecentNotifications"
@@ -133,29 +133,29 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     // load khi co tin nhan moi
     func LoadNotificationNew(){
         ChatHub.addChatHub(hub: ChatHub.chatHub)
-            ChatHub.chatHub.on("notification") { args in
-                let notificationItemNew = NotificationItem()
-                
-                let item = args?[0] as? [Any]
-                notificationItemNew.NotificationID = item?[2] as? Int
-                notificationItemNew.NotificationProID = item?[3] as? Int
-                notificationItemNew.NotificationTitle = item?[0] as? String
-         
-                var dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
-                let dateString = dateFormatter.date(from: (item?[4] as? String)!)
-                notificationItemNew.NotificationCreated = dateString
-                
-                notificationItemNew.NotificationisRead = false
-                self._notificationItems?.insert( notificationItemNew, at: 0)
-                
-                DispatchQueue.global(qos: .userInitiated).async {
-                    DispatchQueue.main.async {
-                        self.LoadTableView()
-                    }
+        ChatHub.chatHub.on("notification") { args in
+            let notificationItemNew = NotificationItem()
+            
+            let item = args?[0] as? [Any]
+            notificationItemNew.NotificationID = item?[2] as? Int
+            notificationItemNew.NotificationProID = item?[3] as? Int
+            notificationItemNew.NotificationTitle = item?[0] as? String
+            
+            var dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+            let dateString = dateFormatter.date(from: (item?[4] as? String)!)
+            notificationItemNew.NotificationCreated = dateString
+            
+            notificationItemNew.NotificationisRead = false
+            self._notificationItems?.insert( notificationItemNew, at: 0)
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    self.LoadTableView()
                 }
-
             }
+            
+        }
     }
     
     // su kien nut button da doc het
@@ -176,7 +176,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         }
         catch {}
     }
-
+    
     func callbackAllRead(data : Data) {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
@@ -207,6 +207,27 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         return self._notificationItems!.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let itemNotification :NotificationItem = self._notificationItems![indexPath.row]
+        
+        let idDuAn = itemNotification.NotificationProID
+        _idDuAnClick = idDuAn
+        let idNotification = itemNotification.NotificationID
+        
+        self.tbNotification?.reloadData()
+        // lay ten du an
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getTenDuAnByID"
+        let params : String = "{\"nDuAnID\" : \(idDuAn!), \"szUsername\": \""+variableConfig.m_szUserName+"\", \"szPassword\":\""+variableConfig.m_szPassWord+"\"}"
+        print(params)
+        ApiService.Post(url: apiUrl, params: params, callback: callbackGetNameDuAn, errorCallBack: errorGetNameDuAn)
+        
+        //await _chatHubProxy.Invoke("MakeReadNotification", _nCurrentUserID, nNotificationID);
+        //update trong co so du lieu
+        do{
+            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, idNotification!])
+        }
+        catch {}
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tbNotification?.dequeueReusableCell(withIdentifier: "idCustomCell", for: indexPath) as! CustomTableNotificationCell
@@ -226,14 +247,14 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         cell.lblTitle.textColor = myColorTemp
         
         var eventClick = UITapGestureRecognizer()
-        
+        /*
         eventClick.addTarget(self, action:  #selector(TableNotifications_Portrait.ClickCell(sender:)))
         cell.lblTitle.accessibilityLabel = (itemNotification.NotificationTitle!)
         cell.lblTitle.tag = (Int)(itemNotification.NotificationProID!)
         cell.lblTitle.addGestureRecognizer(eventClick)
         cell.lblTitle.isUserInteractionEnabled = true;
-        cell.lblTitle.SetNotification(v: (Int)(itemNotification.NotificationID!))
-                //-------------------------
+        cell.lblTitle.SetNotification(v: (Int)(itemNotification.NotificationID!))*/
+        //-------------------------
         // label ngay tao
         if(itemNotification.NotificationCreated != nil){
             var dateFormatter = DateFormatter()
@@ -313,26 +334,28 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     }
     
     // Hàm set chữ bold
-    func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
-        let fontSize = UIFont.systemFontSize
-        let attrs = [
-            NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize),
-            NSForegroundColorAttributeName: UIColor.black
-        ]
-        let nonBoldAttribute = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: fontSize),
-            ]
-        let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
-        if let range = nonBoldRange {
-            attrStr.setAttributes(nonBoldAttribute, range: range)
-        }
-        return attrStr
-    }
-    
+    /*
+     func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
+     let fontSize = UIFont.systemFontSize
+     let attrs = [
+     NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize),
+     NSForegroundColorAttributeName: UIColor.black
+     ]
+     let nonBoldAttribute = [
+     NSFontAttributeName: UIFont.systemFont(ofSize: fontSize),
+     ]
+     let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
+     if let range = nonBoldRange {
+     attrStr.setAttributes(nonBoldAttribute, range: range)
+     }
+     return attrStr
+     }
+     */
     // Hàm tính size text
-    func calulaterTextSize(text : String, size : CGSize) -> CGRect{
-        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
-        return estimatedFrame
-    }
+    /*
+     func calulaterTextSize(text : String, size : CGSize) -> CGRect{
+     let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+     let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
+     return estimatedFrame
+     }*/
 }
