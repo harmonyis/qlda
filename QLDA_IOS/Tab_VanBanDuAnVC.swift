@@ -11,7 +11,7 @@ import XLPagerTabStrip
 
 class Tab_VanBanDuAnVC: UIViewController , IndicatorInfoProvider{
     
-    var itemInfo = IndicatorInfo(title: "Quản lý văn bản")
+    var itemInfo = IndicatorInfo(title: "Văn bản dự án")
     
     var arrVanBan : [VanBanEntity] = []
     let apiUrl = "\(UrlPreFix.QLDA.rawValue)/GetFile"
