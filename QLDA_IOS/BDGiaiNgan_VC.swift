@@ -130,6 +130,8 @@ class BDGiaiNgan_VC: Base_VC {
         chartDataSet.valueFormatter = formatter as? IValueFormatter
         chartDataSet1.valueFormatter = formatter as? IValueFormatter
         
+        
+        
         let chartData = BarChartData(dataSets: dataSets)
         
         let groupSpace = 0.3
