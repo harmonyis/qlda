@@ -238,6 +238,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         */
         widthDSDA = self.view.bounds.size.width
         heightDSDA = self.view.bounds.size.height
+        variableConfig.m_widthScreen = max(self.heightDSDA, self.widthDSDA)
         print(widthDSDA)
         print(heightDSDA)
         print("_________________")

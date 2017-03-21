@@ -16,7 +16,8 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
     var blackTheme = false
     var itemInfo = IndicatorInfo(title: "Quyết định đầu tư")
     var totalHeight : CGFloat = 0
-    
+    var m_arrTTDA : [String] = [String]()
+    var m_arrTDT : [String] = [String]()
     @IBOutlet weak var UiViewQDDC: UIView!
     @IBOutlet weak var UiViewQDDT: UIView!
     override func viewDidLoad() {
@@ -32,443 +33,464 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
     func GetDataQDDT(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
-          
+            
             if var arrTTDA = dic["GetQuyetDinhDauTuResult"] as? [String] {
                 if arrTTDA.count<1 {
                     arrTTDA = ["","","","",""]
+                   
                 }
-                let arrlblTTDA = ["Số văn bản","Ngày phê duyệt","Cơ quan phê duyệt","Tổng giá trị phê duyệt","Xây lắp","Thiết bị","GPMB","QLDA","Tư vấn","Khác","Dự phòng"]
-                DispatchQueue.global(qos: .userInitiated).async {
-                    DispatchQueue.main.async {
-                        var icount = 0
-                        let style = NSMutableParagraphStyle()
-                        style.alignment = NSTextAlignment.right
-                        
-                        // phần tổng mức đầu tư
-                        // tạo cái lable tổng mức đâu tư
-                        var ViewQDDT = UIView()
-                        var lableQDDT:UILabel = UILabel()
-                        lableQDDT.textColor = UIColor.white
-                        lableQDDT.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                        lableQDDT.text = "Tổng mức đầu tư"
-                        
-                        lableQDDT.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width, height: 30)
-                        lableQDDT.numberOfLines = 0
-                        lableQDDT.sizeToFit()
-                        ViewQDDT.addSubview(lableQDDT)
-                        ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
-                        ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width - 10 , height: 25)
-                        self.totalHeight = self.totalHeight + ViewQDDT.frame.height
-                        self.totalHeight = self.totalHeight + 10
-                        self.UiViewQDDT.addSubview(ViewQDDT)
-                        
-                        var ViewGroupTTCQDDT = UIView()
-                        // dùng vong for để tạo giao diện và bind dữ liệu
-                        for itemTTDA in arrTTDA {
-                            //tạo giao diện phần đầu tiên của tổng mức đầu tư
-                            if icount > 0 ,icount < 4 {
-                                var uiView = UIView()
-                                var lable:UILabel = UILabel()
-                                lable.textColor = UIColor.black
-                                lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lable.text = arrlblTTDA[icount-1]
-                                
-                                lable.frame = CGRect(x: 10, y: 0 , width: self.UiViewQDDT.frame.width, height: CGFloat.greatestFiniteMagnitude)
-                                lable.numberOfLines = 0
-                                lable.sizeToFit()
-                                uiView.addSubview(lable)
-                                
-                                uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width - 10 , height: lable.frame.height + 4)
-                                self.totalHeight = self.totalHeight + uiView.frame.height
-                                
-                                self.UiViewQDDT.addSubview(uiView)
-                                uiView = UIView()
-                                //self.uiViewThongTin.addSubview(uiView)
-                                print(lable.frame.height)
-                                var lblTenDuAn:UILabel = UILabel()
-                                lblTenDuAn.textColor = UIColor.black
-                                lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
-                                lblTenDuAn.text = itemTTDA
-                                lblTenDuAn.frame = CGRect(x: 10, y: 30 , width: self.UiViewQDDT.frame.width - 10,  height: CGFloat.greatestFiniteMagnitude)
-                                
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                
-                                
-                                uiView.addSubview(lblTenDuAn)
-                                var calHeight : CGFloat = 27
-                                if lblTenDuAn.frame.height > 20 {
-                                    calHeight = lblTenDuAn.frame.height + 7
-                                }
-                                uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
-                                self.totalHeight = self.totalHeight + uiView.frame.height
-                                
-                                let borderBottom = CALayer()
-                                let borderWidth = CGFloat(1)
-                                borderBottom.borderColor =  self.myColorBoder.cgColor
-                                borderBottom.borderWidth = borderWidth
-                                borderBottom.frame = CGRect(x: 0, y: calHeight, width: self.UiViewQDDT.frame.width, height: 1)
-                                uiView.layer.addSublayer(borderBottom)
-                                uiView.layer.masksToBounds = true
-                                
-                                self.UiViewQDDT.addSubview(uiView)
-                            }
-                            // tạo giao diện phần tổng giá trị
-                            if icount == 4 {
-                                var uiView = UIView()
-                                var lable:UILabel = UILabel()
-                                lable.textColor = UIColor.black
-                                lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lable.text = arrlblTTDA[icount-1]
-                                
-                                lable.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width, height: CGFloat.greatestFiniteMagnitude)
-                                lable.numberOfLines = 0
-                                lable.sizeToFit()
-                                
-                                
-                                /* uiView.frame = CGRect(x: 0,y: totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2, height: lable.frame.height + 4)
-                                 totalHeight = totalHeight + uiView.frame.height
-                                 */
-                                self.UiViewQDDT.addSubview(uiView)
-                                uiView = UIView()
-                                //self.uiViewThongTin.addSubview(uiView)
-                                print(lable.frame.height)
-                                var lblTenDuAn:UILabel = UILabel()
-                                lblTenDuAn.textColor = UIColor.black
-                                lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lblTenDuAn.text =  variableConfig.convert(itemTTDA)
-                                
-                                lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                
-                                lblTenDuAn.frame = CGRect(x:  self.UiViewQDDT.frame.width - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                
-                                uiView.addSubview(lable)
-                                uiView.addSubview(lblTenDuAn)
-                                lblTenDuAn.widthAnchor.constraint(equalToConstant: 160).isActive = true
-                                
-                                var calHeight : CGFloat = 30
-                                uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
-                                
-                                self.totalHeight = self.totalHeight + uiView.frame.height
-                                
-                                let borderBottom = CALayer()
-                                let borderWidth = CGFloat(1)
-                                borderBottom.borderColor =  self.myColorBoder.cgColor
-                                borderBottom.borderWidth = borderWidth
-                                borderBottom.frame = CGRect(x: 0, y: calHeight, width: self.UiViewQDDT.frame.width, height: 1)
-                                uiView.layer.addSublayer(borderBottom)
-                                uiView.layer.masksToBounds = true
-                                
-                                self.UiViewQDDT.addSubview(uiView)
-                            }
-                            // tạo giao diện phần group
-                            if icount > 4 , icount < 12 {
-                                
-                                var uiView = UIView()
-                                var lable:UILabel = UILabel()
-                                lable.textColor = UIColor.black
-                                lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lable.text = arrlblTTDA[icount-1]
-                                
-                                lable.frame = CGRect(x: 10, y: 3 , width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
-                                lable.numberOfLines = 0
-                                lable.sizeToFit()
-                                uiView.addSubview(lable)
-                                var haftWidth : CGFloat = (self.UiViewQDDT.frame.width - 10)/2
-                                if !(icount%2==0){
-                                    haftWidth = 0
-                                }
-                                  uiView.backgroundColor = UIColor(netHex: 0xdddddd)
-                                uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2 , height: 25)
-                                self.totalHeight = self.totalHeight + 25
-                                ViewGroupTTCQDDT.addSubview(uiView)
-                                
-                                uiView = UIView()
-                                  uiView.backgroundColor = UIColor(netHex: 0xdddddd)
-                                //self.uiViewThongTin.addSubview(uiView)
-                                print(lable.frame.height)
-                                var lblTenDuAn:UILabel = UILabel()
-                                lblTenDuAn.textColor = UIColor.black
-                                lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
-                                lblTenDuAn.text = variableConfig.convert(itemTTDA)
-                                
-                                lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width)/2, height: CGFloat.greatestFiniteMagnitude)
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                
-                                lblTenDuAn.frame = CGRect(x:  self.UiViewQDDT.frame.width/2 - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                lblTenDuAn.textAlignment = NSTextAlignment.right
-                                
-                                uiView.addSubview(lblTenDuAn)
-                                uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
-                                
-                                var calHeight : CGFloat = 26
-                                let borderBottom = CALayer()
-                                let borderWidth = CGFloat(1)
-                                borderBottom.borderColor =  self.myColorBoder.cgColor
-                                borderBottom.borderWidth = borderWidth
-                                borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiViewQDDT.frame.width)/2, height: 1)
-                                uiView.layer.addSublayer(borderBottom)
-                                uiView.layer.masksToBounds = true
-                                if (icount%2==0) {
-                                    self.totalHeight = self.totalHeight + 25
-                                }
-                                else{
-                                    self.totalHeight = self.totalHeight - 25
-                                    
-                                }
-                                ViewGroupTTCQDDT.addSubview(uiView)
-                               
-                            }
-                            
-                            
-                            icount = 1 + icount
-                        }
-                        if arrTTDA.count%2==0 {
-                            var uiView = UIView()
-                            uiView.backgroundColor = UIColor(netHex: 0xdddddd)
-                             uiView.frame = CGRect(x: 0 + (self.UiViewQDDT.frame.width)/2 , y: self.totalHeight ,width: (self.UiViewQDDT.frame.width)/2 - 5, height: 50)
-                            ViewGroupTTCQDDT.addSubview(uiView)
-                            self.totalHeight = self.totalHeight + 50
-                        }
-                        self.UiViewQDDT.addSubview(ViewGroupTTCQDDT)
-                        //     let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant: 1600)
-                        //      self.UiViewQDDT.isUserInteractionEnabled = true
-                        //        NSLayoutConstraint.activate([heightConstraint])
-                        // gọi hàm lấy dữ liệu về tổng dự toán từ service
-                        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetTongDuToan"
-                        //let szUser=lblName.
-                        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
-                        // gọi hàm lấy dự liệu tổng dự toán
-                        ApiService.Post(url: ApiUrl, params: params, callback: self.GetDataTDT, errorCallBack: self.Error)
-                        
-                    }
-                }                }
+                m_arrTTDA = arrTTDA
+                LoadDataQDDT()
+            }
         }
     }
     
+    func LoadDataQDDT(){
+        let arrlblTTDA = ["Số văn bản","Ngày phê duyệt","Cơ quan phê duyệt","Tổng giá trị phê duyệt","Xây lắp","Thiết bị","GPMB","QLDA","Tư vấn","Khác","Dự phòng"]
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                var icount = 0
+                let style = NSMutableParagraphStyle()
+                style.alignment = NSTextAlignment.right
+                
+                // phần tổng mức đầu tư
+                // tạo cái lable tổng mức đâu tư
+                var ViewQDDT = UIView()
+                var lableQDDT:UILabel = UILabel()
+                lableQDDT.textColor = UIColor.white
+                lableQDDT.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                lableQDDT.text = "Tổng mức đầu tư"
+                
+                lableQDDT.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width, height: 30)
+                lableQDDT.numberOfLines = 0
+                lableQDDT.sizeToFit()
+                ViewQDDT.addSubview(lableQDDT)
+                ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
+                ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width - 10 , height: 25)
+                self.totalHeight = self.totalHeight + ViewQDDT.frame.height
+                self.totalHeight = self.totalHeight + 10
+                self.UiViewQDDT.addSubview(ViewQDDT)
+                
+                var ViewGroupTTCQDDT = UIView()
+                // dùng vong for để tạo giao diện và bind dữ liệu
+                for itemTTDA in self.m_arrTTDA {
+                    //tạo giao diện phần đầu tiên của tổng mức đầu tư
+                    if icount > 0 ,icount < 4 {
+                        var uiView = UIView()
+                        var lable:UILabel = UILabel()
+                        lable.textColor = UIColor.black
+                        lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                        lable.text = arrlblTTDA[icount-1]
+                        
+                        lable.frame = CGRect(x: 10, y: 0 , width: self.UiViewQDDT.frame.width, height: CGFloat.greatestFiniteMagnitude)
+                        lable.numberOfLines = 0
+                        lable.sizeToFit()
+                        uiView.addSubview(lable)
+                        
+                        uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width - 10 , height: lable.frame.height + 4)
+                        self.totalHeight = self.totalHeight + uiView.frame.height
+                        
+                        self.UiViewQDDT.addSubview(uiView)
+                        uiView = UIView()
+                        //self.uiViewThongTin.addSubview(uiView)
+                        print(lable.frame.height)
+                        var lblTenDuAn:UILabel = UILabel()
+                        lblTenDuAn.textColor = UIColor.black
+                        lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
+                        lblTenDuAn.text = itemTTDA
+                        lblTenDuAn.frame = CGRect(x: 10, y: 30 , width: self.UiViewQDDT.frame.width - 10,  height: CGFloat.greatestFiniteMagnitude)
+                        
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
+                        
+                        
+                        uiView.addSubview(lblTenDuAn)
+                        var calHeight : CGFloat = 27
+                        if lblTenDuAn.frame.height > 20 {
+                            calHeight = lblTenDuAn.frame.height + 7
+                        }
+                        uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
+                        self.totalHeight = self.totalHeight + uiView.frame.height
+                        
+                        let borderBottom = CALayer()
+                        let borderWidth = CGFloat(1)
+                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderWidth = borderWidth
+                        borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiViewQDDT.frame.width - 10, height: 1)
+                        uiView.layer.addSublayer(borderBottom)
+                        uiView.layer.masksToBounds = true
+                        
+                        self.UiViewQDDT.addSubview(uiView)
+                    }
+                    // tạo giao diện phần tổng giá trị
+                    if icount == 4 {
+                        var uiView = UIView()
+                        var lable:UILabel = UILabel()
+                        lable.textColor = UIColor.black
+                        lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                        lable.text = arrlblTTDA[icount-1]
+                        
+                        lable.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width, height: CGFloat.greatestFiniteMagnitude)
+                        lable.numberOfLines = 0
+                        lable.sizeToFit()
+                        
+                        
+                        /* uiView.frame = CGRect(x: 0,y: totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2, height: lable.frame.height + 4)
+                         totalHeight = totalHeight + uiView.frame.height
+                         */
+                        self.UiViewQDDT.addSubview(uiView)
+                        uiView = UIView()
+                        //self.uiViewThongTin.addSubview(uiView)
+                        print(lable.frame.height)
+                        var lblTenDuAn:UILabel = UILabel()
+                        lblTenDuAn.textColor = UIColor.black
+                        lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                        lblTenDuAn.text =  variableConfig.convert(itemTTDA)
+                        
+                        lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
+                        
+                        lblTenDuAn.frame = CGRect(x:  self.UiViewQDDT.frame.width - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
+                        
+                        uiView.addSubview(lable)
+                        uiView.addSubview(lblTenDuAn)
+                        lblTenDuAn.widthAnchor.constraint(equalToConstant: 160).isActive = true
+                        
+                        var calHeight : CGFloat = 30
+                        uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
+                        
+                        self.totalHeight = self.totalHeight + uiView.frame.height
+                        
+                        let borderBottom = CALayer()
+                        let borderWidth = CGFloat(1)
+                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderWidth = borderWidth
+                        borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiViewQDDT.frame.width - 10, height: 1)
+                        uiView.layer.addSublayer(borderBottom)
+                        uiView.layer.masksToBounds = true
+                        
+                        self.UiViewQDDT.addSubview(uiView)
+                    }
+                    // tạo giao diện phần group
+                    if icount > 4 , icount < 12 {
+                        
+                        var uiView = UIView()
+                        var lable:UILabel = UILabel()
+                        lable.textColor = UIColor.black
+                        lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                        lable.text = arrlblTTDA[icount-1]
+                        
+                        lable.frame = CGRect(x: 10, y: 3 , width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
+                        lable.numberOfLines = 0
+                        lable.sizeToFit()
+                        uiView.addSubview(lable)
+                        var haftWidth : CGFloat = (self.UiViewQDDT.frame.width - 10)/2
+                        if !(icount%2==0){
+                            haftWidth = 0
+                        }
+                        uiView.backgroundColor = UIColor(netHex: 0xdddddd)
+                        uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2 , height: 25)
+                        self.totalHeight = self.totalHeight + 25
+                        ViewGroupTTCQDDT.addSubview(uiView)
+                        
+                        uiView = UIView()
+                        uiView.backgroundColor = UIColor(netHex: 0xdddddd)
+                        //self.uiViewThongTin.addSubview(uiView)
+                        print(lable.frame.height)
+                        var lblTenDuAn:UILabel = UILabel()
+                        lblTenDuAn.textColor = UIColor.black
+                        lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
+                        lblTenDuAn.text = variableConfig.convert(itemTTDA)
+                        
+                        lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width)/2, height: CGFloat.greatestFiniteMagnitude)
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
+                        
+                        lblTenDuAn.frame = CGRect(x:  self.UiViewQDDT.frame.width/2 - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
+                        lblTenDuAn.textAlignment = NSTextAlignment.right
+                        
+                        uiView.addSubview(lblTenDuAn)
+                        uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
+                        
+                        var calHeight : CGFloat = 26
+                        let borderBottom = CALayer()
+                        let borderWidth = CGFloat(1)
+                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderWidth = borderWidth
+                        borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiViewQDDT.frame.width)/2, height: 1)
+                        uiView.layer.addSublayer(borderBottom)
+                        uiView.layer.masksToBounds = true
+                        if (icount%2==0) {
+                            self.totalHeight = self.totalHeight + 25
+                        }
+                        else{
+                            self.totalHeight = self.totalHeight - 25
+                            
+                        }
+                        ViewGroupTTCQDDT.addSubview(uiView)
+                        
+                    }
+                    
+                    
+                    icount = 1 + icount
+                }
+                if self.m_arrTTDA.count%2==0 {
+                    var uiView = UIView()
+                    uiView.backgroundColor = UIColor(netHex: 0xdddddd)
+                    uiView.frame = CGRect(x: 0 + (self.UiViewQDDT.frame.width)/2 , y: self.totalHeight ,width: (self.UiViewQDDT.frame.width)/2 - 5, height: 50)
+                    ViewGroupTTCQDDT.addSubview(uiView)
+                    self.totalHeight = self.totalHeight + 50
+                }
+                self.UiViewQDDT.addSubview(ViewGroupTTCQDDT)
+                //     let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant: 1600)
+                //      self.UiViewQDDT.isUserInteractionEnabled = true
+                //        NSLayoutConstraint.activate([heightConstraint])
+                // gọi hàm lấy dữ liệu về tổng dự toán từ service
+                let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetTongDuToan"
+                //let szUser=lblName.
+                let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+                // gọi hàm lấy dự liệu tổng dự toán
+                ApiService.Post(url: ApiUrl, params: params, callback: self.GetDataTDT, errorCallBack: self.Error)
+                
+            }
+        }
+    }
     
     func GetDataTDT(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
-            print(dic)
+         
             if var arrTTDA = dic["GetTongDuToanResult"] as? [String] {
                 if arrTTDA.count<1 {
                     arrTTDA = ["","","","",""]
                 }
-                let arrlblTTDA = ["Số văn bản","Ngày phê duyệt","Cơ quan phê duyệt","Tổng giá trị phê duyệt","Xây dựng","Thiết bị","GPMB","QLDA","Tư vấn","Khác","Dự phòng"]
-                DispatchQueue.global(qos: .userInitiated).async {
-                    DispatchQueue.main.async {
+                m_arrTDT = arrTTDA
+                LoadDataTDT()
+            }
+        }
+    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        for item in UiViewQDDT.subviews {
+            
+                item.removeFromSuperview()
+           
+        }
+        totalHeight = 0
+        LoadDataQDDT()
+      
+    }
+    
+    func LoadDataTDT(){
+        let arrlblTTDA = ["Số văn bản","Ngày phê duyệt","Cơ quan phê duyệt","Tổng giá trị phê duyệt","Xây dựng","Thiết bị","GPMB","QLDA","Tư vấn","Khác","Dự phòng"]
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                
+                
+                var icount = 0
+                // phần tổng dự toán
+                // tạo lable tổng dự toán
+                var ViewQDDT = UIView()
+                var lableQDDT:UILabel = UILabel()
+                lableQDDT.textColor = UIColor.white
+                lableQDDT.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                lableQDDT.text = "Tổng dự toán"
+                
+                
+                
+                lableQDDT.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width - 10, height: 30)
+                lableQDDT.numberOfLines = 0
+                lableQDDT.sizeToFit()
+                ViewQDDT.addSubview(lableQDDT)
+                ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
+                ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width - 10, height: 25)
+                self.totalHeight = self.totalHeight + ViewQDDT.frame.height
+                self.totalHeight = self.totalHeight + 10
+                self.UiViewQDDT.addSubview(ViewQDDT)
+                
+                var ViewGroupTTCQDDT = UIView()
+                
+                // dùng vòng for để tạo giao diện và bind dữ liệu
+                for itemTTDA in self.m_arrTDT {
+                    // tạo dữ liệu phần đầu
+                    if icount > 0 ,icount < 4 {
+                        var uiView = UIView()
+                        var lable:UILabel = UILabel()
+                        lable.textColor = UIColor.black
+                        lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                        lable.text = arrlblTTDA[icount-1]
+                        
+                        lable.frame = CGRect(x: 10, y: 0 , width: self.UiViewQDDT.frame.width, height: CGFloat.greatestFiniteMagnitude)
+                        lable.numberOfLines = 0
+                        lable.sizeToFit()
+                        uiView.addSubview(lable)
+                        
+                        uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width - 10 , height: lable.frame.height + 4)
+                        self.totalHeight = self.totalHeight + uiView.frame.height
+                        
+                        self.UiViewQDDT.addSubview(uiView)
+                        uiView = UIView()
+                        //self.uiViewThongTin.addSubview(uiView)
+                        print(lable.frame.height)
+                        var lblTenDuAn:UILabel = UILabel()
+                        lblTenDuAn.textColor = UIColor.black
+                        lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
+                        lblTenDuAn.text = itemTTDA
+                        lblTenDuAn.frame = CGRect(x: 10, y: 30 , width: self.UiViewQDDT.frame.width - 10,  height: CGFloat.greatestFiniteMagnitude)
+                        
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
                         
                         
-                        var icount = 0
-                        // phần tổng dự toán
-                        // tạo lable tổng dự toán
-                        var ViewQDDT = UIView()
-                        var lableQDDT:UILabel = UILabel()
-                        lableQDDT.textColor = UIColor.white
-                        lableQDDT.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                        lableQDDT.text = "Tổng dự toán"
+                        uiView.addSubview(lblTenDuAn)
+                        var calHeight : CGFloat = 27
+                        if lblTenDuAn.frame.height > 20 {
+                            calHeight = lblTenDuAn.frame.height + 7
+                        }
+                        uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
+                        self.totalHeight = self.totalHeight + uiView.frame.height
+                        
+                        let borderBottom = CALayer()
+                        let borderWidth = CGFloat(1)
+                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderWidth = borderWidth
+                        borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiViewQDDT.frame.width - 10, height: 1)
+                        uiView.layer.addSublayer(borderBottom)
+                        uiView.layer.masksToBounds = true
+                        
+                        self.UiViewQDDT.addSubview(uiView)
+                    }
+                    // tạo dữ liệu phần tổng giá trị
+                    if icount == 4 {
+                        var uiView = UIView()
+                        var lable:UILabel = UILabel()
+                        lable.textColor = UIColor.black
+                        lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                        lable.text = arrlblTTDA[icount-1]
+                        
+                        lable.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width, height: CGFloat.greatestFiniteMagnitude)
+                        lable.numberOfLines = 0
+                        lable.sizeToFit()
+                        
+                        self.UiViewQDDT.addSubview(uiView)
+                        uiView = UIView()
+                        //self.uiViewThongTin.addSubview(uiView)
+                        print(lable.frame.height)
+                        var lblTenDuAn:UILabel = UILabel()
+                        lblTenDuAn.textColor = UIColor.black
+                        lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                        lblTenDuAn.text = variableConfig.convert(itemTTDA)
+                        lblTenDuAn.textAlignment = NSTextAlignment.right
+                        
+                        lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
+                        
+                        lblTenDuAn.frame = CGRect(x:  self.UiViewQDDT.frame.width - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
+                        
+                        uiView.addSubview(lable)
+                        uiView.addSubview(lblTenDuAn)
+                        
+                        var calHeight : CGFloat = 30
+                        uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
+                        
+                        self.totalHeight = self.totalHeight + uiView.frame.height
+                        
+                        let borderBottom = CALayer()
+                        let borderWidth = CGFloat(1)
+                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderWidth = borderWidth
+                        borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiViewQDDT.frame.width - 10, height: 1)
+                        uiView.layer.addSublayer(borderBottom)
+                        uiView.layer.masksToBounds = true
+                        
+                        self.UiViewQDDT.addSubview(uiView)
+                    }
+                    // tạo dữ liệu phần group tổng dự toán
+                    if icount > 4 , icount < 12{
+                        
+                        var uiView = UIView()
+                        var lable:UILabel = UILabel()
+                        uiView.backgroundColor = UIColor(netHex: 0xdddddd)
+                        lable.textColor = UIColor.black
+                        lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
+                        lable.text = arrlblTTDA[icount-1]
+                        
+                        lable.frame = CGRect(x: 10, y: 0 , width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
+                        lable.numberOfLines = 0
+                        lable.sizeToFit()
+                        uiView.addSubview(lable)
+                        var haftWidth : CGFloat = (self.UiViewQDDT.frame.width - 10)/2
+                        if !(icount%2==0){
+                            haftWidth = 0
+                        }
+                        uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2 , height: 25)
+                        self.totalHeight = self.totalHeight + 25
+                        ViewGroupTTCQDDT.addSubview(uiView)
                         
                         
+                        uiView = UIView()
+                        uiView.backgroundColor = UIColor(netHex: 0xdddddd)
+                        //self.uiViewThongTin.addSubview(uiView)
+                        print(lable.frame.height)
+                        var lblTenDuAn:UILabel = UILabel()
+                        lblTenDuAn.textColor = UIColor.black
+                        lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
+                        lblTenDuAn.text = variableConfig.convert(itemTTDA)
                         
-                        lableQDDT.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width - 10, height: 30)
-                        lableQDDT.numberOfLines = 0
-                        lableQDDT.sizeToFit()
-                        ViewQDDT.addSubview(lableQDDT)
-                        ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
-                        ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width - 10, height: 25)
-                        self.totalHeight = self.totalHeight + ViewQDDT.frame.height
-                        self.totalHeight = self.totalHeight + 10
-                        self.UiViewQDDT.addSubview(ViewQDDT)
+                        lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
                         
-                        var ViewGroupTTCQDDT = UIView()
+                        lblTenDuAn.frame = CGRect(x:  self.UiViewQDDT.frame.width/2 - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
+                        lblTenDuAn.numberOfLines = 0
+                        lblTenDuAn.sizeToFit()
+                        lblTenDuAn.textAlignment = NSTextAlignment.right
                         
-                        // dùng vòng for để tạo giao diện và bind dữ liệu
-                        for itemTTDA in arrTTDA {
-                            // tạo dữ liệu phần đầu
-                            if icount > 0 ,icount < 4 {
-                                var uiView = UIView()
-                                var lable:UILabel = UILabel()
-                                lable.textColor = UIColor.black
-                                lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lable.text = arrlblTTDA[icount-1]
-                                
-                                lable.frame = CGRect(x: 10, y: 0 , width: self.UiViewQDDT.frame.width, height: CGFloat.greatestFiniteMagnitude)
-                                lable.numberOfLines = 0
-                                lable.sizeToFit()
-                                uiView.addSubview(lable)
-                                
-                                uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width - 10 , height: lable.frame.height + 4)
-                                self.totalHeight = self.totalHeight + uiView.frame.height
-                                
-                                self.UiViewQDDT.addSubview(uiView)
-                                uiView = UIView()
-                                //self.uiViewThongTin.addSubview(uiView)
-                                print(lable.frame.height)
-                                var lblTenDuAn:UILabel = UILabel()
-                                lblTenDuAn.textColor = UIColor.black
-                                lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
-                                lblTenDuAn.text = itemTTDA
-                                lblTenDuAn.frame = CGRect(x: 10, y: 30 , width: self.UiViewQDDT.frame.width - 10,  height: CGFloat.greatestFiniteMagnitude)
-                                
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                
-                                
-                                uiView.addSubview(lblTenDuAn)
-                                var calHeight : CGFloat = 27
-                                if lblTenDuAn.frame.height > 20 {
-                                    calHeight = lblTenDuAn.frame.height + 7
-                                }
-                                uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
-                                self.totalHeight = self.totalHeight + uiView.frame.height
-                                
-                                let borderBottom = CALayer()
-                                let borderWidth = CGFloat(1)
-                                borderBottom.borderColor =  self.myColorBoder.cgColor
-                                borderBottom.borderWidth = borderWidth
-                                borderBottom.frame = CGRect(x: 0, y: calHeight, width: self.UiViewQDDT.frame.width, height: 1)
-                                uiView.layer.addSublayer(borderBottom)
-                                uiView.layer.masksToBounds = true
-                                
-                                self.UiViewQDDT.addSubview(uiView)
-                            }
-                            // tạo dữ liệu phần tổng giá trị
-                            if icount == 4 {
-                                var uiView = UIView()
-                                var lable:UILabel = UILabel()
-                                lable.textColor = UIColor.black
-                                lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lable.text = arrlblTTDA[icount-1]
-                                
-                                lable.frame = CGRect(x: 10, y: 5 , width: self.UiViewQDDT.frame.width, height: CGFloat.greatestFiniteMagnitude)
-                                lable.numberOfLines = 0
-                                lable.sizeToFit()
-                                
-                                self.UiViewQDDT.addSubview(uiView)
-                                uiView = UIView()
-                                //self.uiViewThongTin.addSubview(uiView)
-                                print(lable.frame.height)
-                                var lblTenDuAn:UILabel = UILabel()
-                                lblTenDuAn.textColor = UIColor.black
-                                lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lblTenDuAn.text = variableConfig.convert(itemTTDA)
-                                lblTenDuAn.textAlignment = NSTextAlignment.right
-                                
-                                lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10), height: CGFloat.greatestFiniteMagnitude)
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                
-                                lblTenDuAn.frame = CGRect(x:  self.UiViewQDDT.frame.width - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                
-                                uiView.addSubview(lable)
-                                uiView.addSubview(lblTenDuAn)
-                                
-                                var calHeight : CGFloat = 30
-                                uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
-                                
-                                self.totalHeight = self.totalHeight + uiView.frame.height
-                                
-                                let borderBottom = CALayer()
-                                let borderWidth = CGFloat(1)
-                                borderBottom.borderColor =  self.myColorBoder.cgColor
-                                borderBottom.borderWidth = borderWidth
-                                borderBottom.frame = CGRect(x: 0, y: calHeight, width: self.UiViewQDDT.frame.width, height: 1)
-                                uiView.layer.addSublayer(borderBottom)
-                                uiView.layer.masksToBounds = true
-                                
-                                self.UiViewQDDT.addSubview(uiView)
-                            }
-                            // tạo dữ liệu phần group tổng dự toán
-                            if icount > 4 , icount < 12{
-                                
-                                var uiView = UIView()
-                                var lable:UILabel = UILabel()
-                                  uiView.backgroundColor = UIColor(netHex: 0xdddddd)
-                                lable.textColor = UIColor.black
-                                lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-                                lable.text = arrlblTTDA[icount-1]
-                                
-                                lable.frame = CGRect(x: 10, y: 0 , width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
-                                lable.numberOfLines = 0
-                                lable.sizeToFit()
-                                uiView.addSubview(lable)
-                                var haftWidth : CGFloat = (self.UiViewQDDT.frame.width - 10)/2
-                                if !(icount%2==0){
-                                    haftWidth = 0
-                                }
-                                uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2 , height: 25)
-                                self.totalHeight = self.totalHeight + 25
-                                ViewGroupTTCQDDT.addSubview(uiView)
-                                
-                                
-                                uiView = UIView()
-                                  uiView.backgroundColor = UIColor(netHex: 0xdddddd)
-                                //self.uiViewThongTin.addSubview(uiView)
-                                print(lable.frame.height)
-                                var lblTenDuAn:UILabel = UILabel()
-                                lblTenDuAn.textColor = UIColor.black
-                                lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
-                                lblTenDuAn.text = variableConfig.convert(itemTTDA)
-                                
-                                lblTenDuAn.frame = CGRect(x: 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                
-                                lblTenDuAn.frame = CGRect(x:  self.UiViewQDDT.frame.width/2 - lblTenDuAn.frame.width - 10, y: 25 , width: (self.UiViewQDDT.frame.width - 10)/2, height: CGFloat.greatestFiniteMagnitude)
-                                lblTenDuAn.numberOfLines = 0
-                                lblTenDuAn.sizeToFit()
-                                lblTenDuAn.textAlignment = NSTextAlignment.right
-                                
-                                uiView.addSubview(lblTenDuAn)
-                                uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
-                                
-                                var calHeight : CGFloat = 26
-                                let borderBottom = CALayer()
-                                let borderWidth = CGFloat(1)
-                                borderBottom.borderColor =  self.myColorBoder.cgColor
-                                borderBottom.borderWidth = borderWidth
-                                borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiViewQDDT.frame.width)/2, height: 1)
-                                uiView.layer.addSublayer(borderBottom)
-                                uiView.layer.masksToBounds = true
-                                if (icount%2==0) {
-                                    self.totalHeight = self.totalHeight + 25
-                                }
-                                else{
-                                    self.totalHeight = self.totalHeight - 25
-                                    
-                                }
-                                ViewGroupTTCQDDT.addSubview(uiView)
-                                
-                            }
+                        uiView.addSubview(lblTenDuAn)
+                        uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
+                        
+                        var calHeight : CGFloat = 26
+                        let borderBottom = CALayer()
+                        let borderWidth = CGFloat(1)
+                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderWidth = borderWidth
+                        borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiViewQDDT.frame.width)/2, height: 1)
+                        uiView.layer.addSublayer(borderBottom)
+                        uiView.layer.masksToBounds = true
+                        if (icount%2==0) {
+                            self.totalHeight = self.totalHeight + 25
+                        }
+                        else{
+                            self.totalHeight = self.totalHeight - 25
                             
-                           
-                            icount = 1 + icount
                         }
-                        if arrTTDA.count%2==0 {
-                            var uiView = UIView()
-                            uiView.backgroundColor = UIColor(netHex: 0xdddddd)
-                            uiView.frame = CGRect(x: 0 + (self.UiViewQDDT.frame.width)/2 , y: self.totalHeight ,width: (self.UiViewQDDT.frame.width)/2 - 5, height: 50)
-                            ViewGroupTTCQDDT.addSubview(uiView)
-                            self.totalHeight = self.totalHeight + 50
-                        }
-                        self.UiViewQDDT.addSubview(ViewGroupTTCQDDT)
-                        // đặt lại giá trị constrain cho view
-                        let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant:  self.totalHeight )
-                        //        self.UiViewQDDT.isUserInteractionEnabled = true
-                        NSLayoutConstraint.activate([heightConstraint])
+                        ViewGroupTTCQDDT.addSubview(uiView)
                         
                     }
+                    
+                    
+                    icount = 1 + icount
                 }
+                if self.m_arrTDT.count%2==0 {
+                    var uiView = UIView()
+                    uiView.backgroundColor = UIColor(netHex: 0xdddddd)
+                    uiView.frame = CGRect(x: 0 + (self.UiViewQDDT.frame.width)/2 , y: self.totalHeight ,width: (self.UiViewQDDT.frame.width)/2 - 5, height: 50)
+                    ViewGroupTTCQDDT.addSubview(uiView)
+                    self.totalHeight = self.totalHeight + 50
+                }
+                self.UiViewQDDT.addSubview(ViewGroupTTCQDDT)
+                // đặt lại giá trị constrain cho view
+                let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant:  self.totalHeight )
+                //        self.UiViewQDDT.isUserInteractionEnabled = true
+                NSLayoutConstraint.activate([heightConstraint])
+                
             }
         }
     }
@@ -482,7 +504,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-            }
+    }
     
     
     init(itemInfo: IndicatorInfo) {
