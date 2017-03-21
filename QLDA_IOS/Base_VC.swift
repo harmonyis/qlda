@@ -5,9 +5,9 @@ class Base_VC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if(Config.bCheckRead == false){
+        //if(Config.bCheckRead == false){
             getTotalNofiticationNotRead()
-        }
+        //}
         
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
@@ -144,8 +144,7 @@ class Base_VC: UIViewController {
         ChatHub.chatHub.on("makeReadAllNotification") {args in
             self.updateBadgeNotification()
         }
-        
-        ChatHub.chatHub.on("makeReadAllNotification") {args in
+        ChatHub.chatHub.on("makeReadNotification") {args in
             self.updateBadgeNotification()
         }
         
