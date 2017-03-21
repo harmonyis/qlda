@@ -15,6 +15,7 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var uiViewHeaderLandscape: UIView!
     @IBOutlet weak var constraintHeightHeader: NSLayoutConstraint!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var m_NhomHD = [NhomHopDong]()
     var indexTrangThaiDuAnCha = Set<Int>()
     var indexGroupDuAnCon = Set<Int>()
@@ -29,6 +30,10 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        
+        self.tbvKHGN.isHidden = true
         
         self.tbvKHGN.separatorColor = UIColor.clear
         self.tbvKHGN.register(UINib(nibName: "CustomCell_KHGN_Header_Landscape", bundle: nil), forCellReuseIdentifier: "CustomCell_KHGN_Header_Landscape")
@@ -147,7 +152,9 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
                         //  self.DSDA = self.DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
+                        self.activityIndicator.stopAnimating()
                         
+                        self.tbvKHGN.isHidden = false
                         self.LoadTableView()
                         
                     }

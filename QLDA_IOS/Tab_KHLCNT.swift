@@ -12,6 +12,7 @@ import XLPagerTabStrip
 
 class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tbDSDA: UITableView!
     var m_dsGoiThau = [GoiThau]()
     var m_countGoiThau : Int = 0
@@ -28,6 +29,11 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        
+        self.tbDSDA.isHidden = true
         
         self.automaticallyAdjustsScrollViewInsets = false
         self.tbDSDA.separatorColor = UIColor.clear
@@ -86,11 +92,15 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
                         
+                        
                         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetKeHoachLuaChonNhaThau"
                         //let szUser=lblName.
                         let params : String = "{\"szIdKHLCNT\": \""+idGoiThau+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
                         
                         ApiService.Post(url: ApiUrl, params: params, callback: self.GetKeHoachLCNT, errorCallBack: self.AlertError)
+                        self.activityIndicator.stopAnimating()
+                        
+                        self.tbDSDA.isHidden = false
                     }
                 }
                 

@@ -29,7 +29,7 @@ class Tab_:ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemBackgroundColor = graySpotifyColor
         settings.style.selectedBarBackgroundColor = UIColor(netHex: 0x0e83d5)
         settings.style.buttonBarItemFont = UIFont(name: "HelveticaNeue-Bold", size:14) ?? UIFont.systemFont(ofSize: 14)
-        settings.style.selectedBarHeight = 1.0
+        settings.style.selectedBarHeight = 2.0
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .black
         settings.style.buttonBarItemsShouldFillAvailableWidth = true

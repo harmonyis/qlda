@@ -12,6 +12,8 @@ import XLPagerTabStrip
 
 class Tab_TTC: UIViewController, IndicatorInfoProvider {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     let cellIdentifier = "postCell"
     var blackTheme = false
     var itemInfo = IndicatorInfo(title: "Thông tin chung")
@@ -19,6 +21,11 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var uiViewThongTin: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        
+        uiViewThongTin.isHidden = true
         //  self.ViewData.autoresizesSubviews = true
         uiViewThongTin.layer.borderColor = myColorBoder.cgColor
         uiViewThongTin.layer.borderWidth = 1
@@ -49,6 +56,11 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
         let arrlblTTDA = ["Tên dự án","Chủ đầu tư","Mục tiêu","Quy mô","Thời gian thực hiện","Lĩnh vực","Nhóm dự án","Hình thức đầu tư","Hình thức quản lý dự án","Giai đoạn dự án","Tình trạng dự án","Nguồn vốn"]
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
+                
+                self.activityIndicator.stopAnimating()
+                            
+                self.uiViewThongTin.isHidden = false
+                
                 var icount = 0
                 var totalHeight : CGFloat = 5
                 for itemTTDA in self.m_arrTTDA {
@@ -103,7 +115,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                     icount = 1 + icount
                 }
                 
-                let heightConstraint = self.uiViewThongTin.heightAnchor.constraint(equalToConstant: totalHeight)
+                let heightConstraint = self.uiViewThongTin.heightAnchor.constraint(equalToConstant: totalHeight + 5 )
              
                 NSLayoutConstraint.activate([heightConstraint])
             }
