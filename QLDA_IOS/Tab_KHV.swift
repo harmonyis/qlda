@@ -138,8 +138,8 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         
                         self.UiviewKHV.addSubview(uiView)
                         uiView = UIView()
-                        //self.uiViewThongTin.addSubview(uiView)
-                        print(lable.frame.height)
+                       
+                        
                         var lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)

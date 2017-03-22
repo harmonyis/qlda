@@ -61,7 +61,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
             if let arrGoiThau = dic["GetGoiThauResult"] as? [[String]] {
-                print(arrGoiThau)
+                
                 for item in arrGoiThau {
                     let goiThau : GoiThau = GoiThau()
                     goiThau.IdGT = item[0]
@@ -116,18 +116,14 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     func GetKeHoachLCNT(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if var dic = json as? [String:Any] {
-            if let check = dic["GetKeHoachLuaChonNhaThauResult"] as? [String] {
-            }
-            else{
-                dic["GetKeHoachLuaChonNhaThauResult"] = ["GetKeHoachLuaChonNhaThauResult":(
-                    "",
-                    "",
-                    "",
-                    "")]
-            }
-            if let arrGoiThau = dic["GetKeHoachLuaChonNhaThauResult"] as? [String] {
+           
+            if var arrGoiThau = dic["GetKeHoachLuaChonNhaThauResult"] as? [String] {
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
+                        if arrGoiThau.count<1 {
+                            arrGoiThau = ["","","",""]
+                            
+                        }
                         self.m_thongTinKHLCNT = arrGoiThau
                         self.LoadTableView()
                     }
@@ -138,7 +134,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     }
     func LoadTableView(){
         
-        print("_________________")
+      
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
@@ -210,11 +206,9 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     }
     func duAnConClickDetail(sender: UITapGestureRecognizer)
     {
-        //print(sender.view?.tag)
-        let value : Int = (sender.view?.tag)!
-        // print(value)
         
-        //  print(self.expandedCellPaths)
+        let value : Int = (sender.view?.tag)!
+       
         if self.indexTrangThaiGoiThau.contains(value) {
             self.indexTrangThaiGoiThau.remove(value)
         }
