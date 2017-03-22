@@ -24,14 +24,19 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     var dataSource_Portrait : TableKHLCNT_Portrait?
     var itemInfo = IndicatorInfo(title: "KHLCNT")
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
-    
+     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     var wTongGiaTri : CGFloat = 120
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
+        
+        self.tbDSDA.layer.borderColor = myColorBoder.cgColor
+        self.tbDSDA.layer.borderWidth = 1
+
         
         self.tbDSDA.isHidden = true
         
