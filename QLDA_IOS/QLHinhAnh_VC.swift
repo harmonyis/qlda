@@ -34,7 +34,7 @@ class QLHinhAnh_VC: UIViewController ,UICollectionViewDataSource, UICollectionVi
         self.view.viewWithTag(1)!.isHidden = true
         self.indicator.startAnimating()
         
-        self.navigationItem.title = "Hình ảnh dự án"
+        //self.navigationItem.title = "Hình ảnh dự án"
         self.idDuAn = variableConfig.m_szIdDuAn
         self.listName = "DuAn"
         self.userName = variableConfig.m_szUserName

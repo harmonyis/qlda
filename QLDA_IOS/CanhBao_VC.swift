@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CanhBao_VC: Base_VC {
+class CanhBao_VC: Base {
 
     @IBOutlet weak var tbCanhBao: UITableView!
     
@@ -23,6 +23,9 @@ class CanhBao_VC: Base_VC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        printError()
+        
         print("reload")
         var nib = UINib(nibName: "CanhBaoTableViewCell", bundle: nil)
         self.tbCanhBao.register(nib, forCellReuseIdentifier: "cell")

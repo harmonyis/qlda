@@ -96,6 +96,7 @@
 		7C72C38C1E80CF8B00AD7650 /* HeaderLandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C72C38A1E80CF8B00AD7650 /* HeaderLandTableViewCell.swift */; };
 		7C72C38D1E80CF8B00AD7650 /* HeaderLandTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C72C38B1E80CF8B00AD7650 /* HeaderLandTableViewCell.xib */; };
 		7C7B151A1E6E5DF500F95D99 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7B15191E6E5DF500F95D99 /* Toast.swift */; };
+		7C7DE6801E8215A1007EADBF /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DE67F1E8215A1007EADBF /* Base.swift */; };
 		7C8CD6FF1E7F72DC006A095F /* CanhBaoLandDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CD6FE1E7F72DC006A095F /* CanhBaoLandDatasource.swift */; };
 		7C8CD7051E7F7334006A095F /* CellChamQTLandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8CD7011E7F7334006A095F /* CellChamQTLandTableViewCell.swift */; };
 		7C8CD7061E7F7334006A095F /* CellChamQTLandTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8CD7021E7F7334006A095F /* CellChamQTLandTableViewCell.xib */; };
@@ -282,6 +283,7 @@
 		7C72C38A1E80CF8B00AD7650 /* HeaderLandTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderLandTableViewCell.swift; sourceTree = "<group>"; };
 		7C72C38B1E80CF8B00AD7650 /* HeaderLandTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderLandTableViewCell.xib; sourceTree = "<group>"; };
 		7C7B15191E6E5DF500F95D99 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Toast.swift; path = "../Pods/Toast-Swift/Toast/Toast.swift"; sourceTree = "<group>"; };
+		7C7DE67F1E8215A1007EADBF /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		7C8CD6FE1E7F72DC006A095F /* CanhBaoLandDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanhBaoLandDatasource.swift; sourceTree = "<group>"; };
 		7C8CD7011E7F7334006A095F /* CellChamQTLandTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellChamQTLandTableViewCell.swift; sourceTree = "<group>"; };
 		7C8CD7021E7F7334006A095F /* CellChamQTLandTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellChamQTLandTableViewCell.xib; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				24BEAFA11E6EA0EA008F205C /* Tab_KHGN.swift */,
 				24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */,
 				7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */,
+				7C7DE67F1E8215A1007EADBF /* Base.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1064,6 +1067,7 @@
 				24BEAEF51E697AA6008F205C /* ExtendtionUItableViewCell.swift in Sources */,
 				24BEAF061E697AA6008F205C /* UIView.swift in Sources */,
 				7C71ED321E6FDF590089BC0D /* VanBanDuAnTableViewCell.swift in Sources */,
+				7C7DE6801E8215A1007EADBF /* Base.swift in Sources */,
 				7C8CD7071E7F7334006A095F /* CellHopDongLandTableViewCell.swift in Sources */,
 				BADA63641E7CF7000097D73C /* CBChamQTTableViewCell.swift in Sources */,
 				24BEAEDE1E697AA6008F205C /* ApiService.swift in Sources */,
