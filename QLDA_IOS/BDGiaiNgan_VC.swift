@@ -122,6 +122,16 @@ class BDGiaiNgan_VC: Base_VC {
         chartDataSet.colors = [UIColor(red: 103/255, green: 183/255, blue: 220/255, alpha: 1)]
         chartDataSet1.colors = [UIColor(red: 253/255, green: 212/255, blue: 0/255, alpha: 1)]
         
+        let format = NumberFormatter()
+        format.numberStyle = NumberFormatter.Style.decimal
+        format.locale = Locale(identifier: "vi_VN")
+        format.generatesDecimalNumbers = false
+        let formatter = DefaultValueFormatter(formatter: format)
+        chartDataSet.valueFormatter = formatter as? IValueFormatter
+        chartDataSet1.valueFormatter = formatter as? IValueFormatter
+        
+        
+        
         let chartData = BarChartData(dataSets: dataSets)
         
         let groupSpace = 0.3

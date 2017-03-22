@@ -18,10 +18,15 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
     var totalHeight : CGFloat = 0
     var m_arrTTDA : [String] = [String]()
     var m_arrTDT : [String] = [String]()
-    @IBOutlet weak var UiViewQDDC: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var UiViewQDDT: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        
+        UiViewQDDT.isHidden = true
         //  self.ViewData.autoresizesSubviews = true
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetQuyetDinhDauTu"
         let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
@@ -49,6 +54,12 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
         let arrlblTTDA = ["Số văn bản","Ngày phê duyệt","Cơ quan phê duyệt","Tổng giá trị phê duyệt","Xây lắp","Thiết bị","GPMB","QLDA","Tư vấn","Khác","Dự phòng"]
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
+                
+                self.activityIndicator.stopAnimating()
+                
+                self.UiViewQDDT.isHidden = false
+
+                
                 var icount = 0
                 let style = NSMutableParagraphStyle()
                 style.alignment = NSTextAlignment.right
@@ -65,7 +76,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                 lableQDDT.numberOfLines = 0
                 lableQDDT.sizeToFit()
                 ViewQDDT.addSubview(lableQDDT)
-                ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
+                ViewQDDT.backgroundColor = UIColor(netHex: 0x21AFFA)
                 ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width - 10 , height: 25)
                 self.totalHeight = self.totalHeight + ViewQDDT.frame.height
                 self.totalHeight = self.totalHeight + 10
@@ -306,7 +317,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                 lableQDDT.numberOfLines = 0
                 lableQDDT.sizeToFit()
                 ViewQDDT.addSubview(lableQDDT)
-                ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
+                ViewQDDT.backgroundColor = UIColor(netHex: 0x21AFFA)
                 ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiViewQDDT.frame.width - 10, height: 25)
                 self.totalHeight = self.totalHeight + ViewQDDT.frame.height
                 self.totalHeight = self.totalHeight + 10
@@ -487,7 +498,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                 }
                 self.UiViewQDDT.addSubview(ViewGroupTTCQDDT)
                 // đặt lại giá trị constrain cho view
-                let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant:  self.totalHeight )
+                let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant:  self.totalHeight + 5 )
                 //        self.UiViewQDDT.isUserInteractionEnabled = true
                 NSLayoutConstraint.activate([heightConstraint])
                 
