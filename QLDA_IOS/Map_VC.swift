@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class Map_VC: UIViewController, UISearchBarDelegate {
+class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
 
     @IBOutlet weak var  UiMapView: GMSMapView!
     
@@ -49,7 +49,7 @@ class Map_VC: UIViewController, UISearchBarDelegate {
          UiMapView.camera = camera
 
         getData()
-       
+        self.UiMapView.delegate = self
         // Danh sach du an
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.register(UINib(nibName: "CustomCellDSDA_Lanscape", bundle: nil), forCellReuseIdentifier: "CustomCellDSDA_Lanscape")
@@ -327,6 +327,12 @@ class Map_VC: UIViewController, UISearchBarDelegate {
         
     }
     
+    func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {
+        var infoWindow = Bundle.main.loadNibNamed("CustomInfoWindow", owner: self, options: nil)?.first! as! CustomInfoWindow
+        infoWindow.lblLabel.text = "\(marker.position.latitude) \(marker.position.longitude)"
+        return infoWindow as? UIView
+    }
+    
     // Tạo marker trên bản đồ
     func createMarker(){
         var TotalKinhDo : Double = 0
@@ -385,7 +391,7 @@ class Map_VC: UIViewController, UISearchBarDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    
+
     func toggleView(){
         
         if checkLoadView == 2{

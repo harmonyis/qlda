@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8nb-LZ-jCf">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8nb-LZ-jCf">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -291,16 +291,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1e8-II-jtu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="200.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxX-d1-jIc">
-                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="200.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="201"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="lIW-yg-aaT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nuG-8m-hyi">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="50.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="51"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_minus" translatesAutoresizingMaskIntoConstraints="NO" id="OaZ-A6-PsD">
                                                                                     <rect key="frame" x="10" y="12" width="20" height="16"/>
@@ -317,7 +317,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COT-v4-cwd">
-                                                                            <rect key="frame" x="280" y="0.0" width="40" height="50.5"/>
+                                                                            <rect key="frame" x="280" y="0.0" width="40" height="51"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_detail" translatesAutoresizingMaskIntoConstraints="NO" id="IHf-Qy-sEG">
                                                                                     <rect key="frame" x="12" y="12" width="16" height="16"/>
@@ -334,7 +334,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="2Z5-KP-l86">
-                                                                            <rect key="frame" x="40" y="0.0" width="240" height="50.5"/>
+                                                                            <rect key="frame" x="40" y="0.0" width="240" height="51"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rib-QO-Q5Z">
                                                                                     <rect key="frame" x="3" y="-1" width="236" height="48"/>
@@ -367,7 +367,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Z6u-WC-JC5">
-                                                                    <rect key="frame" x="0.0" y="50.5" width="320" height="150"/>
+                                                                    <rect key="frame" x="0.0" y="51" width="320" height="150"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r15-yf-yDM">
                                                                             <rect key="frame" x="0.0" y="0.0" width="40" height="150"/>
@@ -1030,13 +1030,19 @@
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="10E-w4-Zdp">
                                                                             <rect key="frame" x="300" y="0.0" width="20" height="31.5"/>
                                                                             <subviews>
-                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_detail" translatesAutoresizingMaskIntoConstraints="NO" id="Sx1-2t-QT7">
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_detail" translatesAutoresizingMaskIntoConstraints="NO" id="Sx1-2t-QT7">
                                                                                     <rect key="frame" x="3" y="2" width="14" height="24"/>
-                                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="14" id="jLE-Ao-L3A"/>
+                                                                                    </constraints>
                                                                                 </imageView>
                                                                             </subviews>
                                                                             <constraints>
+                                                                                <constraint firstAttribute="bottom" secondItem="Sx1-2t-QT7" secondAttribute="bottom" constant="2" id="LpE-f2-jxQ"/>
                                                                                 <constraint firstAttribute="width" constant="20" id="fkY-R2-d5r"/>
+                                                                                <constraint firstItem="Sx1-2t-QT7" firstAttribute="leading" secondItem="10E-w4-Zdp" secondAttribute="leading" constant="3" id="nVN-EB-a8e"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="Sx1-2t-QT7" secondAttribute="trailing" constant="3" id="oib-Pd-s0i"/>
+                                                                                <constraint firstItem="Sx1-2t-QT7" firstAttribute="top" secondItem="10E-w4-Zdp" secondAttribute="top" constant="2" id="xar-cA-Zjh"/>
                                                                             </constraints>
                                                                         </view>
                                                                     </subviews>
@@ -1271,13 +1277,19 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xhj-Ke-0n0">
                                                                     <rect key="frame" x="300" y="0.0" width="20" height="49"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_detail" translatesAutoresizingMaskIntoConstraints="NO" id="vvk-be-vHE">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_detail" translatesAutoresizingMaskIntoConstraints="NO" id="vvk-be-vHE">
                                                                             <rect key="frame" x="3" y="8" width="14" height="24"/>
-                                                                            <autoresizingMask key="autoresizingMask"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="14" id="jZV-Cm-5do"/>
+                                                                            </constraints>
                                                                         </imageView>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="20" id="3a5-Cc-gQi"/>
+                                                                        <constraint firstItem="vvk-be-vHE" firstAttribute="leading" secondItem="xhj-Ke-0n0" secondAttribute="leading" constant="3" id="Hr9-hP-9sF"/>
+                                                                        <constraint firstItem="vvk-be-vHE" firstAttribute="top" secondItem="xhj-Ke-0n0" secondAttribute="top" constant="2" id="QNh-ME-cb5"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="vvk-be-vHE" secondAttribute="trailing" constant="3" id="qHg-pm-NAN"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="vvk-be-vHE" secondAttribute="bottom" constant="2" id="zgC-Is-nQa"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -1624,7 +1636,7 @@
                                             <constraints>
                                                 <constraint firstItem="ZG6-PD-HUT" firstAttribute="leading" secondItem="CKR-4G-mf5" secondAttribute="leading" id="QGz-p6-UJM"/>
                                                 <constraint firstAttribute="trailing" secondItem="ZG6-PD-HUT" secondAttribute="trailing" id="ZpS-ls-4kE"/>
-                                                <constraint firstAttribute="bottom" secondItem="ZG6-PD-HUT" secondAttribute="bottom" constant="-1" id="g94-En-oum"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZG6-PD-HUT" secondAttribute="bottom" id="g94-En-oum"/>
                                                 <constraint firstItem="ZG6-PD-HUT" firstAttribute="top" secondItem="CKR-4G-mf5" secondAttribute="top" id="tL4-UB-VkF"/>
                                             </constraints>
                                         </tableViewCellContentView>

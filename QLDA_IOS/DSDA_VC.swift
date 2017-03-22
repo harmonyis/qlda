@@ -226,22 +226,12 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     }
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     func LoadTableView(){
-   /*     if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
-            widthDSDA = self.view.frame.width
-            heightDSDA = self.view.frame.height
-        }
+ 
         
-        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
-            widthDSDA = self.view.frame.height
-            heightDSDA = self.view.frame.width
-        }
-        */
         widthDSDA = self.view.bounds.size.width
         heightDSDA = self.view.bounds.size.height
         variableConfig.m_widthScreen = max(self.heightDSDA, self.widthDSDA)
-        print(widthDSDA)
-        print(heightDSDA)
-        print("_________________")
+      
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
