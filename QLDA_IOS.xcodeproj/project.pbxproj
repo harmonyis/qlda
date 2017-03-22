@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B1938B31E8215AB000A6782 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1938B11E8215AB000A6782 /* CustomInfoWindow.swift */; };
+		1B1938B41E8215AB000A6782 /* CustomInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B1938B21E8215AB000A6782 /* CustomInfoWindow.xib */; };
 		1B5C6B021E7A522800851D0C /* TableDSDAMap_Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */; };
 		1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B911E6D4145007A615B /* ConvertDVT.swift */; };
 		1B655B941E6D4145007A615B /* YAxisValueFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */; };
@@ -180,6 +182,8 @@
 
 /* Begin PBXFileReference section */
 		18481FBDFADDC304EFED2593 /* Pods-QLDA_IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1B1938B11E8215AB000A6782 /* CustomInfoWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
+		1B1938B21E8215AB000A6782 /* CustomInfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInfoWindow.xib; sourceTree = "<group>"; };
 		1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDSDAMap_Portrait.swift; sourceTree = "<group>"; };
 		1B655B911E6D4145007A615B /* ConvertDVT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertDVT.swift; sourceTree = "<group>"; };
 		1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YAxisValueFormatted.swift; sourceTree = "<group>"; };
@@ -577,6 +581,8 @@
 			children = (
 				1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */,
 				24BEAECA1E697AA5008F205C /* MapItem.swift */,
+				1B1938B11E8215AB000A6782 /* CustomInfoWindow.swift */,
+				1B1938B21E8215AB000A6782 /* CustomInfoWindow.xib */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -869,6 +875,7 @@
 				BADA63671E7CF7000097D73C /* CBHeaderTableViewCell.xib in Resources */,
 				7C8CD7061E7F7334006A095F /* CellChamQTLandTableViewCell.xib in Resources */,
 				BADA63651E7CF7000097D73C /* CBChamQTTableViewCell.xib in Resources */,
+				1B1938B41E8215AB000A6782 /* CustomInfoWindow.xib in Resources */,
 				24BEAE881E6979D8008F205C /* Assets.xcassets in Resources */,
 				24BEAE861E6979D8008F205C /* Main.storyboard in Resources */,
 				7C8CD70E1E7F899F006A095F /* CellHopDongTitleLandTableViewCell.xib in Resources */,
@@ -1124,6 +1131,7 @@
 				BAF1E48D1E72AB9B00F28FE9 /* ImageMessage.swift in Sources */,
 				24BEAF051E697AA6008F205C /* UIImageViewExtension.swift in Sources */,
 				24BEAEE91E697AA6008F205C /* ChatMain_VC.swift in Sources */,
+				1B1938B31E8215AB000A6782 /* CustomInfoWindow.swift in Sources */,
 				24BEAFAB1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift in Sources */,
 				7C8CD7121E7FBAAA006A095F /* QLVanbanLandDatasource.swift in Sources */,
 				BADA636D1E7CF7000097D73C /* NotificationItem.swift in Sources */,
