@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CanhBao_VC: Base {
+class CanhBao_VC: Base_VC {
 
     @IBOutlet weak var tbCanhBao: UITableView!
     
@@ -72,11 +72,19 @@ class CanhBao_VC: Base {
     func loadData() {
         let apiUrl = "\(UrlPreFix.QLDA.rawValue)/GetHopDongCham"
         let params = "{\"szUsername\":\"\(self.userName)\",\"szPassword\":\"\(self.password)\"}"
-        ApiService.PostAsync(url: apiUrl, params: params, callback: loadDataSuccess, errorCallBack: loadDataError)
+        ApiService.PostAsync(url: apiUrl, params: params, callback: loadDataSuccess, errorCallBack: noConnectToServer)
     }
-    
+    //noConnectToServer
+    //loadDataError
     func loadDataSuccess(data : SuccessEntity) {
         //print("data")
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            print("Có lỗi có lỗi:  \(response.statusCode)")
+            return
+        }
+        
         let json = try? JSONSerialization.jsonObject(with: data.data! , options: [])
         if let dic = json as? [String:Any] {
             if let jsonResult = dic["GetHopDongChamResult"] as? [[String]] {
