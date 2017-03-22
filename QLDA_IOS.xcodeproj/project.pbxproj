@@ -522,6 +522,7 @@
 				24BEAFA11E6EA0EA008F205C /* Tab_KHGN.swift */,
 				24BEAFB11E6FB580008F205C /* Tab_KHLCNT.swift */,
 				7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */,
+				7C7DE67F1E8215A1007EADBF /* Base.swift */,
 				BA05CEAA1E8263880089689E /* ThongTinLich_VC.swift */,
 			);
 			name = ViewController;
