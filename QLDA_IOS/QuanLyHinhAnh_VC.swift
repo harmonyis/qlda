@@ -77,7 +77,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     func GetDSHAByIdSuccess(data : Data) {
         //let result = String(data: data, encoding: String.Encoding.utf8)
         
-        
+       
         //print(result)
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         
@@ -227,7 +227,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Danh sách hình ảnh"
+        //self.navigationItem.title = "Danh sách hình ảnh"
         self.idDuAn = 142
         self.listName = "DuAn"
         self.userName = variableConfig.m_szUserName

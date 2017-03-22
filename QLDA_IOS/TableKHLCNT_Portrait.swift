@@ -93,6 +93,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
             
             cell.uiViewTongGT_C2.layer.borderColor = myColorBoder.cgColor
             cell.uiViewTongGT_C2.layer.borderWidth = 0.5
+            
             return cell
             
         }

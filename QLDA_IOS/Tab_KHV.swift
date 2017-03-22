@@ -110,7 +110,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 lableQDDT.numberOfLines = 0
                 lableQDDT.sizeToFit()
                 ViewQDDT.addSubview(lableQDDT)
-                ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
+                ViewQDDT.backgroundColor = UIColor(netHex: 0x21AFFA)
                 ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiviewKHV.frame.width - 10 , height: 25)
                 self.totalHeight = self.totalHeight + ViewQDDT.frame.height
                 self.totalHeight = self.totalHeight + 10
@@ -330,7 +330,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 lableQDDT.numberOfLines = 0
                 lableQDDT.sizeToFit()
                 ViewQDDT.addSubview(lableQDDT)
-                ViewQDDT.backgroundColor = UIColor(netHex: 0x0e83d5)
+                ViewQDDT.backgroundColor = UIColor(netHex: 0x21AFFA)
                 ViewQDDT.frame = CGRect(x: 5,y: self.totalHeight + 5,width: self.UiviewKHV.frame.width - 10, height: 25)
                 self.totalHeight = self.totalHeight + ViewQDDT.frame.height
                 self.totalHeight = self.totalHeight + 10
@@ -507,7 +507,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 }
                 self.UiviewKHV.addSubview(ViewGroupTTCQDDT)
                 // đặt lại giá trị constrain cho view
-                let heightConstraint = self.UiviewKHV.heightAnchor.constraint(equalToConstant:  self.totalHeight )
+                let heightConstraint = self.UiviewKHV.heightAnchor.constraint(equalToConstant:  self.totalHeight + 5 )
                 //        self.UiviewKHV.isUserInteractionEnabled = true
                 NSLayoutConstraint.activate([heightConstraint])
                 
