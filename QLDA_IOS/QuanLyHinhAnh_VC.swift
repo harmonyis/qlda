@@ -39,7 +39,6 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         //let result = String(data: data, encoding: String.Encoding.utf8)
         
         items.removeAll()
-        print("Lấy lại danh sách")
         
         //print(result)
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -77,7 +76,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     func GetDSHAByIdSuccess(data : Data) {
         //let result = String(data: data, encoding: String.Encoding.utf8)
         
-        
+       
         //print(result)
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         
@@ -101,7 +100,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                         DispatchQueue.main.async {
                             
                             self.clv.reloadData()
-                            print("Hoàn thành")
+                            //print("Hoàn thành")
                         }
                     }
                 }
@@ -143,10 +142,10 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
         if UIDevice.current.orientation.isPortrait {
-            print(collectionView.frame.size.width/4.08)
+            //print(collectionView.frame.size.width/4.08)
             return CGSize(width: collectionView.frame.size.width/4.08, height: collectionView.frame.size.width/4.08)
         } else {
-            print(collectionView.frame.size.width/7.25)
+            //print(collectionView.frame.size.width/7.25)
             return CGSize(width: collectionView.frame.size.width/7.2, height: collectionView.frame.size.width/7.2)
         }
         
@@ -227,7 +226,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Danh sách hình ảnh"
+        //self.navigationItem.title = "Danh sách hình ảnh"
         self.idDuAn = 142
         self.listName = "DuAn"
         self.userName = variableConfig.m_szUserName
@@ -267,7 +266,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         if gestureReconizer.state != UIGestureRecognizerState.began {
             return
         }
-        print("đã đc")
+        //print("đã đc")
         
         let point = gestureReconizer.location(in: self.clv)
         let indexPath = self.clv.indexPathForItem(at: point)
@@ -275,7 +274,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         if let index = indexPath {
             var cell = self.clv.cellForItem(at: index)
             // do stuff with your cell, for example print the indexPath
-            print(index.row)
+            //print(index.row)
             showMenu(index: index.row)
             
         } else {
@@ -300,7 +299,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
             ApiService.Post(url: ApiUrlDetail, params: params, callback: {(data) in
                 
                 let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                print(json)
+                //print(json)
                 if let dic = json as? [String:Any] {
                     if let dataResult = dic["GetImageDetailResult"] as? [String:Any] {
                         if let array = dataResult["DataResult"] as? [String:Any] {
@@ -380,8 +379,6 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                     }
                     else if  self.DSDA.contains(where: { $0.IdDA! == itemDA[5] }) {
                         let NhomDuAn = self.DSDA.first(where: { $0.IdDA! == itemDA[5] })
-                        print(itemDA[5])
-                        print(itemDA[0])
                         var NhomDuAnCon = [DuAn]()
                         NhomDuAnCon = (NhomDuAn?.DuAnCon)!
                         
@@ -418,7 +415,6 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                     if let dic = json as? [String:Any] {
                         if let result = dic["GetListDuAnExistsImageResult"] as? [String:Any] {
                             if let listDuAnExists = result["DataResult"] as? [String] {
-                                //print(listDuAnExists)
                                 self.lstDuAnExists = listDuAnExists
                                 DispatchQueue.global(qos: .userInitiated).async {
                                     DispatchQueue.main.async {
@@ -497,7 +493,6 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         {
             height=30
         }
-        print(height)
         if !self.indexTrangThaiDuAnCon.contains((String)(indexPath.section)+"-"+(String)(indexPath.row)) {
             
             return height + 13
@@ -653,7 +648,6 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     }
     func duAnChaClickGroup(sender: UITapGestureRecognizer)
     {
-        //print(sender.view?.tag)
         let value  = (sender.view?.tag)
         
         if self.indexGroupDuAnCon.contains(value!) {
@@ -915,8 +909,6 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                 }
                 else if  self.DSDA.contains(where: { $0.IdDA! == itemDA[5] }) , ConvertToUnsign(itemDA[1]).contains(ConvertToUnsign(searchText)) {
                     let NhomDuAn = self.DSDA.first(where: { $0.IdDA! == itemDA[5] })
-                    print(itemDA[5])
-                    print(itemDA[0])
                     var NhomDuAnCon = [DuAn]()
                     NhomDuAnCon = (NhomDuAn?.DuAnCon)!
                     

@@ -103,8 +103,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         
                         self.UiViewQDDT.addSubview(uiView)
                         uiView = UIView()
-                        //self.uiViewThongTin.addSubview(uiView)
-                        print(lable.frame.height)
+                      
                         var lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
@@ -151,8 +150,8 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                          */
                         self.UiViewQDDT.addSubview(uiView)
                         uiView = UIView()
-                        //self.uiViewThongTin.addSubview(uiView)
-                        print(lable.frame.height)
+                        
+                        
                         var lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -210,7 +209,6 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView = UIView()
                         uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                         //self.uiViewThongTin.addSubview(uiView)
-                        print(lable.frame.height)
                         var lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
@@ -345,8 +343,8 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         
                         self.UiViewQDDT.addSubview(uiView)
                         uiView = UIView()
-                        //self.uiViewThongTin.addSubview(uiView)
-                        print(lable.frame.height)
+                        
+                        
                         var lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
@@ -389,8 +387,8 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         
                         self.UiViewQDDT.addSubview(uiView)
                         uiView = UIView()
-                        //self.uiViewThongTin.addSubview(uiView)
-                        print(lable.frame.height)
+                        
+                        
                         var lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -437,11 +435,12 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         lable.numberOfLines = 0
                         lable.sizeToFit()
                         uiView.addSubview(lable)
+                        // tao biến để vẽ loại giao diện chiếm 1 nửa màn hình
                         var haftWidth : CGFloat = (self.UiViewQDDT.frame.width - 10)/2
                         if !(icount%2==0){
                             haftWidth = 0
                         }
-                        uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2 , height: 25)
+                        uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10 )/2 , height: 25)
                         self.totalHeight = self.totalHeight + 25
                         ViewGroupTTCQDDT.addSubview(uiView)
                         
@@ -449,7 +448,9 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView = UIView()
                         uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                         //self.uiViewThongTin.addSubview(uiView)
-                        print(lable.frame.height)
+                       
+                        
+                        
                         var lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
@@ -465,7 +466,9 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         lblTenDuAn.textAlignment = NSTextAlignment.right
                         
                         uiView.addSubview(lblTenDuAn)
-                        uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
+                        uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10 )/2, height: 25)
+                        
+                        
                         
                         var calHeight : CGFloat = 26
                         let borderBottom = CALayer()

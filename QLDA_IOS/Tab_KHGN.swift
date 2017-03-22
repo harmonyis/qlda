@@ -148,7 +148,8 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
                 let font = UIFont.systemFont(ofSize: 13)
                 wGTHD = (itemNhomHopDong?.GiaTriHopDong?.computeTextSize(size: size, font: font).width)! + 15
                 wLKGTTT = (itemNhomHopDong?.GiaTriLK?.computeTextSize(size: size, font: font).width)! + 15
-                print(m_NhomHD)
+                wGTHD = max(60,wGTHD)
+                wLKGTTT = max(60,wLKGTTT)
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
                         //  self.DSDA = self.DSDA.sorted(by: { Int($0.IdDA!)! > Int($1.IdDA!)! })
@@ -181,7 +182,7 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
     
     func LoadTableView(){
         
-        print("_________________")
+       
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
@@ -191,7 +192,7 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
                     item.removeFromSuperview()
                 }
             }
-            print(self.navigationController!.navigationBar.frame.width, self.tbvKHGN.bounds.size.width)
+       
             var width = variableConfig.m_widthScreen
             
             width = width - 20 - 8

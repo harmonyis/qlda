@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class Tab_VanBanDuAnVC: UIViewController , IndicatorInfoProvider{
+class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider{
     
     var itemInfo = IndicatorInfo(title: "Văn bản dự án")
     

@@ -35,7 +35,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
     func Suscess(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if let dic = json as? [String:Any] {
-            print(dic)
+          
             if let arrTTDA = dic["GetThongTinDuAnResult"] as? [String] {
                 m_arrTTDA = arrTTDA
             }
@@ -82,8 +82,8 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                         
                         self.uiViewThongTin.addSubview(uiView)
                         uiView = UIView()
-                        //self.uiViewThongTin.addSubview(uiView)
-                        print(lable.frame.height)
+                        
+                        
                         var lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
