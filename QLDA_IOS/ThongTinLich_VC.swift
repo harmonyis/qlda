@@ -48,7 +48,7 @@ class ThongTinLich_VC: UIViewController{
     }
     
     @IBAction func btnCancleTouch(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnOKTouch(_ sender: UIButton) {
@@ -97,7 +97,7 @@ class ThongTinLich_VC: UIViewController{
                 if let id = dic["insertCalendarScheduleIOSResult"] as? Int {
                     print("\(id)")
                     DispatchQueue.main.async(execute: { () -> Void in
-                        self.navigationController?.popViewController(animated: true)
+                        _ = self.navigationController?.popViewController(animated: true)
                     })
                     
                 }
@@ -125,7 +125,7 @@ class ThongTinLich_VC: UIViewController{
         ApiService.Post(url: apiUrl, params: params, callback: { (data) in
             DispatchQueue.global(qos: .userInitiated).async {
                 DispatchQueue.main.async {
-                    self.navigationController?.popViewController(animated: true)
+                    _ = self.navigationController?.popViewController(animated: true)
                 }
             }
         }, errorCallBack: { (error) in

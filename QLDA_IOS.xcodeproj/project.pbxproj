@@ -143,7 +143,6 @@
 		BADA636B1E7CF7000097D73C /* CellHopDongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BADA63591E7CF7000097D73C /* CellHopDongTableViewCell.xib */; };
 		BADA636C1E7CF7000097D73C /* CustomTableNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA635A1E7CF7000097D73C /* CustomTableNotificationCell.swift */; };
 		BADA636D1E7CF7000097D73C /* NotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA635B1E7CF7000097D73C /* NotificationItem.swift */; };
-		BADA636E1E7CF7000097D73C /* TableNotifications_Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA635C1E7CF7000097D73C /* TableNotifications_Portrait.swift */; };
 		BADA63721E81040E0097D73C /* CameraIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = BADA63701E81040E0097D73C /* CameraIcon.pdf */; };
 		BADA63731E81040E0097D73C /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = BADA63711E81040E0097D73C /* Contents.json */; };
 		BAF1E4891E72459300F28FE9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E4881E72459300F28FE9 /* UIFont.swift */; };
@@ -333,7 +332,6 @@
 		BADA63591E7CF7000097D73C /* CellHopDongTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellHopDongTableViewCell.xib; sourceTree = "<group>"; };
 		BADA635A1E7CF7000097D73C /* CustomTableNotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableNotificationCell.swift; sourceTree = "<group>"; };
 		BADA635B1E7CF7000097D73C /* NotificationItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationItem.swift; sourceTree = "<group>"; };
-		BADA635C1E7CF7000097D73C /* TableNotifications_Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableNotifications_Portrait.swift; sourceTree = "<group>"; };
 		BADA63701E81040E0097D73C /* CameraIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = CameraIcon.pdf; sourceTree = "<group>"; };
 		BADA63711E81040E0097D73C /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
 		BAF1E4881E72459300F28FE9 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
@@ -409,7 +407,6 @@
 				BADA634B1E7CF7000097D73C /* ApiEntity.swift */,
 				BADA635A1E7CF7000097D73C /* CustomTableNotificationCell.swift */,
 				BADA635B1E7CF7000097D73C /* NotificationItem.swift */,
-				BADA635C1E7CF7000097D73C /* TableNotifications_Portrait.swift */,
 				24BEAF121E697C5C008F205C /* View */,
 				24BEAF0F1E697BBC008F205C /* Config */,
 				24BEAF101E697BC6008F205C /* Supporting Files */,
@@ -1111,7 +1108,6 @@
 				BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */,
 				BA18F9B81E7A424600E53946 /* UIButton.swift in Sources */,
 				24ADE79E1E7FBB0F00415499 /* TableKHLCNT_Landscape.swift in Sources */,
-				BADA636E1E7CF7000097D73C /* TableNotifications_Portrait.swift in Sources */,
 				7CA6B9341E6D486400D70CD9 /* CameraDanhSachDuAnDatasource.swift in Sources */,
 				7CA6B92C1E6D44BB00D70CD9 /* QuanLyHinhAnh_VC.swift in Sources */,
 				24BEAFB21E6FB580008F205C /* Tab_KHLCNT.swift in Sources */,

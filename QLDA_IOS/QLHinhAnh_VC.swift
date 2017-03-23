@@ -350,9 +350,9 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
         let indexPath = self.clv.indexPathForItem(at: point)
         
         if let index = indexPath {
-            var cell = self.clv.cellForItem(at: index)
+            //var cell = self.clv.cellForItem(at: index)
             // do stuff with your cell, for example print the indexPath
-            print(index.row)
+            //print(index.row)
             showMenu(index: index.row)
             
         } else {
@@ -369,7 +369,7 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
         let detailAction = UIAlertAction(title: "Chi tiết", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             
-            var obj = self.items[index]
+            let obj = self.items[index]
             var message = ""
             
             let ApiUrlDetail = "\(UrlPreFix.Camera.rawValue)/GetImageDetail"
@@ -377,7 +377,7 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
             ApiService.Post(url: ApiUrlDetail, params: params, callback: {(data) in
                 
                 let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                print(json)
+                //print(json)
                 if let dic = json as? [String:Any] {
                     if let dataResult = dic["GetImageDetailResult"] as? [String:Any] {
                         if let array = dataResult["DataResult"] as? [String:Any] {
@@ -417,12 +417,12 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
             let alert = UIAlertController(title: "Xác nhận xóa ?", message: "Bạn có chắc chắn muốn xóa ?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Đóng", style: UIAlertActionStyle.default, handler: nil))
             alert.addAction(UIAlertAction(title: "Xác nhận", style: UIAlertActionStyle.default, handler: {(action) -> Void in
-                var obj = self.items[index]
+                let obj = self.items[index]
                 let ApiUrlDetail = "\(UrlPreFix.Camera.rawValue)/DeleteFileUpload"
                 let params : String = "{\"userName\" : \"\(self.userName)\", \"password\": \"\(self.password)\", \"listName\":\"DuAn\", \"IDItem\":\(obj.ItemId), \"fileName\":\"\(obj.ImageName)\"}"
                 ApiService.Post(url: ApiUrlDetail, params: params, callback: {(data) in
                     
-                    let json = try? JSONSerialization.jsonObject(with: data, options: [])
+                    //let json = try? JSONSerialization.jsonObject(with: data, options: [])
                     
                     self.items.remove(at: index)
                     DispatchQueue.global(qos: .userInitiated).async {

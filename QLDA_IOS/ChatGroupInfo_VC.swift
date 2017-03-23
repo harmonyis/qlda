@@ -223,7 +223,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         let action = UIAlertAction(title: "Ok", style: .destructive) { action in
             self.removeUserFromGroup(userID: Config.userID, groupID: self.groupID!)
             ChatCommon.checkCloseView = true
-            self.navigationController?.popViewController(animated: true)
+            _ = self.navigationController?.popViewController(animated: true)
             /*
             guard let parent = self.navigationController?.presentingViewController else{
                 return

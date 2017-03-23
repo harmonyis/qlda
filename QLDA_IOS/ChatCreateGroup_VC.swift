@@ -108,7 +108,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
             //if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
             if (dic["Chat_CreateGroupChatResult"] as? Int) != nil {
                 DispatchQueue.main.async(execute: { () -> Void in
-                    self.navigationController?.popViewController(animated: true)
+                    _ = self.navigationController?.popViewController(animated: true)
                 })
                 
             }
