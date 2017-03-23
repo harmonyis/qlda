@@ -14,9 +14,12 @@ class QLVanBanDatasource : NSObject, UITableViewDataSource ,UITableViewDelegate{
     var table :UITableView
     var arrOpen : Set<Int> = []
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
-    init (arrVanBan : [VanBanEntity], table : UITableView) {
+    var tenVBClick : (VanBanEntity) -> Void
+    
+    init (arrVanBan : [VanBanEntity], table : UITableView, tenVanBanClick: @escaping (VanBanEntity) -> Void) {
         self.arrVanBan = arrVanBan
         self.table = table
+        self.tenVBClick = tenVanBanClick
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,6 +51,16 @@ class QLVanBanDatasource : NSObject, UITableViewDataSource ,UITableViewDelegate{
         
         
         //label.backgroundColor = UIColor.white
+        
+        var eventClick = UITapGestureRecognizer()
+        //let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
+        let valueTenVB = String(indexPath.row)
+        cell.viewTieuDeTenVanBan.accessibilityLabel = valueTenVB
+        //print(indexPath.row)
+        eventClick.addTarget(self, action:  #selector(QLVanBanDatasource.tenVanBanClick(sender:)))
+        cell.viewTieuDeTenVanBan.addGestureRecognizer(eventClick)
+        cell.viewTieuDeTenVanBan.isUserInteractionEnabled = true
+        
         
         
         var targetString : String = "Số văn bản: \(arrVanBan[indexPath.row].soVanBan)"
@@ -118,7 +131,7 @@ class QLVanBanDatasource : NSObject, UITableViewDataSource ,UITableViewDelegate{
         //cell.viewTieuDeChiTiet.layer.masksToBounds = true
         //cell.viewTieuDeTenVanBan.layer.masksToBounds = true
         
-        var eventClick = UITapGestureRecognizer()
+        eventClick = UITapGestureRecognizer()
         //let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
         let value = String(indexPath.row)
         cell.viewTieuDeChiTiet.accessibilityLabel = value
@@ -195,6 +208,12 @@ class QLVanBanDatasource : NSObject, UITableViewDataSource ,UITableViewDelegate{
         self.table.reloadData()
         //print(value)
         
+    }
+    
+    func tenVanBanClick(sender:UITapGestureRecognizer) {
+        let value : Int = Int((sender.view?.accessibilityLabel)!)!
+        //print(value)
+        self.tenVBClick(arrVanBan[value])
     }
     
 

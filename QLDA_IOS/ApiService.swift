@@ -102,6 +102,7 @@ class ApiService {
         //var message :String  = ""
         
         let config = URLSessionConfiguration.default // Session Configuration
+        config.timeoutIntervalForRequest = 30
         let session = URLSession(configuration: config) // Load configuration into Session
         let url = URL(string: url)!
         

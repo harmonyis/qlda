@@ -13,9 +13,11 @@ class QLVanBanLandDatasource : NSObject, UITableViewDataSource, UITableViewDeleg
     
     var arrVanBan  : [VanBanEntity]
     var table : UITableView
-    init(arrVanBan : [VanBanEntity], table : UITableView) {
+    var tenVBClick : (VanBanEntity) -> Void
+    init(arrVanBan : [VanBanEntity], table : UITableView,tenVanBanClick: @escaping (VanBanEntity) -> Void) {
         self.arrVanBan = arrVanBan
         self.table = table
+        self.tenVBClick = tenVanBanClick
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellLand", for: indexPath) as! VanBanLandTableViewCell
@@ -27,6 +29,16 @@ class QLVanBanLandDatasource : NSObject, UITableViewDataSource, UITableViewDeleg
         cell.lbl3.text = item.soVanBan
         cell.lbl4.text = item.ngayBanHanh
         cell.lbl5.text = item.coQuanBanHanh
+        
+        var eventClick = UITapGestureRecognizer()
+        //let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
+        let valueTenVB = String(indexPath.row)
+        cell.view2.accessibilityLabel = valueTenVB
+        //print(indexPath.row)
+        eventClick.addTarget(self, action:  #selector(QLVanBanLandDatasource.tenVanBanClick(sender:)))
+        cell.view2.addGestureRecognizer(eventClick)
+        cell.view2.isUserInteractionEnabled = true
+        
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,6 +70,11 @@ class QLVanBanLandDatasource : NSObject, UITableViewDataSource, UITableViewDeleg
         cell.lbl5.font = UIFont.boldSystemFont(ofSize: 13)
         cell.view5.backgroundColor = background
         return cell
+    }
+    func tenVanBanClick(sender:UITapGestureRecognizer) {
+        let value : Int = Int((sender.view?.accessibilityLabel)!)!
+        //print(value)
+        self.tenVBClick(arrVanBan[value])
     }
     
 }
