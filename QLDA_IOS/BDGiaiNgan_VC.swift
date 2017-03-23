@@ -127,8 +127,8 @@ class BDGiaiNgan_VC: Base_VC {
         format.locale = Locale(identifier: "vi_VN")
         format.generatesDecimalNumbers = false
         let formatter = DefaultValueFormatter(formatter: format)
-        chartDataSet.valueFormatter = formatter as? IValueFormatter
-        chartDataSet1.valueFormatter = formatter as? IValueFormatter
+        chartDataSet.valueFormatter = formatter as IValueFormatter
+        chartDataSet1.valueFormatter = formatter as IValueFormatter
         
         
         

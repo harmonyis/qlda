@@ -65,7 +65,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                 var totalHeight : CGFloat = 5
                 for itemTTDA in self.m_arrTTDA {
                     var uiView = UIView()
-                    var lable:UILabel = UILabel()
+                    let lable:UILabel = UILabel()
                     
                     if icount > 0 {
                         lable.textColor = UIColor.black
@@ -84,7 +84,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                         uiView = UIView()
                         
                         
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                         lblTenDuAn.text = itemTTDA

@@ -78,8 +78,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
             if let arrDSDA = dic["GetDuAnResult"] as? [[String]] {
                 self.m_arrDSDA = arrDSDA
                 for itemDA in arrDSDA {
-                    print(itemDA[5])
-                    print(itemDA[0])
+                  
                     if itemDA[0] == itemDA[5] {
                         let itemNhomDA = DanhSachDA()
                         itemNhomDA.IdDA = itemDA[0] as String
@@ -173,8 +172,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
                 }
                 else if  self.DSDA.contains(where: { $0.IdDA! == itemDA[5] }) , ConvertToUnsign(itemDA[1]).contains(ConvertToUnsign(searchText)) {
                     let NhomDuAn = self.DSDA.first(where: { $0.IdDA! == itemDA[5] })
-                    print(itemDA[5])
-                    print(itemDA[0])
+                   
                     var NhomDuAnCon = [DuAn]()
                     NhomDuAnCon = (NhomDuAn?.DuAnCon)!
                     
@@ -271,7 +269,6 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
         {
             for  j in 0..<signs[i].characters.count
             {
-                let item : String = signs[i]
                 szValue = (szValue as NSString).replacingOccurrences(of: (String)(signs[i][j]), with: (String)(signs[0][i-1]))
             }
         }
@@ -327,7 +324,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
         
     }
     
-    func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
         let infoWindow = Bundle.main.loadNibNamed("InfoWindow", owner: self, options: nil)?.first as! CustomInfoWindow
         infoWindow.lblLabel.text = "Sydney Opera House"
         

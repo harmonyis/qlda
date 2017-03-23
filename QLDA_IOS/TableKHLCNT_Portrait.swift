@@ -19,7 +19,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
     var tbvKHLCNT : UITableView?
     var uiViewKHLCNT : UIViewController?
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
-
+    
     var wTongGiaTri : CGFloat = 0
     
     // MARK: - Table view data source
@@ -40,8 +40,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
         
         
     }
-  
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {}
+    
     
     
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
@@ -121,7 +120,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
             targetString = "Loại hợp đồng: \(m_dsGoiThau[index - 4].LoaiHopDong!)"
             range = NSMakeRange(16, targetString.characters.count - 16 )
             cell.lblLoaiHD.attributedText = attributedString(from: targetString, nonBoldRange: range)
-        
+            
             cell.uiViewSTT.backgroundColor = myColorBackgroud
             cell.uiViewSTT.layer.borderColor = myColorBoder.cgColor
             cell.uiViewSTT.layer.borderWidth = 0.5
@@ -146,7 +145,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
             
             cell.uiViewTieuDe.layer.borderColor = myColorBoder.cgColor
             cell.uiViewTieuDe.layer.borderWidth = 0.5
-         
+            
             let eventClick = UITapGestureRecognizer()
             
             cell.uiViewDetail.tag = (Int)(m_dsGoiThau[index - 4].IdGT!)!
@@ -155,7 +154,7 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
             cell.uiViewDetail.isUserInteractionEnabled = true;
             
             cell.uiViewThongTinCT.isHidden = !self.indexTrangThaiGoiThau.contains((Int)(m_dsGoiThau[index - 4].IdGT!)!)
-         
+            
             return cell
         }
         
