@@ -36,12 +36,16 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getEventOfMonth(currentDate)
-        getCalendarByUserAndDate(Date())
         
         btnAddEvent.layer.cornerRadius = 25
         btnAddEvent.setImage(#imageLiteral(resourceName: "ic_addevent"), for: UIControlState.normal)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getEventOfMonth(passSelectDate)
+        getCalendarByUserAndDate(passSelectDate)
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +55,20 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 46
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            let alert = UIAlertController(title: "Thông báo", message: "Bạn muốn xóa sự kiện này?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Huỷ", style: UIAlertActionStyle.default, handler: nil))
+            
+            let action = UIAlertAction(title: "OK", style: .destructive) { action in
+                //self.removeUserFromGroup(userID: self.listUser[indexPath.row].ContactID!, groupID: self.groupID!)
+                self.deleteCalendarSchedule(self.listCalendarItem[indexPath.row].calendarScheduleID!)
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -133,7 +151,6 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
             let json = try? JSONSerialization.jsonObject(with: data, options: [])
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
-            dateFormatter.timeZone = TimeZone(secondsFromGMT : 7)
             
             if let methodResult = json as? [String:Any] {
                 if let items = methodResult["getCalendarByUserAndDateIOSResult"] as? [[String:Any]] {
@@ -144,9 +161,9 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
                         calendarItem.dateSchedule = Date(jsonDate: dateSchedule)
                         calendarItem.calendarScheduleID = item["CalendarScheduleID"] as? Int
                         let timeEnd = item["TimeEnd"] as! String
-                        calendarItem.timeEnd = Date(jsonDate: timeEnd)
+                        calendarItem.timeEnd = Date(jsonDateGMT: timeEnd)
                         let timeStart = item["TimeStart"] as! String
-                        calendarItem.timeStart = Date(jsonDate: timeStart)
+                        calendarItem.timeStart = Date(jsonDateGMT: timeStart)
                         calendarItem.UserID = item["UserID"] as? Int
                         calendarItem.title = item["Title"] as? String
                         calendarItem.note = item["Note"] as? String
@@ -181,7 +198,7 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
             if let methodResult = json as? [String:Any] {
                 if let items = methodResult["getEventOfMonthResult"] as? [String] {
                     for item in items{
-                        let time = Date(jsonDate: item)
+                        let time = Date.init(jsonDate: item)
                         let day = self.calendar.component(.day, from: time!)
                         self.listEventCurrentMonth.append(day)
                         
@@ -196,7 +213,19 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         })
     }
     
-  
+    func deleteCalendarSchedule(_ id : Int){
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/deleteCalendarSchedule"
+        let params : String = "{\"nCalendarScheduleID\" : \(id)}"
+        print(params)
+        ApiService.Post(url: apiUrl, params: params, callback: { (data) in
+            self.getEventOfMonth(self.passSelectDate)
+            self.getCalendarByUserAndDate(self.passSelectDate)
+        }, errorCallBack: { (error) in
+            self.reloadCalendar()
+            print("error")
+            print(error.localizedDescription)
+        })
+    }
     
     func reloadCalendar(){
         DispatchQueue.global(qos: .userInitiated).async {

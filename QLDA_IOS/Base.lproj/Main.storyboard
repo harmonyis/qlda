@@ -3121,7 +3121,9 @@
                                         <date key="date" timeIntervalSinceReferenceDate="511860322.49525499">
                                             <!--2017-03-22 07:25:22 +0000-->
                                         </date>
-                                        <locale key="locale" localeIdentifier="vi_VN"/>
+                                        <connections>
+                                            <action selector="dtpStartChageValue:" destination="FSX-wM-fCW" eventType="valueChanged" id="P1Y-BR-XBi"/>
+                                        </connections>
                                     </datePicker>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jub-FJ-vc8">
                                         <rect key="frame" x="145" y="88" width="30" height="150"/>
@@ -3141,7 +3143,6 @@
                                         <date key="date" timeIntervalSinceReferenceDate="511860488.55717897">
                                             <!--2017-03-22 07:28:08 +0000-->
                                         </date>
-                                        <locale key="locale" localeIdentifier="vi_VN"/>
                                     </datePicker>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nội dung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzZ-dl-mQj">
                                         <rect key="frame" x="4" y="246" width="312" height="21"/>
@@ -3950,7 +3951,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9aQ-Dx-Rjr">
-                                                    <rect key="frame" x="268" y="-1" width="41" height="44"/>
+                                                    <rect key="frame" x="268" y="0.0" width="41" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 </button>
                                             </subviews>
