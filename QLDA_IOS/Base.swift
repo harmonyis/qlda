@@ -8,9 +8,6 @@
 
 import Foundation
 class Base : UIViewController {
-    func printError() {
-        print("out")
-    }
     
     func noConnectToServer(errorEntity:ErrorEntity) {
         let error = errorEntity.error
