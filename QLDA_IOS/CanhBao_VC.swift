@@ -75,7 +75,7 @@ class CanhBao_VC: Base_VC {
         ApiService.PostAsync(url: apiUrl, params: params, callback: loadDataSuccess, errorCallBack: noConnectToServer)
     }
     //noConnectToServer
-    //loadDataError
+    //loadDataError Data
     func loadDataSuccess(data : SuccessEntity) {
         //print("data")
         let response = data.response as! HTTPURLResponse

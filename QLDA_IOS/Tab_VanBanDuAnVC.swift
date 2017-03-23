@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider{
+class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionControllerDelegate{
     
     var itemInfo = IndicatorInfo(title: "Văn bản dự án")
     
@@ -56,7 +56,51 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider{
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    // open file
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController
+    {
+        return self
+    }
     
+    func saveFile(arrData : [Int8], fileName : String) {
+        let myArray:[Int8] = [ 0x4d, 0x2a, 0x41, 0x2a, 0x53, 0x2a, 0x48]
+        let pointer = UnsafeBufferPointer(start:myArray, count:myArray.count)
+        let data = Data(buffer:pointer)
+        
+        let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let documentDirectoryPath:String = path[0]
+        let destinationURLForFile = URL(fileURLWithPath: documentDirectoryPath.appendingFormat("/\(fileName)"))
+
+        try! data.write(to: URL(fileURLWithPath: destinationURLForFile.path))
+        print(fileName)
+        showFileWithPath(path: destinationURLForFile.path)
+    }
+    
+    
+    
+    func showFileWithPath(path: String){
+        let isFileFound:Bool? = FileManager.default.fileExists(atPath: path)
+        if isFileFound == true{
+            let viewer = UIDocumentInteractionController(url: URL(fileURLWithPath: path))
+            viewer.delegate = self
+            viewer.presentPreview(animated: true)
+        }
+    }
+    
+    //Open file
+    
+    func download(vanBan : VanBanEntity) {
+        let url = "\(UrlPreFix.QLDA.rawValue)/GetFileByName"
+        let params = "{\"filename\":\"\(vanBan.tenFileVanBan)\", \"szDuogDan\":\"\(vanBan.duongDan)\", \"szUsername\":\"\(self.userName)\", \"szPassword\":\"\(self.password)\"}"
+        ApiService.PostAsync(url: url, params: params, callback: { (success : SuccessEntity) in
+            let json = try? JSONSerialization.jsonObject(with: success.data! , options: [])
+            if let dic = json as? [String:Any] {
+                if let arr = dic["GetFileByNameResult"] as? [Int8] {
+                    self.saveFile(arrData: arr, fileName: vanBan.tenFileVanBan)
+                }
+            }
+        }, errorCallBack: self.noConnectToServer)
+    }
     
     // MARK: - UITableViewDataSource
     
@@ -100,13 +144,14 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider{
     
     func rotate() {
         if UIDevice.current.orientation.isLandscape {
-            self.tableLandDatasource = QLVanBanLandDatasource(arrVanBan: self.arrVanBan, table: self.tbVanBanDuAn)
+            self.tableLandDatasource = QLVanBanLandDatasource(arrVanBan: self.arrVanBan, table: self.tbVanBanDuAn,tenVanBanClick:download)
             self.tbVanBanDuAn.dataSource = self.tableLandDatasource
             self.tbVanBanDuAn.delegate = self.tableLandDatasource
             self.tbVanBanDuAn.reloadData()
         }
         else {
-            self.tableDatasource = QLVanBanDatasource(arrVanBan: self.arrVanBan, table: self.tbVanBanDuAn)
+            self.tableDatasource = QLVanBanDatasource(arrVanBan: self.arrVanBan, table: self.tbVanBanDuAn,tenVanBanClick:download)
+
             self.tbVanBanDuAn.dataSource = self.tableDatasource
             self.tbVanBanDuAn.delegate = self.tableDatasource
             self.tbVanBanDuAn.reloadData()
