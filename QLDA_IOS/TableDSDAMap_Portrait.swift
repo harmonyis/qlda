@@ -73,8 +73,6 @@ class TableDSDAMap_Portrait : NSObject, UITableViewDelegate, UITableViewDataSour
             }
         }
 
-        let heightTD = calulaterTextSize(text: itemDAs.TenDA!, size: CGSize(width: cell.lblTenDuAn.frame.width , height: 1000))
-        
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
         cell.UiViewGroup.layer.borderWidth = 0.5
@@ -166,7 +164,7 @@ class TableDSDAMap_Portrait : NSObject, UITableViewDelegate, UITableViewDataSour
             }
         }
       
-        let heightTD = calulaterTextSize(text: itemDuAnCon.TenDA!, size: CGSize(width: cell.lblTenDuAn.frame.width , height: 1000))
+     
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
         cell.UiViewGroup.layer.borderWidth = 0.5
@@ -185,7 +183,7 @@ class TableDSDAMap_Portrait : NSObject, UITableViewDelegate, UITableViewDataSour
         borderBottom.borderColor =  myColorBoder.cgColor
         borderBottom.borderWidth = borderWidth
         
-        var eventClick = UITapGestureRecognizer()
+        let eventClick = UITapGestureRecognizer()
         
         eventClick.addTarget(self, action:  #selector(TableDSDA_Portrait.ClickTenDuAn(sender:)))
         cell.lblTenDuAn.accessibilityLabel = (itemDuAnCon.TenDA!)

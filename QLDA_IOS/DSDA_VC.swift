@@ -77,8 +77,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             if let arrDSDA = dic["GetDuAnResult"] as? [[String]] {
                 self.m_arrDSDA = arrDSDA
                 for itemDA in arrDSDA {
-                    print(itemDA[5])
-                    print(itemDA[0])
+                 
                     if itemDA[0] == itemDA[5] {
                         let itemNhomDA = DanhSachDA()
                         itemNhomDA.IdDA = itemDA[0] as String
@@ -387,8 +386,8 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                 }
             }
             constraintHeightHeader.constant = 30
-            var uiViewHeader:UIView = UIView()
-            var lable:UILabel = UILabel()
+          
+            let lable:UILabel = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Danh sách dự án"
@@ -434,7 +433,6 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         {
             for  j in 0..<signs[i].characters.count
             {
-                let item : String = signs[i]
                 szValue = (szValue as NSString).replacingOccurrences(of: (String)(signs[i][j]), with: (String)(signs[0][i-1]))
             }
         }

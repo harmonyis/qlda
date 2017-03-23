@@ -20,6 +20,17 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
     var m_arrTDT : [String] = [String]()
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var UiViewQDDT: UIView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,8 +77,8 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                 
                 // phần tổng mức đầu tư
                 // tạo cái lable tổng mức đâu tư
-                var ViewQDDT = UIView()
-                var lableQDDT:UILabel = UILabel()
+                let ViewQDDT = UIView()
+                let lableQDDT:UILabel = UILabel()
                 lableQDDT.textColor = UIColor.white
                 lableQDDT.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                 lableQDDT.text = "Tổng mức đầu tư"
@@ -82,13 +93,13 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                 self.totalHeight = self.totalHeight + 10
                 self.UiViewQDDT.addSubview(ViewQDDT)
                 
-                var ViewGroupTTCQDDT = UIView()
+                let ViewGroupTTCQDDT = UIView()
                 // dùng vong for để tạo giao diện và bind dữ liệu
                 for itemTTDA in self.m_arrTTDA {
                     //tạo giao diện phần đầu tiên của tổng mức đầu tư
                     if icount > 0 ,icount < 4 {
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lable.text = arrlblTTDA[icount-1]
@@ -104,7 +115,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         self.UiViewQDDT.addSubview(uiView)
                         uiView = UIView()
                       
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                         lblTenDuAn.text = itemTTDA
@@ -135,7 +146,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                     // tạo giao diện phần tổng giá trị
                     if icount == 4 {
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lable.text = arrlblTTDA[icount-1]
@@ -152,7 +163,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView = UIView()
                         
                         
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lblTenDuAn.text =  variableConfig.convert(itemTTDA)
@@ -169,7 +180,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView.addSubview(lblTenDuAn)
                         lblTenDuAn.widthAnchor.constraint(equalToConstant: 160).isActive = true
                         
-                        var calHeight : CGFloat = 30
+                        let calHeight : CGFloat = 30
                         uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
                         
                         self.totalHeight = self.totalHeight + uiView.frame.height
@@ -188,7 +199,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                     if icount > 4 , icount < 12 {
                         
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lable.text = arrlblTTDA[icount-1]
@@ -209,7 +220,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView = UIView()
                         uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                         //self.uiViewThongTin.addSubview(uiView)
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                         lblTenDuAn.text = variableConfig.convert(itemTTDA)
@@ -226,7 +237,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView.addSubview(lblTenDuAn)
                         uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
                         
-                        var calHeight : CGFloat = 26
+                     
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
                         borderBottom.borderColor =  self.myColorBoder.cgColor
@@ -249,7 +260,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                     icount = 1 + icount
                 }
                 if self.m_arrTTDA.count%2==0 {
-                    var uiView = UIView()
+                    let uiView = UIView()
                     uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                     uiView.frame = CGRect(x: 0 + (self.UiViewQDDT.frame.width)/2 , y: self.totalHeight ,width: (self.UiViewQDDT.frame.width)/2 - 5, height: 50)
                     ViewGroupTTCQDDT.addSubview(uiView)
@@ -303,8 +314,8 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                 var icount = 0
                 // phần tổng dự toán
                 // tạo lable tổng dự toán
-                var ViewQDDT = UIView()
-                var lableQDDT:UILabel = UILabel()
+                let ViewQDDT = UIView()
+                let lableQDDT:UILabel = UILabel()
                 lableQDDT.textColor = UIColor.white
                 lableQDDT.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                 lableQDDT.text = "Tổng dự toán"
@@ -321,14 +332,14 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                 self.totalHeight = self.totalHeight + 10
                 self.UiViewQDDT.addSubview(ViewQDDT)
                 
-                var ViewGroupTTCQDDT = UIView()
+                let ViewGroupTTCQDDT = UIView()
                 
                 // dùng vòng for để tạo giao diện và bind dữ liệu
                 for itemTTDA in self.m_arrTDT {
                     // tạo dữ liệu phần đầu
                     if icount > 0 ,icount < 4 {
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lable.text = arrlblTTDA[icount-1]
@@ -345,7 +356,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView = UIView()
                         
                         
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                         lblTenDuAn.text = itemTTDA
@@ -376,7 +387,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                     // tạo dữ liệu phần tổng giá trị
                     if icount == 4 {
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lable.text = arrlblTTDA[icount-1]
@@ -389,7 +400,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView = UIView()
                         
                         
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lblTenDuAn.text = variableConfig.convert(itemTTDA)
@@ -406,7 +417,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView.addSubview(lable)
                         uiView.addSubview(lblTenDuAn)
                         
-                        var calHeight : CGFloat = 30
+                        let calHeight : CGFloat = 30
                         uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiViewQDDT.frame.width, height: calHeight + 4)
                         
                         self.totalHeight = self.totalHeight + uiView.frame.height
@@ -425,7 +436,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                     if icount > 4 , icount < 12{
                         
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -451,7 +462,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                        
                         
                         
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                         lblTenDuAn.text = variableConfig.convert(itemTTDA)
@@ -469,8 +480,6 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10 )/2, height: 25)
                         
                         
-                        
-                        var calHeight : CGFloat = 26
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
                         borderBottom.borderColor =  self.myColorBoder.cgColor
@@ -493,7 +502,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                     icount = 1 + icount
                 }
                 if self.m_arrTDT.count%2==0 {
-                    var uiView = UIView()
+                    let uiView = UIView()
                     uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                     uiView.frame = CGRect(x: 0 + (self.UiViewQDDT.frame.width)/2 , y: self.totalHeight ,width: (self.UiViewQDDT.frame.width)/2 - 5, height: 50)
                     ViewGroupTTCQDDT.addSubview(uiView)
@@ -516,9 +525,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
         self.present(alert, animated: true, completion: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+   
     
     
     init(itemInfo: IndicatorInfo) {
