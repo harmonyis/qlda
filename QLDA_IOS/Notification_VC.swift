@@ -248,7 +248,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         cell.lblTitle.backgroundColor = myBackgroundColorCell
         cell.viewTitle.backgroundColor = myBackgroundColorCell
         
-        let eventClick = UITapGestureRecognizer()
+        //let eventClick = UITapGestureRecognizer()
         // label ngay tao
         if(itemNotification.NotificationCreated != nil){
             let dateFormatter = DateFormatter()
@@ -287,7 +287,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     {
         let idDuAn = (sender.view?.tag)!
         _idDuAnClick = idDuAn
-        var value : String = (sender.view?.accessibilityLabel)!
+        //var value : String = (sender.view?.accessibilityLabel)!
         let ulLabel = sender.view as? UILabel
         let idNotification = ulLabel?.GetNotification()
         
@@ -301,7 +301,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         //await _chatHubProxy.Invoke("MakeReadNotification", _nCurrentUserID, nNotificationID);
         //update trong co so du lieu
         do{
-            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, idNotification])
+            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, Int(idNotification!)])
         }
         catch {}
         
