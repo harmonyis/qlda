@@ -27,11 +27,8 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         self.getNotifications()
         
-        self.tbNotification.sectionFooterHeight = 0;
-        self.tbNotification.sectionHeaderHeight = UITableViewAutomaticDimension
         self.tbNotification.rowHeight = UITableViewAutomaticDimension
         self.tbNotification.estimatedRowHeight = 30
-        self.tbNotification.estimatedSectionHeaderHeight = 30
         
         btAllRead.layer.borderWidth = 1
         btAllRead.layer.borderColor = UIColor.white.cgColor
@@ -59,7 +56,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
             if let dic = dics["getRecentNotificationsResult"] as? [[String:Any]] {
                 self._notificationItems = [NotificationItem]()
                 for item in dic{
-                    var notificationItem = NotificationItem()
+                    let notificationItem = NotificationItem()
                     
                     let notificationID = item["NotificationID"] as? Int
                     let notificationTitle = item["NotificationTitle"] as? String
@@ -89,7 +86,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         if let dics = json as? [String:Any] {
             if let dic = dics["getRecentNotificationsResult"] as? [[String:Any]] {
                 for item in dic{
-                    var notificationItem = NotificationItem()
+                    let notificationItem = NotificationItem()
                     
                     let notificationID = item["NotificationID"] as? Int
                     let notificationTitle = item["NotificationTitle"] as? String
@@ -141,7 +138,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
             notificationItemNew.NotificationProID = item?[3] as? Int
             notificationItemNew.NotificationTitle = item?[0] as? String
             
-            var dateFormatter = DateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
             let dateString = dateFormatter.date(from: (item?[4] as? String)!)
             notificationItemNew.NotificationCreated = dateString
@@ -234,30 +231,27 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         let itemNotification :NotificationItem = self._notificationItems![indexPath.row]
         // Kiem tra xem thong bao da doc chua
         var myColorTemp : UIColor? = nil
+        var myBackgroundColorCell : UIColor? = nil
         if(itemNotification.NotificationisRead == false){
             myColorTemp = myColorUnRead
+            myBackgroundColorCell = UIColor(netHex: 0xFFFFFF)
         }
         else{
             myColorTemp = myColorDefault
+            myBackgroundColorCell = UIColor(netHex: 0xDDDDDD)
         }
         // label thong bao
         cell.lblTitle.text = itemNotification.NotificationTitle
         cell.lblTitle.font = UIFont.systemFont(ofSize: 13)
         cell.lblTitle.textAlignment = NSTextAlignment.left
         cell.lblTitle.textColor = myColorTemp
+        cell.lblTitle.backgroundColor = myBackgroundColorCell
+        cell.viewTitle.backgroundColor = myBackgroundColorCell
         
-        var eventClick = UITapGestureRecognizer()
-        /*
-        eventClick.addTarget(self, action:  #selector(TableNotifications_Portrait.ClickCell(sender:)))
-        cell.lblTitle.accessibilityLabel = (itemNotification.NotificationTitle!)
-        cell.lblTitle.tag = (Int)(itemNotification.NotificationProID!)
-        cell.lblTitle.addGestureRecognizer(eventClick)
-        cell.lblTitle.isUserInteractionEnabled = true;
-        cell.lblTitle.SetNotification(v: (Int)(itemNotification.NotificationID!))*/
-        //-------------------------
+        //let eventClick = UITapGestureRecognizer()
         // label ngay tao
         if(itemNotification.NotificationCreated != nil){
-            var dateFormatter = DateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
             dateFormatter.timeZone = TimeZone(secondsFromGMT : 7)
             let dateString = dateFormatter.string(from: itemNotification.NotificationCreated!)
@@ -266,8 +260,10 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
             cell.lblDate.font = UIFont.systemFont(ofSize: 13)
             cell.lblDate.textAlignment = NSTextAlignment.right
             cell.lblDate.textColor = myColorTemp
-            
+            cell.lblDate.backgroundColor = myBackgroundColorCell
+            cell.viewDate.backgroundColor = myBackgroundColorCell
         }
+        
         //-------------------------
         return cell
     }
@@ -291,7 +287,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     {
         let idDuAn = (sender.view?.tag)!
         _idDuAnClick = idDuAn
-        let value : String = (sender.view?.accessibilityLabel)!
+        //var value : String = (sender.view?.accessibilityLabel)!
         let ulLabel = sender.view as? UILabel
         let idNotification = ulLabel?.GetNotification()
         
@@ -305,7 +301,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         //await _chatHubProxy.Invoke("MakeReadNotification", _nCurrentUserID, nNotificationID);
         //update trong co so du lieu
         do{
-            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, idNotification])
+            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, Int(idNotification!)])
         }
         catch {}
         
@@ -330,32 +326,5 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         let message = error.localizedDescription
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        //self.present(alert, animated: true, completion: nil)
     }
-    
-    // Hàm set chữ bold
-    /*
-     func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
-     let fontSize = UIFont.systemFontSize
-     let attrs = [
-     NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize),
-     NSForegroundColorAttributeName: UIColor.black
-     ]
-     let nonBoldAttribute = [
-     NSFontAttributeName: UIFont.systemFont(ofSize: fontSize),
-     ]
-     let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
-     if let range = nonBoldRange {
-     attrStr.setAttributes(nonBoldAttribute, range: range)
-     }
-     return attrStr
-     }
-     */
-    // Hàm tính size text
-    /*
-     func calulaterTextSize(text : String, size : CGSize) -> CGRect{
-     let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-     let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
-     return estimatedFrame
-     }*/
 }

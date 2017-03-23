@@ -7,6 +7,7 @@
 //
 import UIKit
 extension Date {
+    //Lấy ngày giờ hiện tại
     init?(jsonDate: String) {
         
         /*
@@ -53,5 +54,25 @@ extension Date {
         // Success! Create NSDate and return.
         self.init(timeIntervalSince1970: timeStamp)
     }
-
+    
+    //Lấy ngày giờ GMT
+    init?(jsonDateGMT: String) {
+       
+        let prefix = "/Date("
+        let suffix = ")/"
+        let scanner = Scanner(string: jsonDateGMT)
+        
+        // Check prefix:
+        guard scanner.scanString(prefix, into: nil)  else { return nil }
+        
+        // Read milliseconds part:
+        var milliseconds : Int64 = 0
+        guard scanner.scanInt64(&milliseconds) else { return nil }
+        // Milliseconds to seconds:
+        var timeStamp = TimeInterval(milliseconds)/1000.0
+        
+        // Success! Create NSDate and return.
+        self.init(timeIntervalSince1970: timeStamp)
+    }
+    
 }

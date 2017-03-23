@@ -137,7 +137,7 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
         //cell.btnCheck.layer.cornerRadius = 12
         if(listUserChecked.contains(contact.ContactID!)){
             cell.btnCheck.setImage(#imageLiteral(resourceName: "ic_check"), for: UIControlState.normal)
-            cell.btnCheck.tintColor = UIColor.green
+            cell.btnCheck.tintColor = UIColor.init(netHex: 0xFDB813)
         }
         else{
             cell.btnCheck.setImage(#imageLiteral(resourceName: "ic_uncheck"), for: UIControlState.normal)

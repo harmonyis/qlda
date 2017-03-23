@@ -9,6 +9,8 @@
 import UIKit
 
 class CustomTableNotificationCell: UITableViewCell {
+    @IBOutlet weak var viewDate: UIView!
+    @IBOutlet weak var viewTitle: UIView!
 
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblTitle: UILabel!

@@ -83,7 +83,7 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
                     if !(itemHD[7] == "") {
                         dLKThanhToan = dLKThanhToan + (Double)(itemHD[7])!
                     }
-                    var itemHopDong = HopDong()
+                    let itemHopDong = HopDong()
                     itemHopDong.TenGoiThau = itemHD[0]
                     itemHopDong.GiaTriHopDong = itemHD[1]
                     itemHopDong.DonViThucHien = itemHD[2]

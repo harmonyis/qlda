@@ -105,7 +105,7 @@ class TableKHGN_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         cell.imgGroup.image = image
         
-        var eventClick = UITapGestureRecognizer()
+        let eventClick = UITapGestureRecognizer()
         cell.uiHeaderGroup.tag = section
         eventClick.addTarget(self, action:  #selector(TableKHGN_Portrait.duAnChaClickGroup(sender: )))
         cell.uiHeaderGroup.addGestureRecognizer(eventClick)
@@ -155,7 +155,7 @@ class TableKHGN_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-        let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell_KHGN_HD_Landscape", for: indexPath) as! CustomCell_KHGN_HD_Landscape
         let itemNhomHD :NhomHopDong = self.m_NhomHopDong[indexPath.section + 1]
         let itemDSHDCon :[HopDong] = itemNhomHD.NhomHopDong!

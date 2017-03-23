@@ -24,7 +24,7 @@ class CanhBao_VC: Base_VC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        printError()
+        //printError()
         
         print("reload")
         var nib = UINib(nibName: "CanhBaoTableViewCell", bundle: nil)

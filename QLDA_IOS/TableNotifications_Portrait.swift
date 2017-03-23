@@ -9,14 +9,14 @@
 import UIKit
 
 class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDataSource {
-
+    
     var _notificationItems = [NotificationItem]()
     var _tbNotification : UITableView?
     var _uiViewNotification : UIViewController?
     var _nPage : Int? = 0
     var _idDuAnClick :Int? = 0
     
-    let myColorDefault : UIColor = UIColor(netHex: 0x000000)
+    let myColorDefault : UIColor = UIColor(netHex: 0xdddddd)
     let myColorUnRead : UIColor = UIColor(netHex: 0x0e83d5)
     let mycolorSelected : UIColor = UIColor.red
     
@@ -43,11 +43,14 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
         let itemNotification :NotificationItem = self._notificationItems[indexPath.row]
         // Kiem tra xem thong bao da doc chua
         var myColorTemp : UIColor? = nil
+        var myBackgroundColorCell : UIColor? = nil
         if(itemNotification.NotificationisRead == false){
             myColorTemp = myColorUnRead
+            myBackgroundColorCell = UIColor(netHex: 0xFFFFFF)
         }
         else{
-            myColorTemp = myColorDefault
+            myColorTemp = UIColor(netHex: 0x000000)
+            myBackgroundColorCell = UIColor.red
         }
         // label thong bao
         cell.lblTitle.text = itemNotification.NotificationTitle
@@ -63,21 +66,23 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
         cell.lblTitle.addGestureRecognizer(eventClick)
         cell.lblTitle.isUserInteractionEnabled = true;
         cell.lblTitle.SetNotification(v: (Int)(itemNotification.NotificationID!))
+        cell.lblTitle.backgroundColor = myBackgroundColorCell
         
         //-------------------------
         // label ngay tao
         if(itemNotification.NotificationCreated != nil){
-        var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
-        dateFormatter.timeZone = TimeZone(secondsFromGMT : 7)
-        let dateString = dateFormatter.string(from: itemNotification.NotificationCreated!)
-        
-        cell.lblDate.text = dateString
-        cell.lblDate.font = UIFont.systemFont(ofSize: 13)
-        cell.lblDate.textAlignment = NSTextAlignment.right
-        cell.lblDate.textColor = myColorTemp
- 
+            var dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+            dateFormatter.timeZone = TimeZone(secondsFromGMT : 7)
+            let dateString = dateFormatter.string(from: itemNotification.NotificationCreated!)
+            
+            cell.lblDate.text = dateString
+            cell.lblDate.font = UIFont.systemFont(ofSize: 13)
+            cell.lblDate.textAlignment = NSTextAlignment.right
+            cell.lblDate.textColor = myColorTemp
+            cell.lblDate.backgroundColor = myBackgroundColorCell
         }
+        cell.contentView.backgroundColor = myBackgroundColorCell
         //-------------------------
         return cell
     }
@@ -88,7 +93,7 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
             // handle your logic here to get more items, add it to dataSource and reload tableview
             _nPage = _nPage! + 1
             let no_VC = Notification_VC()
-         
+            
             
         }
     }
@@ -99,15 +104,15 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
         _idDuAnClick = idDuAn
         let value : String = (sender.view?.accessibilityLabel)!
         let ulLabel = sender.view as? UILabel
-        let idNotification = ulLabel?.GetNotification()	
+        let idNotification = ulLabel?.GetNotification()
         
         self._tbNotification?.reloadData()
         // lay ten du an
         let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getTenDuAnByID"
         let params : String = "{\"nDuAnID\" : \(idDuAn), \"szUsername\": \""+variableConfig.m_szUserName+"\", \"szPassword\":\""+variableConfig.m_szPassWord+"\"}"
- 
+        
         ApiService.Post(url: apiUrl, params: params, callback: callbackGetNameDuAn, errorCallBack: errorGetNameDuAn)
-
+        
         //await _chatHubProxy.Invoke("MakeReadNotification", _nCurrentUserID, nNotificationID);
         //update trong co so du lieu
         do{
@@ -130,7 +135,7 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
                 }
             }
         }
-
+        
         
     }
     
@@ -140,8 +145,8 @@ class TableNotifications_Portrait:  NSObject, UITableViewDelegate, UITableViewDa
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         //self.present(alert, animated: true, completion: nil)
     }
-
-
+    
+    
     
     // Hàm set chữ bold
     func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {

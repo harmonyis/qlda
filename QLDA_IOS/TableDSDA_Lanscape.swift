@@ -53,97 +53,6 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
             return self.DSDA[section].DuAnCon!.count
         }    }
     
-    /* func numberOfSections(_ tableView: UITableView) -> Int {
-     return self.DSDA.count
-     }
-     
-     
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-     if(self.indexGroupDuAnCon.contains(section))
-     {
-     return 0
-     }
-     else {
-     return self.DSDA[section].DuAnCon!.count
-     }
-     }
-     
-     */
-    /*
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
-       
-        let itemNhomDA :DanhSachDA = self.DSDA[indexPath.section]
-        let itemDuAnCon :[DuAn] = itemNhomDA.DuAnCon!
-        
-        
-        //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
-        // cell.lblTenDuAn=label
-        let msg  = itemDuAnCon[indexPath.row].TenDA!
-        
-        let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 13), myText: msg)
-        
-        let labelWidth = cell.lblTenDA.frame.width
-        let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
-        //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
-        var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
-        if height<30
-        {
-            height=30
-        }
-        print(height)
-        if !self.indexTrangThaiDuAnCon.contains((String)(indexPath.section)+"-"+(String)(indexPath.row)) {
-            
-            return height + 2
-            
-        }
-        return   height + 150
-        
-    }
-    
-    
-    func getStringSizeForFont(font: UIFont, myText: String) -> CGSize {
-        let fontAttributes = [NSFontAttributeName: font]
-        let size = (myText as NSString).size(attributes: fontAttributes)
-        return size
-        
-    }
-    
-    /*
-     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-     return UITableViewAutomaticDimension
-     }
-     */
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
-        
-        let itemNhomDA :DanhSachDA = self.DSDA[section]
-        let msg  = itemNhomDA.TenDA!
-        
-        let stringSizeAsText: CGSize = getStringSizeForFont(font: UIFont.systemFont(ofSize: 13), myText: msg)
-        
-        let labelWidth = cell.lblTenDA.frame.width
-        let labelLines: CGFloat = CGFloat(ceil(Float(stringSizeAsText.width/labelWidth)))
-        //let height =  tableView.rowHeight - originalLabelHeight + CGFloat(labelLines*stringSizeAsText.height)
-        var height = CGFloat(labelLines * (stringSizeAsText.height + 3)*1.3)
-        
-        if height<30
-        {
-            height=30
-        }
-        
-        if !self.indexTrangThaiDuAnCha.contains(section) {
-            
-            return height + 2
-            
-        }
-        return height + 150
-    }
-    
-    */
-    // */
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellDSDA_Lanscape") as! CustomCellDSDA_Lanscape
@@ -168,7 +77,6 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.lblTenDA.textAlignment = NSTextAlignment.left
        // cell.lblTenDA.sizeToFit()
         
-         let heightTD = calulaterTextSize(text: itemNhomDA.TenDA!, size: CGSize(width: cell.lblTenDA.frame.width , height: 1000))
         cell.lblNhomDA.text = itemNhomDA.NhomDA!
        // cell.lblNhomDA.sizeToFit()
         cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
@@ -330,10 +238,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.lblTenDA.font = UIFont.italicSystemFont(ofSize: 13)
         cell.lblTenDA.textAlignment = NSTextAlignment.left
       //  cell.lblTenDA.sizeToFit()
-         let heightTD = calulaterTextSize(text: itemDuAnCon.TenDA!, size: CGSize(width: cell.lblTenDA.frame.width , height: 1000))
-        
-        
-        //  cell.lblTenDuAn.lineBreakMode = wrap
+             //  cell.lblTenDuAn.lineBreakMode = wrap
         
         cell.lblNhomDA.text = itemDuAnCon.NhomDA!
      //   cell.lblNhomDA.sizeToFit()
@@ -373,7 +278,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         
         var eventClick = UITapGestureRecognizer()
-        let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
+        
         
         eventClick = UITapGestureRecognizer()
         

@@ -105,7 +105,7 @@ class ApiService {
         config.timeoutIntervalForRequest = 30
         let session = URLSession(configuration: config) // Load configuration into Session
         let url = URL(string: url)!
-        
+        config.timeoutIntervalForRequest = 120
         let postString = params
         let theRequest = NSMutableURLRequest(url: url as URL)
         theRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -114,7 +114,7 @@ class ApiService {
         let task = session.dataTask(with: theRequest as URLRequest, completionHandler: {
             (data, response, error) in
             if error != nil {
-                
+           
                 //message = error!.localizedDescription
                 let errorEntity = ErrorEntity()
                 errorEntity.error = error!
