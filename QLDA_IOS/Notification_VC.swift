@@ -56,7 +56,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
             if let dic = dics["getRecentNotificationsResult"] as? [[String:Any]] {
                 self._notificationItems = [NotificationItem]()
                 for item in dic{
-                    var notificationItem = NotificationItem()
+                    let notificationItem = NotificationItem()
                     
                     let notificationID = item["NotificationID"] as? Int
                     let notificationTitle = item["NotificationTitle"] as? String
@@ -86,7 +86,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         if let dics = json as? [String:Any] {
             if let dic = dics["getRecentNotificationsResult"] as? [[String:Any]] {
                 for item in dic{
-                    var notificationItem = NotificationItem()
+                    let notificationItem = NotificationItem()
                     
                     let notificationID = item["NotificationID"] as? Int
                     let notificationTitle = item["NotificationTitle"] as? String
@@ -138,7 +138,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
             notificationItemNew.NotificationProID = item?[3] as? Int
             notificationItemNew.NotificationTitle = item?[0] as? String
             
-            var dateFormatter = DateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
             let dateString = dateFormatter.date(from: (item?[4] as? String)!)
             notificationItemNew.NotificationCreated = dateString
@@ -248,10 +248,10 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         cell.lblTitle.backgroundColor = myBackgroundColorCell
         cell.viewTitle.backgroundColor = myBackgroundColorCell
         
-        var eventClick = UITapGestureRecognizer()
+        let eventClick = UITapGestureRecognizer()
         // label ngay tao
         if(itemNotification.NotificationCreated != nil){
-            var dateFormatter = DateFormatter()
+            let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
             dateFormatter.timeZone = TimeZone(secondsFromGMT : 7)
             let dateString = dateFormatter.string(from: itemNotification.NotificationCreated!)
@@ -287,7 +287,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     {
         let idDuAn = (sender.view?.tag)!
         _idDuAnClick = idDuAn
-        let value : String = (sender.view?.accessibilityLabel)!
+        var value : String = (sender.view?.accessibilityLabel)!
         let ulLabel = sender.view as? UILabel
         let idNotification = ulLabel?.GetNotification()
         
@@ -301,7 +301,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         //await _chatHubProxy.Invoke("MakeReadNotification", _nCurrentUserID, nNotificationID);
         //update trong co so du lieu
         do{
-            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, idNotification])
+            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, idNotification ?? <#default value#>])
         }
         catch {}
         
