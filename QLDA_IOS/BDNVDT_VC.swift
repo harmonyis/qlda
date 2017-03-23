@@ -90,7 +90,7 @@ class BDNVDT_VC: Base_VC{
         pieCharNV.chartDescription?.enabled = false
         pieCharNV.minOffset=0
         
-        var colors: [UIColor] = [UIColor.init(netHex:0x3399FF),
+        let colors: [UIColor] = [UIColor.init(netHex:0x3399FF),
                                  UIColor.init(netHex:0xFF33FF),
                                  UIColor.init(netHex:0x996666),
                                  UIColor.init(netHex:0xFFFF33),
@@ -109,7 +109,7 @@ class BDNVDT_VC: Base_VC{
             dynamicSquare.backgroundColor = UIColor.init(netHex:arrColors[i])
             
             // tao Label ten cac co cau tong muc dau tu
-            var dynamicLabel: UILabel = UILabel()
+            let dynamicLabel: UILabel = UILabel()
             dynamicLabel.textColor = UIColor.black
             dynamicLabel.font = UIFont(name: dynamicLabel.font.fontName, size: 13)
             dynamicLabel.textAlignment = NSTextAlignment.left

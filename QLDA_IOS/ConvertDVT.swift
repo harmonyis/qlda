@@ -9,9 +9,9 @@ struct Number {
 }
 extension Double {
     var doubleToString: String {
-        var doubleRound = (self * 1000).rounded() / 1000
+        let doubleRound = (self * 1000).rounded() / 1000
         var arrDouble = String(doubleRound).components(separatedBy: ".")
-        var dou = Double(arrDouble[0])
+        let dou = Double(arrDouble[0])
         var doubleFormat = Number.formatterWithSeparator.string(from: NSNumber(value: dou!)) ?? ""
         
         if arrDouble[1] != "0" && arrDouble[1] != ""{

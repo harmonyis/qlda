@@ -328,9 +328,10 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
     }
     
     func mapView(mapView: GMSMapView!, markerInfoWindow marker: GMSMarker!) -> UIView! {
-        var infoWindow = Bundle.main.loadNibNamed("CustomInfoWindow", owner: self, options: nil)?.first! as! CustomInfoWindow
-        infoWindow.lblLabel.text = "\(marker.position.latitude) \(marker.position.longitude)"
-        return infoWindow as? UIView
+        let infoWindow = Bundle.main.loadNibNamed("InfoWindow", owner: self, options: nil)?.first as! CustomInfoWindow
+        infoWindow.lblLabel.text = "Sydney Opera House"
+        
+        return infoWindow
     }
     
     // Tạo marker trên bản đồ
@@ -352,6 +353,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
                 //Create marker
                 let Position = CLLocationCoordinate2D(latitude: ViDoTemp!, longitude: KinhDoTemp!)
                 let marker = GMSMarker(position: Position)
+                
                 marker.title = item.TenDuAn
                 marker.snippet = item.DiaDiemXayDung
                 marker.map = UiMapView
@@ -369,6 +371,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
             UiMapView.moveCamera(camera)
 
         }
+        UiMapView.delegate = self
     }
     
     func setViTri(idDA: Int,uiMapView:GMSMapView){
