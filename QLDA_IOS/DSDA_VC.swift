@@ -48,7 +48,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         //let szUser=lblName.
         let params : String = "{\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         
-        ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
+        ApiService.PostAsync(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: noConnectToServer)
         
         
      
@@ -65,8 +65,14 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     }
     
 
-    func Alert(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func loadDataSuccess(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             if let arrDSDA = dic["GetDuAnResult"] as? [[String]] {
                 self.m_arrDSDA = arrDSDA
