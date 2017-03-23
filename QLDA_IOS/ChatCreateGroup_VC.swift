@@ -34,7 +34,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        btnCreateGroup.setImage(#imageLiteral(resourceName: "PlayIcon"), for: UIControlState.normal)
+        btnCreateGroup.setImage(#imageLiteral(resourceName: "ic_add"), for: UIControlState.normal)
         btnCreateGroup.imageEdgeInsets = UIEdgeInsetsMake(30,30,30,30)
         //Remove empty cell
         tblListContact.tableFooterView = UIView(frame: .zero)
@@ -57,7 +57,7 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
         //cell.btnCheck.layer.cornerRadius = 12
         if(listUserChecked.contains(contact.ContactID!)){
             cell.btnCheck.setImage(#imageLiteral(resourceName: "ic_check"), for: UIControlState.normal)
-            cell.btnCheck.tintColor = UIColor.green
+            cell.btnCheck.tintColor = UIColor.init(netHex: 0xFDB813)
         }
         else{
             cell.btnCheck.setImage(#imageLiteral(resourceName: "ic_uncheck"), for: UIControlState.normal)

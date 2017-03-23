@@ -29,7 +29,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Thông tin nhóm"
+        //self.title = "Thông tin nhóm"
         //self.navigationItem.backBarButtonItem?.title = ""
         //self.navigationController?.navigationItem.backBarButtonItem?.title=""
         
@@ -220,7 +220,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         let alert = UIAlertController(title: "Thông báo", message: "Bạn thực sự muốn rời nhóm?", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Huỷ", style: UIAlertActionStyle.default, handler: nil))
 
-        let action = UIAlertAction(title: "Ok", style: .default) { action in
+        let action = UIAlertAction(title: "Ok", style: .destructive) { action in
             self.removeUserFromGroup(userID: Config.userID, groupID: self.groupID!)
             ChatCommon.checkCloseView = true
             self.navigationController?.popViewController(animated: true)
