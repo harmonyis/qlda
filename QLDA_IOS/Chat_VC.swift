@@ -453,14 +453,17 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     @IBAction func btnSendTouchUpInside(_ sender: UIButton) {
+        toggleButton(false)
         sendMessage()
     }
     
     @IBAction func txtMessageEditingChanged(_ sender: UITextField) {
+        toggleButton(false)
         makeReadMsg()
     }
     
     @IBAction func txtMessageTouchDown(_ sender: UITextField) {
+        toggleButton(false)
         makeReadMsg()
     }
     func initEnvetChatHub(){
@@ -578,10 +581,10 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     
     func addRightBar(){
-        let btnInfoMenu = UIButton(type: UIButtonType.system)
+        let btnInfoMenu = UIButton(type: UIButtonType.custom)
         btnInfoMenu.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         btnInfoMenu.addTarget(self, action: #selector(Chat_VC.onInfoBarPressed(_:)), for: UIControlEvents.touchUpInside)
-        btnInfoMenu.setImage(UIImage(named: "HomeIcon"), for: UIControlState())
+        btnInfoMenu.setImage(#imageLiteral(resourceName: "ic_info"), for: UIControlState())
         btnInfoMenu.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         let custoInfoBarItem = UIBarButtonItem(customView: btnInfoMenu)
         self.navigationItem.rightBarButtonItem = custoInfoBarItem
