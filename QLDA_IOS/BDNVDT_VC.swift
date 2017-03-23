@@ -98,7 +98,7 @@ class BDNVDT_VC: Base_VC{
                                  UIColor.init(netHex:0xFF9900),
                                  UIColor.init(netHex:0x00CC99)]
         pieChartDataSet.colors = colors
-        let screenSize:CGRect = UIScreen.main.bounds
+        //let screenSize:CGRect = UIScreen.main.bounds
     
         // tao Legend Custom: dua legend vao 2 View  duoi bieu do
         var yA = 20

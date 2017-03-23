@@ -301,7 +301,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         //await _chatHubProxy.Invoke("MakeReadNotification", _nCurrentUserID, nNotificationID);
         //update trong co so du lieu
         do{
-            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, idNotification ?? <#default value#>])
+            try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, idNotification])
         }
         catch {}
         
