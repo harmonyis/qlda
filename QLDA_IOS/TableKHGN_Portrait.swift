@@ -103,7 +103,7 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         cell.imgGroup.image = image
         
-       var eventClick = UITapGestureRecognizer()
+       let eventClick = UITapGestureRecognizer()
         cell.uiViewLoaiGoiThau_group.tag = section
         eventClick.addTarget(self, action:  #selector(TableKHGN_Portrait.duAnChaClickGroup(sender: )))
         cell.uiViewLoaiGoiThau_group.addGestureRecognizer(eventClick)
@@ -257,7 +257,7 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.uiViewHopDong_TTCT_Right.layer.borderColor = myColorBoder.cgColor
         cell.uiViewHopDong_TTCT_Right.layer.borderWidth = 0.5
         
-        var eventClick = UITapGestureRecognizer()
+        let eventClick = UITapGestureRecognizer()
         
         cell.uiViewHopDong_TieuDe_detail.accessibilityLabel = value
         
@@ -303,7 +303,7 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
             
            
             
-            var eventClick = UITapGestureRecognizer()
+            let eventClick = UITapGestureRecognizer()
             
             cell.uiView_R4_detail.accessibilityLabel = value
             

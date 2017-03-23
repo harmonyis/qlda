@@ -45,18 +45,8 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
     func GetDataQDDT(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if var dic = json as? [String:Any] {
-            if let check = dic["GetKeHoachVonResult"] as? [String]{
-            }
-            else{
-                dic["GetKeHoachVonResult"] = ["GetKeHoachVonResult":(
-                    "",
-                    "",
-                    "",
-                    "",
-                    "")]
-            }
+           
             if var arrKHV = dic["GetKeHoachVonResult"] as? [String] {
-                print(dic)
                 if arrKHV.count<1 {
                     arrKHV = ["","","","",""]
                 }
@@ -100,8 +90,8 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 
                 // phần tổng mức đầu tư
                 // tạo cái lable tổng mức đâu tư
-                var ViewQDDT = UIView()
-                var lableQDDT:UILabel = UILabel()
+                let ViewQDDT = UIView()
+                let lableQDDT:UILabel = UILabel()
                 lableQDDT.textColor = UIColor.white
                 lableQDDT.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                 lableQDDT.text = "Kế hoạch vốn"
@@ -116,14 +106,14 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 self.totalHeight = self.totalHeight + 10
                 self.UiviewKHV.addSubview(ViewQDDT)
                 
-                var ViewGroupTTCQDDT = UIView()
+                let ViewGroupTTCQDDT = UIView()
                 // dùng vong for để tạo giao diện và bind dữ liệu
                 var count = 0
                 for itemTTDA in self.m_arrKHV {
                     //tạo giao diện phần đầu tiên của tổng mức đầu tư
                     if icount > 0 ,icount < 4 {
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lable.text = arrlblTTDA[icount-1]
@@ -140,7 +130,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         uiView = UIView()
                        
                         
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                         lblTenDuAn.text = itemTTDA
@@ -171,7 +161,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                     // tạo giao diện phần tổng giá trị
                     if icount == 4 {
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lable.text = arrlblTTDA[icount-1]
@@ -188,7 +178,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         uiView = UIView()
                         //self.uiViewThongTin.addSubview(uiView)
                         print(lable.frame.height)
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lblTenDuAn.text =  variableConfig.convert(itemTTDA)
@@ -206,7 +196,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         uiView.addSubview(lblTenDuAn)
                         lblTenDuAn.widthAnchor.constraint(equalToConstant: 160).isActive = true
                         
-                        var calHeight : CGFloat = 30
+                        let calHeight : CGFloat = 30
                         uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiviewKHV.frame.width, height: calHeight + 4)
                         
                         self.totalHeight = self.totalHeight + uiView.frame.height
@@ -226,7 +216,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         if !(self.m_arrKHV[icount] == ""){
                             count = count + 1
                             var uiView = UIView()
-                            var lable:UILabel = UILabel()
+                            let lable:UILabel = UILabel()
                             lable.textColor = UIColor.black
                             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                             lable.text = self.m_arrKHV[icount]
@@ -235,7 +225,6 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                             lable.numberOfLines = 0
                             lable.sizeToFit()
                             uiView.addSubview(lable)
-                            var haftWidth : CGFloat = self.UiviewKHV.frame.width - 10
                             
                             uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                             uiView.frame = CGRect(x: 5 ,y: self.totalHeight ,width: self.UiviewKHV.frame.width - 10 , height: 25)
@@ -246,7 +235,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                             uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                             //self.uiViewThongTin.addSubview(uiView)
                             print(lable.frame.height)
-                            var lblTenDuAn:UILabel = UILabel()
+                            let lblTenDuAn:UILabel = UILabel()
                             lblTenDuAn.textColor = UIColor.black
                             lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                             lblTenDuAn.text =  variableConfig.convert(self.m_arrKHV[icount + 1])
@@ -264,7 +253,6 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                             uiView.addSubview(lblTenDuAn)
                             uiView.frame = CGRect(x: 5 ,y: self.totalHeight ,width: (self.UiviewKHV.frame.width - 10), height: 25)
                             
-                            var calHeight : CGFloat = 26
                             let borderBottom = CALayer()
                             let borderWidth = CGFloat(1)
                             borderBottom.borderColor =  self.myColorBoder.cgColor
@@ -299,7 +287,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
     func GetDataTDT(data : Data) {
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         if var dic = json as? [String:Any] {
-            if var arrTTDA = dic["GetDieuChinhKeHoachVonResult"] as? [String] {
+            if let arrTTDA = dic["GetDieuChinhKeHoachVonResult"] as? [String] {
                 m_arrDCKHV = arrTTDA
             }
             LoadDataDCKHV()
@@ -318,8 +306,8 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 var icount = 0
                 // phần tổng dự toán
                 // tạo lable tổng dự toán
-                var ViewQDDT = UIView()
-                var lableQDDT:UILabel = UILabel()
+                let ViewQDDT = UIView()
+                let lableQDDT:UILabel = UILabel()
                 lableQDDT.textColor = UIColor.white
                 lableQDDT.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                 lableQDDT.text = "Kế hoạch vốn ĐC/BS"
@@ -336,14 +324,14 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 self.totalHeight = self.totalHeight + 10
                 self.UiviewKHV.addSubview(ViewQDDT)
                 
-                var ViewGroupTTCQDDT = UIView()
+                let ViewGroupTTCQDDT = UIView()
                 var count = 0
                 // dùng vòng for để tạo giao diện và bind dữ liệu
                 for itemTTDA in self.m_arrDCKHV {
                     // tạo dữ liệu phần đầu
                     if icount > 0 ,icount < 4 {
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lable.text = arrlblTTDA[icount-1]
@@ -360,7 +348,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         uiView = UIView()
                         //self.uiViewThongTin.addSubview(uiView)
                         print(lable.frame.height)
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                         lblTenDuAn.text = itemTTDA
@@ -391,7 +379,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                     // tạo dữ liệu phần tổng giá trị
                     if icount == 4 {
                         var uiView = UIView()
-                        var lable:UILabel = UILabel()
+                        let lable:UILabel = UILabel()
                         lable.textColor = UIColor.black
                         lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lable.text = arrlblTTDA[icount-1]
@@ -404,7 +392,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         uiView = UIView()
                         //self.uiViewThongTin.addSubview(uiView)
                         print(lable.frame.height)
-                        var lblTenDuAn:UILabel = UILabel()
+                        let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
                         lblTenDuAn.text = variableConfig.convert(itemTTDA)
@@ -422,7 +410,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         uiView.addSubview(lable)
                         uiView.addSubview(lblTenDuAn)
                         
-                        var calHeight : CGFloat = 30
+                        let calHeight : CGFloat = 30
                         uiView.frame = CGRect(x: 0,y: self.totalHeight ,width: self.UiviewKHV.frame.width, height: calHeight + 4)
                         
                         self.totalHeight = self.totalHeight + uiView.frame.height
@@ -442,7 +430,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         if !(self.m_arrDCKHV[icount] == ""){
                             count = count + 1
                             var uiView = UIView()
-                            var lable:UILabel = UILabel()
+                            let lable:UILabel = UILabel()
                             uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                             lable.textColor = UIColor.black
                             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -462,7 +450,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                             uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                             //self.uiViewThongTin.addSubview(uiView)
                             print(lable.frame.height)
-                            var lblTenDuAn:UILabel = UILabel()
+                            let lblTenDuAn:UILabel = UILabel()
                             lblTenDuAn.textColor = UIColor.black
                             lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
                             lblTenDuAn.text =  variableConfig.convert(self.m_arrDCKHV[icount + 1])
@@ -480,7 +468,6 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                             uiView.addSubview(lblTenDuAn)
                             uiView.frame = CGRect(x: 5 ,y: self.totalHeight ,width: (self.UiviewKHV.frame.width - 10), height: 25)
                             
-                            var calHeight : CGFloat = 26
                             let borderBottom = CALayer()
                             let borderWidth = CGFloat(1)
                             borderBottom.borderColor =  self.myColorBoder.cgColor
