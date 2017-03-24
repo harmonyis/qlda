@@ -15,8 +15,6 @@ class Login_VC: Base {
     //var service = ApiService()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
     var szMatKhau : String = ""
     var szTenDangNhap : String = ""
@@ -28,7 +26,7 @@ class Login_VC: Base {
         szTenDangNhap = (lblTenDangNhap.text)!
         let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
         
-       ApiService.PostAsync(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: noConnectToServer)
+       ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
         
     }
     func loadDataSuccess(data : SuccessEntity) {
@@ -39,6 +37,11 @@ class Login_VC: Base {
         }
         let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
+            let response = data.response as! HTTPURLResponse
+            if response.statusCode != 200 {
+                serverError(success: data)
+                return
+            }
             if let idUser = dic["CheckUserResult"] as? String {
                 let nIdUser:Int = Int(idUser)!
                 if nIdUser > 0 {
@@ -52,7 +55,7 @@ class Login_VC: Base {
                     
                     DispatchQueue.global(qos: .userInitiated).async {
                         DispatchQueue.main.async {
-                            Config.GetCurrentUser()
+                            self.GetCurrentUser()
                         }
                     }
                     
@@ -64,6 +67,35 @@ class Login_VC: Base {
                         }
                     }
                     
+                }
+            }
+        }
+    }
+     func GetCurrentUser(){
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetUser/\(Config.userID))"
+        
+    ApiService.GetAsyncAc(url: apiUrl, callback: callbackGetUser, errorCallBack: alertAction)
+        // ApiService.Get(url: apiUrl, callback: callbackGetUser, errorCallBack: { (error) in
+        
+        //   })
+    }
+     func callbackGetUser(data : SuccessEntity){
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
+        
+        if let item = json as? [String:Any] {
+            Config.loginName = item["LoginName"] as! String
+            Config.profifePictureUrl = item["PictureUrl"] as! String
+            
+            if let url = NSURL(string: UrlPreFix.Root.rawValue + Config.profifePictureUrl) {
+                if let data = NSData(contentsOf: url as URL) {
+                    if let pic : UIImage =  UIImage(data: data as Data){
+                        Config.profilePicture = pic
+                    }
                 }
             }
         }

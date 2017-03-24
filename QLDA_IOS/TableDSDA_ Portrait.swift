@@ -18,13 +18,14 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     var indexTrangThaiDuAnCon = Set<String>()
     var tbDSDA : UITableView?
     var uiViewDSDA : UIViewController?
-    
+    var m_textHightLight : String = String()
     // MARK: - Table view data source
-    init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController){
+    init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController , textHightLight : String = ""){
         super.init()
         self.DSDA = arrDSDA
         self.tbDSDA = tbvDSDA
         self.uiViewDSDA = tbvcDSDA
+        self.m_textHightLight = textHightLight
         
     }
     
@@ -47,17 +48,25 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
+      
         
         
         let itemNhomDA :DanhSachDA = self.DSDA[section]
-        cell.lblTenDuAn.text = itemNhomDA.TenDA!
+        
+        var targetString : String = itemNhomDA.TenDA!
+        let rangeHL = (targetString.toUnsign() as NSString).range(of: m_textHightLight.toUnsign())
+        
         cell.lblTenDuAn.font = UIFont.systemFont(ofSize: 13)
+        let attributedStringHL = NSMutableAttributedString(string: itemNhomDA.TenDA!)
+        attributedStringHL.addAttribute( NSForegroundColorAttributeName, value: UIColor.black, range: rangeHL)
+         cell.lblTenDuAn.attributedText = attributedStringHL
+        
         cell.lblTenDuAn.textAlignment = NSTextAlignment.left
         
         let heightTD = calulaterTextSize(text: itemNhomDA.TenDA!, size: CGSize(width: cell.lblTenDuAn.frame.width , height: 1000))
         
         
-        var targetString : String = "Nhóm: \(itemNhomDA.NhomDA!)"
+        targetString = "Nhóm: \(itemNhomDA.NhomDA!)"
         var range = NSMakeRange(6, targetString.characters.count - 6 )
         cell.lblNhomDuAn.attributedText = attributedString(from: targetString, nonBoldRange: range)
         
@@ -215,15 +224,21 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
         // cell.lblTenDuAn=label
-        cell.lblTenDuAn.text = itemDuAnCon.TenDA!
-        cell.lblTenDuAn.numberOfLines = 0
-        cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
         cell.lblTenDuAn.textAlignment = NSTextAlignment.left
+        
+        var targetString : String = itemDuAnCon.TenDA!
+        let rangeHL = (targetString.toUnsign() as NSString).range(of: m_textHightLight.toUnsign())
+        
+        cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
+        let attributedStringHL = NSMutableAttributedString(string: itemDuAnCon.TenDA!)
+        attributedStringHL.addAttribute( NSForegroundColorAttributeName, value: UIColor.black, range: rangeHL)
+        cell.lblTenDuAn.attributedText = attributedStringHL
+        
         //  cell.lblTenDuAn.lineBreakMode = wrap
         let heightTD = calulaterTextSize(text: itemDuAnCon.TenDA!, size: CGSize(width: cell.lblTenDuAn.frame.width , height: 1000))
         
         
-        var targetString : String = "Nhóm: \(itemNhomDA.NhomDA!)"
+        targetString = "Nhóm: \(itemNhomDA.NhomDA!)"
         var range = NSMakeRange(6, targetString.characters.count - 6 )
         cell.lblNhomDuAn.attributedText = attributedString(from: targetString, nonBoldRange: range)
         
