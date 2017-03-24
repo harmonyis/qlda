@@ -16,8 +16,10 @@ class ThongTinLich_VC: UIViewController{
     @IBOutlet weak var txtContent: UITextField!
     
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var constraintHeightScrollView: NSLayoutConstraint!
     
+    @IBOutlet weak var constraintHeaderToBottom: NSLayoutConstraint!
     
     var calendarItem : CalendarItem!
     var isEdit = false
@@ -26,12 +28,31 @@ class ThongTinLich_VC: UIViewController{
     let calendar = Calendar.current
     
     func setConstraintView(height : CGFloat, width : CGFloat){
-         
+
+        constraintHeightScrollView.constant = height - 44
+        constraintHeaderToBottom.constant = 300
+        /*constraintHeaderToBottom.constant = height - 20
+        scrollView.scrollsToTop = true
+        scrollView.isScrollEnabled = true
+        
+        if (height - 400) > 44{
+            //scrollView.isScrollEnabled = false
+            scrollView.scrollToTop(true)
+        }
+        else{
+            scrollView.isScrollEnabled = true
+            
+        }*/
+       
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setConstraintView(height: size.height, width: size.width)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setConstraintView(height: view.frame.height, width: view.frame.width)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         
