@@ -1472,11 +1472,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-PD-HUT">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="110.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZG6-PD-HUT">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FpN-Ve-Zha">
-                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50.5"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FpN-Ve-Zha">
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orq-QA-5VV">
                                                                     <rect key="frame" x="10" y="5" width="310" height="25"/>
@@ -1494,8 +1494,8 @@
                                                                 <constraint firstAttribute="trailing" secondItem="orq-QA-5VV" secondAttribute="trailing" id="v8Q-Mc-8rl"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sD2-7O-H5z">
-                                                            <rect key="frame" x="0.0" y="50.5" width="320" height="30"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sD2-7O-H5z">
+                                                            <rect key="frame" x="0.0" y="30" width="320" height="30"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LWm-Xb-IJz">
                                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -1579,8 +1579,8 @@
                                                                 <constraint firstAttribute="height" constant="30" id="kaf-3l-HjD"/>
                                                             </constraints>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZS-v0-lsL">
-                                                            <rect key="frame" x="0.0" y="80.5" width="320" height="30"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cZS-v0-lsL">
+                                                            <rect key="frame" x="0.0" y="60" width="320" height="30"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UDl-ZT-GYc">
                                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
