@@ -16,9 +16,15 @@ class Lich_Cell : UITableViewCell{
 }
 
 class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var btnAddEvent: UIButton!
+    //Constraint
+    @IBOutlet weak var constraintHeightCalendar: NSLayoutConstraint!
+    @IBOutlet weak var constraintWidthCalendar: NSLayoutConstraint!
     
+    @IBOutlet weak var constraintHeightTable: NSLayoutConstraint!
+    @IBOutlet weak var constraintWidthTable: NSLayoutConstraint!
+    
+    //View
+    @IBOutlet weak var btnAddEvent: UIButton!
     @IBOutlet weak var tblCalendar: UITableView!
     @IBOutlet weak var fsCalendar: FSCalendar!
     var listCalendarItem : [CalendarItem] = [CalendarItem]()
@@ -32,22 +38,51 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     
     var selectCalendarItem : CalendarItem!
     var passIsEdit = false
-    var passSelectDate = Date()
+    
+    func setConstraint(height : CGFloat, width : CGFloat){
+        let w = width
+        var h = height
+        
+        //let hBar = self.navigationController?.navigationBar.frame.height
+        h = h - 32
+        
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+            
+            constraintWidthCalendar.constant = w
+            constraintHeightCalendar.constant = 250
+            
+            constraintHeightTable.constant = h - 250
+            constraintWidthTable.constant = w
+        }
+        else{
+            constraintWidthCalendar.constant = w * 6/10 - 0.5
+            constraintHeightCalendar.constant = h
+            
+            constraintHeightTable.constant = h
+            constraintWidthTable.constant = w * 4/10
+        }
+    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setConstraint(height: size.height, width: size.width)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setConstraint(height: view.frame.height, width: view.frame.width)
         btnAddEvent.layer.cornerRadius = 25
         btnAddEvent.setImage(#imageLiteral(resourceName: "ic_addevent"), for: UIControlState.normal)
+        btnAddEvent.tintColor = UIColor.white
+        tblCalendar.tableFooterView = UIView(frame: .zero)
+        fsCalendar.select(Date())
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getEventOfMonth(passSelectDate)
-        getCalendarByUserAndDate(passSelectDate)
+        getEventOfMonth(fsCalendar.selectedDate)
+        getCalendarByUserAndDate(fsCalendar.selectedDate)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -93,7 +128,7 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
             if let vc = segue.destination as? ThongTinLich_VC{
                 vc.calendarItem = selectCalendarItem
                 vc.isEdit = passIsEdit
-                vc.selectDate = passSelectDate
+                vc.selectDate = fsCalendar.selectedDate
             }
         }
     }
@@ -112,12 +147,11 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         print(date, monthPosition.rawValue)
-
+        
         if monthPosition == .previous || monthPosition == .next {
             calendar.setCurrentPage(date, animated: true)
         }
-        passSelectDate = date
-        getCalendarByUserAndDate(date)        
+        getCalendarByUserAndDate(date)
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
@@ -144,7 +178,7 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         let month = self.calendar.component(.month, from: date)
         let year = self.calendar.component(.year, from: date)
         let day = self.calendar.component(.day, from: date)
-
+        
         let params : String = "{\"nUserID\" : \(Config.userID), \"nYear\": \(year), \"nMonth\": \(month), \"nDay\":\(day)}"
         print(params)
         ApiService.Post(url: apiUrl, params: params, callback: { (data) in
@@ -218,8 +252,8 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         let params : String = "{\"nCalendarScheduleID\" : \(id)}"
         print(params)
         ApiService.Post(url: apiUrl, params: params, callback: { (data) in
-            self.getEventOfMonth(self.passSelectDate)
-            self.getCalendarByUserAndDate(self.passSelectDate)
+            self.getEventOfMonth(self.fsCalendar.selectedDate)
+            self.getCalendarByUserAndDate(self.fsCalendar.selectedDate)
         }, errorCallBack: { (error) in
             self.reloadCalendar()
             print("error")
@@ -241,6 +275,33 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
             DispatchQueue.main.async {
                 self.tblCalendar.reloadData()
             }
+        }
+    }
+    
+    
+    func runCode(in timeInterval:TimeInterval, _ code:@escaping ()->(Void))
+    {
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + timeInterval,
+            execute: code)
+    }
+    
+    func runCode(at date:Date, _ code:@escaping ()->(Void))
+    {
+        let timeInterval = date.timeIntervalSinceNow
+        runCode(in: timeInterval, code)
+    }
+    
+    func test()
+    {
+        runCode(at: Date(timeIntervalSinceNow:2))
+        {
+            print("Hello")
+        }
+        
+        runCode(in: 3.0)
+        {
+            print("World)")
         }
     }
 }
