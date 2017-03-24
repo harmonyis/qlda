@@ -70,29 +70,6 @@ class Config{
         
     }
     
-    static func GetCurrentUser(){
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetUser/\(userID)"
-        print(apiUrl)
-        ApiService.Get(url: apiUrl, callback: callbackGetUser, errorCallBack: { (error) in
-            print("error")
-            print(error.localizedDescription)
-        })
-    }
-    private static func callbackGetUser(data : Data){
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-        
-        if let item = json as? [String:Any] {
-            loginName = item["LoginName"] as! String
-            profifePictureUrl = item["PictureUrl"] as! String
-            
-            if let url = NSURL(string: UrlPreFix.Root.rawValue + profifePictureUrl) {
-                if let data = NSData(contentsOf: url as URL) {
-                    if let pic : UIImage =  UIImage(data: data as Data){
-                        profilePicture = pic                        
-                    }
-                }
-            }
-        }
-    }
+   
 }
 

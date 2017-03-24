@@ -20,22 +20,24 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
     var uiViewDSDA : UIViewController?
     var wTMDT : CGFloat = 0
     var wGN : CGFloat = 0
-    
+    var m_textHightLight : String = String()
     // MARK: - Table view data source
     init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController){
         super.init()
         self.DSDA = arrDSDA
         self.tbDSDA = tbvDSDA
         self.uiViewDSDA = tbvcDSDA
-    }
+           }
     
-    init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController, wTMDT : CGFloat, wGN : CGFloat){
+    init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController, wTMDT : CGFloat, wGN : CGFloat , textHightLight: String = ""){
         super.init()
         self.DSDA = arrDSDA
         self.tbDSDA = tbvDSDA
         self.uiViewDSDA = tbvcDSDA
         self.wTMDT = wTMDT
         self.wGN = wGN
+        self.m_textHightLight = textHightLight
+
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,8 +74,15 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         // cell.ght = 60
         //  cell.scrollEnabled = false
         let itemNhomDA :DanhSachDA = self.DSDA[section]
-        cell.lblTenDA.text = itemNhomDA.TenDA!
+       
+        var targetString : String = itemNhomDA.TenDA!
+        let rangeHL = (targetString.toUnsign() as NSString).range(of: m_textHightLight.toUnsign())
+        
         cell.lblTenDA.font = UIFont.systemFont(ofSize: 13)
+        let attributedStringHL = NSMutableAttributedString(string: itemNhomDA.TenDA!)
+        attributedStringHL.addAttribute( NSForegroundColorAttributeName, value: UIColor.black, range: rangeHL)
+        cell.lblTenDA.attributedText = attributedStringHL
+        
         cell.lblTenDA.textAlignment = NSTextAlignment.left
        // cell.lblTenDA.sizeToFit()
         
@@ -233,10 +242,15 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
         // cell.lblTenDuAn=label
-        cell.lblTenDA.text = itemDuAnCon.TenDA!
-        cell.lblTenDA.numberOfLines = 0
-        cell.lblTenDA.font = UIFont.italicSystemFont(ofSize: 13)
         cell.lblTenDA.textAlignment = NSTextAlignment.left
+        
+        var targetString : String = itemDuAnCon.TenDA!
+        let rangeHL = (targetString.toUnsign() as NSString).range(of: m_textHightLight.toUnsign())
+        
+        cell.lblTenDA.font = UIFont.italicSystemFont(ofSize: 13)
+        let attributedStringHL = NSMutableAttributedString(string: itemDuAnCon.TenDA!)
+        attributedStringHL.addAttribute( NSForegroundColorAttributeName, value: UIColor.black, range: rangeHL)
+        cell.lblTenDA.attributedText = attributedStringHL
       //  cell.lblTenDA.sizeToFit()
              //  cell.lblTenDuAn.lineBreakMode = wrap
         

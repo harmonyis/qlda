@@ -12,6 +12,7 @@ import UIKit
 class DSDA_VC: Base_VC , UISearchBarDelegate{
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var s : UITableViewController = UITableViewController()
     
     @IBOutlet weak var constraintHeightHeader: NSLayoutConstraint!
     @IBOutlet weak var uiViewHeaderDSDA: UIView!
@@ -27,9 +28,11 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     var dataSource_Lanscape : TableDSDA_Lanscape?
     var widthDSDA : CGFloat = 0
     var heightDSDA : CGFloat = 0
-    
+    var m_textHightLight : String = String()
     var wGN : CGFloat = 0
     var wTMDT : CGFloat = 0
+    var ApiUrl : String = ""
+    var params : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,16 +42,16 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         uiViewHeaderDSDA.isHidden = true
         uiSearchTDA.isHidden = true
         tbDSDA.isHidden = true
-        
+        self.m_textHightLight = ""
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.register(UINib(nibName: "CustomCellDSDA_Lanscape", bundle: nil), forCellReuseIdentifier: "CustomCellDSDA_Lanscape")
        
         self.automaticallyAdjustsScrollViewInsets = false
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetDuAn"
+       ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetDuAn"
         //let szUser=lblName.
-        let params : String = "{\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        params = "{\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         
-        ApiService.PostAsync(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: noConnectToServer)
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
         
         
      
@@ -63,7 +66,8 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         LoadTableView()
     }
-    
+
+  
 
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
@@ -158,6 +162,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !(searchText == "") {
+            self.m_textHightLight = searchText
             DSDA = [DanhSachDA]()
             for itemDA in self.m_arrDSDA {
                 if itemDA[0] == itemDA[5] , ConvertToUnsign(itemDA[1]).contains(ConvertToUnsign(searchText)){
@@ -224,6 +229,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         }
         else
         {
+            self.m_textHightLight = ""
             self.DSDA = self.m_DSDA
         }
         LoadTableView()
@@ -231,8 +237,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     }
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     func LoadTableView(){
- 
-        
+
         widthDSDA = self.view.bounds.size.width
         heightDSDA = self.view.bounds.size.height
         variableConfig.m_widthScreen = max(self.heightDSDA, self.widthDSDA)
@@ -373,7 +378,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
            // self.uiViewHeaderDSDA.frame = CGRect(x: 0,y: 116 ,width: self.widthDSDA , height: 30)
            // uiViewHeader.tag = 100
             
-            self.dataSource_Lanscape = TableDSDA_Lanscape(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self, wTMDT : wTMDT, wGN : wGN)
+            self.dataSource_Lanscape = TableDSDA_Lanscape(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self, wTMDT : wTMDT, wGN : wGN , textHightLight : m_textHightLight)
             self.tbDSDA.dataSource = self.dataSource_Lanscape
             self.tbDSDA.delegate = self.dataSource_Lanscape
             self.tbDSDA.reloadData()
@@ -402,7 +407,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             // uiViewHeader.tag = 100
             self.uiViewHeaderDSDA.addSubview(lable)
                 
-                       self.dataSource_Portrait = TableDSDA_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self)
+            self.dataSource_Portrait = TableDSDA_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self , textHightLight : m_textHightLight)
             self.tbDSDA.dataSource = self.dataSource_Portrait
             self.tbDSDA.delegate = self.dataSource_Portrait
             self.tbDSDA.reloadData()

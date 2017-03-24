@@ -10,6 +10,7 @@ import Foundation
 
 class ErrorEntity {
     var error :Error?
+    
 }
 
 class SuccessEntity {
