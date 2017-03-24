@@ -49,9 +49,9 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
             
             constraintWidthCalendar.constant = w
-            constraintHeightCalendar.constant = 250
+            constraintHeightCalendar.constant = 300
             
-            constraintHeightTable.constant = h - 250
+            constraintHeightTable.constant = h - 300
             constraintWidthTable.constant = w
         }
         else{
