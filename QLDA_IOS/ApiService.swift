@@ -71,7 +71,9 @@ class ApiService {
             (data, response, error) in
             
             if error != nil {
-                
+                print("------------------")
+                print("------------------")
+                print("------------------")
                 //message = error!.localizedDescription
                 let errorEntity = ErrorEntity()
                 errorEntity.error = error!

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class Login_VC: UIViewController {
+class Login_VC: Base {
     
     @IBOutlet weak var lblMesage: UILabel!
     @IBOutlet weak var lblMatKhau: UITextField!
@@ -28,11 +28,16 @@ class Login_VC: UIViewController {
         szTenDangNhap = (lblTenDangNhap.text)!
         let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
         
-        ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
+       ApiService.PostAsync(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: noConnectToServer)
         
     }
-    func Alert(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func loadDataSuccess(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             if let idUser = dic["CheckUserResult"] as? String {
                 let nIdUser:Int = Int(idUser)!

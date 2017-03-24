@@ -7,9 +7,9 @@
 //
 
 import Foundation
-class Base : UIViewController {
+public class Base : UIViewController {
     
-    func noConnectToServer(errorEntity:ErrorEntity) {
+   func noConnectToServer(errorEntity:ErrorEntity) {
         let error = errorEntity.error
         print(error!.localizedDescription)
         let message = "Vui lòng bật 3G/Wifi để sử dụng phần mềm!"
