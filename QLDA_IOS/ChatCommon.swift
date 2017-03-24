@@ -113,7 +113,7 @@ class ChatCommon{
         let senderID = (sender![0] as? Int)!
         let senderName = (sender![1] as? String)!
         let receiverID = (receiver![0] as? Int)!
-        let receiverName = (receiver![1] as? String)!
+        //let receiverName = (receiver![1] as? String)!
         let message = (inbox![0] as? String)!
         let messageType = (inbox![1] as? Int)!
         let inboxID = (inbox![2] as? Int64)!

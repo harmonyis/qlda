@@ -59,7 +59,7 @@ extension Date {
     init?(jsonDateGMT: String) {
        
         let prefix = "/Date("
-        let suffix = ")/"
+        //let suffix = ")/"
         let scanner = Scanner(string: jsonDateGMT)
         
         // Check prefix:
@@ -69,7 +69,7 @@ extension Date {
         var milliseconds : Int64 = 0
         guard scanner.scanInt64(&milliseconds) else { return nil }
         // Milliseconds to seconds:
-        var timeStamp = TimeInterval(milliseconds)/1000.0
+        let timeStamp = TimeInterval(milliseconds)/1000.0
         
         // Success! Create NSDate and return.
         self.init(timeIntervalSince1970: timeStamp)

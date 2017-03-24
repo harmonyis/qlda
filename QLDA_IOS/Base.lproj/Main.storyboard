@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8nb-LZ-jCf">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="8nb-LZ-jCf">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -2203,7 +2203,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="Gad-ej-vQR">
             <objects>
-                <viewController id="8nb-LZ-jCf" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="8nb-LZ-jCf" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k3N-Gk-oKE"/>
                         <viewControllerLayoutGuide type="bottom" id="eVC-NA-fZ0"/>
@@ -3947,7 +3947,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAo-eI-8SK">
-                                                    <rect key="frame" x="276" y="3" width="40" height="40"/>
+                                                    <rect key="frame" x="276" y="2" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="8eZ-JD-LuH"/>
                                                         <constraint firstAttribute="width" constant="40" id="9Yy-Ka-UOC"/>

@@ -17,7 +17,6 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     let _nSizePage = 14
     var _currentPage = 1
     var _notificationItems : [NotificationItem]? = nil
-    var dataSource_Portrait : TableNotifications_Portrait?
     var firstRun : Bool? = true
     let myColorDefault : UIColor = UIColor(netHex: 0x000000)
     let myColorUnRead : UIColor = UIColor(netHex: 0x0e83d5)
@@ -271,7 +270,7 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     // khi keo table xuong cuoi cung thi se load them data
     var loadingData = false
     
-    func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastElement = (_notificationItems?.count)! - 1
         if(!loadingData && indexPath.row == lastElement){
             _currentPage += 1

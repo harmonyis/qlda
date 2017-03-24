@@ -272,7 +272,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         let indexPath = self.clv.indexPathForItem(at: point)
         
         if let index = indexPath {
-            var cell = self.clv.cellForItem(at: index)
+            //var cell = self.clv.cellForItem(at: index)
             // do stuff with your cell, for example print the indexPath
             //print(index.row)
             showMenu(index: index.row)
@@ -291,7 +291,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         let detailAction = UIAlertAction(title: "Chi tiết", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             
-            var obj = self.items[index]
+            let obj = self.items[index]
             var message = ""
             
             let ApiUrlDetail = "\(UrlPreFix.Camera.rawValue)/GetImageDetail"
@@ -769,7 +769,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
          */
         
         // cell.imgDetail.addTarget(self, action: #selector(DSDA_VC.tappedMe()))
-        var eventClick = UITapGestureRecognizer()
+        let eventClick = UITapGestureRecognizer()
         let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
         
         
@@ -988,7 +988,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         {
             for  j in 0..<signs[i].characters.count
             {
-                let item : String = signs[i]
+                //let item : String = signs[i]
                 szValue = (szValue as NSString).replacingOccurrences(of: (String)(signs[i][j]), with: (String)(signs[0][i-1]))
             }
         }

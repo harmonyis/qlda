@@ -108,10 +108,10 @@ class ChatHub {
             let senderID = (sender![0] as? Int)!
             let senderName = (sender![1] as? String)!
             let receiverID = (receiver![0] as? Int)!
-            let receiverName = (receiver![1] as? String)!
+            //let receiverName = (receiver![1] as? String)!
             let msg = (inbox![0] as? String)!
             let msgType = (inbox![1] as? Int)!
-            let inboxID = (inbox![2] as? Int64)!
+            //let inboxID = (inbox![2] as? Int64)!
             
 
             
@@ -146,7 +146,7 @@ class ChatHub {
             let receiverName = (receiver![1] as? String)!
             let msg = (inbox![0] as? String)!
             let msgType = (inbox![1] as? Int)!
-            let inboxID = (inbox![2] as? Int64)!
+            //let inboxID = (inbox![2] as? Int64)!
             
             /*
             let list = ChatCommon.listContact.filter(){
@@ -178,7 +178,7 @@ class ChatHub {
             var groupID : Int = 0
             var host : Int = 0
             var groupName : String = ""
-            var pictureUrl : String = ""
+            //var pictureUrl : String = ""
             if let temp = args?[0] as? Int{
                  groupID = temp
             }
@@ -189,9 +189,9 @@ class ChatHub {
             if let temp = args?[2] as? Int{
                 host = temp
             }
-            if let temp = args?[3] as? String{
-                pictureUrl = temp
-            }
+            //if let temp = args?[3] as? String{
+                //pictureUrl = temp
+            //}
             
             let identifier = "\(-groupID - 1000)"
             if host != Config.userID{

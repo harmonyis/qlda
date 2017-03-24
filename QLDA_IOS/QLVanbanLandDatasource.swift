@@ -30,7 +30,7 @@ class QLVanBanLandDatasource : NSObject, UITableViewDataSource, UITableViewDeleg
         cell.lbl4.text = item.ngayBanHanh
         cell.lbl5.text = item.coQuanBanHanh
         
-        var eventClick = UITapGestureRecognizer()
+        let eventClick = UITapGestureRecognizer()
         //let value=(String)(indexPath.section)+"-"+(String)(indexPath.row)
         let valueTenVB = String(indexPath.row)
         cell.view2.accessibilityLabel = valueTenVB
