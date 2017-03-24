@@ -12,6 +12,7 @@ import XLPagerTabStrip
 class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionControllerDelegate{
     
     var itemInfo = IndicatorInfo(title: "Văn bản dự án")
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     var arrVanBan : [VanBanEntity] = []
     let apiUrl = "\(UrlPreFix.QLDA.rawValue)/GetFile"
@@ -37,6 +38,8 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
         self.tbVanBanDuAn.register(UINib(nibName: "HeaderableViewCell", bundle: nil), forCellReuseIdentifier: "HeaderPort")
         self.tbVanBanDuAn.register(UINib(nibName: "VanBanLandTableViewCell", bundle: nil), forCellReuseIdentifier: "cellLand")
                 self.tbVanBanDuAn.register(UINib(nibName: "HeaderLandTableViewCell", bundle: nil), forCellReuseIdentifier: "HeaderLand")
+        self.tbVanBanDuAn.isHidden = true
+        self.indicator.startAnimating()
         loadData()
         
         
@@ -157,6 +160,8 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
             self.tbVanBanDuAn.reloadData()
             
         }
+        self.tbVanBanDuAn.isHidden = false
+        self.indicator.stopAnimating()
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         rotate()
