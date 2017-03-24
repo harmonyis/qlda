@@ -1583,10 +1583,10 @@
                                                             <rect key="frame" x="0.0" y="81.5" width="320" height="30"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDl-ZT-GYc">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tổng giá trị gói thầu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKq-pf-nM0">
-                                                                            <rect key="frame" x="10" y="0.0" width="180" height="30"/>
+                                                                            <rect key="frame" x="10" y="0.0" width="180" height="50"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -1601,10 +1601,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Rs-z7-nQH">
-                                                                    <rect key="frame" x="200" y="0.0" width="90" height="30"/>
+                                                                    <rect key="frame" x="200" y="0.0" width="90" height="50"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IK8-Zn-qsM">
-                                                                            <rect key="frame" x="5" y="0.0" width="80" height="30"/>
+                                                                            <rect key="frame" x="5" y="0.0" width="80" height="50"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
