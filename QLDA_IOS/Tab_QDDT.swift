@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import XLPagerTabStrip
 
-class Tab_QDDT: UIViewController, IndicatorInfoProvider {
+class Tab_QDDT: Base, IndicatorInfoProvider {
     
     let cellIdentifier = "postCell"
     var blackTheme = false
@@ -30,7 +30,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,17 +43,25 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
         let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         UiViewQDDT.layer.borderColor = myColorBoder.cgColor
         UiViewQDDT.layer.borderWidth = 1
-        ApiService.Post(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: Error)
+        
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: alertAction)
+        // ApiService.Post(url: ApiUrl, params: params, callback: , errorCallBack: Error)
     }
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
-    func GetDataQDDT(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func GetDataQDDT(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             
             if var arrTTDA = dic["GetQuyetDinhDauTuResult"] as? [String] {
                 if arrTTDA.count<1 {
                     arrTTDA = ["","","","",""]
-                   
+                    
                 }
                 m_arrTTDA = arrTTDA
                 LoadDataQDDT()
@@ -69,7 +77,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                 self.activityIndicator.stopAnimating()
                 
                 self.UiViewQDDT.isHidden = false
-
+                
                 
                 var icount = 0
                 let style = NSMutableParagraphStyle()
@@ -114,7 +122,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         
                         self.UiViewQDDT.addSubview(uiView)
                         uiView = UIView()
-                      
+                        
                         let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
                         lblTenDuAn.font = UIFont(name:"HelveticaNeue", size: 13.0)
@@ -237,7 +245,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView.addSubview(lblTenDuAn)
                         uiView.frame = CGRect(x: 5 + haftWidth,y: self.totalHeight ,width: (self.UiViewQDDT.frame.width - 10)/2, height: 25)
                         
-                     
+                        
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
                         borderBottom.borderColor =  self.myColorBoder.cgColor
@@ -267,24 +275,28 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                     self.totalHeight = self.totalHeight + 50
                 }
                 self.UiViewQDDT.addSubview(ViewGroupTTCQDDT)
-                //     let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant: 1600)
-                //      self.UiViewQDDT.isUserInteractionEnabled = true
-                //        NSLayoutConstraint.activate([heightConstraint])
-                // gọi hàm lấy dữ liệu về tổng dự toán từ service
-                let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetTongDuToan"
-                //let szUser=lblName.
-                let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
-                // gọi hàm lấy dự liệu tổng dự toán
-                ApiService.Post(url: ApiUrl, params: params, callback: self.GetDataTDT, errorCallBack: self.Error)
-                
+                self.GetTDT()
             }
         }
     }
     
-    func GetDataTDT(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func GetTDT(){
+        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetTongDuToan"
+        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        // gọi hàm lấy dự liệu tổng dự toán
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataTDT, errorCallBack: alertAction)
+        
+    }
+    func GetDataTDT(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
-         
+            
             if var arrTTDA = dic["GetTongDuToanResult"] as? [String] {
                 if arrTTDA.count<1 {
                     arrTTDA = ["","","","",""]
@@ -297,12 +309,12 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         for item in UiViewQDDT.subviews {
             
-                item.removeFromSuperview()
-           
+            item.removeFromSuperview()
+            
         }
         totalHeight = 0
         LoadDataQDDT()
-      
+        
     }
     
     func LoadDataTDT(){
@@ -459,7 +471,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
                         uiView = UIView()
                         uiView.backgroundColor = UIColor(netHex: 0xdddddd)
                         //self.uiViewThongTin.addSubview(uiView)
-                       
+                        
                         
                         
                         let lblTenDuAn:UILabel = UILabel()
@@ -525,7 +537,7 @@ class Tab_QDDT: UIViewController, IndicatorInfoProvider {
         self.present(alert, animated: true, completion: nil)
     }
     
-   
+    
     
     
     init(itemInfo: IndicatorInfo) {

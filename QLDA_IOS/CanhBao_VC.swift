@@ -72,7 +72,8 @@ class CanhBao_VC: Base_VC {
     func loadData() {
         let apiUrl = "\(UrlPreFix.QLDA.rawValue)/GetHopDongCham"
         let params = "{\"szUsername\":\"\(self.userName)\",\"szPassword\":\"\(self.password)\"}"
-        ApiService.PostAsync(url: apiUrl, params: params, callback: loadDataSuccess, errorCallBack: noConnectToServer)
+        
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
     }
     //noConnectToServer
     //loadDataError Data
