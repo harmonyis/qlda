@@ -8,7 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
-class Tab_KHGN: UIViewController, IndicatorInfoProvider {
+class Tab_KHGN: Base, IndicatorInfoProvider {
     var itemInfo = IndicatorInfo(title: "Giải ngân")
     
     @IBOutlet weak var tbvKHGN: UITableView!
@@ -44,15 +44,15 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
         //let szUser=lblName.
         let params : String = "{ \"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\", \"szNam\" : \""+"2017"+"\", \"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         
-        ApiService.Post(url: ApiUrl, params: params, callback: Alert, errorCallBack: AlertError)
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
         
         self.tbvKHGN.sectionFooterHeight = 0;
         self.tbvKHGN.sectionHeaderHeight = UITableViewAutomaticDimension
         self.tbvKHGN.rowHeight = UITableViewAutomaticDimension
         self.tbvKHGN.estimatedRowHeight = 30
         self.tbvKHGN.estimatedSectionHeaderHeight = 30
-         print("--------")
-     print(self.tbvKHGN.bounds.size.height, self.tbvKHGN.bounds.size.width)
+        print("--------")
+        print(self.tbvKHGN.bounds.size.height, self.tbvKHGN.bounds.size.width)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -60,8 +60,14 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
     }
     
     
-    func Alert(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func loadDataSuccess(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             if let arrHD = dic["GetTheoDoiGiaiNganDSHDResult"] as? [[String]] {
                 
@@ -182,7 +188,7 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
     
     func LoadTableView(){
         
-       
+        
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
@@ -192,7 +198,7 @@ class Tab_KHGN: UIViewController, IndicatorInfoProvider {
                     item.removeFromSuperview()
                 }
             }
-       
+            
             var width = variableConfig.m_widthScreen
             
             width = width - 20 - 8

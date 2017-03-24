@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import XLPagerTabStrip
 
-class Tab_TTC: UIViewController, IndicatorInfoProvider {
+class Tab_TTC: Base, IndicatorInfoProvider {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -30,12 +30,23 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
         uiViewThongTin.layer.borderColor = myColorBoder.cgColor
         uiViewThongTin.layer.borderWidth = 1
         
+        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetThongTinDuAn"
+        //let szUser=lblName.
+        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        
+        ApiService.PostAsyncAc(url: ApiUrl, params: params,  callback: loadDataSuccess, errorCallBack: alertAction)
+        
     }
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
-    func Suscess(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func loadDataSuccess(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
-          
+            
             if let arrTTDA = dic["GetThongTinDuAnResult"] as? [String] {
                 m_arrTTDA = arrTTDA
             }
@@ -48,7 +59,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
             item.removeFromSuperview()
             
         }
-           LoadDataTTC()
+        LoadDataTTC()
         
     }
     
@@ -58,7 +69,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
             DispatchQueue.main.async {
                 
                 self.activityIndicator.stopAnimating()
-                            
+                
                 self.uiViewThongTin.isHidden = false
                 
                 var icount = 0
@@ -116,7 +127,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
                 }
                 
                 let heightConstraint = self.uiViewThongTin.heightAnchor.constraint(equalToConstant: totalHeight + 5 )
-             
+                
                 NSLayoutConstraint.activate([heightConstraint])
             }
         }
@@ -132,11 +143,7 @@ class Tab_TTC: UIViewController, IndicatorInfoProvider {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetThongTinDuAn"
-        //let szUser=lblName.
-        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
-        
-        ApiService.Post(url: ApiUrl, params: params, callback: Suscess, errorCallBack: Error)    }
+    }
     
     
     init(itemInfo: IndicatorInfo) {

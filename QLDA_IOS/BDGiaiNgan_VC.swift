@@ -29,12 +29,18 @@ class BDGiaiNgan_VC: Base_VC {
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoGiaiNgan"
         //let szUser=lblName.
         let params : String = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
-        
-        ApiService.Post(url: ApiUrl, params: params, callback: getDataGN, errorCallBack: getDataGNError)
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: getDataGN, errorCallBack: alertAction)
+     //   ApiService.Post(url: ApiUrl, params: params, callback: getDataGN, errorCallBack: getDataGNError)
     }
 
-    func getDataGN(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func getDataGN(data :SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             if let items = dic["GetBieuDoGiaiNganResult"] as? [[String]] {
                 let itemSorts = items.sorted{

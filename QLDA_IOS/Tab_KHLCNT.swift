@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import XLPagerTabStrip
 
-class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
+class Tab_KHLCNT: Base ,IndicatorInfoProvider{
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tbDSDA: UITableView!
@@ -24,7 +24,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     var dataSource_Portrait : TableKHLCNT_Portrait?
     var itemInfo = IndicatorInfo(title: "KHLCNT")
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
-     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
+    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     var wTongGiaTri : CGFloat = 120
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
         
         self.tbDSDA.layer.borderColor = myColorBoder.cgColor
         self.tbDSDA.layer.borderWidth = 1
-
+        
         
         self.tbDSDA.isHidden = true
         
@@ -52,13 +52,20 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
         let params : String = "{\"szIdDA\": \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetGoiThau"
         
-        ApiService.Post(url: ApiUrl, params: params, callback: GetGoiThau, errorCallBack: AlertError)
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback:GetGoiThau, errorCallBack: alertAction)
+        //  ApiService.Post(url: ApiUrl, params: params, callback: GetGoiThau, errorCallBack: AlertError)
         
         
     }
     
-    func GetGoiThau(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func GetGoiThau(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             if let arrGoiThau = dic["GetGoiThauResult"] as? [[String]] {
                 
@@ -97,12 +104,11 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
                         
+                        self.getKHLCNT(idGT : idGoiThau)
                         
-                        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetKeHoachLuaChonNhaThau"
                         //let szUser=lblName.
-                        let params : String = "{\"szIdKHLCNT\": \""+idGoiThau+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
                         
-                        ApiService.Post(url: ApiUrl, params: params, callback: self.GetKeHoachLCNT, errorCallBack: self.AlertError)
+                        
                         self.activityIndicator.stopAnimating()
                         
                         self.tbDSDA.isHidden = false
@@ -112,11 +118,23 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
             }
         }
     }
+    func getKHLCNT(idGT : String){
+        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetKeHoachLuaChonNhaThau"
+        let params : String = "{\"szIdKHLCNT\": \""+idGT+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback:self.GetKeHoachLCNT, errorCallBack: alertAction)
+    }
     
-    func GetKeHoachLCNT(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func GetKeHoachLCNT(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if var dic = json as? [String:Any] {
-           
+            
             if var arrGoiThau = dic["GetKeHoachLuaChonNhaThauResult"] as? [String] {
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
@@ -134,7 +152,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     }
     func LoadTableView(){
         
-      
+        
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
@@ -208,7 +226,7 @@ class Tab_KHLCNT: UIViewController ,IndicatorInfoProvider{
     {
         
         let value : Int = (sender.view?.tag)!
-       
+        
         if self.indexTrangThaiGoiThau.contains(value) {
             self.indexTrangThaiGoiThau.remove(value)
         }
