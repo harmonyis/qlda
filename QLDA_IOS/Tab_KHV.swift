@@ -10,14 +10,14 @@ import UIKit
 import Foundation
 import XLPagerTabStrip
 
-class Tab_KHV: UIViewController , IndicatorInfoProvider {
+class Tab_KHV: Base , IndicatorInfoProvider {
     
     let cellIdentifier = "postCell"
     var blackTheme = false
     var itemInfo = IndicatorInfo(title: "Kế hoạch vốn")
     var totalHeight : CGFloat = 0
     var m_arrKHV : [String] = [String]()
-     var m_arrDCKHV : [String] = [String]()
+    var m_arrDCKHV : [String] = [String]()
     @IBOutlet weak var UiviewKHV: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     let m_date = Date()
@@ -39,18 +39,25 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
         let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"nam\" : \""+(String)(m_year)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         UiviewKHV.layer.borderColor = myColorBoder.cgColor
         UiviewKHV.layer.borderWidth = 1
-        ApiService.Post(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: Error)
+        
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataKHV, errorCallBack: alertAction)
+        //   ApiService.Post(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: Error)
     }
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
-    func GetDataQDDT(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func GetDataKHV(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if var dic = json as? [String:Any] {
-           
+            
             if var arrKHV = dic["GetKeHoachVonResult"] as? [String] {
                 if arrKHV.count<1 {
                     arrKHV = ["","","","",""]
                 }
-                 self.m_IdKHV = arrKHV[0]
+                self.m_IdKHV = arrKHV[0]
                 self.m_arrKHV = arrKHV
                 LoadKHV()
                 let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetDieuChinhKeHoachVon"
@@ -58,8 +65,10 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 //let szUser=lblName.
                 let params : String = "{\"szIdKHV\" : \""+(String)(self.m_IdKHV)+"\",\"nam\" : \""+(String)(m_year)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
                 // gọi hàm lấy dự liệu tổng dự toán
-                ApiService.Post(url: ApiUrl, params: params, callback: self.GetDataTDT, errorCallBack: self.Error)
-                              }
+                ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: self.GetDataDCKHV, errorCallBack: alertAction)
+                
+                // ApiService.Post(url: ApiUrl, params: params, callback: self.GetDataTDT, errorCallBack: self.Error)
+            }
         }
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -75,11 +84,11 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
     }
     
     func LoadKHV(){
-    
+        
         let arrlblTTDA = ["Số quyết định","Ngày ban hành","Niên độ","Tổng giá trị phê duyệt"]
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
-               
+                
                 self.activityIndicator.stopAnimating()
                 
                 self.UiviewKHV.isHidden = false
@@ -128,7 +137,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                         
                         self.UiviewKHV.addSubview(uiView)
                         uiView = UIView()
-                       
+                        
                         
                         let lblTenDuAn:UILabel = UILabel()
                         lblTenDuAn.textColor = UIColor.black
@@ -278,14 +287,20 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 //      self.UiviewKHV.isUserInteractionEnabled = true
                 //        NSLayoutConstraint.activate([heightConstraint])
                 // gọi hàm lấy dữ liệu về tổng dự toán từ service
-              
+                
                 
             }
         }
     }
     
-    func GetDataTDT(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func GetDataDCKHV(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if var dic = json as? [String:Any] {
             if let arrTTDA = dic["GetDieuChinhKeHoachVonResult"] as? [String] {
                 m_arrDCKHV = arrTTDA
@@ -500,7 +515,7 @@ class Tab_KHV: UIViewController , IndicatorInfoProvider {
                 
             }
         }
-    
+        
     }
     
     func Error(error : Error) {

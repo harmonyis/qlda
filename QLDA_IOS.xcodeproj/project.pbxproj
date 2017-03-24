@@ -125,6 +125,7 @@
 		BA649B851E6EB302003973FA /* ChatGroupInfo_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */; };
 		BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */; };
 		BA7E1DED1E738C9C00140811 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7E1DEC1E738C9C00140811 /* UIImage.swift */; };
+		BAB044581E84FEEA00D34714 /* pod.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BAB044571E84FEEA00D34714 /* pod.rtf */; };
 		BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */; };
 		BAB6284B1E71535E002472D6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6284A1E71535E002472D6 /* String.swift */; };
 		BADA635D1E7CF7000097D73C /* ApiEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA634B1E7CF7000097D73C /* ApiEntity.swift */; };
@@ -314,6 +315,7 @@
 		BA649B841E6EB302003973FA /* ChatGroupInfo_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfo_VC.swift; sourceTree = "<group>"; };
 		BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAddUser_VC.swift; sourceTree = "<group>"; };
 		BA7E1DEC1E738C9C00140811 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		BAB044571E84FEEA00D34714 /* pod.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = pod.rtf; sourceTree = "<group>"; };
 		BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChangeGroupName_Modal.swift; sourceTree = "<group>"; };
 		BAB6284A1E71535E002472D6 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BADA634B1E7CF7000097D73C /* ApiEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEntity.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				BADA636F1E81040E0097D73C /* CameraIcon.imageset */,
 				24BEAE891E6979D8008F205C /* LaunchScreen.storyboard */,
 				24BEAE8C1E6979D8008F205C /* Info.plist */,
+				BAB044571E84FEEA00D34714 /* pod.rtf */,
 			);
 			path = QLDA_IOS;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				24ADE77C1E7CC98500415499 /* CustomCell_KHGN_Header_Landscape.xib in Resources */,
 				24BEAEF21E697AA6008F205C /* DSDA_View.xib in Resources */,
 				24ADE79C1E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.xib in Resources */,
+				BAB044581E84FEEA00D34714 /* pod.rtf in Resources */,
 				24BEAF0A1E697AA6008F205C /* View.xib in Resources */,
 				7C8CD7081E7F7334006A095F /* CellHopDongLandTableViewCell.xib in Resources */,
 				BADA63691E7CF7000097D73C /* CellHopDongHiddenTableViewCell.xib in Resources */,

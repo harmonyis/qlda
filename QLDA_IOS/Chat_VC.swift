@@ -453,6 +453,9 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     @IBAction func btnSendTouchUpInside(_ sender: UIButton) {
+        if txtMessage.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            return
+        }
         toggleButton(false)
         sendMessage()
     }

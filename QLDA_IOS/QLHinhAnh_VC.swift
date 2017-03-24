@@ -42,8 +42,8 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
         
         let ApiUrl = "\(UrlPreFix.Camera.rawValue)/GetAllFileUploadByID"
         let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\", \"listName\":\"DuAn\", \"IDItem\":\(idDuAn)}"
-        ApiService.Post(url: ApiUrl, params: params, callback: GetDSHAByIdSuccess, errorCallBack: GetDSHAError)
-        
+      //  ApiService.Post(url: ApiUrl, params: params, callback: GetDSHAByIdSuccess, errorCallBack: GetDSHAError)
+          ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDSHAByIdSuccess, errorCallBack: alertAction)
         imagePicker.delegate = self
         
         // Do any additional setup after loading the view.
@@ -76,30 +76,12 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let newImg = resizeImage(image: image, newWidth: 540)
             //imageView.image = image
-            let data = UIImageJPEGRepresentation(newImg, 1.0)
-            let array = [UInt8](data!)
-            
-            //let jsonResult = JSONSerializer.toJson(dataImage)
-            
-            let uuid = UUID().uuidString
-            
-            let jsonResult = "{\"ImageName\":\"\(uuid).jpg\",\"ListName\":\"\(listName)\",\"IDItem\":\(idDuAn),\"ImageData\":\(array)}"
-            
-            let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\", \"data\":\(jsonResult)}"
-            
-            
-            //print(params)
-            
+           
+           getIF(im: newImg)
+
             self.clv.isHidden = true
             self.view.viewWithTag(1)!.isHidden = true
             self.indicator.startAnimating()
-            
-            let ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/UploadImage"
-            
-            ApiService.Post(url: ApiUrl, params: params, callback: PostImageSuccess, errorCallBack: { (error) in
-                print("error")
-                print(error.localizedDescription)
-            })
             
             
             
@@ -109,9 +91,28 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
         
         self.dismiss(animated: true, completion: nil)
     }
-    
-    func PostImageSuccess(data:Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func getIF(im : UIImage){
+         let data = UIImageJPEGRepresentation(im, 1.0)
+        let array = [UInt8](data!)
+        
+        //let jsonResult = JSONSerializer.toJson(dataImage)
+        
+        let uuid = UUID().uuidString
+        let jsonResult = "{\"ImageName\":\"\(uuid).jpg\",\"ListName\":\"\(listName)\",\"IDItem\":\(idDuAn),\"ImageData\":\(array)}"
+         let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\", \"data\":\(jsonResult)}"
+        let ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/UploadImage"
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: PostImageSuccess, errorCallBack: alertAction)
+
+      
+    }
+    func PostImageSuccess(data: SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let methodResult = json as? [String:Any] {
             if let uploadImageResult = methodResult["UploadImageResult"] as? [String: Any] {
                 if let dataResult = uploadImageResult["DataResult"] as? [String : Any] {
@@ -161,12 +162,13 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
     }
     
     
-    func GetDSHAByIdSuccess(data : Data) {
-        //let result = String(data: data, encoding: String.Encoding.utf8)
-        
-        
-        //print(result)
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func GetDSHAByIdSuccess(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         
         items.removeAll()
         if let dic = json as? [String:Any] {

@@ -37,7 +37,7 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
         
         self.tbVanBanDuAn.register(UINib(nibName: "HeaderableViewCell", bundle: nil), forCellReuseIdentifier: "HeaderPort")
         self.tbVanBanDuAn.register(UINib(nibName: "VanBanLandTableViewCell", bundle: nil), forCellReuseIdentifier: "cellLand")
-                self.tbVanBanDuAn.register(UINib(nibName: "HeaderLandTableViewCell", bundle: nil), forCellReuseIdentifier: "HeaderLand")
+        self.tbVanBanDuAn.register(UINib(nibName: "HeaderLandTableViewCell", bundle: nil), forCellReuseIdentifier: "HeaderLand")
         self.tbVanBanDuAn.isHidden = true
         self.indicator.startAnimating()
         loadData()
@@ -73,7 +73,7 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
         let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let documentDirectoryPath:String = path[0]
         let destinationURLForFile = URL(fileURLWithPath: documentDirectoryPath.appendingFormat("/\(fileName)"))
-
+        
         try! data.write(to: URL(fileURLWithPath: destinationURLForFile.path))
         print(fileName)
         showFileWithPath(path: destinationURLForFile.path)
@@ -118,15 +118,20 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     
     func loadData() {
         let params = "{\"sDuAnID\":\"\(self.idDuAn)\",\"szUsername\":\"\(self.userName)\",\"szPassword\":\"\(self.password)\"}"
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback:loadVanBanSuccess, errorCallBack: alertAction)
+        //  ApiService.Post(url: apiUrl, params: params, callback: loadVanBanSuccess) { (error) in
         
-        ApiService.Post(url: apiUrl, params: params, callback: loadVanBanSuccess) { (error) in
-            print("Có lỗi:\(error)")
-        }
         
     }
     
-    func loadVanBanSuccess(data: Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func loadVanBanSuccess(data: SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             if let jsonResult = dic["GetFileResult"] as? [[String]] {
                 var vanBan : VanBanEntity
@@ -154,7 +159,7 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
         }
         else {
             self.tableDatasource = QLVanBanDatasource(arrVanBan: self.arrVanBan, table: self.tbVanBanDuAn,tenVanBanClick:download)
-
+            
             self.tbVanBanDuAn.dataSource = self.tableDatasource
             self.tbVanBanDuAn.delegate = self.tableDatasource
             self.tbVanBanDuAn.reloadData()
