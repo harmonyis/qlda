@@ -24,6 +24,8 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     @IBOutlet weak var constraintWidthTable: NSLayoutConstraint!
     
     // View
+    
+    
     @IBOutlet weak var btnAddEvent: UIButton!
     @IBOutlet weak var tblCalendar: UITableView!
     @IBOutlet weak var fsCalendar: FSCalendar!

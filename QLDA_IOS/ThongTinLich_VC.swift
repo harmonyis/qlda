@@ -15,11 +15,19 @@ class ThongTinLich_VC: UIViewController{
     @IBOutlet weak var dtpEnd: UIDatePicker!
     @IBOutlet weak var txtContent: UITextField!
     
+    
+    @IBOutlet weak var constraintHeightScrollView: NSLayoutConstraint!
+    
+    
     var calendarItem : CalendarItem!
     var isEdit = false
     
     var selectDate : Date!
     let calendar = Calendar.current
+    
+    func setConstraintView(height : CGFloat, width : CGFloat){
+         
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
