@@ -20,7 +20,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     var items : [ImageEntity] = []
     
     var ApiUrl : String = "\(UrlPreFix.Camera.rawValue)/GetAllFileUpload"
-    
+    var m_textHightLight : String = ""
     var idDuAn : Int = 0
     var listName : String = ""
     var userName : String = ""
@@ -552,10 +552,13 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         // cell.ght = 60
         //  cell.scrollEnabled = false
         let itemNhomDA :DanhSachDA = self.DSDA[section]
-        cell.lblTenDuAn.text = itemNhomDA.TenDA!
-        cell.lblTenDuAn.font = UIFont.boldSystemFont(ofSize: 13)
+      //  cell.lblTenDuAn.text = itemNhomDA.TenDA!
+      //  cell.lblTenDuAn.font = UIFont.boldSystemFont(ofSize: 13)
         
+        var targetString : String = itemNhomDA.TenDA!
+        let rangeHL = (targetString.toUnsign() as NSString).range(of: m_textHightLight.toUnsign())
         
+        cell.lblTenDuAn.font = UIFont.systemFont(ofSize: 13)
         
         if self.DuAnSelected == itemNhomDA.IdDA! {
             cell.lblTenDuAn.textColor = colorSelectd
@@ -566,6 +569,15 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
             } else {
                 cell.lblTenDuAn.textColor = colorNotExistsItem
         }
+
+        
+        let attributedStringHL = NSMutableAttributedString(string: itemNhomDA.TenDA!)
+        attributedStringHL.addAttribute( NSForegroundColorAttributeName, value: UIColor.black, range: rangeHL)
+        cell.lblTenDuAn.attributedText = attributedStringHL
+        
+        cell.lblTenDuAn.textAlignment = NSTextAlignment.left
+        
+        
         
         //cell.lblTenDuAn.textColor = colorSelectd
         
@@ -703,10 +715,11 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         
         //  let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 60))
         // cell.lblTenDuAn=label
-        cell.lblTenDuAn.text = itemDuAnCon.TenDA!
-        cell.lblTenDuAn.numberOfLines = 0
-        cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
+       
+        var targetString : String = itemDuAnCon.TenDA!
+        let rangeHL = (targetString.toUnsign() as NSString).range(of: m_textHightLight.toUnsign())
         
+        cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
         
         if self.DuAnSelected == itemDuAnCon.IdDA! {
             cell.lblTenDuAn.textColor = colorSelectd
@@ -717,6 +730,13 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
             } else {
                 cell.lblTenDuAn.textColor = colorNotExistsItem
         }
+        
+        let attributedStringHL = NSMutableAttributedString(string: itemDuAnCon.TenDA!)
+        attributedStringHL.addAttribute( NSForegroundColorAttributeName, value: UIColor.black, range: rangeHL)
+        cell.lblTenDuAn.attributedText = attributedStringHL
+        
+        
+       
         //cell.lblTenDuAn.textColor = colorSelectd
         
         
@@ -894,6 +914,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !(searchText == "") {
+            m_textHightLight = searchText
             DSDA = [DanhSachDA]()
             for itemDA in self.m_arrDSDA {
                 if itemDA[0] == itemDA[5] , ConvertToUnsign(itemDA[1]).contains(ConvertToUnsign(searchText)){
@@ -959,6 +980,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         }
         else
         {
+            m_textHightLight = ""
             self.DSDA = self.m_DSDA
         }
         self.tbDanhSachDuAn.reloadData()

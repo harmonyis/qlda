@@ -22,7 +22,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
     @IBOutlet weak var lblHeader: UILabel!
     
     var checkLoadView : Int = 0
-    
+     var m_textHightLight : String = ""
     var m_arrDSDA : [[String]] = []
     var DSDA = [DanhSachDA]()
     var m_DSDA = [DanhSachDA]()
@@ -58,8 +58,8 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetDuAn"
         //let szUser=lblName.
         let params : String = "{\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
-        
-        ApiService.Post(url: ApiUrl, params: params, callback: GetDanhSachDuAn, errorCallBack: GetDanhSachDuAnError)
+         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDanhSachDuAn, errorCallBack: alertAction)
+      //  ApiService.Post(url: ApiUrl, params: params, callback: GetDanhSachDuAn, errorCallBack: GetDanhSachDuAnError)
 
         self.tbDSDA.sectionFooterHeight = 0;
         self.tbDSDA.sectionHeaderHeight = UITableViewAutomaticDimension
@@ -72,8 +72,14 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
         LoadTableView()
     }
     
-    func GetDanhSachDuAn(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func GetDanhSachDuAn(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             if let arrDSDA = dic["GetDuAnResult"] as? [[String]] {
                 self.m_arrDSDA = arrDSDA
@@ -157,6 +163,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !(searchText == "") {
+            m_textHightLight = searchText
             DSDA = [DanhSachDA]()
             for itemDA in self.m_arrDSDA {
                 if itemDA[0] == itemDA[5] , ConvertToUnsign(itemDA[1]).contains(ConvertToUnsign(searchText)){
@@ -223,6 +230,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
         }
         else
         {
+            m_textHightLight = ""
             self.DSDA = self.m_DSDA
         }
         LoadTableView()
@@ -238,7 +246,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
             
         }
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
-            self.dataSource_Portrait = TableDSDAMap_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self,uiMapView:UiMapView,dicMarker: Map_VC.dicMarker)
+            self.dataSource_Portrait = TableDSDAMap_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self,uiMapView:UiMapView,dicMarker: Map_VC.dicMarker,textHightLight : m_textHightLight)
             self.tbDSDA.dataSource = self.dataSource_Portrait
             self.tbDSDA.delegate = self.dataSource_Portrait
             self.tbDSDA.reloadData()
