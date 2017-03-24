@@ -29,15 +29,23 @@ class BDTMDT_VC: Base_VC {
         //let szUser=lblName.
         let params : String = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
         
-        ApiService.Post(url: ApiUrl, params: params, callback: getDataTMDT, errorCallBack: getDataTMDTError)
-
-    }
-
-    func getDataTMDT(data : Data) {
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: getDataTMDT, errorCallBack: alertAction)
         
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
-              if let dic = json as? [String:Any] {
-                if let items = dic["GetBieuDoTMDTResult"] as? [Double] {
+        // ApiService.Post(url: ApiUrl, params: params, callback: getDataTMDT, errorCallBack: getDataTMDTError)
+        
+    }
+    
+    func getDataTMDT(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        
+        
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
+        if let dic = json as? [String:Any] {
+            if let items = dic["GetBieuDoTMDTResult"] as? [Double] {
                 for item in items{
                     self.arrGiaTris.append(item)
                 }
@@ -61,7 +69,7 @@ class BDTMDT_VC: Base_VC {
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -84,7 +92,7 @@ class BDTMDT_VC: Base_VC {
         pieChartTMDT.usePercentValuesEnabled = true
         pieChartTMDT.chartDescription?.enabled = false
         pieChartTMDT.minOffset=0
-
+        
         let colors: [UIColor] = [UIColor.init(netHex:0x3399FF),
                                  UIColor.init(netHex:0xFF33FF),
                                  UIColor.init(netHex:0x996666),
@@ -135,7 +143,7 @@ class BDTMDT_VC: Base_VC {
             uiView.addSubview(dynamicSquare)
             uiView.addSubview(dynamicLabel)
         }
- 
+        
         /*let l : Legend = pieChartTMDT.legend
          l.verticalAlignment = Legend.VerticalAlignment.top
          l.horizontalAlignment = Legend.HorizontalAlignment.left

@@ -76,7 +76,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     func GetDSHAByIdSuccess(data : Data) {
         //let result = String(data: data, encoding: String.Encoding.utf8)
         
-       
+        
         //print(result)
         let json = try? JSONSerialization.jsonObject(with: data, options: [])
         
@@ -170,8 +170,8 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         
         self.presentImageGallery(galleryViewController)
     }
-        override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-            self.clv.reloadData()
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.clv.reloadData()
     }
     func galleryConfiguration() -> GalleryConfiguration {
         

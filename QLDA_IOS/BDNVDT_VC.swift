@@ -33,13 +33,19 @@ class BDNVDT_VC: Base_VC{
         
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoNguonVon"
         let params : String = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
-        
-        ApiService.Post(url: ApiUrl, params: params, callback: getDataBieuDoNguonVon, errorCallBack: getDataBieuDoNguonVonError)
+      ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: getDataBieuDoNguonVon, errorCallBack: alertAction)
+     //   ApiService.Post(url: ApiUrl, params: params, callback: getDataBieuDoNguonVon, errorCallBack: getDataBieuDoNguonVonError)
     }
 
-    func getDataBieuDoNguonVon(data : Data) {
+    func getDataBieuDoNguonVon(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+
         
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             print(dic)
             if let items = dic["GetBieuDoNguonVonResult"] as? [[String]] {

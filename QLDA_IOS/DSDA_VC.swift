@@ -45,43 +45,43 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         self.m_textHightLight = ""
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.register(UINib(nibName: "CustomCellDSDA_Lanscape", bundle: nil), forCellReuseIdentifier: "CustomCellDSDA_Lanscape")
-       
+        
         self.automaticallyAdjustsScrollViewInsets = false
-       ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetDuAn"
+        ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetDuAn"
         //let szUser=lblName.
         params = "{\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
         
         
-     
-            self.tbDSDA.sectionFooterHeight = 0;
-             self.tbDSDA.sectionHeaderHeight = UITableViewAutomaticDimension
-             self.tbDSDA.rowHeight = UITableViewAutomaticDimension
-             self.tbDSDA.estimatedRowHeight = 30
-            self.tbDSDA.estimatedSectionHeaderHeight = 30
-      
+        
+        self.tbDSDA.sectionFooterHeight = 0;
+        self.tbDSDA.sectionHeaderHeight = UITableViewAutomaticDimension
+        self.tbDSDA.rowHeight = UITableViewAutomaticDimension
+        self.tbDSDA.estimatedRowHeight = 30
+        self.tbDSDA.estimatedSectionHeaderHeight = 30
+        
     }
-
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         LoadTableView()
     }
-
-  
-
+    
+    
+    
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
             serverError(success: data)
             return
         }
-
+        
         let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             if let arrDSDA = dic["GetDuAnResult"] as? [[String]] {
                 self.m_arrDSDA = arrDSDA
                 for itemDA in arrDSDA {
-                 
+                    
                     if itemDA[0] == itemDA[5] {
                         let itemNhomDA = DanhSachDA()
                         itemNhomDA.IdDA = itemDA[0] as String
@@ -95,7 +95,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                     }
                     else if  self.DSDA.contains(where: { $0.IdDA! == itemDA[5] }) {
                         let NhomDuAn = self.DSDA.first(where: { $0.IdDA! == itemDA[5] })
-                       
+                        
                         var NhomDuAnCon = [DuAn]()
                         NhomDuAnCon = (NhomDuAn?.DuAnCon)!
                         
@@ -237,19 +237,19 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     }
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     func LoadTableView(){
-
+        
         widthDSDA = self.view.bounds.size.width
         heightDSDA = self.view.bounds.size.height
         variableConfig.m_widthScreen = max(self.heightDSDA, self.widthDSDA)
-      
+        
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
-         //   uiViewHeaderDSDA.viewWithTag(100)?.removeFromSuperview()
+            //   uiViewHeaderDSDA.viewWithTag(100)?.removeFromSuperview()
             
             for item in uiViewHeaderDSDA.subviews {
-            if item.tag == 100 {
-                item.removeFromSuperview()
+                if item.tag == 100 {
+                    item.removeFromSuperview()
                 }
             }
             let width = max(self.heightDSDA, self.widthDSDA) - 20
@@ -257,19 +257,19 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             uiViewHeaderDSDA.backgroundColor = UIColor(netHex: 0x21AFFA)
             
             var uiView:UIView = UIView()
-           
- 
+            
+            
             uiView.frame = CGRect(x: 0, y: 0 , width: 20, height: 50)
             uiView.layer.borderColor = myColorBoder.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
-
+            
             self.uiViewHeaderDSDA.addSubview(uiView)
             
             var lable:UILabel = UILabel()
             
             let wTotal = width - wGN - wTMDT
-           
+            
             uiView = UIView()
             uiView.frame = CGRect(x: (20), y: 0 , width: (45*wTotal/100), height: 50)
             uiView.layer.borderColor = myColorBoder.cgColor
@@ -374,9 +374,9 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             uiView.addSubview(lable)
             self.uiViewHeaderDSDA.addSubview(uiView)
             
-           
-           // self.uiViewHeaderDSDA.frame = CGRect(x: 0,y: 116 ,width: self.widthDSDA , height: 30)
-           // uiViewHeader.tag = 100
+            
+            // self.uiViewHeaderDSDA.frame = CGRect(x: 0,y: 116 ,width: self.widthDSDA , height: 30)
+            // uiViewHeader.tag = 100
             
             self.dataSource_Lanscape = TableDSDA_Lanscape(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self, wTMDT : wTMDT, wGN : wGN , textHightLight : m_textHightLight)
             self.tbDSDA.dataSource = self.dataSource_Lanscape
@@ -391,7 +391,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                 }
             }
             constraintHeightHeader.constant = 30
-          
+            
             let lable:UILabel = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
@@ -406,13 +406,13 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             // self.uiViewHeaderDSDA.frame = CGRect(x: 0,y: 116 ,width: self.widthDSDA , height: 30)
             // uiViewHeader.tag = 100
             self.uiViewHeaderDSDA.addSubview(lable)
-                
+            
             self.dataSource_Portrait = TableDSDA_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self , textHightLight : m_textHightLight)
             self.tbDSDA.dataSource = self.dataSource_Portrait
             self.tbDSDA.delegate = self.dataSource_Portrait
             self.tbDSDA.reloadData()
         }
-
+        
     }
     func  ConvertToUnsign(_ sztext: String) -> String
     {
@@ -445,7 +445,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        }
+    }
     
     
     @IBAction func backLogin(_ sender: Any) {
@@ -459,11 +459,11 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     
     // Hàm tính size text
     /*
-    func calulaterTextSize(text : String, size : CGSize) -> CGRect{
-        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
-        return estimatedFrame
-    }*/
+     func calulaterTextSize(text : String, size : CGSize) -> CGRect{
+     let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+     let estimatedFrame = NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 13)], context: nil)
+     return estimatedFrame
+     }*/
     
     func computeWidthCell(){
         var temp : CGFloat = 0
