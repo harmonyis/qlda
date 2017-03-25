@@ -63,7 +63,7 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
         //let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cellMenu")!
         let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: arrayMenu[indexPath.row]["name"]!)!
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        //cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.layoutMargins = UIEdgeInsets.zero
         cell.preservesSuperviewLayoutMargins = false
         cell.backgroundColor = UIColor.clear
@@ -109,13 +109,14 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
         self.present(alert, animated: true, completion: nil)
     }
     
-    /*
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let cell : UITableViewCell = tblMenuLeft.cellForRow(at: indexPath)!
         
         let index = Int32(indexPath.row)
         Config.SelectMenuIndex = index
         
+        /*
         if(index == 8){
             
             let alert = UIAlertController(title: "Thông báo", message: "Bạn thực sự muốn thoát?", preferredStyle: UIAlertControllerStyle.alert)
@@ -126,8 +127,8 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
             }
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
-        }
-    }*/
+        }*/
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
