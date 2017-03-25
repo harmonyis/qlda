@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ThongTinLich_VC: UIViewController, UITextFieldDelegate{
+class ThongTinLich_VC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
     @IBOutlet weak var lblHeader: UILabel!
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var dtpStart: UIDatePicker!
     @IBOutlet weak var dtpEnd: UIDatePicker!
-    @IBOutlet weak var txtContent: UITextField!
+    @IBOutlet weak var txtContent: UITextView!
     
     @IBOutlet weak var viewAll: UIView!
     
@@ -32,6 +32,8 @@ class ThongTinLich_VC: UIViewController, UITextFieldDelegate{
     
     var hView : CGFloat = 0
     var wView : CGFloat = 0
+    
+    var selectText : Int = 1
     
     func setConstraintView(){
         constraintHeightScrollView.constant = hView - 44
@@ -65,6 +67,9 @@ class ThongTinLich_VC: UIViewController, UITextFieldDelegate{
             lblHeader.text = "Thêm sự kiện cho ngày: " + dateFormatter.string(from: selectDate)
         }
         dtpEnd.minimumDate = dtpStart.date
+        txtContent.layer.borderWidth = 0.5
+        txtContent.layer.borderColor = UIColor(netHex: 0xCDCDCD).cgColor
+        txtContent.layer.cornerRadius = 5
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -86,7 +91,7 @@ class ThongTinLich_VC: UIViewController, UITextFieldDelegate{
                 self.constraintHeightScrollView.constant = self.constraintHeightScrollView.constant  - keyboardFrame!.height
             }
             else{
-                self.constraintBottomViewAll.constant = 0                
+                self.constraintBottomViewAll.constant = 0
             }
             //self.constraintBottomViewAll.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
             
@@ -97,7 +102,12 @@ class ThongTinLich_VC: UIViewController, UITextFieldDelegate{
                 
             }, completion: { (completed) in
                 if isKeyboardShowing {
-                    //self.scrollView.scrollToBottom()
+                    switch self.selectText{
+                    case 2:
+                        self.scrollView.scrollToView(view: self.txtContent, animated: true)
+                    default:
+                        self.scrollView.scrollToView(view: self.txtTitle, animated: true)
+                    }
                 }
                 
             })
@@ -111,11 +121,19 @@ class ThongTinLich_VC: UIViewController, UITextFieldDelegate{
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+        if textField == txtTitle{
+            selectText = 1
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == txtContent{
+            selectText = 2
+        }
     }
     
     override func didReceiveMemoryWarning() {
