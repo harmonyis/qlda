@@ -88,9 +88,28 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
             cell.addSubview(lineView)
         }
         
+        if (Int32(indexPath.row) == 8){
+            let eventClick = UITapGestureRecognizer()
+            eventClick.addTarget(self, action:  #selector(MenuLeft_VC.logout(sender: )))
+            cell.addGestureRecognizer(eventClick)
+        }
+        
         return cell
     }
     
+    func logout(sender: UITapGestureRecognizer)
+    {
+        let alert = UIAlertController(title: "Thông báo", message: "Bạn thực sự muốn thoát?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Huỷ", style: UIAlertActionStyle.default, handler: nil))
+        
+        let action = UIAlertAction(title: "OK", style: .destructive) { action in
+            self.performSegue(withIdentifier: "logout", sender: self)
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    /*
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let cell : UITableViewCell = tblMenuLeft.cellForRow(at: indexPath)!
         
@@ -98,6 +117,7 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
         Config.SelectMenuIndex = index
         
         if(index == 8){
+            
             let alert = UIAlertController(title: "Thông báo", message: "Bạn thực sự muốn thoát?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Huỷ", style: UIAlertActionStyle.default, handler: nil))
             
@@ -106,9 +126,8 @@ class MenuLeft_VC: UIViewController , UITableViewDataSource, UITableViewDelegate
             }
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
-            
         }
-    }
+    }*/
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
