@@ -8,51 +8,47 @@
 
 import UIKit
 
-class ThongTinLich_VC: UIViewController{
+class ThongTinLich_VC: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var lblHeader: UILabel!
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var dtpStart: UIDatePicker!
     @IBOutlet weak var dtpEnd: UIDatePicker!
     @IBOutlet weak var txtContent: UITextField!
     
+    @IBOutlet weak var viewAll: UIView!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var constraintHeightScrollView: NSLayoutConstraint!
     
     @IBOutlet weak var constraintHeaderToBottom: NSLayoutConstraint!
     
+    
+    @IBOutlet weak var constraintBottomViewAll: NSLayoutConstraint!
     var calendarItem : CalendarItem!
     var isEdit = false
     
     var selectDate : Date!
     let calendar = Calendar.current
     
-    func setConstraintView(height : CGFloat, width : CGFloat){
-
-        constraintHeightScrollView.constant = height - 44
-        constraintHeaderToBottom.constant = 300
-        /*constraintHeaderToBottom.constant = height - 20
-        scrollView.scrollsToTop = true
-        scrollView.isScrollEnabled = true
-        
-        if (height - 400) > 44{
-            //scrollView.isScrollEnabled = false
-            scrollView.scrollToTop(true)
-        }
-        else{
-            scrollView.isScrollEnabled = true
-            
-        }*/
-       
+    var hView : CGFloat = 0
+    var wView : CGFloat = 0
+    
+    func setConstraintView(){
+        constraintHeightScrollView.constant = hView - 44
+        //constraintHeaderToBottom.constant = 300
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        setConstraintView(height: size.height, width: size.width)
+        hView = size.height
+        wView = size.width
+        setConstraintView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraintView(height: view.frame.height, width: view.frame.width)
+        hView = view.frame.height
+        wView = view.frame.width
+        setConstraintView()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         
@@ -69,6 +65,57 @@ class ThongTinLich_VC: UIViewController{
             lblHeader.text = "Thêm sự kiện cho ngày: " + dateFormatter.string(from: selectDate)
         }
         dtpEnd.minimumDate = dtpStart.date
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func handleKeyboardNotification(_ notification: Notification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+            //print(keyboardFrame)
+            
+            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            
+            self.setConstraintView()
+            if isKeyboardShowing{
+                self.constraintBottomViewAll.constant = keyboardFrame!.height
+                self.constraintHeightScrollView.constant = self.constraintHeightScrollView.constant  - keyboardFrame!.height
+            }
+            else{
+                self.constraintBottomViewAll.constant = 0                
+            }
+            //self.constraintBottomViewAll.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
+            
+            
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                
+                self.view.layoutIfNeeded()
+                
+            }, completion: { (completed) in
+                if isKeyboardShowing {
+                    //self.scrollView.scrollToBottom()
+                }
+                
+            })
+            
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
     }
     
     override func didReceiveMemoryWarning() {

@@ -3243,6 +3243,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="FSX-wM-fCW" id="cFO-MB-toi"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Khoảng thời gian" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VqE-As-hRJ">
                                                         <rect key="frame" x="4" y="63" width="312" height="21"/>
@@ -3301,6 +3304,9 @@
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="FSX-wM-fCW" id="Cyu-xc-I0f"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -3338,7 +3344,7 @@
                                             <constraint firstAttribute="trailing" secondItem="F6f-HG-UPb" secondAttribute="trailing" id="WCI-of-ReV"/>
                                             <constraint firstItem="Pae-0G-K0b" firstAttribute="leading" secondItem="07P-Mi-SY8" secondAttribute="leading" id="avu-c6-5Ls"/>
                                             <constraint firstItem="F6f-HG-UPb" firstAttribute="leading" secondItem="07P-Mi-SY8" secondAttribute="leading" id="kCA-c4-iTB"/>
-                                            <constraint firstAttribute="bottom" secondItem="F6f-HG-UPb" secondAttribute="bottom" constant="430" id="kGx-1O-t1g"/>
+                                            <constraint firstAttribute="bottom" secondItem="F6f-HG-UPb" secondAttribute="bottom" constant="300" id="kGx-1O-t1g"/>
                                             <constraint firstItem="F6f-HG-UPb" firstAttribute="centerX" secondItem="07P-Mi-SY8" secondAttribute="centerX" id="siY-AA-LSs"/>
                                             <constraint firstItem="F6f-HG-UPb" firstAttribute="top" secondItem="07P-Mi-SY8" secondAttribute="top" id="vD0-xC-VEE"/>
                                         </constraints>
@@ -3401,6 +3407,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="0FT-X6-90V"/>
                     <connections>
+                        <outlet property="constraintBottomViewAll" destination="Gda-y2-3p5" id="mzH-kC-iS8"/>
                         <outlet property="constraintHeaderToBottom" destination="kGx-1O-t1g" id="9XA-Hk-v8n"/>
                         <outlet property="constraintHeightScrollView" destination="VU7-DU-tLP" id="G0g-Ld-Cup"/>
                         <outlet property="dtpEnd" destination="wgq-hY-EXT" id="57X-eh-ipy"/>
@@ -3409,6 +3416,7 @@
                         <outlet property="scrollView" destination="07P-Mi-SY8" id="ZRW-9v-NId"/>
                         <outlet property="txtContent" destination="mKb-EZ-vmf" id="LcV-0N-XIV"/>
                         <outlet property="txtTitle" destination="EeU-ff-fDd" id="mHh-Pa-sAW"/>
+                        <outlet property="viewAll" destination="COG-Lk-N0n" id="0Wb-A8-DEI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Foe-GP-vRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
