@@ -705,6 +705,7 @@ class Chat_Cell: BaseCell {
         textView.text = "Sample message"
         textView.backgroundColor = UIColor.clear
         textView.textColor = UIColor.black
+        textView.isEditable = false
         return textView
     }()
     
