@@ -16,12 +16,19 @@ class BDNVDT_VC: Base_VC{
     @IBOutlet weak var pieCharNV: PieChartView!
 
     
+    @IBOutlet weak var scView: UIScrollView!
     @IBOutlet weak var viewLegend: UIView!
     
     var arrNguonVons : [String] = []
     var arrGiaTris : [Double] = []
     let arrColors = [0x3399FF,0xFF33FF,0x996666,0xFF9900,0x00CC99,0xfe6400,0x73b751,
                      0x00a3c2,0xadacad,0xffc603,0xf8c7b6,0xfeff01,0xffe4d7,0xcddbed]
+    
+    var ApiUrl : String = ""
+    var params : String = ""
+    
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +37,28 @@ class BDNVDT_VC: Base_VC{
         pieCharNV.isHidden = true
         viewLegend.isHidden = true
         
+        for item in scView.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(DSDA_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tag = 101
+            self.scView.addSubview(refreshControl)
+        }
         
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoNguonVon"
-        let params : String = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
+         ApiUrl  = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoNguonVon"
+         params  = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
       ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: getDataBieuDoNguonVon, errorCallBack: alertAction)
      //   ApiService.Post(url: ApiUrl, params: params, callback: getDataBieuDoNguonVon, errorCallBack: getDataBieuDoNguonVonError)
     }
 
+    func refresh(sender:AnyObject) {
+         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: getDataBieuDoNguonVon, errorCallBack: alertAction)
+    }
     func getDataBieuDoNguonVon(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
@@ -62,6 +84,7 @@ class BDNVDT_VC: Base_VC{
                 self.pieCharNV.isHidden = false
                 self.viewLegend.isHidden = false
                 self.setChart()
+                self.refreshControl?.endRefreshing()
             }
         }
     }
