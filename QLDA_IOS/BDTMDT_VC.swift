@@ -7,11 +7,20 @@ class BDTMDT_VC: Base_VC {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet var viewBDTMDT: UIView!
     @IBOutlet weak var pieChartTMDT: PieChartView!
     
     @IBOutlet weak var viewLegendRight: UIView!
     
     @IBOutlet weak var viewLegendLeft: UIView!
+    
+    
+    @IBOutlet weak var scView: UIScrollView!
+    var ApiUrl : String = ""
+    var params : String = ""
+    
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
     
     let arrCoCaus = ["Xây lắp", "Thiết bị", "GPMB", "QLDA", "Tư vấn", "Khác", "Dự phòng"]
     var arrGiaTris : [Double] = []
@@ -25,13 +34,29 @@ class BDTMDT_VC: Base_VC {
         viewLegendLeft.isHidden = true
         
         
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoTMDT"
+        for item in scView.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(DSDA_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tag = 101
+            self.scView.addSubview(refreshControl)
+        }
+         ApiUrl  = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoTMDT"
         //let szUser=lblName.
-        let params : String = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
+         params = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: getDataTMDT, errorCallBack: alertAction)
         
         // ApiService.Post(url: ApiUrl, params: params, callback: getDataTMDT, errorCallBack: getDataTMDTError)
+        
+    }
+    func refresh(sender:AnyObject) {
+          ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: getDataTMDT, errorCallBack: alertAction)
         
     }
     
@@ -59,6 +84,7 @@ class BDTMDT_VC: Base_VC {
                 self.viewLegendRight.isHidden = false
                 self.viewLegendLeft.isHidden = false
                 self.setChart()
+                  self.refreshControl?.endRefreshing()
             }
         }
     }

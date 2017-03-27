@@ -57,7 +57,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         if bcheck == true {
             refreshControl = UIRefreshControl()
             refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tintColor = variableConfig.m_swipeColor
             refreshControl.tag = 101
             self.tbvKHGN.addSubview(refreshControl)
         }
@@ -208,8 +208,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
     var searchActive : Bool = false
     var filtered = [UserContact]()
     
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
-    
+   
     func LoadTableView(){
         
         
@@ -251,7 +250,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: 0, y: 0 , width: 20, height: height_R1_Header)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
@@ -264,7 +263,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20), y: 0 , width: wNoiDung, height: height_R1_Header)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
@@ -282,7 +281,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung), y: 0 ,width : wDVTH, height: height_R1_Header)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
@@ -299,7 +298,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH), y: 0 , width: wTGTH, height: height_R1_Header)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
@@ -317,7 +316,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH), y: 0 , width: wSNK, height: height_R1_Header)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
@@ -335,7 +334,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK), y: 0 , width: wGTHD, height: height_R1_Header)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
@@ -352,7 +351,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK + wGTHD), y: 0 , width: wLKGTTT + 8, height: height_R1_Header)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             uiView.backgroundColor = UIColor(netHex: 0x21AFFA)
@@ -369,7 +368,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             // add dòng thứ 2 của KHGN
             uiView = UIView()
             uiView.frame = CGRect(x: (20), y: height_R1_Header , width: wNoiDung, height: 30)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -387,7 +386,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung), y: height_R1_Header ,width : wDVTH, height: 30)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -395,7 +394,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH), y: height_R1_Header , width: wTGTH, height: 30)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -403,7 +402,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH), y: height_R1_Header , width: wSNK, height: 30)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -412,7 +411,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK), y: height_R1_Header , width: wGTHD, height: 30)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -429,7 +428,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wNoiDung + wDVTH + wTGTH + wSNK + wGTHD), y: height_R1_Header , width: wLKGTTT + 8, height: 30)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             

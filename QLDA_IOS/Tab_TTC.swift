@@ -31,7 +31,7 @@ class Tab_TTC: Base, IndicatorInfoProvider {
         
         uiViewThongTin.isHidden = true
         //  self.ViewData.autoresizesSubviews = true
-        uiViewThongTin.layer.borderColor = myColorBoder.cgColor
+        uiViewThongTin.layer.borderColor = variableConfig.m_borderColor.cgColor
         uiViewThongTin.layer.borderWidth = 1
         
         ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetThongTinDuAn"
@@ -46,7 +46,7 @@ class Tab_TTC: Base, IndicatorInfoProvider {
         if bcheck == true {
             refreshControl = UIRefreshControl()
             refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tintColor = variableConfig.m_swipeColor
             refreshControl.tag = 101
             self.uiViewThongTin.addSubview(refreshControl)
         }
@@ -68,7 +68,6 @@ class Tab_TTC: Base, IndicatorInfoProvider {
             ApiService.PostAsyncAc(url: ApiUrl, params: params,  callback: loadDataSuccess, errorCallBack: alertAction)
             
         }
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
@@ -150,7 +149,7 @@ class Tab_TTC: Base, IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 0, y: calHeight, width: self.uiViewThongTin.frame.width, height: 1)
                         uiView.layer.addSublayer(borderBottom)

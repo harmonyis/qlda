@@ -24,7 +24,6 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
     var dataSource_Portrait : TableKHLCNT_Portrait?
     var itemInfo = IndicatorInfo(title: "KHLCNT")
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     var wTongGiaTri : CGFloat = 120
     
     var refreshControl: UIRefreshControl!
@@ -38,7 +37,7 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         
-        self.tbDSDA.layer.borderColor = myColorBoder.cgColor
+        self.tbDSDA.layer.borderColor = variableConfig.m_borderColor.cgColor
         self.tbDSDA.layer.borderWidth = 1
         
         
@@ -64,7 +63,7 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
         if bcheck == true {
             refreshControl = UIRefreshControl()
             refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tintColor = variableConfig.m_swipeColor
             refreshControl.tag = 101
             self.tbDSDA.addSubview(refreshControl)
         }

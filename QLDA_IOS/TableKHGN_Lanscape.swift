@@ -151,7 +151,7 @@ class TableKHGN_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     
     
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
+    let myColorBoder : UIColor = variableConfig.m_borderColor
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //tableView.scrollToRow(at: indexPath, at: .top, animated: false)
