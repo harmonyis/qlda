@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B1938B31E8215AB000A6782 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1938B11E8215AB000A6782 /* CustomInfoWindow.swift */; };
-		1B1938B41E8215AB000A6782 /* CustomInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B1938B21E8215AB000A6782 /* CustomInfoWindow.xib */; };
 		1B5C6B021E7A522800851D0C /* TableDSDAMap_Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */; };
 		1B655B931E6D4145007A615B /* ConvertDVT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B911E6D4145007A615B /* ConvertDVT.swift */; };
 		1B655B941E6D4145007A615B /* YAxisValueFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */; };
+		1BFD722A1E85125E00490AA7 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD72291E85125E00490AA7 /* CustomInfoWindow.swift */; };
+		1BFD722C1E8512C400490AA7 /* CustomInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BFD722B1E8512C400490AA7 /* CustomInfoWindow.xib */; };
 		244937621E76470E00929B6F /* TableDSDA_ Portrait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */; };
 		244937641E76820500929B6F /* TableDSDA_Lanscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244937631E76820500929B6F /* TableDSDA_Lanscape.swift */; };
 		2449376D1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2449376B1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift */; };
@@ -184,11 +184,11 @@
 
 /* Begin PBXFileReference section */
 		18481FBDFADDC304EFED2593 /* Pods-QLDA_IOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDA_IOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDA_IOSUITests/Pods-QLDA_IOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		1B1938B11E8215AB000A6782 /* CustomInfoWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
-		1B1938B21E8215AB000A6782 /* CustomInfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInfoWindow.xib; sourceTree = "<group>"; };
 		1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDSDAMap_Portrait.swift; sourceTree = "<group>"; };
 		1B655B911E6D4145007A615B /* ConvertDVT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertDVT.swift; sourceTree = "<group>"; };
 		1B655B921E6D4145007A615B /* YAxisValueFormatted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YAxisValueFormatted.swift; sourceTree = "<group>"; };
+		1BFD72291E85125E00490AA7 /* CustomInfoWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
+		1BFD722B1E8512C400490AA7 /* CustomInfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInfoWindow.xib; sourceTree = "<group>"; };
 		244937611E76470E00929B6F /* TableDSDA_ Portrait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableDSDA_ Portrait.swift"; sourceTree = "<group>"; };
 		244937631E76820500929B6F /* TableDSDA_Lanscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDSDA_Lanscape.swift; sourceTree = "<group>"; };
 		2449376B1E76953A00929B6F /* CustomCellDSDA_Lanscape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellDSDA_Lanscape.swift; sourceTree = "<group>"; };
@@ -370,6 +370,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B7CF4591E88A7C00025DD80 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				BADA635A1E7CF7000097D73C /* CustomTableNotificationCell.swift */,
+				BADA635B1E7CF7000097D73C /* NotificationItem.swift */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
 		244937601E7646A800929B6F /* CustomTable */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,8 +418,6 @@
 			isa = PBXGroup;
 			children = (
 				BADA634B1E7CF7000097D73C /* ApiEntity.swift */,
-				BADA635A1E7CF7000097D73C /* CustomTableNotificationCell.swift */,
-				BADA635B1E7CF7000097D73C /* NotificationItem.swift */,
 				24BEAF121E697C5C008F205C /* View */,
 				24BEAF0F1E697BBC008F205C /* Config */,
 				24BEAF101E697BC6008F205C /* Supporting Files */,
@@ -491,6 +498,7 @@
 			children = (
 				24BEAEC21E697AA5008F205C /* DSDA_View.swift */,
 				24BEAEC31E697AA5008F205C /* DSDA_View.xib */,
+				1BFD722B1E8512C400490AA7 /* CustomInfoWindow.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -527,6 +535,7 @@
 				7C71ED2D1E6FD6EC0089BC0D /* Tab_VanBanDuAnVC.swift */,
 				7C7DE67F1E8215A1007EADBF /* Base.swift */,
 				BA05CEAA1E8263880089689E /* ThongTinLich_VC.swift */,
+				1BFD72291E85125E00490AA7 /* CustomInfoWindow.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -534,6 +543,7 @@
 		24BEAF141E697CCB008F205C /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				1B7CF4591E88A7C00025DD80 /* Notification */,
 				24BEAF181E697CE8008F205C /* Map */,
 				24BEAF171E697CE4008F205C /* Camera */,
 				24BEAF161E697CDF008F205C /* Chat */,
@@ -587,8 +597,6 @@
 			children = (
 				1B5C6B011E7A522800851D0C /* TableDSDAMap_Portrait.swift */,
 				24BEAECA1E697AA5008F205C /* MapItem.swift */,
-				1B1938B11E8215AB000A6782 /* CustomInfoWindow.swift */,
-				1B1938B21E8215AB000A6782 /* CustomInfoWindow.xib */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -867,6 +875,7 @@
 				24ADE77C1E7CC98500415499 /* CustomCell_KHGN_Header_Landscape.xib in Resources */,
 				24BEAEF21E697AA6008F205C /* DSDA_View.xib in Resources */,
 				24ADE79C1E7FB85D00415499 /* Cell_KHLCNT_HD_Landscape.xib in Resources */,
+				1BFD722C1E8512C400490AA7 /* CustomInfoWindow.xib in Resources */,
 				BAB044581E84FEEA00D34714 /* pod.rtf in Resources */,
 				24BEAF0A1E697AA6008F205C /* View.xib in Resources */,
 				7C8CD7081E7F7334006A095F /* CellHopDongLandTableViewCell.xib in Resources */,
@@ -882,7 +891,6 @@
 				BADA63671E7CF7000097D73C /* CBHeaderTableViewCell.xib in Resources */,
 				7C8CD7061E7F7334006A095F /* CellChamQTLandTableViewCell.xib in Resources */,
 				BADA63651E7CF7000097D73C /* CBChamQTTableViewCell.xib in Resources */,
-				1B1938B41E8215AB000A6782 /* CustomInfoWindow.xib in Resources */,
 				24BEAE881E6979D8008F205C /* Assets.xcassets in Resources */,
 				24BEAE861E6979D8008F205C /* Main.storyboard in Resources */,
 				7C8CD70E1E7F899F006A095F /* CellHopDongTitleLandTableViewCell.xib in Resources */,
@@ -1087,6 +1095,7 @@
 				BADA63641E7CF7000097D73C /* CBChamQTTableViewCell.swift in Sources */,
 				24BEAEDE1E697AA6008F205C /* ApiService.swift in Sources */,
 				24BEAEE71E697AA6008F205C /* ChatCreateGroup_VC.swift in Sources */,
+				1BFD722A1E85125E00490AA7 /* CustomInfoWindow.swift in Sources */,
 				24BEAE811E6979D8008F205C /* AppDelegate.swift in Sources */,
 				2449377A1E7A8F4300929B6F /* NhomHopDong.swift in Sources */,
 				BADA63601E7CF7000097D73C /* CanhBaoTableViewCell.swift in Sources */,
@@ -1139,7 +1148,6 @@
 				BAF1E48D1E72AB9B00F28FE9 /* ImageMessage.swift in Sources */,
 				24BEAF051E697AA6008F205C /* UIImageViewExtension.swift in Sources */,
 				24BEAEE91E697AA6008F205C /* ChatMain_VC.swift in Sources */,
-				1B1938B31E8215AB000A6782 /* CustomInfoWindow.swift in Sources */,
 				24BEAFAB1E6FAF0A008F205C /* Cell_KHLCNT_R1.swift in Sources */,
 				7C8CD7121E7FBAAA006A095F /* QLVanbanLandDatasource.swift in Sources */,
 				BADA636D1E7CF7000097D73C /* NotificationItem.swift in Sources */,
