@@ -74,5 +74,4 @@ extension Date {
         // Success! Create NSDate and return.
         self.init(timeIntervalSince1970: timeStamp)
     }
-    
 }

@@ -29,6 +29,34 @@ class UserNotificationManager : NSObject{
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
+    
+    func addNotificationWithFireTime(identifier : String, title : String, body : String, fireGMT : Date){
+        let content = UNMutableNotificationContent()
+        content.title = title
+        //content.subtitle = subTitle
+        content.body = body
+        
+        //content.badge = badge
+        content.sound = UNNotificationSound.default()
+        
+        let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: fireGMT)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+
+    }
+    
+    func removeNotification(identifier : String){
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
+    }
+    
+    func removeAllNotification(){
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
 }
 
 

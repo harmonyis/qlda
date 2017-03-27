@@ -575,7 +575,6 @@
 				24BEAF191E697D09008F205C /* Entity */,
 				24BEAEB71E697AA5008F205C /* ChatCommon.swift */,
 				24BEAEB91E697AA5008F205C /* ChatHub.swift */,
-				BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -667,6 +666,7 @@
 		24BEAF1C1E697D5C008F205C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BA33292A1E6D616400F9EDDE /* UserNotificationManager.swift */,
 				24BEAEAF1E697AA5008F205C /* ApiService.swift */,
 				24BEAEBC1E697AA5008F205C /* Config.swift */,
 			);

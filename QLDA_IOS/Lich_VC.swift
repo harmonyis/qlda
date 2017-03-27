@@ -56,7 +56,7 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
             constraintHeightTable.constant = h - 300
             constraintWidthTable.constant = w
         }
-        else{
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
             constraintWidthCalendar.constant = w * 6/10 - 0.5
             constraintHeightCalendar.constant = h
             
@@ -77,12 +77,13 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         tblCalendar.tableFooterView = UIView(frame: .zero)
         fsCalendar.select(Date())
         // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getEventOfMonth(fsCalendar.selectedDate!)
-        getCalendarByUserAndDate(fsCalendar.selectedDate!)
+        getEventOfMonth(fsCalendar.selectedDate)
+        getCalendarByUserAndDate(fsCalendar.selectedDate)
     }
     
     override func didReceiveMemoryWarning() {
@@ -254,8 +255,8 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         let params : String = "{\"nCalendarScheduleID\" : \(id)}"
         print(params)
         ApiService.Post(url: apiUrl, params: params, callback: { (data) in
-            self.getEventOfMonth(self.fsCalendar.selectedDate!)
-            self.getCalendarByUserAndDate(self.fsCalendar.selectedDate!)
+            self.getEventOfMonth(self.fsCalendar.selectedDate)
+            self.getCalendarByUserAndDate(self.fsCalendar.selectedDate)
         }, errorCallBack: { (error) in
             self.reloadCalendar()
             print("error")
