@@ -25,15 +25,16 @@ class TableDSDAMap_Portrait : NSObject, UITableViewDelegate, UITableViewDataSour
     let myColorText : UIColor = UIColor(netHex: 0x0e83d5)
     let mycolorSelected : UIColor = UIColor.red
     var DuAnSelected : String = "0"
-    
+    var m_textHightLight : String = ""
     // MARK: - Table view data source
-    init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController, uiMapView : GMSMapView,dicMarker:[Int: GMSMarker]){
+    init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController, uiMapView : GMSMapView,dicMarker:[Int: GMSMarker],textHightLight : String){
         super.init()
         self.DSDA = arrDSDA
         self.tbDSDA = tbvDSDA
         self.uiViewDSDA = tbvcDSDA
         self._uiMapView = uiMapView
         self._dicMarker = dicMarker
+        self.m_textHightLight = textHightLight
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -58,9 +59,8 @@ class TableDSDAMap_Portrait : NSObject, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCustomcell") as! CustomCellDSDATableViewCell
         
         let itemDAs :DanhSachDA = self.DSDA[section]
-        cell.lblTenDuAn.text = itemDAs.TenDA!
-        cell.lblTenDuAn.font = UIFont.systemFont(ofSize: 13)
-        cell.lblTenDuAn.textAlignment = NSTextAlignment.left
+        var targetString : String = itemDAs.TenDA!
+        let rangeHL = (targetString.toUnsign() as NSString).range(of: m_textHightLight.toUnsign())
         let idDA = Int(itemDAs.IdDA!)
         if(_dicMarker[idDA!] == nil){
             cell.lblTenDuAn.textColor = myColorBoder
@@ -72,6 +72,13 @@ class TableDSDAMap_Portrait : NSObject, UITableViewDelegate, UITableViewDataSour
                 cell.lblTenDuAn.textColor = myColorText
             }
         }
+        cell.lblTenDuAn.font = UIFont.systemFont(ofSize: 13)
+        let attributedStringHL = NSMutableAttributedString(string: itemDAs.TenDA!)
+        attributedStringHL.addAttribute( NSForegroundColorAttributeName, value: UIColor.black, range: rangeHL)
+        cell.lblTenDuAn.attributedText = attributedStringHL
+        
+        cell.lblTenDuAn.textAlignment = NSTextAlignment.left
+        
 
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor
@@ -146,11 +153,11 @@ class TableDSDAMap_Portrait : NSObject, UITableViewDelegate, UITableViewDataSour
         let itemDSDuAnCon :[DuAn] = itemDAs.DuAnCon!
         let itemDuAnCon : DuAn = itemDSDuAnCon[indexPath.row]
         
-        cell.lblTenDuAn.text = itemDuAnCon.TenDA!
+     /*   cell.lblTenDuAn.text = itemDuAnCon.TenDA!
         cell.lblTenDuAn.numberOfLines = 0
         cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
         cell.lblTenDuAn.textAlignment = NSTextAlignment.left
-        
+ */
         let idDACon = Int(itemDuAnCon.IdDA!)
         if(_dicMarker[idDACon!] == nil){
             cell.lblTenDuAn.textColor = myColorBoder
@@ -163,7 +170,16 @@ class TableDSDAMap_Portrait : NSObject, UITableViewDelegate, UITableViewDataSour
                 cell.lblTenDuAn.textColor = myColorText
             }
         }
-      
+
+        var targetString : String = itemDuAnCon.TenDA!
+        let rangeHL = (targetString.toUnsign() as NSString).range(of: m_textHightLight.toUnsign())
+        
+        cell.lblTenDuAn.font = UIFont.italicSystemFont(ofSize: 13)
+        let attributedStringHL = NSMutableAttributedString(string: itemDuAnCon.TenDA!)
+        attributedStringHL.addAttribute( NSForegroundColorAttributeName, value: UIColor.black, range: rangeHL)
+        cell.lblTenDuAn.attributedText = attributedStringHL
+        
+        
      
         
         cell.UiViewGroup.layer.borderColor = myColorBoder.cgColor

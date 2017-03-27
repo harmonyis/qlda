@@ -24,6 +24,8 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     @IBOutlet weak var constraintWidthTable: NSLayoutConstraint!
     
     // View
+    
+    
     @IBOutlet weak var btnAddEvent: UIButton!
     @IBOutlet weak var tblCalendar: UITableView!
     @IBOutlet weak var fsCalendar: FSCalendar!
@@ -79,8 +81,8 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getEventOfMonth(fsCalendar.selectedDate!)
-        getCalendarByUserAndDate(fsCalendar.selectedDate!)
+        getEventOfMonth(fsCalendar.selectedDate)
+        getCalendarByUserAndDate(fsCalendar.selectedDate)
     }
     
     override func didReceiveMemoryWarning() {
@@ -252,8 +254,8 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         let params : String = "{\"nCalendarScheduleID\" : \(id)}"
         print(params)
         ApiService.Post(url: apiUrl, params: params, callback: { (data) in
-            self.getEventOfMonth(self.fsCalendar.selectedDate!)
-            self.getCalendarByUserAndDate(self.fsCalendar.selectedDate!)
+            self.getEventOfMonth(self.fsCalendar.selectedDate)
+            self.getCalendarByUserAndDate(self.fsCalendar.selectedDate)
         }, errorCallBack: { (error) in
             self.reloadCalendar()
             print("error")

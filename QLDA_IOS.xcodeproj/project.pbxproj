@@ -126,6 +126,7 @@
 		BA649B871E6FF8B5003973FA /* ChatAddUser_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */; };
 		BA7E1DED1E738C9C00140811 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7E1DEC1E738C9C00140811 /* UIImage.swift */; };
 		BAB044581E84FEEA00D34714 /* pod.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BAB044571E84FEEA00D34714 /* pod.rtf */; };
+		BAB0445A1E850E8600D34714 /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB044591E850E8600D34714 /* UIScrollView.swift */; };
 		BAB628471E714694002472D6 /* ChatChangeGroupName_Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */; };
 		BAB6284B1E71535E002472D6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6284A1E71535E002472D6 /* String.swift */; };
 		BADA635D1E7CF7000097D73C /* ApiEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADA634B1E7CF7000097D73C /* ApiEntity.swift */; };
@@ -316,6 +317,7 @@
 		BA649B861E6FF8B5003973FA /* ChatAddUser_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAddUser_VC.swift; sourceTree = "<group>"; };
 		BA7E1DEC1E738C9C00140811 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		BAB044571E84FEEA00D34714 /* pod.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = pod.rtf; sourceTree = "<group>"; };
+		BAB044591E850E8600D34714 /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		BAB628461E714694002472D6 /* ChatChangeGroupName_Modal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChangeGroupName_Modal.swift; sourceTree = "<group>"; };
 		BAB6284A1E71535E002472D6 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BADA634B1E7CF7000097D73C /* ApiEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEntity.swift; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 				BAF1E4881E72459300F28FE9 /* UIFont.swift */,
 				BA7E1DEC1E738C9C00140811 /* UIImage.swift */,
 				BA18F9BB1E7A805E00E53946 /* UIViewController.swift */,
+				BAB044591E850E8600D34714 /* UIScrollView.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -1051,6 +1054,7 @@
 				24BEAEFC1E697AA6008F205C /* MyCollectionViewCell.swift in Sources */,
 				24BEAFA51E6EB0EC008F205C /* CustomCellKHGN.swift in Sources */,
 				244937741E7A376400929B6F /* Cell_KHGN_R3.swift in Sources */,
+				BAB0445A1E850E8600D34714 /* UIScrollView.swift in Sources */,
 				24BEAEF71E697AA6008F205C /* Login_VC.swift in Sources */,
 				244937721E7A374D00929B6F /* Cell_KHGN_R2.swift in Sources */,
 				24BEAEF01E697AA6008F205C /* DSDA_VC.swift in Sources */,
