@@ -23,6 +23,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet weak var btnToggle: UIButton!
     
     @IBOutlet weak var constraintLeftMessage: NSLayoutConstraint!
+    @IBOutlet weak var constraintBottom: NSLayoutConstraint!
     
     var messages: [ChatMessage] = [ChatMessage]()
     var contactID : Int!
@@ -33,7 +34,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     var isClose : Bool! = false
     
-    var bottomConstraint: NSLayoutConstraint?
+    //var bottomConstraint: NSLayoutConstraint?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -54,8 +55,8 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         
         //toggle bàn phím và hiện thị ô chat
-        bottomConstraint = NSLayoutConstraint(item: viewBottom, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
-        view.addConstraint(bottomConstraint!)
+        //bottomConstraint = NSLayoutConstraint(item: viewBottom, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        //view.addConstraint(bottomConstraint!)
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -73,7 +74,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             
             let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
             
-            bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
+            constraintBottom.constant = isKeyboardShowing ? keyboardFrame!.height : 0
             
             
             UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
