@@ -370,6 +370,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B7CF4591E88A7C00025DD80 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				BADA635A1E7CF7000097D73C /* CustomTableNotificationCell.swift */,
+				BADA635B1E7CF7000097D73C /* NotificationItem.swift */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
 		244937601E7646A800929B6F /* CustomTable */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,8 +418,6 @@
 			isa = PBXGroup;
 			children = (
 				BADA634B1E7CF7000097D73C /* ApiEntity.swift */,
-				BADA635A1E7CF7000097D73C /* CustomTableNotificationCell.swift */,
-				BADA635B1E7CF7000097D73C /* NotificationItem.swift */,
 				24BEAF121E697C5C008F205C /* View */,
 				24BEAF0F1E697BBC008F205C /* Config */,
 				24BEAF101E697BC6008F205C /* Supporting Files */,
@@ -536,6 +543,7 @@
 		24BEAF141E697CCB008F205C /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				1B7CF4591E88A7C00025DD80 /* Notification */,
 				24BEAF181E697CE8008F205C /* Map */,
 				24BEAF171E697CE4008F205C /* Camera */,
 				24BEAF161E697CDF008F205C /* Chat */,
