@@ -63,6 +63,11 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        //print("Hiển thị")
+        self.clv.reloadData()
+    }
+    
     @IBAction func btnGallery(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum){
             imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
@@ -235,10 +240,10 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
         if UIDevice.current.orientation.isPortrait {
-            print(collectionView.frame.size.width/4.08)
+            //print(collectionView.frame.size.width/4.08)
             return CGSize(width: collectionView.frame.size.width/4.08, height: collectionView.frame.size.width/4.08)
         } else {
-            print(collectionView.frame.size.width/7.25)
+            //print(collectionView.frame.size.width/7.25)
             return CGSize(width: collectionView.frame.size.width/7.2, height: collectionView.frame.size.width/7.2)
         }
         

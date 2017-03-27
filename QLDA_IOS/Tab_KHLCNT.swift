@@ -24,9 +24,12 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
     var dataSource_Portrait : TableKHLCNT_Portrait?
     var itemInfo = IndicatorInfo(title: "KHLCNT")
     let arrTieuDe = ["Số quyết định","Ngày phê duyệt","Cơ quan phê duyệt"]
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     var wTongGiaTri : CGFloat = 120
     
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
+    var params : String = ""
+    var ApiUrl : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,7 +37,7 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         
-        self.tbDSDA.layer.borderColor = myColorBoder.cgColor
+        self.tbDSDA.layer.borderColor = variableConfig.m_borderColor.cgColor
         self.tbDSDA.layer.borderWidth = 1
         
         
@@ -49,14 +52,33 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
         
         self.tbDSDA.register(UINib(nibName: "Cell_KHLCNT_HD_Landscape", bundle: nil), forCellReuseIdentifier: "Cell_KHLCNT_HD_Landscape")
         
-        let params : String = "{\"szIdDA\": \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetGoiThau"
+        params = "{\"szIdDA\": \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetGoiThau"
+        
+        for item in tbDSDA.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = variableConfig.m_swipeColor
+            refreshControl.tag = 101
+            self.tbDSDA.addSubview(refreshControl)
+        }
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback:GetGoiThau, errorCallBack: alertAction)
         //  ApiService.Post(url: ApiUrl, params: params, callback: GetGoiThau, errorCallBack: AlertError)
         
         
     }
+    func refresh(sender:AnyObject) {
+       m_dsGoiThau = [GoiThau]()
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback:GetGoiThau, errorCallBack: alertAction)
+        
+    }
+
     
     func GetGoiThau(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
@@ -143,6 +165,7 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
                             
                         }
                         self.m_thongTinKHLCNT = arrGoiThau
+                         self.refreshControl?.endRefreshing()
                         self.LoadTableView()
                     }
                 }

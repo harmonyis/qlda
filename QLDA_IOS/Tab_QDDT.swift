@@ -20,6 +20,10 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
     var m_arrTDT : [String] = [String]()
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var UiViewQDDT: UIView!
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
+    var params : String = ""
+    var ApiUrl : String = ""
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,15 +43,30 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
         
         UiViewQDDT.isHidden = true
         //  self.ViewData.autoresizesSubviews = true
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetQuyetDinhDauTu"
-        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
-        UiViewQDDT.layer.borderColor = myColorBoder.cgColor
+         ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetQuyetDinhDauTu"
+         params = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        UiViewQDDT.layer.borderColor = variableConfig.m_borderColor.cgColor
         UiViewQDDT.layer.borderWidth = 1
+        
+        for item in UiViewQDDT.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(Tab_QDDT.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = variableConfig.m_swipeColor
+            refreshControl.tag = 101
+            self.UiViewQDDT.addSubview(refreshControl)
+        }
+
+          totalHeight = 0
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: alertAction)
         // ApiService.Post(url: ApiUrl, params: params, callback: , errorCallBack: Error)
     }
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
+    
     func GetDataQDDT(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
@@ -143,7 +162,7 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiViewQDDT.frame.width - 10, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -195,7 +214,7 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiViewQDDT.frame.width - 10, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -248,7 +267,7 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiViewQDDT.frame.width)/2, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -306,11 +325,32 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
             }
         }
     }
+    func refresh(sender:AnyObject) {
+        m_arrTTDA = [String]()
+        for item in UiViewQDDT.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+            else {
+                item.removeFromSuperview()
+            }
+        }
+          totalHeight = 0
+         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: alertAction)
+        
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         for item in UiViewQDDT.subviews {
-            
+           
+                if item.tag == 101 {
+                    bcheck = false
+                }
+                else {
+
             item.removeFromSuperview()
-            
+                    
+            }
         }
         totalHeight = 0
         LoadDataQDDT()
@@ -388,7 +428,7 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiViewQDDT.frame.width - 10, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -436,7 +476,7 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiViewQDDT.frame.width - 10, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -494,7 +534,7 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiViewQDDT.frame.width)/2, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -523,7 +563,7 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
                 self.UiViewQDDT.addSubview(ViewGroupTTCQDDT)
                 // đặt lại giá trị constrain cho view
                 let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant:  self.totalHeight + 5 )
-                //        self.UiViewQDDT.isUserInteractionEnabled = true
+                 self.refreshControl?.endRefreshing()
                 NSLayoutConstraint.activate([heightConstraint])
                 
             }

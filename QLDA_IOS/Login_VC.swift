@@ -15,6 +15,8 @@ class Login_VC: Base {
     //var service = ApiService()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
     }
     var szMatKhau : String = ""
     var szTenDangNhap : String = ""

@@ -19,6 +19,10 @@ class Tab_TTC: Base, IndicatorInfoProvider {
     var itemInfo = IndicatorInfo(title: "Thông tin chung")
     var m_arrTTDA : [String] = [String]()
     @IBOutlet weak var uiViewThongTin: UIView!
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
+    var params : String = ""
+    var ApiUrl : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,17 +31,43 @@ class Tab_TTC: Base, IndicatorInfoProvider {
         
         uiViewThongTin.isHidden = true
         //  self.ViewData.autoresizesSubviews = true
-        uiViewThongTin.layer.borderColor = myColorBoder.cgColor
+        uiViewThongTin.layer.borderColor = variableConfig.m_borderColor.cgColor
         uiViewThongTin.layer.borderWidth = 1
         
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetThongTinDuAn"
-        //let szUser=lblName.
-        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetThongTinDuAn"
+        
+        // thêm swipe cho trang
+        
+        for item in uiViewThongTin.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = variableConfig.m_swipeColor
+            refreshControl.tag = 101
+            self.uiViewThongTin.addSubview(refreshControl)
+        }
+         params = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params,  callback: loadDataSuccess, errorCallBack: alertAction)
         
     }
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
+        func refresh(sender:AnyObject) {
+          m_arrTTDA = [String]()
+            for item in uiViewThongTin.subviews {
+                if item.tag == 101 {
+                    bcheck = false
+                }
+                else {
+                item.removeFromSuperview()
+                }
+            }
+            ApiService.PostAsyncAc(url: ApiUrl, params: params,  callback: loadDataSuccess, errorCallBack: alertAction)
+            
+        }
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
@@ -55,8 +85,12 @@ class Tab_TTC: Base, IndicatorInfoProvider {
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         for item in uiViewThongTin.subviews {
-            
+            if item.tag == 101 {
+                bcheck = false
+            }
+            else {
             item.removeFromSuperview()
+        }
             
         }
         LoadDataTTC()
@@ -115,7 +149,7 @@ class Tab_TTC: Base, IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 0, y: calHeight, width: self.uiViewThongTin.frame.width, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -128,6 +162,7 @@ class Tab_TTC: Base, IndicatorInfoProvider {
                 
                 let heightConstraint = self.uiViewThongTin.heightAnchor.constraint(equalToConstant: totalHeight + 5 )
                 
+                self.refreshControl?.endRefreshing()
                 NSLayoutConstraint.activate([heightConstraint])
             }
         }

@@ -42,7 +42,7 @@ class TableKHLCNT_Landscape : NSObject, UITableViewDelegate, UITableViewDataSour
     
     
     
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
+    let myColorBoder : UIColor = variableConfig.m_borderColor
     let myColorBackgroud : UIColor = UIColor(netHex: 0xb4e2f7)
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
