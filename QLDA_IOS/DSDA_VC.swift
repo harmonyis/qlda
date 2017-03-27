@@ -13,7 +13,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var s : UITableViewController = UITableViewController()
-    
+    var refreshControl: UIRefreshControl!
     @IBOutlet weak var constraintHeightHeader: NSLayoutConstraint!
     @IBOutlet weak var uiViewHeaderDSDA: UIView!
     @IBOutlet weak var uiSearchTDA: UISearchBar!
@@ -46,6 +46,11 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.register(UINib(nibName: "CustomCellDSDA_Lanscape", bundle: nil), forCellReuseIdentifier: "CustomCellDSDA_Lanscape")
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:  #selector(DSDA_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+        self.tbDSDA.addSubview(refreshControl)
+        
         self.automaticallyAdjustsScrollViewInsets = false
         ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetDuAn"
         //let szUser=lblName.
@@ -62,7 +67,10 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         self.tbDSDA.estimatedSectionHeaderHeight = 30
         
     }
-    
+    func refresh(sender:AnyObject) {
+         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
+        
+    }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         LoadTableView()
     }
@@ -126,6 +134,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                         self.uiViewHeaderDSDA.isHidden = false
                         self.uiSearchTDA.isHidden = false
                         self.tbDSDA.isHidden = false
+                        self.refreshControl?.endRefreshing()
                     }
                 }
                 

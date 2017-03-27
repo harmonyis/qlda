@@ -72,7 +72,7 @@ class Login_VC: Base {
         }
     }
      func GetCurrentUser(){
-        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetUser/\(Config.userID))"
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetUser/\(Config.userID)"
         
     ApiService.GetAsyncAc(url: apiUrl, callback: callbackGetUser, errorCallBack: alertAction)
         // ApiService.Get(url: apiUrl, callback: callbackGetUser, errorCallBack: { (error) in

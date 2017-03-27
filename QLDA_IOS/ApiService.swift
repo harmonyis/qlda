@@ -14,7 +14,7 @@ class ApiService {
     }
     //typealias MethodHandler1 = (dataResult : String)  -> Void
     static func Get (url : String,callback:@escaping (_ dataResult : Data) -> Void,
-              errorCallBack:@escaping (_ error : Error) -> Void) -> Void {
+                     errorCallBack:@escaping (_ error : Error) -> Void) -> Void {
         //var resultJson : String
         //resultJson = ""
         
@@ -79,6 +79,8 @@ class ApiService {
                 errorEntity.error = error!
                 errorCallBack(errorEntity)
             } else {
+                let re = response as! HTTPURLResponse
+                print(re.statusCode)
                 
                 //if let data = data, let result = String(data: data, encoding: String.Encoding.utf8) {
                 

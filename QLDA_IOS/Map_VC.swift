@@ -66,6 +66,9 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
         self.tbDSDA.rowHeight = UITableViewAutomaticDimension
         self.tbDSDA.estimatedRowHeight = 30
         self.tbDSDA.estimatedSectionHeaderHeight = 30
+        
+        UiMapView.delegate = self
+        mapView?.delegate = self
     }
     // dsda---
     override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
@@ -310,7 +313,13 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
                 let ViDoTemp = Double((item["ViDo"] as? String)!)
                 let sTenDuAn = item["TenDuAn"] as? String
                 let sDiaDiemXayDung = item["DiaDiemXayDung"] as? String
+                let sThoiGian = item["ThoiGianThucHien"] as? String
+                let dTDMT = item["TongMucDauTu"] as? Double!
+                let dGiaiNgan = item["GiaiNgan"] as? Double!
                 
+                mapItem.TMDT = dTDMT
+                mapItem.GiaiNgan = dGiaiNgan
+                mapItem.ThoiGian = sThoiGian
                 mapItem.DiaDiemXayDung = sDiaDiemXayDung
                 mapItem.DuAnChaID = Int((item["DuAnChaID"]  as? String)!)
                 mapItem.DuAnID = Int((item["DuAnID"] as? String)!)
@@ -333,10 +342,35 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
-        let infoWindow = Bundle.main.loadNibNamed("InfoWindow", owner: self, options: nil)?.first as! CustomInfoWindow
-        infoWindow.lblLabel.text = "Sydney Opera House"
+        let infoWindow = Bundle.main.loadNibNamed("CustomInfoWindow", owner: self, options: nil)?.first as! CustomInfoWindow
+        infoWindow.layer.borderWidth = 1
+        infoWindow.layer.borderColor = (UIColor.init(netHex: 0xDDDDDD)).cgColor
         
+        var targetString : String = ""
+        targetString  = "Địa điểm: \(marker.title!)"
+        var range = NSMakeRange(9, targetString.characters.count - 9 )
+        infoWindow.lblTitle.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        infoWindow.lblTitle.lineBreakMode = NSLineBreakMode.byWordWrapping
+        infoWindow.lblTitle.numberOfLines = 0
+        
+        let arrInfo = marker.snippet?.components(separatedBy: "|")
+        
+        targetString  = "Thời gian thực hiện: \((arrInfo?[0])!)"
+        range = NSMakeRange(20, targetString.characters.count - 20 )
+        infoWindow.lblTime.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        
+        targetString  = "TMDT: \(variableConfig.convert((arrInfo?[1])!))"
+        range = NSMakeRange(5, targetString.characters.count - 5 )
+        infoWindow.lblTMDT.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        
+        targetString  = "Giải ngân: \(variableConfig.convert((arrInfo?[2])!))"
+        range = NSMakeRange(10, targetString.characters.count - 10 )
+        infoWindow.lblGiaiNgan.attributedText = attributedString(from: targetString, nonBoldRange: range)
+        infoWindow.autoresizingMask = .flexibleHeight
+     
+        //infoWindow.frame = CGRect(x: 30, y: 5 , width: self.UiMapView.frame.width - 60, height: 80)
         return infoWindow
+        
     }
     
     // Tạo marker trên bản đồ
@@ -359,8 +393,9 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
                 let Position = CLLocationCoordinate2D(latitude: ViDoTemp!, longitude: KinhDoTemp!)
                 let marker = GMSMarker(position: Position)
                 
-                marker.title = item.TenDuAn
-                marker.snippet = item.DiaDiemXayDung
+                marker.title = item.DiaDiemXayDung
+                marker.snippet = (item.ThoiGian!) + "|" + String(item.TMDT!) + "|" + String(item.GiaiNgan!)
+                
                 marker.map = UiMapView
                 
                 Map_VC.dicMarker[item.DuAnID!] = marker
@@ -416,5 +451,20 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
             tbDSDA.isHidden = true
         }
     }
-
+    // Hàm set chữ bold
+    func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
+        let fontSize = UIFont.systemFontSize
+        let attrs = [
+            NSFontAttributeName: UIFont.boldSystemFont(ofSize: fontSize),
+            NSForegroundColorAttributeName: UIColor.black
+        ]
+        let nonBoldAttribute = [
+            NSFontAttributeName: UIFont.systemFont(ofSize: fontSize),
+            ]
+        let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
+        if let range = nonBoldRange {
+            attrStr.setAttributes(nonBoldAttribute, range: range)
+        }
+        return attrStr
+    }
 }

@@ -17,6 +17,9 @@ class MapItem {
          ViDo = 0
          TenDuAn = ""
          isDuAnCon = false
+        TMDT = 0
+        GiaiNgan = 0
+        ThoiGian = ""
     }
     var DuAnID : Int?
     var DuAnChaID : Int?
@@ -25,5 +28,7 @@ class MapItem {
     var ViDo : Double?
     var TenDuAn : String?
     var isDuAnCon : Bool?
-
+    var TMDT : Double?
+    var GiaiNgan : Double?
+    var ThoiGian : String?
 }
