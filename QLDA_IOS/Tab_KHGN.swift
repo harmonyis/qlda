@@ -27,6 +27,11 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
     
     var wGTHD : CGFloat = 0
     var wLKGTTT : CGFloat = 0
+    
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
+    var params : String = ""
+    var ApiUrl : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,9 +45,22 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         self.tbvKHGN.register(UINib(nibName: "CustomCell_KHGN_HD_Landscape", bundle: nil), forCellReuseIdentifier: "CustomCell_KHGN_HD_Landscape")
         self.tbvKHGN.register(UINib(nibName: "Cell_KHGN_R4", bundle: nil), forCellReuseIdentifier: "Cell_KHGN_R4")
         self.automaticallyAdjustsScrollViewInsets = false
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetTheoDoiGiaiNganDSHD"
+         ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetTheoDoiGiaiNganDSHD"
         //let szUser=lblName.
-        let params : String = "{ \"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\", \"szNam\" : \""+"2017"+"\", \"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        params = "{ \"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\", \"szNam\" : \""+"2017"+"\", \"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        
+        for item in tbvKHGN.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tag = 101
+            self.tbvKHGN.addSubview(refreshControl)
+        }
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
         
@@ -51,14 +69,20 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         self.tbvKHGN.rowHeight = UITableViewAutomaticDimension
         self.tbvKHGN.estimatedRowHeight = 30
         self.tbvKHGN.estimatedSectionHeaderHeight = 30
-        print("--------")
-        print(self.tbvKHGN.bounds.size.height, self.tbvKHGN.bounds.size.width)
+      
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         LoadTableView()
     }
     
+    func refresh(sender:AnyObject) {
+        m_NhomHD = [NhomHopDong]()
+       
+        ApiService.PostAsyncAc(url: ApiUrl, params: params,  callback: loadDataSuccess, errorCallBack: alertAction)
+        
+    }
+
     
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
@@ -189,7 +213,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
     func LoadTableView(){
         
         
-        
+        self.refreshControl?.endRefreshing()
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
             

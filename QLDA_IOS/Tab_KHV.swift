@@ -23,7 +23,10 @@ class Tab_KHV: Base , IndicatorInfoProvider {
     let m_date = Date()
     let m_calendar = Calendar.current
     var m_IdKHV : String = ""
-    
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
+    var params : String = ""
+    var ApiUrl : String = ""
     
     
     override func viewDidLoad() {
@@ -34,9 +37,25 @@ class Tab_KHV: Base , IndicatorInfoProvider {
         
         UiviewKHV.isHidden = true
         
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetKeHoachVon"
+        ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetKeHoachVon"
         let m_year = self.m_calendar.component(.year, from: self.m_date)
-        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"nam\" : \""+(String)(m_year)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        params = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"nam\" : \""+(String)(m_year)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+        
+        for item in UiviewKHV.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(Tab_KHV.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tag = 101
+            self.UiviewKHV.addSubview(refreshControl)
+        }
+        
+        totalHeight = 0
+        
         UiviewKHV.layer.borderColor = myColorBoder.cgColor
         UiviewKHV.layer.borderWidth = 1
         
@@ -71,6 +90,21 @@ class Tab_KHV: Base , IndicatorInfoProvider {
             }
         }
     }
+    func refresh(sender:AnyObject) {
+        m_arrKHV = [String]()
+        for item in UiviewKHV.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+            else {
+                item.removeFromSuperview()
+            }
+        }
+        totalHeight = 0
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataKHV, errorCallBack: alertAction)
+        
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         for item in UiviewKHV.subviews {
             
@@ -510,6 +544,7 @@ class Tab_KHV: Base , IndicatorInfoProvider {
                 self.UiviewKHV.addSubview(ViewGroupTTCQDDT)
                 // đặt lại giá trị constrain cho view
                 let heightConstraint = self.UiviewKHV.heightAnchor.constraint(equalToConstant:  self.totalHeight + 5 )
+                  self.refreshControl?.endRefreshing()
                 //        self.UiviewKHV.isUserInteractionEnabled = true
                 NSLayoutConstraint.activate([heightConstraint])
                 

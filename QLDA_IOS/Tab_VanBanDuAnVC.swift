@@ -22,8 +22,11 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     var tableDatasource : QLVanBanDatasource?
     var tableLandDatasource : QLVanBanLandDatasource?
-    
-    
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
+    var params : String = ""
+    var ApiUrl : String = ""
+    var url = ""
     @IBOutlet weak var tbVanBanDuAn: UITableView!
     
     override func viewDidLoad() {
@@ -40,6 +43,19 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
         self.tbVanBanDuAn.register(UINib(nibName: "HeaderLandTableViewCell", bundle: nil), forCellReuseIdentifier: "HeaderLand")
         self.tbVanBanDuAn.isHidden = true
         self.indicator.startAnimating()
+        for item in tbVanBanDuAn.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tag = 101
+            self.tbVanBanDuAn.addSubview(refreshControl)
+        }
+        
         loadData()
         
         
@@ -91,10 +107,16 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     }
     
     //Open file
-    
+    func refresh(sender:AnyObject) {
+        arrVanBan = []
+        
+        loadData() 
+        
+    }
+
     func download(vanBan : VanBanEntity) {
-        let url = "\(UrlPreFix.QLDA.rawValue)/GetFileByName"
-        let params = "{\"filename\":\"\(vanBan.tenFileVanBan)\", \"szDuogDan\":\"\(vanBan.duongDan)\", \"szUsername\":\"\(self.userName)\", \"szPassword\":\"\(self.password)\"}"
+         url = "\(UrlPreFix.QLDA.rawValue)/GetFileByName"
+        params = "{\"filename\":\"\(vanBan.tenFileVanBan)\", \"szDuogDan\":\"\(vanBan.duongDan)\", \"szUsername\":\"\(self.userName)\", \"szPassword\":\"\(self.password)\"}"
         ApiService.PostAsync(url: url, params: params, callback: { (success : SuccessEntity) in
             let json = try? JSONSerialization.jsonObject(with: success.data! , options: [])
             if let dic = json as? [String:Any] {
@@ -117,7 +139,7 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     }
     
     func loadData() {
-        let params = "{\"sDuAnID\":\"\(self.idDuAn)\",\"szUsername\":\"\(self.userName)\",\"szPassword\":\"\(self.password)\"}"
+         params = "{\"sDuAnID\":\"\(self.idDuAn)\",\"szUsername\":\"\(self.userName)\",\"szPassword\":\"\(self.password)\"}"
         ApiService.PostAsyncAc(url: apiUrl, params: params, callback:loadVanBanSuccess, errorCallBack: alertAction)
         //  ApiService.Post(url: apiUrl, params: params, callback: loadVanBanSuccess) { (error) in
         
@@ -143,6 +165,7 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
                         self.rotate()
+                         self.refreshControl?.endRefreshing()
                     }
                 }
                 

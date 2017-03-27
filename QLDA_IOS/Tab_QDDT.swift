@@ -20,6 +20,10 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
     var m_arrTDT : [String] = [String]()
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var UiViewQDDT: UIView!
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
+    var params : String = ""
+    var ApiUrl : String = ""
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,10 +43,25 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
         
         UiViewQDDT.isHidden = true
         //  self.ViewData.autoresizesSubviews = true
-        let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/GetQuyetDinhDauTu"
-        let params : String = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+         ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetQuyetDinhDauTu"
+         params = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         UiViewQDDT.layer.borderColor = myColorBoder.cgColor
         UiViewQDDT.layer.borderWidth = 1
+        
+        for item in UiViewQDDT.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(Tab_QDDT.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tag = 101
+            self.UiViewQDDT.addSubview(refreshControl)
+        }
+
+          totalHeight = 0
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: alertAction)
         // ApiService.Post(url: ApiUrl, params: params, callback: , errorCallBack: Error)
@@ -306,11 +325,32 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
             }
         }
     }
+    func refresh(sender:AnyObject) {
+        m_arrTTDA = [String]()
+        for item in UiViewQDDT.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+            else {
+                item.removeFromSuperview()
+            }
+        }
+          totalHeight = 0
+         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: alertAction)
+        
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         for item in UiViewQDDT.subviews {
-            
+           
+                if item.tag == 101 {
+                    bcheck = false
+                }
+                else {
+
             item.removeFromSuperview()
-            
+                    
+            }
         }
         totalHeight = 0
         LoadDataQDDT()
@@ -523,7 +563,7 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
                 self.UiViewQDDT.addSubview(ViewGroupTTCQDDT)
                 // đặt lại giá trị constrain cho view
                 let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant:  self.totalHeight + 5 )
-                //        self.UiViewQDDT.isUserInteractionEnabled = true
+                 self.refreshControl?.endRefreshing()
                 NSLayoutConstraint.activate([heightConstraint])
                 
             }
