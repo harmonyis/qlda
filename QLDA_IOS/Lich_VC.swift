@@ -56,7 +56,7 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
             constraintHeightTable.constant = h - 300
             constraintWidthTable.constant = w
         }
-        else{
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
             constraintWidthCalendar.constant = w * 6/10 - 0.5
             constraintHeightCalendar.constant = h
             
@@ -77,6 +77,7 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         tblCalendar.tableFooterView = UIView(frame: .zero)
         fsCalendar.select(Date())
         // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
