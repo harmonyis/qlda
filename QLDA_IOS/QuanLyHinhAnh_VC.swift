@@ -35,6 +35,10 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     var lstDuAnExists : [String] = []
     var DuAnSelected : String = "0"
     
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
+    var params : String = ""
+        
     func GetDSHASuccess(data : Data) {
         //let result = String(data: data, encoding: String.Encoding.utf8)
         
@@ -223,7 +227,12 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
             GalleryConfigurationItem.displacementInsetMargin(50)
         ]
     }
-    
+    func refresh(sender:AnyObject) {
+        items = []
+        
+        ApiService.Post(url: ApiUrl, params: params, callback: GetDSHASuccess, errorCallBack: GetDSHAError)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationItem.title = "Danh sách hình ảnh"
@@ -232,7 +241,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         self.userName = variableConfig.m_szUserName
         self.password = variableConfig.m_szPassWord
         
-        let params : String = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\"}"
+         params  = "{\"userName\" : \"\(userName)\", \"password\": \"\(password)\"}"
         ApiService.Post(url: ApiUrl, params: params, callback: GetDSHASuccess, errorCallBack: GetDSHAError)
         
         
@@ -245,6 +254,18 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
          tbDanhSachDuAn.dataSource = datasource
          tbDanhSachDuAn.delegate = datasource
          */
+        for item in tbDanhSachDuAn.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(QuanLyHinhAnh_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tag = 101
+            self.tbDanhSachDuAn.addSubview(refreshControl)
+        }
         
         self.automaticallyAdjustsScrollViewInsets = false
         
