@@ -3304,6 +3304,7 @@
                                                         <date key="date" timeIntervalSinceReferenceDate="511860322.49525499">
                                                             <!--2017-03-22 07:25:22 +0000-->
                                                         </date>
+                                                        <locale key="locale" localeIdentifier="vi"/>
                                                         <connections>
                                                             <action selector="dtpStartChageValue:" destination="FSX-wM-fCW" eventType="valueChanged" id="P1Y-BR-XBi"/>
                                                         </connections>
@@ -3326,6 +3327,7 @@
                                                         <date key="date" timeIntervalSinceReferenceDate="511860488.55717897">
                                                             <!--2017-03-22 07:28:08 +0000-->
                                                         </date>
+                                                        <locale key="locale" localeIdentifier="vi"/>
                                                     </datePicker>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nội dung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzZ-dl-mQj">
                                                         <rect key="frame" x="4" y="246" width="312" height="21"/>
@@ -4472,7 +4474,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Jjd-7L-i8K">
-                                <rect key="frame" x="0.0" y="-44" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="526"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6tA-nn-vZ6">
                                     <size key="itemSize" width="50" height="50"/>
@@ -4553,13 +4555,12 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="4jO-v1-d9c" secondAttribute="bottom" constant="4" id="45C-RY-wHP"/>
-                                    <constraint firstAttribute="height" constant="38" id="7p8-8K-OIa"/>
-                                    <constraint firstAttribute="width" constant="320" id="CRc-L3-a1E"/>
                                     <constraint firstItem="lvi-b6-uHZ" firstAttribute="leading" secondItem="V6w-AW-Ki8" secondAttribute="leading" constant="156" id="FRK-g4-6IM"/>
                                     <constraint firstItem="4jO-v1-d9c" firstAttribute="top" secondItem="V6w-AW-Ki8" secondAttribute="top" constant="4" id="JI8-SL-RUz"/>
                                     <constraint firstAttribute="bottom" secondItem="lvi-b6-uHZ" secondAttribute="bottom" constant="4" id="QBF-z4-8XD"/>
                                     <constraint firstItem="4jO-v1-d9c" firstAttribute="leading" secondItem="lvi-b6-uHZ" secondAttribute="trailing" constant="8" id="jTj-Yt-5sL"/>
                                     <constraint firstItem="lvi-b6-uHZ" firstAttribute="top" secondItem="V6w-AW-Ki8" secondAttribute="top" constant="4" id="mtv-hT-uH9"/>
+                                    <constraint firstAttribute="height" constant="38" id="uOC-AA-ITw"/>
                                     <constraint firstAttribute="trailing" secondItem="4jO-v1-d9c" secondAttribute="trailing" constant="8" id="uPX-Iv-LCe"/>
                                     <constraint firstItem="4jO-v1-d9c" firstAttribute="leading" secondItem="lvi-b6-uHZ" secondAttribute="trailing" constant="8" id="xQb-R4-lMT"/>
                                 </constraints>
@@ -4567,20 +4568,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Jjd-7L-i8K" secondAttribute="trailing" constant="-16" id="2yW-oi-Ttf"/>
-                            <constraint firstItem="V6w-AW-Ki8" firstAttribute="top" secondItem="Jjd-7L-i8K" secondAttribute="bottom" constant="6" id="4e5-Ow-hL9"/>
-                            <constraint firstItem="V6w-AW-Ki8" firstAttribute="leading" secondItem="7bJ-L9-3QZ" secondAttribute="leading" id="6mZ-jz-aVN"/>
-                            <constraint firstItem="LJm-s3-uqy" firstAttribute="top" secondItem="V6w-AW-Ki8" secondAttribute="bottom" id="DK5-a8-SBC"/>
-                            <constraint firstItem="LJm-s3-uqy" firstAttribute="top" secondItem="Jjd-7L-i8K" secondAttribute="bottom" constant="44" id="TmM-5k-Trn"/>
-                            <constraint firstAttribute="trailing" secondItem="V6w-AW-Ki8" secondAttribute="trailing" id="en6-vn-PeG"/>
-                            <constraint firstItem="Jjd-7L-i8K" firstAttribute="leading" secondItem="7bJ-L9-3QZ" secondAttribute="leadingMargin" constant="-16" id="jDy-wq-2Kq"/>
-                            <constraint firstItem="Jjd-7L-i8K" firstAttribute="top" secondItem="hv3-S6-xOY" secondAttribute="bottom" constant="-64" id="v4X-XV-3jr"/>
+                            <constraint firstAttribute="trailing" secondItem="Jjd-7L-i8K" secondAttribute="trailing" id="BMb-Vr-mEJ"/>
+                            <constraint firstAttribute="trailing" secondItem="V6w-AW-Ki8" secondAttribute="trailing" id="Pea-r8-Ya5"/>
+                            <constraint firstItem="Jjd-7L-i8K" firstAttribute="top" secondItem="7bJ-L9-3QZ" secondAttribute="top" id="ceq-rg-uey"/>
+                            <constraint firstItem="Jjd-7L-i8K" firstAttribute="leading" secondItem="7bJ-L9-3QZ" secondAttribute="leading" id="ed0-eu-dFz"/>
+                            <constraint firstItem="LJm-s3-uqy" firstAttribute="top" secondItem="V6w-AW-Ki8" secondAttribute="bottom" id="i7p-Re-wZj"/>
+                            <constraint firstItem="V6w-AW-Ki8" firstAttribute="top" secondItem="Jjd-7L-i8K" secondAttribute="bottom" constant="4" id="s18-2s-jBE"/>
+                            <constraint firstItem="V6w-AW-Ki8" firstAttribute="leading" secondItem="7bJ-L9-3QZ" secondAttribute="leading" id="zWK-Sj-1LN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5Oj-u4-g0S"/>
                     <connections>
                         <outlet property="btnToggle" destination="S2u-MG-y5i" id="JqB-ir-mGF"/>
                         <outlet property="collectionView" destination="Jjd-7L-i8K" id="1Xn-3K-jdO"/>
+                        <outlet property="constraintBottom" destination="i7p-Re-wZj" id="fIM-T3-p1r"/>
                         <outlet property="constraintLeftMessage" destination="FRK-g4-6IM" id="Qdd-AD-mYq"/>
                         <outlet property="txtMessage" destination="lvi-b6-uHZ" id="Evz-jh-1QO"/>
                         <outlet property="viewBottom" destination="V6w-AW-Ki8" id="6Ix-4y-KCy"/>
