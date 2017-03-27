@@ -19,7 +19,6 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     var idDuAn : String = String(variableConfig.m_szIdDuAn)
     var userName : String = variableConfig.m_szUserName
     var password : String = variableConfig.m_szPassWord
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     var tableDatasource : QLVanBanDatasource?
     var tableLandDatasource : QLVanBanLandDatasource?
     var refreshControl: UIRefreshControl!
@@ -51,7 +50,7 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
         if bcheck == true {
             refreshControl = UIRefreshControl()
             refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tintColor = variableConfig.m_swipeColor
             refreshControl.tag = 101
             self.tbVanBanDuAn.addSubview(refreshControl)
         }

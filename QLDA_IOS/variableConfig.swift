@@ -14,7 +14,8 @@ public class variableConfig {
     static var m_szUserName : String = ""
     static var m_heightScreen : CGFloat = 0
     static var m_widthScreen : CGFloat = 0
-    
+    static var m_swipeColor : UIColor = UIColor(netHex: 0x13B8FF)
+    static var m_borderColor : UIColor = UIColor(netHex: 0xcccccc)
     static var m_szPassWord : String = ""
     static func convert(_ sztext: String) -> String {
          if !(sztext==""){

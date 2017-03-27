@@ -49,20 +49,20 @@ class Tab_KHV: Base , IndicatorInfoProvider {
         if bcheck == true {
             refreshControl = UIRefreshControl()
             refreshControl.addTarget(self, action:  #selector(Tab_KHV.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+            refreshControl.tintColor = variableConfig.m_swipeColor
             refreshControl.tag = 101
             self.UiviewKHV.addSubview(refreshControl)
         }
         
         totalHeight = 0
         
-        UiviewKHV.layer.borderColor = myColorBoder.cgColor
+        UiviewKHV.layer.borderColor = variableConfig.m_borderColor.cgColor
         UiviewKHV.layer.borderWidth = 1
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataKHV, errorCallBack: alertAction)
         //   ApiService.Post(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: Error)
     }
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
+    
     func GetDataKHV(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
@@ -193,7 +193,7 @@ class Tab_KHV: Base , IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiviewKHV.frame.width - 10, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -246,7 +246,7 @@ class Tab_KHV: Base , IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiviewKHV.frame.width - 10, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -298,7 +298,7 @@ class Tab_KHV: Base , IndicatorInfoProvider {
                             
                             let borderBottom = CALayer()
                             let borderWidth = CGFloat(1)
-                            borderBottom.borderColor =  self.myColorBoder.cgColor
+                            borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                             borderBottom.borderWidth = borderWidth
                             borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiviewKHV.frame.width), height: 1)
                             uiView.layer.addSublayer(borderBottom)
@@ -417,7 +417,7 @@ class Tab_KHV: Base , IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiviewKHV.frame.width - 10, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -466,7 +466,7 @@ class Tab_KHV: Base , IndicatorInfoProvider {
                         
                         let borderBottom = CALayer()
                         let borderWidth = CGFloat(1)
-                        borderBottom.borderColor =  self.myColorBoder.cgColor
+                        borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                         borderBottom.borderWidth = borderWidth
                         borderBottom.frame = CGRect(x: 5, y: calHeight, width: self.UiviewKHV.frame.width - 10, height: 1)
                         uiView.layer.addSublayer(borderBottom)
@@ -519,7 +519,7 @@ class Tab_KHV: Base , IndicatorInfoProvider {
                             
                             let borderBottom = CALayer()
                             let borderWidth = CGFloat(1)
-                            borderBottom.borderColor =  self.myColorBoder.cgColor
+                            borderBottom.borderColor =  variableConfig.m_borderColor.cgColor
                             borderBottom.borderWidth = borderWidth
                             borderBottom.frame = CGRect(x:3 , y:24, width: (self.UiviewKHV.frame.width), height: 1)
                             uiView.layer.addSublayer(borderBottom)

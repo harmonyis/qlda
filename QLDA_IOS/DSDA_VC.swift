@@ -58,7 +58,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         if bcheck == true {
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:  #selector(DSDA_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
-        refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
+        refreshControl.tintColor = variableConfig.m_swipeColor
         refreshControl.tag = 101
         self.tbDSDA.addSubview(refreshControl)
 }
@@ -258,7 +258,6 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         LoadTableView()
         
     }
-    let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     func LoadTableView(){
         
         widthDSDA = self.view.bounds.size.width
@@ -284,7 +283,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             
             uiView.frame = CGRect(x: 0, y: 0 , width: 20, height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -296,7 +295,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20), y: 0 , width: (45*wTotal/100), height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -314,7 +313,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + 45*wTotal/100), y: 0 , width: (15*wTotal/100), height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -331,7 +330,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + 60*wTotal/100), y: 0 , width: (20*wTotal/100), height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -348,7 +347,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + 80*wTotal/100), y: 0 , width: (20*wTotal/100), height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -366,7 +365,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wTotal), y: 0 , width: (wTMDT), height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
@@ -383,7 +382,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             uiView = UIView()
             uiView.frame = CGRect(x: (20 + wTotal + wTMDT), y: 0 , width: (wGN), height: 50)
-            uiView.layer.borderColor = myColorBoder.cgColor
+            uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
             
