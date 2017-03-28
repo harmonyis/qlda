@@ -54,7 +54,6 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
             refreshControl.tag = 101
             self.tbVanBanDuAn.addSubview(refreshControl)
         }
-        
         loadData()
         
         
@@ -163,8 +162,9 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
-                        self.rotate()
-                         self.refreshControl?.endRefreshing()
+                        //self.rotate()
+                        self.viewWillAppear(true)
+                        self.refreshControl?.endRefreshing()
                     }
                 }
                 
@@ -193,7 +193,10 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         rotate()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rotate()
+    }
     /*
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
      return CGFloat(150)
