@@ -80,7 +80,7 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     }
     
     func saveFile(arrData : [Int8], fileName : String) {
-        let myArray:[Int8] = [ 0x4d, 0x2a, 0x41, 0x2a, 0x53, 0x2a, 0x48]
+        let myArray:[Int8] = arrData
         let pointer = UnsafeBufferPointer(start:myArray, count:myArray.count)
         let data = Data(buffer:pointer)
         
