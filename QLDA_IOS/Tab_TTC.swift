@@ -48,6 +48,10 @@ class Tab_TTC: Base, IndicatorInfoProvider {
             refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
             refreshControl.tintColor = variableConfig.m_swipeColor
             refreshControl.tag = 101
+            
+            
+            //refreshControl.contentScaleFactor = 1
+            //refreshControl.
             self.uiViewThongTin.addSubview(refreshControl)
         }
          params = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
@@ -105,6 +109,7 @@ class Tab_TTC: Base, IndicatorInfoProvider {
                 self.activityIndicator.stopAnimating()
                 
                 self.uiViewThongTin.isHidden = false
+                //self.uiViewThongTin.subviews.forEach { $0.removeFromSuperview() }
                 
                 var icount = 0
                 var totalHeight : CGFloat = 5
@@ -177,7 +182,12 @@ class Tab_TTC: Base, IndicatorInfoProvider {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if m_arrTTDA.count > 0 {
+        //LoadDataTTC()
+        }
         super.viewWillAppear(animated)
+        
+        
     }
     
     
