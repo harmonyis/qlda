@@ -38,8 +38,51 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
     static var mapItems : [MapItem]? = nil
     var makers : [GMSMarker]? = nil
     
+    @IBOutlet weak var constraintWidthMap: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightMap: NSLayoutConstraint!
+    @IBOutlet weak var constraintBottomMap: NSLayoutConstraint!
+    @IBOutlet weak var constraintRightMap: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintWidthDSDA: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightDSDA: NSLayoutConstraint!
+    
+    func setConstraint(height : CGFloat, width : CGFloat){
+        let w = width
+        var h = height
+        
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+            h = h - 64 - 4
+            constraintWidthMap.constant = w
+            constraintHeightMap.constant = 310
+            constraintBottomMap.constant = h - 310 + 1
+            constraintRightMap.constant = 0
+            
+            constraintWidthDSDA.constant = w
+            constraintHeightDSDA.constant = h - 310
+        }
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
+            let hBar = self.navigationController?.navigationBar.frame.height
+            h = h - hBar! - 4
+            constraintWidthMap.constant = w * 5.5/10 - 0.5
+            constraintHeightMap.constant = h
+            constraintBottomMap.constant = 1
+            constraintRightMap.constant = w * 4.5/10
+            
+            constraintWidthDSDA.constant = w * 4.5/10
+            constraintHeightDSDA.constant = h + 1
+
+        }
+        
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setConstraint(height: size.height, width: size.width)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setConstraint(height: view.frame.height, width: view.frame.width)
         
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
