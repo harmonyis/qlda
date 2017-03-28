@@ -49,7 +49,7 @@ class BDTMDT_VC: Base_VC {
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
             // 64: height navigation
             // 35: height header
-            h = h - 64 - 35
+            h = h - 64 - 34
             constraintWidthChart.constant = w
             constraintHeightChart.constant = 310
             constraintBottomChart.constant = h - 310 + 1
@@ -64,21 +64,21 @@ class BDTMDT_VC: Base_VC {
             constraintWidthLegendRight.constant = w/2
         }
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
-            // 35: height header
-            let hBar = self.navigationController?.navigationBar.frame.height
-            //h = h - hBar! - 35
-            h = h - 32 - 35
-            constraintWidthChart.constant = w * 6/10 - 0.5
+            // 34: height header
+            //let hBar = self.navigationController?.navigationBar.frame.height
+            //h = h - hBar! - 34
+            h = h - 32 - 34
+            constraintWidthChart.constant = w * 5.5/10 - 0.5
             constraintHeightChart.constant = h
             constraintBottomChart.constant = 1
-            constraintRightChart.constant = w * 4/10
+            constraintRightChart.constant = w * 4.5/10
             
-            constraintWidthLegend.constant = w * 4/10
+            constraintWidthLegend.constant = w * 4.5/10
             constraintHeightLegend.constant = h
  
             
             constraintHeightLegendLeft.constant = h
-            constraintWidthLegendLeft.constant = w * 4/10
+            constraintWidthLegendLeft.constant = w * 4.5/10
             constraintHeightLegendRight.constant = 0
             constraintWidthLegendRight.constant = 0
         }
@@ -263,8 +263,8 @@ class BDTMDT_VC: Base_VC {
                 yAL = yAL + 20
             }
             
-            dynamicSquare.frame = CGRect(x: 5, y: yA, width: 15, height: 15)
-            dynamicLabel.frame = CGRect(x: 22, y: yA, width: Int(view.frame.width), height: 21)
+            dynamicSquare.frame = CGRect(x: 5, y: yA + 3, width: 15, height: 15)
+            dynamicLabel.frame = CGRect(x: 22, y: yA, width: Int(view.frame.width), height: 20)
             
             
             uiView.addSubview(dynamicSquare)
