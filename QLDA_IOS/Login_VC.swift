@@ -20,7 +20,7 @@ class Login_VC: Base {
     }
     var szMatKhau : String = ""
     var szTenDangNhap : String = ""
-
+    
     @IBAction func Login(_ sender: Any) {
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/CheckUser"
         //let szUser=lblName.
@@ -28,7 +28,7 @@ class Login_VC: Base {
         szTenDangNhap = (lblTenDangNhap.text)!
         let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
         
-       ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
         
     }
     func loadDataSuccess(data : SuccessEntity) {
@@ -49,7 +49,7 @@ class Login_VC: Base {
                 if nIdUser > 0 {
                     Config.userID = nIdUser
                     Config.userName = szTenDangNhap
-                    Config.passWord = szMatKhau               
+                    Config.passWord = szMatKhau
                     
                     variableConfig.m_szUserName = self.szTenDangNhap
                     variableConfig.m_szPassWord = self.szMatKhau
@@ -58,6 +58,7 @@ class Login_VC: Base {
                     DispatchQueue.global(qos: .userInitiated).async {
                         DispatchQueue.main.async {
                             self.GetCurrentUser()
+                            self.GetPendingCalendar()
                         }
                     }
                     
@@ -73,15 +74,15 @@ class Login_VC: Base {
             }
         }
     }
-     func GetCurrentUser(){
+    func GetCurrentUser(){
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetUser/\(Config.userID)"
         
-    ApiService.GetAsyncAc(url: apiUrl, callback: callbackGetUser, errorCallBack: alertAction)
+        ApiService.GetAsyncAc(url: apiUrl, callback: callbackGetUser, errorCallBack: alertAction)
         // ApiService.Get(url: apiUrl, callback: callbackGetUser, errorCallBack: { (error) in
         
         //   })
     }
-     func callbackGetUser(data : SuccessEntity){
+    func callbackGetUser(data : SuccessEntity){
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
             serverError(success: data)
@@ -174,5 +175,42 @@ class Login_VC: Base {
     }
     
     func errorGetContacts(error : Error) {
+    }
+    
+    func GetPendingCalendar(){
+        let apiUrl : String = "\(UrlPreFix.Map.rawValue)/getPendingCalendar"
+        let params : String = "{\"nUserID\" : \(Config.userID)}"
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: callbackpendingCalendar, errorCallBack: alertAction)
+    }
+    func callbackpendingCalendar(data : SuccessEntity){
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        if let methodResult = json as? [String:Any] {
+            if let items = methodResult["getPendingCalendarResult"] as? [[String:Any]] {
+                UserNotificationManager.share.removeAllNotification()
+                for item in items{
+                    let calendarItem : CalendarItem = CalendarItem()
+                    let dateSchedule = item["DateSchedule"] as! String
+                    calendarItem.dateSchedule = Date(jsonDate: dateSchedule)
+                    calendarItem.calendarScheduleID = item["CalendarScheduleID"] as? Int
+                    let timeEnd = item["TimeEnd"] as! String
+                    calendarItem.timeEnd = Date(jsonDateGMT: timeEnd)
+                    let timeStart = item["TimeStart"] as! String
+                    calendarItem.timeStart = Date(jsonDateGMT: timeStart)
+                    calendarItem.UserID = item["UserID"] as? Int
+                    calendarItem.title = item["Title"] as? String
+                    calendarItem.note = item["Note"] as? String
+                    
+                    UserNotificationManager.share.addNotificationWithFireTime(identifier: "Calendar-\(calendarItem.calendarScheduleID!)", title: calendarItem.title!, body: calendarItem.note!, fireGMT: calendarItem.timeStart!)
+                }
+            }
+        }
+        
     }
 }

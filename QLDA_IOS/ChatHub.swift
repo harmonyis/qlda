@@ -211,6 +211,60 @@ class ChatHub {
             ChatCommon.makeReadNotification(args: args)
             //Config.nTotalNotificationNotRead = Config.nTotalNotificationNotRead - 1
         }
+        
+        chatHub.on("insertCalendar") {args in
+            let arr = args as? [[String : Any]]
+            let item = arr?[0]
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"//this your string date format
+            dateFormatter.timeZone = TimeZone.current
+            
+            let calendarItem : CalendarItem = CalendarItem()
+            let dateSchedule = item?["DateSchedule"] as! String
+            calendarItem.dateSchedule = Date(jsonDate: dateSchedule)
+            calendarItem.calendarScheduleID = item?["CalendarScheduleID"] as? Int
+            let timeEnd = item?["TimeEnd"] as! String
+            calendarItem.timeEnd = dateFormatter.date(from: timeEnd)
+           
+            let timeStart = item?["TimeStart"] as! String            
+            calendarItem.timeStart = dateFormatter.date(from: timeStart)
+
+            calendarItem.UserID = item?["UserID"] as? Int
+            calendarItem.title = item?["Title"] as? String
+            calendarItem.note = item?["Note"] as? String
+            
+            UserNotificationManager.share.addNotificationWithFireTime(identifier: "Calendar-\(calendarItem.calendarScheduleID!)", title: calendarItem.title!, body: calendarItem.note!, fireGMT: calendarItem.timeStart!)
+        }
+        chatHub.on("editCalendar") {args in
+            let arr = args as? [[String : Any]]
+            let item = arr?[0]
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"//this your string date format
+            dateFormatter.timeZone = TimeZone.current
+            
+            let calendarItem : CalendarItem = CalendarItem()
+            let dateSchedule = item?["DateSchedule"] as! String
+            calendarItem.dateSchedule = Date(jsonDate: dateSchedule)
+            calendarItem.calendarScheduleID = item?["CalendarScheduleID"] as? Int
+            let timeEnd = item?["TimeEnd"] as! String
+            calendarItem.timeEnd = dateFormatter.date(from: timeEnd)
+            
+            let timeStart = item?["TimeStart"] as! String
+            calendarItem.timeStart = dateFormatter.date(from: timeStart)
+            
+            calendarItem.UserID = item?["UserID"] as? Int
+            calendarItem.title = item?["Title"] as? String
+            calendarItem.note = item?["Note"] as? String
+            
+            UserNotificationManager.share.addNotificationWithFireTime(identifier: "Calendar-\(calendarItem.calendarScheduleID!)", title: calendarItem.title!, body: calendarItem.note!, fireGMT: calendarItem.timeStart!)
+        }
+        
+        chatHub.on("deleteCalendar") {args in
+            let id =  args?[0] as? Int
+            UserNotificationManager.share.removeNotification(identifier: "Calendar-\(id!)")
+        }
     }
     
     static func pushView(){
