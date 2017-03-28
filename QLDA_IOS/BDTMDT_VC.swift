@@ -25,8 +25,74 @@ class BDTMDT_VC: Base_VC {
     let arrCoCaus = ["Xây lắp", "Thiết bị", "GPMB", "QLDA", "Tư vấn", "Khác", "Dự phòng"]
     var arrGiaTris : [Double] = []
     let arrColors = [0x3399FF,0xFF33FF,0x996666,0xFFFF33,0xFF3366,0xFF9900,0x00CC99]
+    
+    //constraint
+    
+    @IBOutlet weak var constraintWidthChart: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightChart: NSLayoutConstraint!
+    @IBOutlet weak var constraintBottomChart: NSLayoutConstraint!
+    @IBOutlet weak var constraintRightChart: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintWidthLegend: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightLegend: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var constraintHeightLegendLeft: NSLayoutConstraint!
+    @IBOutlet weak var constraintWidthLegendLeft: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightLegendRight: NSLayoutConstraint!
+    @IBOutlet weak var constraintWidthLegendRight: NSLayoutConstraint!
+    
+    func setConstraint(height : CGFloat, width : CGFloat){
+        let w = width
+        var h = height
+        
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+            // 64: height navigation
+            // 35: height header
+            h = h - 64 - 35
+            constraintWidthChart.constant = w
+            constraintHeightChart.constant = 310
+            constraintBottomChart.constant = h - 310 + 1
+            constraintRightChart.constant = 0
+            
+            constraintWidthLegend.constant = w
+            constraintHeightLegend.constant = h - 310
+            
+            constraintHeightLegendLeft.constant = h - 310
+            constraintWidthLegendLeft.constant = w/2
+            constraintHeightLegendRight.constant = h - 310
+            constraintWidthLegendRight.constant = w/2
+        }
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
+            // 35: height header
+            let hBar = self.navigationController?.navigationBar.frame.height
+            //h = h - hBar! - 35
+            h = h - 32 - 35
+            constraintWidthChart.constant = w * 6/10 - 0.5
+            constraintHeightChart.constant = h
+            constraintBottomChart.constant = 1
+            constraintRightChart.constant = w * 4/10
+            
+            constraintWidthLegend.constant = w * 4/10
+            constraintHeightLegend.constant = h
+ 
+            
+            constraintHeightLegendLeft.constant = h
+            constraintWidthLegendLeft.constant = w * 4/10
+            constraintHeightLegendRight.constant = 0
+            constraintWidthLegendRight.constant = 0
+        }
+        
+    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setConstraint(height: size.height, width: size.width)
+        setLegend()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setConstraint(height: view.frame.height, width: view.frame.width)
+        
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         pieChartTMDT.isHidden = true
@@ -41,7 +107,7 @@ class BDTMDT_VC: Base_VC {
         }
         if bcheck == true {
             refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action:  #selector(DSDA_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.addTarget(self, action:  #selector(BDTMDT_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
             refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
             refreshControl.tag = 101
             self.scView.addSubview(refreshControl)
@@ -108,7 +174,7 @@ class BDTMDT_VC: Base_VC {
         for i in 0..<arrCoCaus.count {
             dataEntries.append(ChartDataEntry(x: Double(i), y: self.arrGiaTris[i], data: arrCoCaus[i] as AnyObject? ))
         }
-        print(arrGiaTris)
+
         let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "")
         pieChartDataSet.drawValuesEnabled = false
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
@@ -127,10 +193,37 @@ class BDTMDT_VC: Base_VC {
                                  UIColor.init(netHex:0xFF9900),
                                  UIColor.init(netHex:0x00CC99)]
         pieChartDataSet.colors = colors
-        let screenSize:CGRect = UIScreen.main.bounds
-        viewLegendLeft.frame.size.width	 = screenSize.width / 2
-        viewLegendRight.frame.size.width = screenSize.width / 2
+        //let screenSize:CGRect = UIScreen.main.bounds
+        //viewLegendLeft.frame.size.width	 = screenSize.width / 2
+        //viewLegendRight.frame.size.width = screenSize.width / 2
         
+        setLegend()
+        
+        
+        /*let l : Legend = pieChartTMDT.legend
+         l.verticalAlignment = Legend.VerticalAlignment.top
+         l.horizontalAlignment = Legend.HorizontalAlignment.left
+         l.orientation  = Legend.Orientation.vertical
+         l.setCustom(colors: [UIColor.init(netHex:0x3399FF),
+         UIColor.init(netHex:0xFF33FF),
+         UIColor.init(netHex:0x996666),
+         UIColor.init(netHex:0xFFFF33),
+         UIColor.init(netHex:0xFF3366),
+         UIColor.init(netHex:0xFF9900),
+         UIColor.init(netHex:0x00CC99)],
+         labels: ["Xây lắp", "Thiết bị", "GPMB", "QLDA", "Tư vấn", "Khác", "Dự phòng"])
+         l.wordWrapEnabled = true
+         */
+        
+    }
+    
+    func setLegend(){
+        for view in viewLegendRight.subviews{
+            view.removeFromSuperview()
+        }
+        for view in viewLegendLeft.subviews{
+            view.removeFromSuperview()
+        }
         
         // tao Legend Custom: dua legend vao 2 View  duoi bieu do
         var yAL = 20
@@ -151,17 +244,25 @@ class BDTMDT_VC: Base_VC {
             dynamicLabel.text = arrCoCaus[i] + ": " + String(arrGiaTris[i].doubleToString)
             
             // dua cac thong tin vao view
-            if i % 2 != 0{
-                uiView = viewLegendRight
-                yA = yAR
-                yAR = yAR + 20
+            if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+                if i % 2 != 0{
+                    uiView = viewLegendRight
+                    yA = yAR
+                    yAR = yAR + 20
+                }
+                else{
+                    uiView = viewLegendLeft
+                    
+                    yA = yAL
+                    yAL = yAL + 20
+                }
             }
-            else{
+            if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
                 uiView = viewLegendLeft
-                
                 yA = yAL
                 yAL = yAL + 20
             }
+            
             dynamicSquare.frame = CGRect(x: 5, y: yA, width: 15, height: 15)
             dynamicLabel.frame = CGRect(x: 22, y: yA, width: Int(view.frame.width), height: 21)
             
@@ -169,23 +270,6 @@ class BDTMDT_VC: Base_VC {
             uiView.addSubview(dynamicSquare)
             uiView.addSubview(dynamicLabel)
         }
-        
-        /*let l : Legend = pieChartTMDT.legend
-         l.verticalAlignment = Legend.VerticalAlignment.top
-         l.horizontalAlignment = Legend.HorizontalAlignment.left
-         l.orientation  = Legend.Orientation.vertical
-         l.setCustom(colors: [UIColor.init(netHex:0x3399FF),
-         UIColor.init(netHex:0xFF33FF),
-         UIColor.init(netHex:0x996666),
-         UIColor.init(netHex:0xFFFF33),
-         UIColor.init(netHex:0xFF3366),
-         UIColor.init(netHex:0xFF9900),
-         UIColor.init(netHex:0x00CC99)],
-         labels: ["Xây lắp", "Thiết bị", "GPMB", "QLDA", "Tư vấn", "Khác", "Dự phòng"])
-         l.wordWrapEnabled = true
-         */
-        
     }
-    
 }
 
