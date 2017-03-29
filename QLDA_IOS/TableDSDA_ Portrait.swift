@@ -19,7 +19,7 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     var tbDSDA : UITableView?
     var uiViewDSDA : UIViewController?
     var m_textHightLight : String = String()
-    var m_caneSwipe =true
+    var m_caneSwipe = true
     // MARK: - Table view data source
     init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController , textHightLight : String = ""){
         super.init()
