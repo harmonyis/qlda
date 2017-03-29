@@ -65,7 +65,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
                     self.constraintHeightDSDA.constant = h - 245
                 }
                 if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
-                    self.constraintWidthMap.constant = w * 5.5/10 - 0.5
+                    self.constraintWidthMap.constant = w * 5.5/10
                     self.constraintHeightMap.constant = h
                     self.constraintBottomMap.constant = 1
                     self.constraintRightMap.constant = w * 4.5/10

@@ -67,13 +67,13 @@ class BDTMDT_VC: Base_VC {
                     self.constraintWidthLegendRight.constant = w/2
                 }
                 if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
-                    self.constraintWidthChart.constant = w * 5.5/10 - 0.5
+                    self.constraintWidthChart.constant = w * 5.5/10
                     self.constraintHeightChart.constant = h
                     self.constraintBottomChart.constant = 1
                     self.constraintRightChart.constant = w * 4.5/10
                     
                     self.constraintWidthLegend.constant = w * 4.5/10
-                    self.constraintHeightLegend.constant = h
+                    self.constraintHeightLegend.constant = h + 1
                     
                     
                     self.constraintHeightLegendLeft.constant = h

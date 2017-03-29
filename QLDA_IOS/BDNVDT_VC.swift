@@ -60,13 +60,13 @@ class BDNVDT_VC: Base_VC{
                     self.constraintHeightScrollLegend.constant = h - 310
                 }
                 if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
-                    self.constraintWidthChart.constant = w * 5.5/10 - 0.5
+                    self.constraintWidthChart.constant = w * 5.5/10
                     self.constraintHeightChart.constant = h
                     self.constraintBottomChart.constant = 1
                     self.constraintRightChart.constant = w * 4.5/10
                     
                     self.constraintWidthScrollLegend.constant = w * 4.5/10
-                    self.constraintHeightScrollLegend.constant = h
+                    self.constraintHeightScrollLegend.constant = h + 1
                 }
             }
         }
