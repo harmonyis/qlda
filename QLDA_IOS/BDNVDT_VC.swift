@@ -42,47 +42,34 @@ class BDNVDT_VC: Base_VC{
     @IBOutlet weak var constraintHeightLegend: NSLayoutConstraint!
     
     func setConstraint(height : CGFloat, width : CGFloat){
-        let w = width
-        var h = height
-        
-        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
-            // 64: height navigation
-            // 34: height header
-            h = h - 64 - 34
-            constraintWidthChart.constant = w
-            constraintHeightChart.constant = 310
-            constraintBottomChart.constant = h - 310 + 1
-            constraintRightChart.constant = 0
-            
-            constraintWidthScrollLegend.constant = w
-            constraintHeightScrollLegend.constant = h - 310
-            
-            /*
-            constraintHeightLegendLeft.constant = h - 310
-            constraintWidthLegendLeft.constant = w/2
-            constraintHeightLegendRight.constant = h - 310
-            constraintWidthLegendRight.constant = w/2*/
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                let hBar = UIApplication.shared.statusBarFrame.height +
+                    self.navigationController!.navigationBar.frame.height
+                let w = width
+                var h = height
+                // 34: height header
+                h = h - hBar - 34
+                if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+                    self.constraintWidthChart.constant = w
+                    self.constraintHeightChart.constant = 310
+                    self.constraintBottomChart.constant = h - 310 + 1
+                    self.constraintRightChart.constant = 0
+                    
+                    self.constraintWidthScrollLegend.constant = w
+                    self.constraintHeightScrollLegend.constant = h - 310
+                }
+                if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
+                    self.constraintWidthChart.constant = w * 5.5/10 - 0.5
+                    self.constraintHeightChart.constant = h
+                    self.constraintBottomChart.constant = 1
+                    self.constraintRightChart.constant = w * 4.5/10
+                    
+                    self.constraintWidthScrollLegend.constant = w * 4.5/10
+                    self.constraintHeightScrollLegend.constant = h
+                }
+            }
         }
-        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
-            // 34: height header
-            //let hBar = self.navigationController?.navigationBar.frame.height
-            //h = h - hBar! - 34
-            h = h - 32 - 34
-            constraintWidthChart.constant = w * 5.5/10 - 0.5
-            constraintHeightChart.constant = h
-            constraintBottomChart.constant = 1
-            constraintRightChart.constant = w * 4.5/10
-            
-            constraintWidthScrollLegend.constant = w * 4.5/10
-            constraintHeightScrollLegend.constant = h
-            
-            /*
-            constraintHeightLegendLeft.constant = h
-            constraintWidthLegendLeft.constant = w * 4/10
-            constraintHeightLegendRight.constant = 0
-            constraintWidthLegendRight.constant = 0*/
-        }
-        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

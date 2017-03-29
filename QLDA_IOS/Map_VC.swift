@@ -47,32 +47,34 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
     @IBOutlet weak var constraintHeightDSDA: NSLayoutConstraint!
     
     func setConstraint(height : CGFloat, width : CGFloat){
-        let w = width
-        var h = height
-        
-        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
-            h = h - 64 - 4
-            constraintWidthMap.constant = w
-            constraintHeightMap.constant = 310
-            constraintBottomMap.constant = h - 310 + 1
-            constraintRightMap.constant = 0
-            
-            constraintWidthDSDA.constant = w
-            constraintHeightDSDA.constant = h - 310
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                let hBar = UIApplication.shared.statusBarFrame.height +
+                    self.navigationController!.navigationBar.frame.height
+                let w = width
+                var h = height
+                // 4: height header
+                h = h - hBar - 4
+                if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+                    self.constraintWidthMap.constant = w
+                    self.constraintHeightMap.constant = 245
+                    self.constraintBottomMap.constant = h - 245 + 1
+                    self.constraintRightMap.constant = 0
+                    
+                    self.constraintWidthDSDA.constant = w
+                    self.constraintHeightDSDA.constant = h - 245
+                }
+                if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
+                    self.constraintWidthMap.constant = w * 5.5/10 - 0.5
+                    self.constraintHeightMap.constant = h
+                    self.constraintBottomMap.constant = 1
+                    self.constraintRightMap.constant = w * 4.5/10
+                    
+                    self.constraintWidthDSDA.constant = w * 4.5/10
+                    self.constraintHeightDSDA.constant = h + 1
+                }
+            }
         }
-        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
-            let hBar = self.navigationController?.navigationBar.frame.height
-            h = h - hBar! - 4
-            constraintWidthMap.constant = w * 5.5/10 - 0.5
-            constraintHeightMap.constant = h
-            constraintBottomMap.constant = 1
-            constraintRightMap.constant = w * 4.5/10
-            
-            constraintWidthDSDA.constant = w * 4.5/10
-            constraintHeightDSDA.constant = h + 1
-
-        }
-        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
