@@ -19,9 +19,11 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     //Constraint
     @IBOutlet weak var constraintHeightCalendar: NSLayoutConstraint!
     @IBOutlet weak var constraintWidthCalendar: NSLayoutConstraint!
+    @IBOutlet weak var constraintBottomCalendar: NSLayoutConstraint!
+    @IBOutlet weak var constraintRightCalendar: NSLayoutConstraint!
     
-    @IBOutlet weak var constraintHeightTable: NSLayoutConstraint!
-    @IBOutlet weak var constraintWidthTable: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightEvent: NSLayoutConstraint!
+    @IBOutlet weak var constraintWidthEvent: NSLayoutConstraint!
     
     // View
     
@@ -42,26 +44,44 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     var passIsEdit = false
     
     func setConstraint(height : CGFloat, width : CGFloat){
-        let w = width
-        var h = height
-        
-        //let hBar = self.navigationController?.navigationBar.frame.height
-        h = h - 32
-        
-        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
-            
-            constraintWidthCalendar.constant = w
-            constraintHeightCalendar.constant = 300
-            
-            constraintHeightTable.constant = h - 300
-            constraintWidthTable.constant = w
+        for view in fsCalendar.subviews{
+            if view.tag == 69{
+                view.removeFromSuperview()
+            }
         }
-        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
-            constraintWidthCalendar.constant = w * 6/10 - 0.5
-            constraintHeightCalendar.constant = h
-            
-            constraintHeightTable.constant = h
-            constraintWidthTable.constant = w * 4/10
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                let hBar = UIApplication.shared.statusBarFrame.height +
+                    self.navigationController!.navigationBar.frame.height
+                let w = width
+                var h = height
+                h = h - hBar
+                if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+                    
+                    self.constraintWidthCalendar.constant = w
+                    self.constraintHeightCalendar.constant = 250
+                    self.constraintBottomCalendar.constant = h - 250 + 1
+                    self.constraintRightCalendar.constant = 0
+                    
+                    self.constraintHeightEvent.constant = h - 250
+                    self.constraintWidthEvent.constant = w
+                }
+                if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
+                    self.constraintWidthCalendar.constant = w * 5.5/10
+                    self.constraintHeightCalendar.constant = h
+                    self.constraintBottomCalendar.constant = 1
+                    self.constraintRightCalendar.constant = w * 4.5/10
+                    
+                    self.constraintHeightEvent.constant = h + 1
+                    self.constraintWidthEvent.constant = w * 4.5/10
+                    
+                    let line : UIView = UIView()
+                    line.backgroundColor = UIColor(netHex: 0xe5e5e5)
+                    line.tag = 69
+                    line.frame = CGRect.init(x: w * 5.5/10 - 0.5,y: 0, width: 0.5, height: h)
+                    self.fsCalendar.addSubview(line)
+                }
+            }
         }
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
