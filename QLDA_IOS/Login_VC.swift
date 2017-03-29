@@ -7,21 +7,117 @@
 //
 
 import UIKit
-class Login_VC: Base {
+class Login_VC: Base, UITextFieldDelegate{
+    //constraint
+    @IBOutlet weak var constraintBottomLogin: NSLayoutConstraint!
+    @IBOutlet weak var constraintTopHeader: NSLayoutConstraint!
+    @IBOutlet weak var constraintWidthLogin: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightLogo: NSLayoutConstraint!
+    @IBOutlet weak var constraintBottomViewAll: NSLayoutConstraint!
     
+    //view
+    @IBOutlet weak var imgLogo: UIImageView!
     @IBOutlet weak var lblMesage: UILabel!
     @IBOutlet weak var lblMatKhau: UITextField!
     @IBOutlet weak var lblTenDangNhap: UITextField!
     //var service = ApiService()
+    
+    func setConstraint(height : CGFloat, width : CGFloat){
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                let hBar = UIApplication.shared.statusBarFrame.height
+                let h = height - hBar
+                let padding = h - 231
+                if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+                    self.imgLogo.isHidden = false
+                    self.constraintTopHeader.constant = padding/2 + 20
+                    self.constraintBottomLogin.constant = padding/2 - 20
+                    self.constraintWidthLogin.constant = width * 7.5/10
+                    self.constraintHeightLogo.constant = (padding/2 + 20 - 16)*7/10
+                }
+                if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
+                    self.imgLogo.isHidden = true
+                    self.constraintTopHeader.constant = padding/2 - 10
+                    self.constraintBottomLogin.constant = padding/2 + 10
+                    self.constraintWidthLogin.constant = width * 6/10
+                }
+            }
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setConstraint(height: size.height, width: size.width)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setConstraint(height: view.frame.height, width: view.frame.width)
 
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
+    
+    func handleKeyboardNotification(_ notification: Notification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+            //print(keyboardFrame)
+            
+            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            
+            //self.setConstraintView()
+            if isKeyboardShowing{
+                self.constraintBottomViewAll.constant = keyboardFrame!.height
+                //self.constraintHeightScrollView.constant = self.constraintHeightScrollView.constant  - keyboardFrame!.height
+            }
+            else{
+                self.constraintBottomViewAll.constant = 0
+            }
+            //self.constraintBottomViewAll.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
+            
+            
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                
+                self.view.layoutIfNeeded()
+                
+            }, completion: { (completed) in
+                if isKeyboardShowing {
+                    
+                }
+                
+            })
+            
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == lblTenDangNhap{
+            lblMatKhau.becomeFirstResponder()
+        }
+        else if textField == lblMatKhau{
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
+                    self.login()
+                }
+            }
+           
+        }
+        
+        return true
+    }
+    
+    
+    
     var szMatKhau : String = ""
     var szTenDangNhap : String = ""
     
     @IBAction func Login(_ sender: Any) {
+        
+        login()
+    }
+    
+    func login(){
         let ApiUrl : String = "\(UrlPreFix.QLDA.rawValue)/CheckUser"
         //let szUser=lblName.
         szMatKhau = (lblMatKhau.text)!
@@ -29,8 +125,8 @@ class Login_VC: Base {
         let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
-        
     }
+    
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
