@@ -30,6 +30,7 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        arrVanBan = []
         tbVanBanDuAn.rowHeight = UITableViewAutomaticDimension
         tbVanBanDuAn.estimatedRowHeight = 30
         tbVanBanDuAn.separatorColor = UIColor.clear
@@ -174,13 +175,13 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     
     func rotate() {
         if UIDevice.current.orientation.isLandscape {
-            self.tableLandDatasource = QLVanBanLandDatasource(arrVanBan: self.arrVanBan, table: self.tbVanBanDuAn,tenVanBanClick:download)
+            self.tableLandDatasource = QLVanBanLandDatasource(arrVanBan: self.arrVanBan, table: self.tbVanBanDuAn,ViewVB : self,tenVanBanClick:download)
             self.tbVanBanDuAn.dataSource = self.tableLandDatasource
             self.tbVanBanDuAn.delegate = self.tableLandDatasource
             self.tbVanBanDuAn.reloadData()
         }
         else {
-            self.tableDatasource = QLVanBanDatasource(arrVanBan: self.arrVanBan, table: self.tbVanBanDuAn,tenVanBanClick:download)
+            self.tableDatasource = QLVanBanDatasource(arrVanBan: self.arrVanBan, table: self.tbVanBanDuAn,ViewVB : self,tenVanBanClick:download)
             
             self.tbVanBanDuAn.dataSource = self.tableDatasource
             self.tbVanBanDuAn.delegate = self.tableDatasource

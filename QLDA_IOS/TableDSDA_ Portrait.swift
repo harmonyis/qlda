@@ -19,7 +19,7 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     var tbDSDA : UITableView?
     var uiViewDSDA : UIViewController?
     var m_textHightLight : String = String()
-    var m_caneSwipe = true
+    var m_caneSwipe = false
     // MARK: - Table view data source
     init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController , textHightLight : String = ""){
         super.init()
@@ -27,7 +27,7 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         self.tbDSDA = tbvDSDA
         self.uiViewDSDA = tbvcDSDA
         self.m_textHightLight = textHightLight
-        
+        m_caneSwipe = false
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -212,11 +212,13 @@ class TableDSDA_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if scrollView.contentOffset.y < -50 {
-            
+        if m_caneSwipe == false && scrollView.contentOffset.y < -50 {
+              m_caneSwipe = true
             self.uiViewDSDA?.viewDidLoad()
+          
+
         }
-    }
+           }
 
     
     let myColorBoder : UIColor = variableConfig.m_borderColor

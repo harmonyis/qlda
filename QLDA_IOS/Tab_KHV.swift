@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import XLPagerTabStrip
 
-class Tab_KHV: Base , IndicatorInfoProvider {
+class Tab_KHV: Base , IndicatorInfoProvider , UIScrollViewDelegate{
     
     let cellIdentifier = "postCell"
     var blackTheme = false
@@ -27,7 +27,7 @@ class Tab_KHV: Base , IndicatorInfoProvider {
     var bcheck = true
     var params : String = ""
     var ApiUrl : String = ""
-    
+     var m_caneSwipe = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,18 +41,6 @@ class Tab_KHV: Base , IndicatorInfoProvider {
         let m_year = self.m_calendar.component(.year, from: self.m_date)
         params = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"nam\" : \""+(String)(m_year)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         
-        for item in UiviewKHV.subviews {
-            if item.tag == 101 {
-                bcheck = false
-            }
-        }
-        if bcheck == true {
-            refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action:  #selector(Tab_KHV.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = variableConfig.m_swipeColor
-            refreshControl.tag = 101
-            self.UiviewKHV.addSubview(refreshControl)
-        }
         
         totalHeight = 0
         
@@ -61,6 +49,25 @@ class Tab_KHV: Base , IndicatorInfoProvider {
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataKHV, errorCallBack: alertAction)
         //   ApiService.Post(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: Error)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_caneSwipe == false && scrollView.contentOffset.y < -50 { //change 100 to whatever you want
+            for item in UiviewKHV.subviews {
+                
+                item.removeFromSuperview()
+                
+            }
+            totalHeight = 0
+            m_arrKHV = [String]()
+             m_arrDCKHV = [String]()
+            m_caneSwipe = true
+            self.viewDidLoad()
+        }else if scrollView.contentOffset.y >= 0 {
+            
+            m_caneSwipe = false
+        }
     }
     
     func GetDataKHV(data : SuccessEntity) {
@@ -544,7 +551,6 @@ class Tab_KHV: Base , IndicatorInfoProvider {
                 self.UiviewKHV.addSubview(ViewGroupTTCQDDT)
                 // đặt lại giá trị constrain cho view
                 let heightConstraint = self.UiviewKHV.heightAnchor.constraint(equalToConstant:  self.totalHeight + 5 )
-                  self.refreshControl?.endRefreshing()
                 //        self.UiviewKHV.isUserInteractionEnabled = true
                 NSLayoutConstraint.activate([heightConstraint])
                 

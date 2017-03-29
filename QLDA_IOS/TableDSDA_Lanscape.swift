@@ -21,6 +21,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
     var wTMDT : CGFloat = 0
     var wGN : CGFloat = 0
     var m_textHightLight : String = String()
+    var m_caneSwipe = false
     // MARK: - Table view data source
     init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController){
         super.init()
@@ -31,6 +32,7 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     init(_ tbvDSDA: UITableView,arrDSDA: [DanhSachDA], tbvcDSDA: UIViewController, wTMDT : CGFloat, wGN : CGFloat , textHightLight: String = ""){
         super.init()
+        m_caneSwipe = false
         self.DSDA = arrDSDA
         self.tbDSDA = tbvDSDA
         self.uiViewDSDA = tbvcDSDA
@@ -199,7 +201,15 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         self.tbDSDA?.reloadData()
     }
     
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_caneSwipe == false && scrollView.contentOffset.y < -50 {
+            m_caneSwipe = true
+            self.uiViewDSDA?.viewDidLoad()
+            
+            
+        }
+    }
     /*    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
      return self.DSDA.count
      }

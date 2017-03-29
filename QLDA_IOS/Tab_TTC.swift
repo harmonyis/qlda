@@ -78,7 +78,11 @@ class Tab_TTC: Base, IndicatorInfoProvider , UIScrollViewDelegate {
      func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView.contentOffset.y < -50 { //change 100 to whatever you want
-            
+            for item in uiViewThongTin.subviews {
+                
+                item.removeFromSuperview()
+                
+            }
             m_arrTTDA = [String]()
             self.viewDidLoad()
         }

@@ -9,7 +9,7 @@
 import Foundation
 class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    
+    var m_caneSwipe = false
     var m_dsGoiThau = [GoiThau]()
     var m_countGoiThau : Int = 0
     var m_TongGiaTri : Int = 0
@@ -23,16 +23,27 @@ class TableKHLCNT_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource
     var wTongGiaTri : CGFloat = 0
     
     // MARK: - Table view data source
-    init(_ tbvKHLC: UITableView, arrGoiThau: [GoiThau], arrthongTinKHLCNT : [String] , nTongGiaTri : Int, wTongGiaTri : CGFloat){
+    init(_ tbvKHLC: UITableView, arrGoiThau: [GoiThau], arrthongTinKHLCNT : [String] , nTongGiaTri : Int, wTongGiaTri : CGFloat,ViewKHLCNT : UIViewController){
         super.init()
         self.m_dsGoiThau = arrGoiThau
         self.tbvKHLCNT = tbvKHLC
         self.m_thongTinKHLCNT = arrthongTinKHLCNT
         self.m_TongGiaTri = nTongGiaTri
+        self.m_dsGoiThau = arrGoiThau
+        self.uiViewKHLCNT = ViewKHLCNT
         m_countGoiThau = m_dsGoiThau.count
         self.wTongGiaTri = wTongGiaTri
     }
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_caneSwipe == false && scrollView.contentOffset.y < -50 {
+            m_caneSwipe = true
+            self.uiViewKHLCNT?.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y > 0 {
+        self.m_caneSwipe = false
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         

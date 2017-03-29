@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import XLPagerTabStrip
 
-class Tab_QDDT: Base, IndicatorInfoProvider {
+class Tab_QDDT: Base, IndicatorInfoProvider , UIScrollViewDelegate{
     
     let cellIdentifier = "postCell"
     var blackTheme = false
@@ -21,46 +21,54 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var UiViewQDDT: UIView!
     var refreshControl: UIRefreshControl!
+    var m_caneSwipe = false
     var bcheck = true
     var params : String = ""
     var ApiUrl : String = ""
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+         m_caneSwipe = false
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+      m_caneSwipe = false
     }
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_caneSwipe == false && scrollView.contentOffset.y < -50 { //change 100 to whatever you want
+           
+            for item in UiViewQDDT.subviews {
+                
+                item.removeFromSuperview()
+                
+            }
+            totalHeight = 0
+            m_arrTTDA = [String]()
+            m_arrTDT = [String]()
+            m_caneSwipe = true
+           self.viewDidLoad()
+           
+        }
+        else if scrollView.contentOffset.y >= 0 {
+            
+            m_caneSwipe = false
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        
         UiViewQDDT.isHidden = true
         //  self.ViewData.autoresizesSubviews = true
          ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetQuyetDinhDauTu"
          params = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         UiViewQDDT.layer.borderColor = variableConfig.m_borderColor.cgColor
         UiViewQDDT.layer.borderWidth = 1
-        
-        for item in UiViewQDDT.subviews {
-            if item.tag == 101 {
-                bcheck = false
-            }
-        }
-        if bcheck == true {
-            refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action:  #selector(Tab_QDDT.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = variableConfig.m_swipeColor
-            refreshControl.tag = 101
-            self.UiViewQDDT.addSubview(refreshControl)
-        }
-
+      
           totalHeight = 0
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: GetDataQDDT, errorCallBack: alertAction)
@@ -563,7 +571,6 @@ class Tab_QDDT: Base, IndicatorInfoProvider {
                 self.UiViewQDDT.addSubview(ViewGroupTTCQDDT)
                 // đặt lại giá trị constrain cho view
                 let heightConstraint = self.UiViewQDDT.heightAnchor.constraint(equalToConstant:  self.totalHeight + 5 )
-                 self.refreshControl?.endRefreshing()
                 NSLayoutConstraint.activate([heightConstraint])
                 
             }

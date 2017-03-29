@@ -17,9 +17,6 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var m_NhomHD = [NhomHopDong]()
-    var indexTrangThaiDuAnCha = Set<Int>()
-    var indexGroupDuAnCon = Set<Int>()
-    var indexTrangThaiDuAnCon = Set<String>()
     var dataSource_Portrait : TableKHGN_Portrait?
     var dataSource_Lanscape : TableKHGN_Lanscape?
     var dGiaTriGiaiNgan : Double = 0
@@ -37,7 +34,9 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        
+        m_NhomHD = [NhomHopDong]()
+        dGiaTriGiaiNgan = 0
+        var dLKThanhToan = 0
         self.tbvKHGN.isHidden = true
         
         self.tbvKHGN.separatorColor = UIColor.clear
@@ -49,18 +48,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         //let szUser=lblName.
         params = "{ \"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\", \"szNam\" : \""+"2017"+"\", \"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         
-        for item in tbvKHGN.subviews {
-            if item.tag == 101 {
-                bcheck = false
-            }
-        }
-        if bcheck == true {
-            refreshControl = UIRefreshControl()
-            //refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = variableConfig.m_swipeColor
-            refreshControl.tag = 101
-            self.tbvKHGN.addSubview(refreshControl)
-        }
+       
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
         
@@ -76,14 +64,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         LoadTableView()
     }
     
-    func refresh(sender:AnyObject) {
-        m_NhomHD = [NhomHopDong]()
-       
-        ApiService.PostAsyncAc(url: ApiUrl, params: params,  callback: loadDataSuccess, errorCallBack: alertAction)
-        
-    }
-
-    
+      
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
@@ -444,7 +425,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
             self.uiViewHeaderLandscape.addSubview(uiView)
             constraintHeightHeader.constant = height_R1_Header + 30
             
-            self.dataSource_Lanscape = TableKHGN_Lanscape(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT)
+            self.dataSource_Lanscape = TableKHGN_Lanscape(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT, ViewKHGN: self)
             self.tbvKHGN.dataSource = self.dataSource_Lanscape
             self.tbvKHGN.delegate = self.dataSource_Lanscape
             self.tbvKHGN.reloadData()
@@ -453,7 +434,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
             
             constraintHeightHeader.constant = 0
-            self.dataSource_Portrait = TableKHGN_Portrait(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, tbvcDSDA: self, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT)
+            self.dataSource_Portrait = TableKHGN_Portrait(self.tbvKHGN, arrNhomHopDong: self.m_NhomHD, wGTHD : self.wGTHD, wLKGTTT : self.wLKGTTT, ViewKHGN: self)
             self.tbvKHGN.dataSource = self.dataSource_Portrait
             self.tbvKHGN.delegate = self.dataSource_Portrait
             self.tbvKHGN.reloadData()

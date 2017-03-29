@@ -18,7 +18,6 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
     var m_countGoiThau : Int = 0
     var m_TongGiaTri : Int = 0
     var m_thongTinKHLCNT : [String] = []
-    var indexTrangThaiGoiThau = Set<Int>()
     var blackTheme = false
     var dataSource_Lanscape : TableKHLCNT_Landscape?
     var dataSource_Portrait : TableKHLCNT_Portrait?
@@ -33,6 +32,10 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+         m_dsGoiThau = [GoiThau]()
+         m_countGoiThau = 0
+         m_TongGiaTri = 0
+         m_thongTinKHLCNT = []
         
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
@@ -55,18 +58,6 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
         params = "{\"szIdDA\": \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetGoiThau"
         
-        for item in tbDSDA.subviews {
-            if item.tag == 101 {
-                bcheck = false
-            }
-        }
-        if bcheck == true {
-            refreshControl = UIRefreshControl()
-           // refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = variableConfig.m_swipeColor
-            refreshControl.tag = 101
-            self.tbDSDA.addSubview(refreshControl)
-        }
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback:GetGoiThau, errorCallBack: alertAction)
         //  ApiService.Post(url: ApiUrl, params: params, callback: GetGoiThau, errorCallBack: AlertError)
@@ -165,7 +156,6 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
                             
                         }
                         self.m_thongTinKHLCNT = arrGoiThau
-                         self.refreshControl?.endRefreshing()
                         self.LoadTableView()
                     }
                 }
@@ -179,7 +169,7 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
         
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             
-            self.dataSource_Lanscape = TableKHLCNT_Landscape(self.tbDSDA, arrGoiThau: self.m_dsGoiThau ,arrthongTinKHLCNT : self.m_thongTinKHLCNT , nTongGiaTri : self.m_TongGiaTri, wTongGiaTri : self.wTongGiaTri)
+            self.dataSource_Lanscape = TableKHLCNT_Landscape(self.tbDSDA, arrGoiThau: self.m_dsGoiThau ,arrthongTinKHLCNT : self.m_thongTinKHLCNT , nTongGiaTri : self.m_TongGiaTri, wTongGiaTri : self.wTongGiaTri,ViewKHLCNT : self)
             self.tbDSDA.dataSource = self.dataSource_Lanscape
             self.tbDSDA.delegate = self.dataSource_Lanscape
             self.tbDSDA.reloadData()
@@ -189,7 +179,7 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
             
             
-            self.dataSource_Portrait = TableKHLCNT_Portrait(self.tbDSDA, arrGoiThau: self.m_dsGoiThau ,arrthongTinKHLCNT : self.m_thongTinKHLCNT , nTongGiaTri : self.m_TongGiaTri, wTongGiaTri : self.wTongGiaTri)
+            self.dataSource_Portrait = TableKHLCNT_Portrait(self.tbDSDA, arrGoiThau: self.m_dsGoiThau ,arrthongTinKHLCNT : self.m_thongTinKHLCNT , nTongGiaTri : self.m_TongGiaTri, wTongGiaTri : self.wTongGiaTri,ViewKHLCNT : self)
             self.tbDSDA.dataSource = self.dataSource_Portrait
             self.tbDSDA.delegate = self.dataSource_Portrait
             self.tbDSDA.reloadData()
@@ -245,26 +235,7 @@ class Tab_KHLCNT: Base ,IndicatorInfoProvider{
         }
         return attrStr
     }
-    func duAnConClickDetail(sender: UITapGestureRecognizer)
-    {
-        
-        let value : Int = (sender.view?.tag)!
-        
-        if self.indexTrangThaiGoiThau.contains(value) {
-            self.indexTrangThaiGoiThau.remove(value)
-        }
-        else {
-            self.indexTrangThaiGoiThau.insert(value)
-            
-        }
-        self.tbDSDA.rowHeight = UITableViewAutomaticDimension
-        self.tbDSDA.estimatedRowHeight = 60
-        self.tbDSDA.beginUpdates()
-        self.tbDSDA.endUpdates()
-        self.tbDSDA.reloadData()
-    }
-    
-    init(itemInfo: IndicatorInfo) {
+       init(itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         super.init(nibName: nil, bundle: nil)
     }

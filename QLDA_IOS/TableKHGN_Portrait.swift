@@ -17,21 +17,31 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
     var indexGroupDuAnCon = Set<Int>()
     var indexTrangThaiDuAnCon = Set<String>()
     var tbDSDA : UITableView?
-    var uiViewDSDA : UIViewController?
-    
+    var uiViewKHGN : UIViewController?
+    var m_caneSwipe = false
     var wGTHD : CGFloat = 0
     var wLKGTTT : CGFloat = 0
     
     // MARK: - Table view data source
-    init(_ tbvDSDA: UITableView,arrNhomHopDong: [NhomHopDong], tbvcDSDA: UIViewController, wGTHD : CGFloat, wLKGTTT : CGFloat){
+    init(_ tbvDSDA: UITableView,arrNhomHopDong: [NhomHopDong], wGTHD : CGFloat, wLKGTTT : CGFloat, ViewKHGN : UIViewController){
         super.init()
         self.m_NhomHopDong = arrNhomHopDong
         self.tbDSDA = tbvDSDA
-        self.uiViewDSDA = tbvcDSDA
         self.wGTHD = wGTHD
         self.wLKGTTT = wLKGTTT
-        
+        self.uiViewKHGN = ViewKHGN
     }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_caneSwipe == false && scrollView.contentOffset.y < -50 {
+            m_caneSwipe = true
+            self.uiViewKHGN?.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y > 0 {
+            self.m_caneSwipe = false
+        }
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -338,15 +348,7 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         self.tbDSDA?.endUpdates()
         self.tbDSDA?.reloadData()
     }
-    func ClickTenDuAn(sender: UITapGestureRecognizer)
-    {
-        let value : String = (sender.view?.accessibilityLabel)!
-        variableConfig.m_szIdDuAn = (sender.view?.tag)!
-        variableConfig.m_szTenDuAn = value
-        let vc = uiViewDSDA?.storyboard?.instantiateViewController(withIdentifier: "Tab_") as! Tab_
-        uiViewDSDA?.navigationController?.pushViewController(vc, animated: true)
-    }
-    // Hàm set chữ bold
+       // Hàm set chữ bold
     func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
         let fontSize = UIFont.systemFontSize
         let attrs = [

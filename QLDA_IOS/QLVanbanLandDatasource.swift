@@ -14,10 +14,13 @@ class QLVanBanLandDatasource : NSObject, UITableViewDataSource, UITableViewDeleg
     var arrVanBan  : [VanBanEntity]
     var table : UITableView
     var tenVBClick : (VanBanEntity) -> Void
-    init(arrVanBan : [VanBanEntity], table : UITableView,tenVanBanClick: @escaping (VanBanEntity) -> Void) {
+    var m_caneSwipe = false
+    var uiViewVB : UIViewController?
+    init(arrVanBan : [VanBanEntity], table : UITableView,ViewVB : UIViewController,tenVanBanClick: @escaping (VanBanEntity) -> Void) {
         self.arrVanBan = arrVanBan
         self.table = table
         self.tenVBClick = tenVanBanClick
+        self.uiViewVB = ViewVB
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellLand", for: indexPath) as! VanBanLandTableViewCell
@@ -40,6 +43,16 @@ class QLVanBanLandDatasource : NSObject, UITableViewDataSource, UITableViewDeleg
         cell.view2.isUserInteractionEnabled = true
         
         return cell
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_caneSwipe == false && scrollView.contentOffset.y < -50 {
+            m_caneSwipe = true
+            self.uiViewVB?.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y > 0 {
+            self.m_caneSwipe = false
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrVanBan.count

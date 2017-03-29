@@ -15,12 +15,26 @@ class QLVanBanDatasource : NSObject, UITableViewDataSource ,UITableViewDelegate{
     var arrOpen : Set<Int> = []
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
     var tenVBClick : (VanBanEntity) -> Void
-    
-    init (arrVanBan : [VanBanEntity], table : UITableView, tenVanBanClick: @escaping (VanBanEntity) -> Void) {
+    var uiViewVB : UIViewController?
+    var m_caneSwipe = false
+    init (arrVanBan : [VanBanEntity], table : UITableView , ViewVB : UIViewController, tenVanBanClick: @escaping (VanBanEntity) -> Void) {
         self.arrVanBan = arrVanBan
         self.table = table
         self.tenVBClick = tenVanBanClick
+        self.uiViewVB = ViewVB
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_caneSwipe == false && scrollView.contentOffset.y < -50 {
+            m_caneSwipe = true
+            self.uiViewVB?.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y > 0 {
+            self.m_caneSwipe = false
+        }
+    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("Chỉ số \(section)")
