@@ -9,13 +9,13 @@
 import UIKit
 import Charts
 
-class BDNVDT_VC: Base_VC{
+class BDNVDT_VC: Base_VC, UIScrollViewDelegate {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
    
     @IBOutlet weak var pieCharNV: PieChartView!
 
-    
+     var m_caneSwipe = false
     @IBOutlet weak var scView: UIScrollView!
     @IBOutlet weak var viewLegend: UIView!
     
@@ -72,6 +72,21 @@ class BDNVDT_VC: Base_VC{
         }
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_caneSwipe == false && scrollView.contentOffset.y < -50 { //change 100 to whatever you want
+            
+           arrNguonVons = []
+            m_caneSwipe = true
+            self.viewDidLoad()
+            
+        }
+        else if scrollView.contentOffset.y >= 0 {
+            
+            m_caneSwipe = false
+        }
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         setConstraint(height: size.height, width: size.width)
         //setLegend()
@@ -85,18 +100,6 @@ class BDNVDT_VC: Base_VC{
         pieCharNV.isHidden = true
         viewLegend.isHidden = true
         
-        for item in scView.subviews {
-            if item.tag == 101 {
-                bcheck = false
-            }
-        }
-        if bcheck == true {
-            refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action:  #selector(DSDA_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = UIColor(netHex: 0x21AFFA)
-            refreshControl.tag = 101
-            self.scView.addSubview(refreshControl)
-        }
         
          ApiUrl  = "\(UrlPreFix.QLDA.rawValue)/GetBieuDoNguonVon"
          params  = "{\"szUsername\" : \"demo1\", \"szPassword\": \"abc@123\"}"

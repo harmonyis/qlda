@@ -36,7 +36,7 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
     var listEventCurrentMonth : [Int] = [Int]()
     var listEventPreMonth : [Int] = [Int]()
     var listEventNextMonth : [Int] = [Int]()
-    
+    var m_canceSwipe = false
     let currentDate = Date()
     let calendar = Calendar.current
     
@@ -84,6 +84,21 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
             }
         }
     }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 { //change 100 to whatever you want
+            
+        
+            m_canceSwipe = true
+            self.viewDidLoad()
+            
+        }
+        else if scrollView.contentOffset.y >= 0 {
+            
+            m_canceSwipe = false
+        }
+    }
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         setConstraint(height: size.height, width: size.width)
     }

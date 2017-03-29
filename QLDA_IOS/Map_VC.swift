@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
+class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate , UIScrollViewDelegate {
 
     @IBOutlet weak var  UiMapView: GMSMapView!
     
@@ -31,7 +31,7 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
     var indexTrangThaiDuAnCon = Set<String>()
     var dataSource_Portrait : TableDSDAMap_Portrait?
     var dataSource_Lanscape : TableDSDA_Lanscape?
-    
+    var m_canceSwipe = false
     static var dicMarker: [Int: GMSMarker] = [:]
     
     var mapView : GMSMapView? = nil
@@ -76,6 +76,28 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
             }
         }
     }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 { //change 100 to whatever you want
+            
+             m_arrDSDA = []
+             DSDA = [DanhSachDA]()
+             m_DSDA = [DanhSachDA]()
+             indexTrangThaiDuAnCha = Set<Int>()
+             indexGroupDuAnCon = Set<Int>()
+             indexTrangThaiDuAnCon = Set<String>()
+            checkLoadView = 0
+             Map_VC.dicMarker = [:]
+            m_canceSwipe = true
+            self.viewDidLoad()
+            
+        }
+        else if scrollView.contentOffset.y >= 0 {
+            
+            m_canceSwipe = false
+        }
+    }
+
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         setConstraint(height: size.height, width: size.width)

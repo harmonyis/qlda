@@ -34,7 +34,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     var indexTrangThaiDuAnCon = Set<String>()
     var lstDuAnExists : [String] = []
     var DuAnSelected : String = "0"
-    
+    var m_canceSwipe = false
     var refreshControl: UIRefreshControl!
     var bcheck = true
     var params : String = ""
@@ -74,6 +74,16 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                     }
                 }
             }
+        }
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 {
+            m_canceSwipe = true
+            self.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y > 0 {
+            self.m_canceSwipe = false
         }
     }
     

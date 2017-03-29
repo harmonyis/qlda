@@ -3,7 +3,7 @@
 import UIKit
 import Charts
 
-class BDTMDT_VC: Base_VC {
+class BDTMDT_VC: Base_VC , UIScrollViewDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -18,7 +18,7 @@ class BDTMDT_VC: Base_VC {
     @IBOutlet weak var scView: UIScrollView!
     var ApiUrl : String = ""
     var params : String = ""
-    
+    var m_canceSwipe = false
     var refreshControl: UIRefreshControl!
     var bcheck = true
     
@@ -87,6 +87,20 @@ class BDTMDT_VC: Base_VC {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         setConstraint(height: size.height, width: size.width)
         setLegend()
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 { //change 100 to whatever you want
+            
+          arrGiaTris = []
+            m_canceSwipe = true
+            self.viewDidLoad()
+            
+        }
+        else if scrollView.contentOffset.y >= 0 {
+            
+            m_canceSwipe = false
+        }
     }
     
     override func viewDidLoad() {

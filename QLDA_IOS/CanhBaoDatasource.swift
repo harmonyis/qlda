@@ -23,10 +23,25 @@ class CanhBaoDatasource : NSObject, UITableViewDelegate, UITableViewDataSource,U
     var arrCanhBao : [CanhBaoEntity]
     var setClick : Set<String> = []
     var setHeaderClick : Set<String> = []
-    init(arr:[CanhBaoEntity], table : UITableView) {
+    var uiViewCB : UIViewController?
+    var m_canceSwipe = false
+    init(arr:[CanhBaoEntity], table : UITableView,ViewCB : UIViewController) {
         self.arrCanhBao = arr
         self.table = table
+        self.uiViewCB = ViewCB
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 {
+            m_canceSwipe = true
+            self.uiViewCB?.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y > 0 {
+            self.m_canceSwipe = false
+        }
+    }
+
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      print("selected in \(indexPath.section):\(indexPath.row)")

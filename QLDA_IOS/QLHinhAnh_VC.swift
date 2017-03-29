@@ -10,12 +10,12 @@ import UIKit
 import ImageViewer
 import XLPagerTabStrip
 
-class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate, IndicatorInfoProvider, UIGestureRecognizerDelegate  {
+class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate, IndicatorInfoProvider, UIGestureRecognizerDelegate  , UIScrollViewDelegate{
     
     @IBOutlet weak var clv: UICollectionView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     var imagePicker = UIImagePickerController()
-    
+    var m_canceSwipe = false
     let reuseIdentifier = "cell" // also enter this string as the cell identifier in the storyboard
     var items : [ImageEntity] = []
     var itemInfo = IndicatorInfo(title: "Hình ảnh dự án")
@@ -74,6 +74,17 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
             imagePicker.allowsEditing = false
             
             self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 {
+            m_canceSwipe = true
+            self.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y > 0 {
+            self.m_canceSwipe = false
         }
     }
     

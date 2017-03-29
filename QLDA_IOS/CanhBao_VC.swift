@@ -30,7 +30,7 @@ class CanhBao_VC: Base_VC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //printError()
+        arrData = []
         
         print("reload")
         var nib = UINib(nibName: "CanhBaoTableViewCell", bundle: nil)
@@ -58,19 +58,7 @@ class CanhBao_VC: Base_VC {
         self.tbCanhBao.estimatedRowHeight = 300
         self.tbCanhBao.estimatedSectionHeaderHeight = 100
         
-        for item in tbCanhBao.subviews {
-            if item.tag == 101 {
-                bcheck = false
-            }
-        }
-        if bcheck == true {
-            refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action:  #selector(CanhBao_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = variableConfig.m_swipeColor
-            refreshControl.tag = 101
-            self.tbCanhBao.addSubview(refreshControl)
-            }
-        loadData()
+             loadData()
         
         //print(addMonth(date: "20/11/2016",month: "2"))
         //self.datasource = CanhBaoDatascource()
@@ -153,7 +141,6 @@ class CanhBao_VC: Base_VC {
                             arrSection.append(ChamPDHSQT(type: 4, ngayNhanDuHS: item[2], thoiGianQD: item[4], ngayDuKienPD: addMonth(date: item[2], month: item[4]), ngayCham: item[5], ghiChu: "Ngày phê duyệt: \(item[3]) chậm so với quy định"))
                         }
                         canhBao.arrSection = arrSection
-                          self.refreshControl?.endRefreshing()
                         arrData.append(canhBao)
                     }
                 }
@@ -164,7 +151,7 @@ class CanhBao_VC: Base_VC {
                         self.lblHeader.text = "Danh sách dự án cảnh báo (\(self.arrData.count) dự án)"
                         if UIDevice.current.orientation.isLandscape {
                             
-                            self.datasourceLand = CanhBaoLandDatasource(arrData: self.arrData, table : self.tbCanhBao)
+                            self.datasourceLand = CanhBaoLandDatasource(arrData: self.arrData, table : self.tbCanhBao ,ViewCB : self)
                             self.tbCanhBao.dataSource = self.datasourceLand
                             self.tbCanhBao.delegate = self.datasourceLand
                             self.tbCanhBao.reloadData()
@@ -172,7 +159,7 @@ class CanhBao_VC: Base_VC {
                             
                             
                         } else {
-                            self.datasource = CanhBaoDatasource(arr: self.arrData, table : self.tbCanhBao)
+                            self.datasource = CanhBaoDatasource(arr: self.arrData, table : self.tbCanhBao , ViewCB : self)
                             self.tbCanhBao.dataSource = self.datasource
                             self.tbCanhBao.delegate = self.datasource
                             self.tbCanhBao.reloadData()
@@ -189,7 +176,7 @@ class CanhBao_VC: Base_VC {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.current.orientation.isLandscape {
-            self.datasourceLand = CanhBaoLandDatasource(arrData: self.arrData, table : self.tbCanhBao)
+            self.datasourceLand = CanhBaoLandDatasource(arrData: self.arrData, table : self.tbCanhBao , ViewCB : self)
             self.tbCanhBao.dataSource = self.datasourceLand
             self.tbCanhBao.delegate = self.datasourceLand
             self.tbCanhBao.reloadData()
@@ -197,7 +184,7 @@ class CanhBao_VC: Base_VC {
  
             
         } else {
-            self.datasource = CanhBaoDatasource(arr: self.arrData, table : self.tbCanhBao)
+            self.datasource = CanhBaoDatasource(arr: self.arrData, table : self.tbCanhBao , ViewCB : self)
             self.tbCanhBao.dataSource = self.datasource
             self.tbCanhBao.delegate = self.datasource
             self.tbCanhBao.reloadData()

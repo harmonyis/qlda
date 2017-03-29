@@ -13,12 +13,23 @@ class CanhBaoLandDatasource : NSObject, UITableViewDelegate, UITableViewDataSour
     var table : UITableView
     var setHeaderClick : Set<String> = []
     let myColorBoder : UIColor = UIColor(netHex: 0xcccccc)
-    
-    init (arrData : [CanhBaoEntity],table : UITableView) {
+    var uiViewCB : UIViewController?
+    var m_canceSwipe = false
+    init (arrData : [CanhBaoEntity],table : UITableView,ViewCB : UIViewController) {
         self.arrCanhBao = arrData
         self.table = table
+        self.uiViewCB = ViewCB
     }
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 {
+            m_canceSwipe = true
+            self.uiViewCB?.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y > 0 {
+            self.m_canceSwipe = false
+        }
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.arrCanhBao.count
     }
