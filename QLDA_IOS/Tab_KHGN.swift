@@ -56,7 +56,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         }
         if bcheck == true {
             refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            //refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
             refreshControl.tintColor = variableConfig.m_swipeColor
             refreshControl.tag = 101
             self.tbvKHGN.addSubview(refreshControl)

@@ -38,7 +38,8 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     var bcheck = true
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DSDA = [DanhSachDA]()
+        m_DSDA = [DanhSachDA]()
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         uiViewHeaderDSDA.isHidden = true
@@ -47,21 +48,6 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         self.m_textHightLight = ""
         self.tbDSDA.separatorColor = UIColor.clear
         self.tbDSDA.register(UINib(nibName: "CustomCellDSDA_Lanscape", bundle: nil), forCellReuseIdentifier: "CustomCellDSDA_Lanscape")
-        
-        // thêm swipe cho trang
-        
-        for item in tbDSDA.subviews {
-            if item.tag == 101 {
-                bcheck = false
-            }
-        }
-        if bcheck == true {
-        refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:  #selector(DSDA_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
-        refreshControl.tintColor = variableConfig.m_swipeColor
-        refreshControl.tag = 101
-        self.tbDSDA.addSubview(refreshControl)
-}
        
         
         self.automaticallyAdjustsScrollViewInsets = false
@@ -80,16 +66,19 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         self.tbDSDA.estimatedSectionHeaderHeight = 30
         
     }
+  
+
     func refresh(sender:AnyObject) {
         self.DSDA = []
-         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
+        ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
+
         
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         LoadTableView()
     }
     
-    
+ 
     
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
@@ -148,7 +137,6 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                         self.uiViewHeaderDSDA.isHidden = false
                         self.uiSearchTDA.isHidden = false
                         self.tbDSDA.isHidden = false
-                        self.refreshControl?.endRefreshing()
                     }
                 }
                 
@@ -258,7 +246,11 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
         LoadTableView()
         
     }
-    func LoadTableView(){
+   
+    
+    
+    
+        func LoadTableView(){
         
         widthDSDA = self.view.bounds.size.width
         heightDSDA = self.view.bounds.size.height
@@ -431,6 +423,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             self.uiViewHeaderDSDA.addSubview(lable)
             
             self.dataSource_Portrait = TableDSDA_Portrait(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self , textHightLight : m_textHightLight)
+            print(self.DSDA)
             self.tbDSDA.dataSource = self.dataSource_Portrait
             self.tbDSDA.delegate = self.dataSource_Portrait
             self.tbDSDA.reloadData()
