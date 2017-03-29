@@ -21,6 +21,12 @@ class CanhBao_VC: Base_VC {
     var password = variableConfig.m_szPassWord
     var arrData : [CanhBaoEntity] = []
     
+    var apiUrl : String = ""
+    var params : String = ""
+    
+    var refreshControl: UIRefreshControl!
+    var bcheck = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +57,19 @@ class CanhBao_VC: Base_VC {
         self.tbCanhBao.separatorColor = UIColor.clear
         self.tbCanhBao.estimatedRowHeight = 300
         self.tbCanhBao.estimatedSectionHeaderHeight = 100
+        
+        for item in tbCanhBao.subviews {
+            if item.tag == 101 {
+                bcheck = false
+            }
+        }
+        if bcheck == true {
+            refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action:  #selector(CanhBao_VC.refresh(sender: )), for: UIControlEvents.valueChanged)
+            refreshControl.tintColor = variableConfig.m_swipeColor
+            refreshControl.tag = 101
+            self.tbCanhBao.addSubview(refreshControl)
+            }
         loadData()
         
         //print(addMonth(date: "20/11/2016",month: "2"))
@@ -63,6 +82,12 @@ class CanhBao_VC: Base_VC {
 
         // Do any additional setup after loading the view.
     }
+    
+    func refresh(sender:AnyObject) {
+        self.arrData = []
+         ApiService.PostAsyncAc(url: apiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,8 +95,8 @@ class CanhBao_VC: Base_VC {
     }
     
     func loadData() {
-        let apiUrl = "\(UrlPreFix.QLDA.rawValue)/GetHopDongCham"
-        let params = "{\"szUsername\":\"\(self.userName)\",\"szPassword\":\"\(self.password)\"}"
+         apiUrl = "\(UrlPreFix.QLDA.rawValue)/GetHopDongCham"
+         params = "{\"szUsername\":\"\(self.userName)\",\"szPassword\":\"\(self.password)\"}"
         
         ApiService.PostAsyncAc(url: apiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
     }
@@ -128,7 +153,7 @@ class CanhBao_VC: Base_VC {
                             arrSection.append(ChamPDHSQT(type: 4, ngayNhanDuHS: item[2], thoiGianQD: item[4], ngayDuKienPD: addMonth(date: item[2], month: item[4]), ngayCham: item[5], ghiChu: "Ngày phê duyệt: \(item[3]) chậm so với quy định"))
                         }
                         canhBao.arrSection = arrSection
-                        
+                          self.refreshControl?.endRefreshing()
                         arrData.append(canhBao)
                     }
                 }
@@ -152,6 +177,7 @@ class CanhBao_VC: Base_VC {
                             self.tbCanhBao.delegate = self.datasource
                             self.tbCanhBao.reloadData()
                         }
+                        
 
                     }
                 }

@@ -23,7 +23,6 @@ extension UILabel {
 
 
 
-
 extension String {
     subscript(pos: Int) -> String {
         precondition(pos >= 0, "character position can't be negative")

@@ -10,10 +10,11 @@ import UIKit
 import Foundation
 import XLPagerTabStrip
 
-class Tab_TTC: Base, IndicatorInfoProvider {
+class Tab_TTC: Base, IndicatorInfoProvider , UIScrollViewDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     let cellIdentifier = "postCell"
     var blackTheme = false
     var itemInfo = IndicatorInfo(title: "Thông tin chung")
@@ -25,7 +26,7 @@ class Tab_TTC: Base, IndicatorInfoProvider {
     var ApiUrl : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.scrollView.delegate = self
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         
@@ -35,43 +36,14 @@ class Tab_TTC: Base, IndicatorInfoProvider {
         uiViewThongTin.layer.borderWidth = 1
         
         ApiUrl = "\(UrlPreFix.QLDA.rawValue)/GetThongTinDuAn"
-        
-        // thêm swipe cho trang
-        
-        for item in uiViewThongTin.subviews {
-            if item.tag == 101 {
-                bcheck = false
-            }
-        }
-        if bcheck == true {
-            refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action:  #selector(Tab_TTC.refresh(sender: )), for: UIControlEvents.valueChanged)
-            refreshControl.tintColor = variableConfig.m_swipeColor
-            refreshControl.tag = 101
-            
-            
-            //refreshControl.contentScaleFactor = 1
-            //refreshControl.
-            self.uiViewThongTin.addSubview(refreshControl)
-        }
-         params = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
+     
+     
+        params = "{\"szIdDuAn\" : \""+(String)(variableConfig.m_szIdDuAn)+"\",\"szUsername\" : \""+variableConfig.m_szUserName+"\", \"szPassword\": \""+variableConfig.m_szPassWord+"\"}"
         
         ApiService.PostAsyncAc(url: ApiUrl, params: params,  callback: loadDataSuccess, errorCallBack: alertAction)
         
     }
-        func refresh(sender:AnyObject) {
-          m_arrTTDA = [String]()
-            for item in uiViewThongTin.subviews {
-                if item.tag == 101 {
-                    bcheck = false
-                }
-                else {
-                item.removeFromSuperview()
-                }
-            }
-            ApiService.PostAsyncAc(url: ApiUrl, params: params,  callback: loadDataSuccess, errorCallBack: alertAction)
-            
-        }
+        
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
         if response.statusCode != 200 {
@@ -99,6 +71,17 @@ class Tab_TTC: Base, IndicatorInfoProvider {
         }
         LoadDataTTC()
         
+    }
+    
+   
+    
+     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if scrollView.contentOffset.y < -50 { //change 100 to whatever you want
+            
+            m_arrTTDA = [String]()
+            self.viewDidLoad()
+        }
     }
     
     func LoadDataTTC(){
