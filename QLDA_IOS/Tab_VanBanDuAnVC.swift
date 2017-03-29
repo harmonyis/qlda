@@ -54,7 +54,6 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
             refreshControl.tag = 101
             self.tbVanBanDuAn.addSubview(refreshControl)
         }
-        
         loadData()
         
         
@@ -81,7 +80,7 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     }
     
     func saveFile(arrData : [Int8], fileName : String) {
-        let myArray:[Int8] = [ 0x4d, 0x2a, 0x41, 0x2a, 0x53, 0x2a, 0x48]
+        let myArray:[Int8] = arrData
         let pointer = UnsafeBufferPointer(start:myArray, count:myArray.count)
         let data = Data(buffer:pointer)
         
@@ -163,8 +162,9 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
                 
                 DispatchQueue.global(qos: .userInitiated).async {
                     DispatchQueue.main.async {
-                        self.rotate()
-                         self.refreshControl?.endRefreshing()
+                        //self.rotate()
+                        self.viewWillAppear(true)
+                        self.refreshControl?.endRefreshing()
                     }
                 }
                 
@@ -193,7 +193,10 @@ class Tab_VanBanDuAnVC: Base , IndicatorInfoProvider, UIDocumentInteractionContr
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         rotate()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rotate()
+    }
     /*
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
      return CGFloat(150)

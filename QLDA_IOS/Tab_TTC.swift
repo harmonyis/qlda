@@ -92,6 +92,7 @@ class Tab_TTC: Base, IndicatorInfoProvider , UIScrollViewDelegate {
                 self.activityIndicator.stopAnimating()
                 
                 self.uiViewThongTin.isHidden = false
+                //self.uiViewThongTin.subviews.forEach { $0.removeFromSuperview() }
                 
                 var icount = 0
                 var totalHeight : CGFloat = 5
@@ -164,7 +165,12 @@ class Tab_TTC: Base, IndicatorInfoProvider , UIScrollViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if m_arrTTDA.count > 0 {
+        //LoadDataTTC()
+        }
         super.viewWillAppear(animated)
+        
+        
     }
     
     

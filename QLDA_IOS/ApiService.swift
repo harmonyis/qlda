@@ -149,10 +149,11 @@ class ApiService {
         //var message :String  = ""
         
         let config = URLSessionConfiguration.default // Session Configuration
-        config.timeoutIntervalForRequest = 30
+        //config.timeoutIntervalForRequest = 30
+        config.timeoutIntervalForRequest = 120
         let session = URLSession(configuration: config) // Load configuration into Session
         let url = URL(string: url)!
-        config.timeoutIntervalForRequest = 120
+        
         let postString = params
         let theRequest = NSMutableURLRequest(url: url as URL)
         theRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")

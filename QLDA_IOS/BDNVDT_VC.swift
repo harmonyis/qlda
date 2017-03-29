@@ -30,8 +30,56 @@ class BDNVDT_VC: Base_VC{
     var refreshControl: UIRefreshControl!
     var bcheck = true
     
+    @IBOutlet weak var constraintWidthChart: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightChart: NSLayoutConstraint!
+    @IBOutlet weak var constraintBottomChart: NSLayoutConstraint!
+    @IBOutlet weak var constraintRightChart: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintWidthScrollLegend: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightScrollLegend: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintWidthLegend: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightLegend: NSLayoutConstraint!
+    
+    func setConstraint(height : CGFloat, width : CGFloat){
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                let hBar = UIApplication.shared.statusBarFrame.height +
+                    self.navigationController!.navigationBar.frame.height
+                let w = width
+                var h = height
+                // 34: height header
+                h = h - hBar - 34
+                if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+                    self.constraintWidthChart.constant = w
+                    self.constraintHeightChart.constant = 310
+                    self.constraintBottomChart.constant = h - 310 + 1
+                    self.constraintRightChart.constant = 0
+                    
+                    self.constraintWidthScrollLegend.constant = w
+                    self.constraintHeightScrollLegend.constant = h - 310
+                }
+                if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
+                    self.constraintWidthChart.constant = w * 5.5/10 - 0.5
+                    self.constraintHeightChart.constant = h
+                    self.constraintBottomChart.constant = 1
+                    self.constraintRightChart.constant = w * 4.5/10
+                    
+                    self.constraintWidthScrollLegend.constant = w * 4.5/10
+                    self.constraintHeightScrollLegend.constant = h
+                }
+            }
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setConstraint(height: size.height, width: size.width)
+        //setLegend()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setConstraint(height: view.frame.height, width: view.frame.width)
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
         pieCharNV.isHidden = true
@@ -69,7 +117,6 @@ class BDNVDT_VC: Base_VC{
         
         let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
-            print(dic)
             if let items = dic["GetBieuDoNguonVonResult"] as? [[String]] {
                 //for item in items{
                 self.arrNguonVons = items[0]
@@ -130,7 +177,9 @@ class BDNVDT_VC: Base_VC{
         //let screenSize:CGRect = UIScreen.main.bounds
     
         // tao Legend Custom: dua legend vao 2 View  duoi bieu do
-        var yA = 20
+        var yA = 10
+        var maxWidth : CGFloat = 0
+        let size = CGSize(width: 1000, height: 20)
         for i in 0..<arrNguonVons.count {
             // tao o vuong mau sac ung voi mau tren bieu do
             let dynamicSquare = UIView()
@@ -146,16 +195,18 @@ class BDNVDT_VC: Base_VC{
             dynamicLabel.text = arrNguonVons[i] + ": " + String(arrGiaTris[i].doubleToString)
             
             // dua cac thong tin vao view
-            dynamicSquare.frame = CGRect(x: 5, y: yA, width: 15, height: 15)
-            dynamicLabel.frame = CGRect(x: 22, y: yA, width: Int(view.frame.width), height: 21)
             
+            dynamicSquare.frame = CGRect(x: 5, y: yA + 3, width: 15, height: 15)
+            dynamicLabel.frame = CGRect(x: 22, y: yA, width: Int(view.frame.width), height: 20)
+            
+            let temp = (dynamicLabel.text?.computeTextSize(size: size, font: dynamicLabel.font).width)! + 22 + 4
+            maxWidth = max(maxWidth, temp)
             viewLegend.addSubview(dynamicSquare)
             viewLegend.addSubview(dynamicLabel)
             yA = yA + 20
         }
-        
+        constraintHeightLegend.constant = CGFloat(yA)
+        constraintWidthLegend.constant = maxWidth
     }
-   
-
 }
 

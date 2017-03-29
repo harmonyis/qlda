@@ -38,8 +38,53 @@ class Map_VC: Base_VC, UISearchBarDelegate, GMSMapViewDelegate {
     static var mapItems : [MapItem]? = nil
     var makers : [GMSMarker]? = nil
     
+    @IBOutlet weak var constraintWidthMap: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightMap: NSLayoutConstraint!
+    @IBOutlet weak var constraintBottomMap: NSLayoutConstraint!
+    @IBOutlet weak var constraintRightMap: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintWidthDSDA: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightDSDA: NSLayoutConstraint!
+    
+    func setConstraint(height : CGFloat, width : CGFloat){
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                let hBar = UIApplication.shared.statusBarFrame.height +
+                    self.navigationController!.navigationBar.frame.height
+                let w = width
+                var h = height
+                // 4: height header
+                h = h - hBar - 4
+                if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+                    self.constraintWidthMap.constant = w
+                    self.constraintHeightMap.constant = 245
+                    self.constraintBottomMap.constant = h - 245 + 1
+                    self.constraintRightMap.constant = 0
+                    
+                    self.constraintWidthDSDA.constant = w
+                    self.constraintHeightDSDA.constant = h - 245
+                }
+                if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
+                    self.constraintWidthMap.constant = w * 5.5/10 - 0.5
+                    self.constraintHeightMap.constant = h
+                    self.constraintBottomMap.constant = 1
+                    self.constraintRightMap.constant = w * 4.5/10
+                    
+                    self.constraintWidthDSDA.constant = w * 4.5/10
+                    self.constraintHeightDSDA.constant = h + 1
+                }
+            }
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setConstraint(height: size.height, width: size.width)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setConstraint(height: view.frame.height, width: view.frame.width)
         
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
