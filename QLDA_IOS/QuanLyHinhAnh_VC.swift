@@ -59,12 +59,12 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
                 h = h - hBar - 4
                 if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
                     self.constraintWidthHinhAnh.constant = w
-                    self.constraintHeightHinhAnh.constant = 250
-                    self.constraintBottomHinhAnh.constant = h - 250 + 1
+                    self.constraintHeightHinhAnh.constant = 227
+                    self.constraintBottomHinhAnh.constant = h - 227 + 1
                     self.constraintRightHinhAnh.constant = 0
                     
                     self.constraintWidthDSDA.constant = w
-                    self.constraintHeightDSDA.constant = h - 250
+                    self.constraintHeightDSDA.constant = h - 227
                 }
                 if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
                     self.constraintWidthHinhAnh.constant = w * 5.5/10
