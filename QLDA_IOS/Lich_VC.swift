@@ -15,7 +15,7 @@ class Lich_Cell : UITableViewCell{
     @IBOutlet weak var lblTime: UILabel!
 }
 
-class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource {
+class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDelegate, UITableViewDataSource ,UIScrollViewDelegate{
     //Constraint
     @IBOutlet weak var constraintHeightCalendar: NSLayoutConstraint!
     @IBOutlet weak var constraintWidthCalendar: NSLayoutConstraint!

@@ -21,7 +21,7 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
     @IBOutlet weak var searchContact: UISearchBar!
     var arrayMenu = [Dictionary<String,String>]()
     var listContact = [UserContact]()
-    
+    var m_canceSwipe = false
     var passContactID:Int!
     var passContactType:Int!
     var passContactName:String!
@@ -112,7 +112,16 @@ class ChatMain_VC: Base_VC , UITableViewDataSource, UITableViewDelegate, UISearc
  
         self.tblListContact.reloadData()
     }
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 {
+            m_canceSwipe = true
+            self.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y > 0 {
+            self.m_canceSwipe = false
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : ChatMain_Cell = tableView.dequeueReusableCell(withIdentifier: "cellContact") as! ChatMain_Cell

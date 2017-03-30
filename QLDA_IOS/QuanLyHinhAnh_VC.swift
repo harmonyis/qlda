@@ -10,7 +10,7 @@ import UIKit
 import ImageViewer
 
 
-class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UISearchBarDelegate  {
+class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UISearchBarDelegate , UIScrollViewDelegate {
     
     @IBOutlet weak var clv: UICollectionView!
     
