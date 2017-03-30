@@ -24,6 +24,7 @@ class Tab_TTC: Base, IndicatorInfoProvider , UIScrollViewDelegate {
     var bcheck = true
     var params : String = ""
     var ApiUrl : String = ""
+    var m_canceSwipe = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.scrollView.delegate = self
@@ -77,14 +78,19 @@ class Tab_TTC: Base, IndicatorInfoProvider , UIScrollViewDelegate {
     
      func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        if scrollView.contentOffset.y < -50 { //change 100 to whatever you want
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 { //change 100 to whatever you want
             for item in uiViewThongTin.subviews {
                 
                 item.removeFromSuperview()
                 
             }
+            m_canceSwipe = true
             m_arrTTDA = [String]()
             self.viewDidLoad()
+        }
+        else if scrollView.contentOffset.y >= 0 {
+            
+            m_canceSwipe = false
         }
     }
     
