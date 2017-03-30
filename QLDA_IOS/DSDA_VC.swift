@@ -356,7 +356,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wTotal), y: 0 , width: (wTMDT), height: 50)
+            uiView.frame = CGRect(x: (20 + wTotal), y: 0 , width: (wGN), height: 50)
             uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
@@ -366,14 +366,14 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Giá trị giải ngân"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (wTMDT), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (wGN), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
             self.uiViewHeaderDSDA.addSubview(uiView)
             
             uiView = UIView()
-            uiView.frame = CGRect(x: (20 + wTotal + wTMDT), y: 0 , width: (wGN), height: 50)
+            uiView.frame = CGRect(x: (20 + wTotal + wGN), y: 0 , width: (wTMDT), height: 50)
             uiView.layer.borderColor = variableConfig.m_borderColor.cgColor
             uiView.layer.borderWidth = 0.5
             uiView.tag = 100
@@ -383,7 +383,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
             lable.text = "Tổng mức đầu tư"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (wGN), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (wTMDT), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
@@ -484,7 +484,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
     func computeWidthCell(){
         var temp : CGFloat = 0
         let size = CGSize(width: 1000 , height: 30)
-        let font = UIFont.boldSystemFont(ofSize: 13)
+        let font = UIFont.systemFont(ofSize: 13)
         for item in DSDA{
             temp = variableConfig.convert(item.GiaTriGiaiNgan!).computeTextSize(size : size, font : font).width
             //temp = calulaterTextSize(text: variableConfig.convert(item.GiaTriGiaiNgan!), size: CGSize(width: 1000 , height: 30)).width
@@ -503,8 +503,8 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
                 wTMDT = max(wTMDT, temp)
             }
         }
-        wGN = wGN + 10
-        wTMDT = wTMDT + 10
+        wGN = wGN + 10 + 5
+        wTMDT = wTMDT + 10 + 5
         print(wGN,wTMDT)
     }
 }
