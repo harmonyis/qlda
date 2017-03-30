@@ -110,9 +110,9 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
                         
                         let itemNhomHopDong = self.m_NhomHD.first(where: { $0.LoaiHopDong! == itemHD[6] })
                         
-                        itemNhomHopDong?.GiaTriLK = Config.convert((String)((Float)((itemNhomHopDong?.GiaTriLK)!)! + (Float)(itemHD[7])!))
+                        itemNhomHopDong?.GiaTriLK = (String)((Float)((itemNhomHopDong?.GiaTriLK)!)! + (Float)(itemHD[7])!)
                         
-                        itemNhomHopDong?.GiaTriHopDong = Config.convert((String)((Float)((itemNhomHopDong?.GiaTriHopDong)!)! + (Float)(itemHD[1])!))
+                        itemNhomHopDong?.GiaTriHopDong = (String)((Float)((itemNhomHopDong?.GiaTriHopDong)!)! + (Float)(itemHD[1])!)
                         var itemHDCon = [HopDong]()
                         itemHDCon = (itemNhomHopDong?.NhomHopDong)!
                         
@@ -151,14 +151,14 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
                 
                 let itemNhomHopDong = self.m_NhomHD.first(where: { $0.LoaiHopDong! == "Tong" })
                 
-                itemNhomHopDong?.GiaTriLK = Config.convert((String)(dLKThanhToan))
+                itemNhomHopDong?.GiaTriLK = ((String)(dLKThanhToan))
                 
-                itemNhomHopDong?.GiaTriHopDong = Config.convert((String)(dGiaTriGiaiNgan))
+                itemNhomHopDong?.GiaTriHopDong = ((String)(dGiaTriGiaiNgan))
                 
                 let size = CGSize(width: 1000 , height: 30)
                 let font = UIFont.systemFont(ofSize: 13)
-                wGTHD = (itemNhomHopDong?.GiaTriHopDong?.computeTextSize(size: size, font: font).width)! + 15
-                wLKGTTT = (itemNhomHopDong?.GiaTriLK?.computeTextSize(size: size, font: font).width)! + 15
+                wGTHD = (variableConfig.convert((itemNhomHopDong?.GiaTriHopDong)!).computeTextSize(size: size, font: font).width) + 15
+                wLKGTTT = (variableConfig.convert((itemNhomHopDong?.GiaTriLK)!).computeTextSize(size: size, font: font).width) + 15
                 wGTHD = max(60,wGTHD)
                 wLKGTTT = max(60,wLKGTTT)
                 DispatchQueue.global(qos: .userInitiated).async {
