@@ -83,7 +83,7 @@ class QLHinhAnh_VC: Base ,UICollectionViewDataSource, UICollectionViewDelegate,U
             m_canceSwipe = true
             self.viewDidLoad()
         }
-        else if scrollView.contentOffset.y > 0 {
+        else if scrollView.contentOffset.y >= 0 {
             self.m_canceSwipe = false
         }
     }

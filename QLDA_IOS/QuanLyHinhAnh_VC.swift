@@ -287,7 +287,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint(height: view.frame.height, width: view.frame.width)
-        //self.navigationItem.title = "Danh sách hình ảnh"
+       
         self.idDuAn = 142
         self.listName = "DuAn"
         self.userName = variableConfig.m_szUserName

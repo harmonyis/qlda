@@ -12,6 +12,7 @@ import SwiftR
 class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tbNotification: UITableView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var btAllRead: UIButton!
     
     let _nSizePage = 14
@@ -21,10 +22,17 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
     let myColorDefault : UIColor = UIColor(netHex: 0x000000)
     let myColorUnRead : UIColor = UIColor(netHex: 0x0e83d5)
     let mycolorSelected : UIColor = UIColor.red
-    
+    var m_canceSwipe = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        _currentPage = 1
+        firstRun = true
+        _notificationItems = []
         self.getNotifications()
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        self.tbNotification.isHidden = true
         
         self.tbNotification.rowHeight = UITableViewAutomaticDimension
         self.tbNotification.estimatedRowHeight = 30
@@ -77,6 +85,8 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
                 self.LoadTableView()
+                self.activityIndicator.stopAnimating()
+                self.tbNotification.isHidden = false
             }
         }
     }
@@ -223,6 +233,21 @@ class Notification_VC: Base_VC, UITableViewDelegate, UITableViewDataSource {
             try ChatHub.chatHub.invoke("MakeReadNotification", arguments: [Config.userID, idNotification!])
         }
         catch {}
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if m_canceSwipe == false && scrollView.contentOffset.y < -50 { //change 100 to whatever you want
+            
+            
+            m_canceSwipe = true
+            self.viewDidLoad()
+            
+        }
+        else if scrollView.contentOffset.y >= 0 {
+            
+            m_canceSwipe = false
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

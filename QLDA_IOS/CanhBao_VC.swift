@@ -12,6 +12,7 @@ class CanhBao_VC: Base_VC {
 
     @IBOutlet weak var tbCanhBao: UITableView!
     
+    @IBOutlet weak var indicatorAction: UIActivityIndicatorView!
     
     @IBOutlet weak var lblHeader: UILabel!
 
@@ -30,6 +31,9 @@ class CanhBao_VC: Base_VC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        indicatorAction.startAnimating()
+        indicatorAction.hidesWhenStopped = true
+        tbCanhBao.isHidden = true
         arrData = []
         
         print("reload")
@@ -164,7 +168,8 @@ class CanhBao_VC: Base_VC {
                             self.tbCanhBao.delegate = self.datasource
                             self.tbCanhBao.reloadData()
                         }
-                        
+                       self.indicatorAction.stopAnimating()
+                        self.tbCanhBao.isHidden = false
 
                     }
                 }
