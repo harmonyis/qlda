@@ -12,6 +12,15 @@ import ImageViewer
 
 class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UISearchBarDelegate , UIScrollViewDelegate {
     
+    
+    @IBOutlet weak var constraintWidthHinhAnh: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightHinhAnh: NSLayoutConstraint!
+    @IBOutlet weak var constraintBottomHinhAnh: NSLayoutConstraint!
+    @IBOutlet weak var constraintRightHinhAnh: NSLayoutConstraint!
+    
+    @IBOutlet weak var constraintWidthDSDA: NSLayoutConstraint!
+    @IBOutlet weak var constraintHeightDSDA: NSLayoutConstraint!
+    
     @IBOutlet weak var clv: UICollectionView!
     
     @IBOutlet weak var tbDanhSachDuAn: UITableView!
@@ -38,6 +47,37 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     var refreshControl: UIRefreshControl!
     var bcheck = true
     var params : String = ""
+    
+    func setConstraint(height : CGFloat, width : CGFloat){
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                let hBar = UIApplication.shared.statusBarFrame.height +
+                    self.navigationController!.navigationBar.frame.height
+                let w = width
+                var h = height
+                // 4: height header
+                h = h - hBar - 4
+                if UIDeviceOrientationIsPortrait(UIDevice.current.orientation){
+                    self.constraintWidthHinhAnh.constant = w
+                    self.constraintHeightHinhAnh.constant = 250
+                    self.constraintBottomHinhAnh.constant = h - 250 + 1
+                    self.constraintRightHinhAnh.constant = 0
+                    
+                    self.constraintWidthDSDA.constant = w
+                    self.constraintHeightDSDA.constant = h - 250
+                }
+                if UIDeviceOrientationIsLandscape(UIDevice.current.orientation){
+                    self.constraintWidthHinhAnh.constant = w * 5.5/10
+                    self.constraintHeightHinhAnh.constant = h
+                    self.constraintBottomHinhAnh.constant = 1
+                    self.constraintRightHinhAnh.constant = w * 4.5/10
+                    
+                    self.constraintWidthDSDA.constant = w * 4.5/10
+                    self.constraintHeightDSDA.constant = h + 1
+                }
+            }
+        }
+    }
         
     func GetDSHASuccess(data : Data) {
         //let result = String(data: data, encoding: String.Encoding.utf8)
@@ -185,6 +225,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
         self.presentImageGallery(galleryViewController)
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setConstraint(height: size.height, width: size.width)
         self.clv.reloadData()
     }
     func galleryConfiguration() -> GalleryConfiguration {
@@ -245,6 +286,7 @@ class QuanLyHinhAnh_VC: Base_VC ,UICollectionViewDataSource, UICollectionViewDel
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setConstraint(height: view.frame.height, width: view.frame.width)
         //self.navigationItem.title = "Danh sách hình ảnh"
         self.idDuAn = 142
         self.listName = "DuAn"
