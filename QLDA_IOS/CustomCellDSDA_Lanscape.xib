@@ -186,13 +186,13 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="constrainWidthGTGN" destination="pm9-fv-AQ2" id="js4-is-UUr"/>
-                <outlet property="constrainWidthGiaiDoan" destination="rwn-zQ-o90" id="HDb-Sw-bmp"/>
+                <outlet property="constrainLeftGTGN" destination="ncX-Us-OYo" id="xQ0-Ae-rmR"/>
+                <outlet property="constrainLeftGiaiDoan" destination="rwn-zQ-o90" id="1hc-ej-kuJ"/>
+                <outlet property="constrainLeftNhomDA" destination="eqf-nH-EVR" id="8El-EO-ZLb"/>
+                <outlet property="constrainLeftTGTH" destination="21F-Jk-KtF" id="TDy-o9-XmY"/>
+                <outlet property="constrainLeftTMDT" destination="pm9-fv-AQ2" id="nTe-9R-NbO"/>
+                <outlet property="constrainLeftTenDuAn" destination="lXN-sq-KSa" id="PuB-kC-kYI"/>
                 <outlet property="constrainWidthGroup" destination="fMW-sX-BQO" id="D9k-9v-v6S"/>
-                <outlet property="constrainWidthNhomDA" destination="eqf-nH-EVR" id="jpL-Kj-itj"/>
-                <outlet property="constrainWidthTGTH" destination="21F-Jk-KtF" id="rFp-04-QXo"/>
-                <outlet property="constrainWidthTMDT" destination="ncX-Us-OYo" id="wNr-6J-iAg"/>
-                <outlet property="constrainWidthTenDuAn" destination="lXN-sq-KSa" id="yZJ-El-af3"/>
                 <outlet property="imgGroup" destination="Jzy-cn-atj" id="g1O-kU-yRr"/>
                 <outlet property="lblGTGN" destination="ILx-Yh-snx" id="gPW-SO-Idx"/>
                 <outlet property="lblGiaiDoan" destination="qmq-ei-6qn" id="COo-5p-yQq"/>
