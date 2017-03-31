@@ -21,7 +21,6 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
     var dataSource_Lanscape : TableKHGN_Lanscape?
     var dGiaTriGiaiNgan : Double = 0
     var dLKThanhToan : Double = 0
-    
     var wGTHD : CGFloat = 0
     var wLKGTTT : CGFloat = 0
     
@@ -36,7 +35,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         activityIndicator.hidesWhenStopped = true
         m_NhomHD = [NhomHopDong]()
         dGiaTriGiaiNgan = 0
-        var dLKThanhToan = 0
+        self.dLKThanhToan = 0
         self.tbvKHGN.isHidden = true
         
         self.tbvKHGN.separatorColor = UIColor.clear
