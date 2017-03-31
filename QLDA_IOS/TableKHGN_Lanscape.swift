@@ -73,8 +73,8 @@ class TableKHGN_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
         let itemNhomHD :NhomHopDong = self.m_NhomHopDong[section + 1]
         cell.lblLoaiHD.text = itemNhomHD.LoaiHopDong!
         
-        cell.lblGTHD.text = itemNhomHD.GiaTriHopDong
-        cell.lblLKGTTT.text = itemNhomHD.GiaTriLK
+        cell.lblGTHD.text = variableConfig.convert(itemNhomHD.GiaTriHopDong!)
+        cell.lblLKGTTT.text = variableConfig.convert(itemNhomHD.GiaTriLK!)
         
         cell.uiHeader_SNK.layer.borderColor = myColorBoder.cgColor
         cell.uiHeader_SNK.layer.borderWidth = 0.5

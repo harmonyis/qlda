@@ -73,8 +73,8 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.lblTenGoiThau.font = UIFont.systemFont(ofSize: 13)
         cell.lblTenGoiThau.textAlignment = NSTextAlignment.left
         
-        cell.lblGTHD.text = itemNhomHD.GiaTriHopDong
-        cell.lblLKGTTT.text = itemNhomHD.GiaTriLK
+        cell.lblGTHD.text = variableConfig.convert(itemNhomHD.GiaTriHopDong!)
+        cell.lblLKGTTT.text = variableConfig.convert(itemNhomHD.GiaTriLK!)
         
         cell.uiViewLoaiGoiThau.layer.borderColor = myColorBoder.cgColor
         cell.uiViewLoaiGoiThau.layer.borderWidth = 0.5
@@ -135,8 +135,8 @@ class TableKHGN_Portrait: NSObject, UITableViewDelegate, UITableViewDataSource {
             cell.constraintRightR2GTHD.constant = wLKGTTT + 20
             cell.constraintRightR2TongGiaTri.constant = wGTHD + wLKGTTT + 20
             
-            cell.lblGTHD.text = itemNhomHD.GiaTriHopDong
-            cell.lblLKGTTT.text = itemNhomHD.GiaTriLK
+            cell.lblGTHD.text = variableConfig.convert(itemNhomHD.GiaTriHopDong!)
+            cell.lblLKGTTT.text = variableConfig.convert(itemNhomHD.GiaTriLK!)
             
             cell.uiViewHeader_R1_GTHD.layer.borderColor = myColorBoder.cgColor
             cell.uiViewHeader_R1_GTHD.layer.borderWidth = 0.5
