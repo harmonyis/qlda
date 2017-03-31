@@ -197,12 +197,18 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         if let dic = json as? [String: Any] {
             let host = dic["Host"] as? Int
             if let id = host{
-                if id == Config.userID{
-                    self.isHost = true
-                }
-                else{
-                    self.barRoiNhom.isEnabled = true
-                }
+                DispatchQueue.global(qos: .userInitiated).async {
+                    DispatchQueue.main.async {
+                        if id == Config.userID{
+                            self.isHost = true
+                            self.btnAddUsers.isHidden = false
+                        }
+                        else{
+                            self.barRoiNhom.isEnabled = true
+                            self.btnAddUsers.isHidden = true
+                        }
+                    }
+                }                
             }
             
         }
