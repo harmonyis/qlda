@@ -364,9 +364,9 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "Giá trị giải ngân"
+            lable.text = "Tổng mức đầu tư"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (wGN), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (wTMDT), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
@@ -381,9 +381,9 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             lable = UILabel()
             lable.textColor = UIColor.white
             lable.font = UIFont(name:"HelveticaNeue-Bold", size: 13.0)
-            lable.text = "Tổng mức đầu tư"
+            lable.text = "Giá trị giải ngân"
             lable.textAlignment = .center
-            lable.frame = CGRect(x: 0, y: 0 , width: (wTMDT), height: 50)
+            lable.frame = CGRect(x: 0, y: 0 , width: (wGN), height: 50)
             lable.numberOfLines = 0
             
             uiView.addSubview(lable)
@@ -393,7 +393,7 @@ class DSDA_VC: Base_VC , UISearchBarDelegate{
             // self.uiViewHeaderDSDA.frame = CGRect(x: 0,y: 116 ,width: self.widthDSDA , height: 30)
             // uiViewHeader.tag = 100
             
-            self.dataSource_Lanscape = TableDSDA_Lanscape(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self, wTMDT : wTMDT, wGN : wGN , textHightLight : m_textHightLight)
+            self.dataSource_Lanscape = TableDSDA_Lanscape(self.tbDSDA, arrDSDA: self.DSDA, tbvcDSDA: self, wTMDT : wGN, wGN : wTMDT , textHightLight : m_textHightLight)
             self.tbDSDA.dataSource = self.dataSource_Lanscape
             self.tbDSDA.delegate = self.dataSource_Lanscape
             self.tbDSDA.reloadData()
