@@ -123,16 +123,18 @@ class Login_VC: Base, UITextFieldDelegate{
         szMatKhau = (lblMatKhau.text)!
         szTenDangNhap = (lblTenDangNhap.text)!
         let params : String = "{\"szUsername\" : \""+szTenDangNhap+"\", \"szPassword\": \""+szMatKhau+"\"}"
-        
+        print(ApiUrl)
         ApiService.PostAsyncAc(url: ApiUrl, params: params, callback: loadDataSuccess, errorCallBack: alertAction)
     }
     
     func loadDataSuccess(data : SuccessEntity) {
         let response = data.response as! HTTPURLResponse
+        print(response.statusCode)
         if response.statusCode != 200 {
             serverError(success: data)
             return
         }
+ 
         let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             let response = data.response as! HTTPURLResponse
