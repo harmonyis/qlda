@@ -9,6 +9,7 @@
 import UIKit
 
 class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    @IBOutlet weak var barRoiNhom: UIBarButtonItem!
     
     @IBOutlet weak var btnAddUsers: UIButton!
     @IBOutlet weak var viewTop: UIView!
@@ -27,6 +28,8 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
    
     var imageTemp : UIImage?
     
+    var isHost : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.title = "Thông tin nhóm"
@@ -44,12 +47,12 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         
         imagePicker.delegate = self
         
-       
+       // self.tblListUser.separatorStyle = .none
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadUsers()
+        loadInfoGroup()
     }
     
     override func didReceiveMemoryWarning() {
@@ -151,6 +154,14 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        if self.isHost{
+            return true
+        }
+        return false
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             let alert = UIAlertController(title: "Thông báo", message: "Bạn muốn xóa người dùng \"\(self.listUser[indexPath.row].Name!)\" khỏi nhóm?", preferredStyle: UIAlertControllerStyle.alert)
@@ -173,6 +184,35 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         return listUser.count
     }
     
+    func loadInfoGroup(){
+        
+        let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetInfoGroup/\(groupID!)"
+        print(apiUrl)
+        ApiService.Get(url: apiUrl, callback: callbackGetGroup, errorCallBack: errorGetUsers)
+    }
+    
+    func callbackGetGroup(data : Data) {
+        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        
+        if let dic = json as? [String: Any] {
+            let host = dic["Host"] as? Int
+            if let id = host{
+                if id == Config.userID{
+                    self.isHost = true
+                }
+                else{
+                    self.barRoiNhom.isEnabled = true
+                }
+            }
+            
+        }
+        DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
+                self.loadUsers()
+            }
+        }
+        
+    }
     
     func loadUsers(){
        // ChatCommon.listContact = [UserContact]()
