@@ -219,8 +219,13 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         
         let params : String = "{\"nUserID\" : \(Config.userID), \"nYear\": \(year), \"nMonth\": \(month), \"nDay\":\(day)}"
         print(params)
-        ApiService.Post(url: apiUrl, params: params, callback: { (data) in
-            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: { (data) in
+            let response = data.response as! HTTPURLResponse
+            if response.statusCode != 200 {
+                self.serverError(success: data)
+                return
+            }
+            let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
             
@@ -249,11 +254,7 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
             }
             
             self.reloadTable()
-        }, errorCallBack: { (error) in
-            self.reloadTable()
-            print("error")
-            print(error.localizedDescription)
-        })
+        }, errorCallBack: alertAction)
     }
     
     func getEventOfMonth(_ date : Date){
@@ -265,8 +266,13 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
         
         let params : String = "{\"nUserID\" : \(Config.userID), \"nMonth\": \(month), \"nYear\":\(year)}"
         print(params)
-        ApiService.Post(url: apiUrl, params: params, callback: { (data) in
-            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: { (data) in
+            let response = data.response as! HTTPURLResponse
+            if response.statusCode != 200 {
+                self.serverError(success: data)
+                return
+            }
+            let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
             if let methodResult = json as? [String:Any] {
                 if let items = methodResult["getEventOfMonthResult"] as? [String] {
                     for item in items{
@@ -278,25 +284,22 @@ class Lich_VC: Base_VC, FSCalendarDelegate, FSCalendarDataSource, UITableViewDel
                 }
             }
             self.reloadCalendar()
-        }, errorCallBack: { (error) in
-            self.reloadCalendar()
-            print("error")
-            print(error.localizedDescription)
-        })
+        }, errorCallBack: alertAction)
     }
     
     func deleteCalendarSchedule(_ id : Int){
         let apiUrl : String = "\(UrlPreFix.Map.rawValue)/deleteCalendarSchedule"
         let params : String = "{\"nCalendarScheduleID\" : \(id)}"
         print(params)
-        ApiService.Post(url: apiUrl, params: params, callback: { (data) in
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: { (data) in
+            let response = data.response as! HTTPURLResponse
+            if response.statusCode != 200 {
+                self.serverError(success: data)
+                return
+            }
             self.getEventOfMonth(self.fsCalendar.selectedDate)
             self.getCalendarByUserAndDate(self.fsCalendar.selectedDate)
-        }, errorCallBack: { (error) in
-            self.reloadCalendar()
-            print("error")
-            print(error.localizedDescription)
-        })
+        }, errorCallBack: alertAction)
     }
     
     func reloadCalendar(){

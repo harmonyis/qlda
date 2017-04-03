@@ -43,14 +43,16 @@ class ThongTinCaNhan_VC: Base_VC, UIImagePickerControllerDelegate, UINavigationC
 
         let params : String = "{\"szUsername\" : \"\(Config.userName)\", \"szPassword\": \"\(Config.passWord)\",\"szNewPass\" : \"\(newPass!)\"}"
 
-        ApiService.Post(url: apiUrl, params: params, callback: callbackChangePass, errorCallBack: { (error) in
-            print("error")
-            print(error.localizedDescription)
-        })
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: callbackChangePass, errorCallBack: alertAction)
     }
     
-    func callbackChangePass(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func callbackChangePass(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
 
         if let dic = json as? [String:Any] {
             let msg = dic["ThayDoiMatKhauResult"] as! String
@@ -89,10 +91,7 @@ class ThongTinCaNhan_VC: Base_VC, UIImagePickerControllerDelegate, UINavigationC
             
             let params : String = "{\"userID\": \"\(String(Config.userID))\", \"imageData\":\(array)}"
             //let params : String = "{\"groupID\" : \"\(String(groupID!))\", \"userID\": \"\(String(ChatHub.userID))\"}"
-            ApiService.Post(url: apiUrl, params: params, callback: callbackChagePicture, errorCallBack: { (error) in
-                print("error")
-                print(error.localizedDescription)
-            })
+            ApiService.PostAsyncAc(url: apiUrl, params: params, callback: callbackChagePicture, errorCallBack: alertAction)
             
         } else{
             //print("Something went wrong")
@@ -108,7 +107,12 @@ class ThongTinCaNhan_VC: Base_VC, UIImagePickerControllerDelegate, UINavigationC
         
     }
     
-    func callbackChagePicture(data : Data) {
+    func callbackChagePicture(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
         Config.profilePicture = imageTemp
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {

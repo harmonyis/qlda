@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ThongTinLich_VC: UIViewController, UITextFieldDelegate, UITextViewDelegate{
+class ThongTinLich_VC: Base, UITextFieldDelegate, UITextViewDelegate{
     @IBOutlet weak var lblHeader: UILabel!
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var dtpStart: UIDatePicker!
@@ -185,8 +185,13 @@ class ThongTinLich_VC: UIViewController, UITextFieldDelegate, UITextViewDelegate
         
         let params : String = "{\"nUserID\" : \(Config.userID), \"nYearSchedule\": \(year), \"nMonthSchedule\": \(month), \"nDaySchedule\": \(day), \"sTitle\": \"\(title)\", \"nHourStart\": \(hourStart), \"nMinuteStart\": \(minuteStart), \"nHourEnd\": \(hourEnd), \"nMinuteEnd\": \(minuteEnd), \"sNote\": \"\(note)\"}"
         print(params)
-        ApiService.Post(url: apiUrl, params: params, callback: { (data) in
-            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: { (data) in
+            let response = data.response as! HTTPURLResponse
+            if response.statusCode != 200 {
+                self.serverError(success: data)
+                return
+            }
+            let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
             if let dic = json as? [String:Any] {
                 if let id = dic["insertCalendarScheduleIOSResult"] as? Int {
                     print("\(id)")
@@ -197,10 +202,7 @@ class ThongTinLich_VC: UIViewController, UITextFieldDelegate, UITextViewDelegate
                 }
             }
 
-        }, errorCallBack: { (error) in
-            print("error")
-            print(error.localizedDescription)
-        })
+        }, errorCallBack: alertAction)
     }
     
     func editCalendar(id : Int, date : Date, start : Date, end : Date, title : String, note : String){
@@ -216,15 +218,17 @@ class ThongTinLich_VC: UIViewController, UITextFieldDelegate, UITextViewDelegate
 
         let params : String = "{\"nCalendarScheduleID\" : \(id), \"nYearSchedule\": \(year), \"nMonthSchedule\": \(month), \"nDaySchedule\": \(day), \"sTitle\": \"\(title)\", \"nHourStart\": \(hourStart), \"nMinuteStart\": \(minuteStart), \"nHourEnd\": \(hourEnd), \"nMinuteEnd\": \(minuteEnd), \"sNote\": \"\(note)\"}"
         print(params)
-        ApiService.Post(url: apiUrl, params: params, callback: { (data) in
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: { (data) in
+            let response = data.response as! HTTPURLResponse
+            if response.statusCode != 200 {
+                self.serverError(success: data)
+                return
+            }
             DispatchQueue.global(qos: .userInitiated).async {
                 DispatchQueue.main.async {
                     _ = self.navigationController?.popViewController(animated: true)
                 }
             }
-        }, errorCallBack: { (error) in
-            print("error")
-            print(error.localizedDescription)
-        })
+        }, errorCallBack: alertAction)
     }
 }

@@ -201,13 +201,6 @@ class Login_VC: Base, UITextFieldDelegate{
             }
         }
     }
-    func AlertError(error : Error) {
-        let message = error.localizedDescription
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -233,12 +226,16 @@ class Login_VC: Base, UITextFieldDelegate{
         
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_Getcontacts/\(Config.userID)"
         print(apiUrl)
-        ApiService.Get(url: apiUrl, callback: callbackGetContacts, errorCallBack: errorGetContacts)
+        ApiService.GetAsyncAc(url: apiUrl, callback: callbackGetContacts, errorCallBack: alertAction)
     }
     
-    func callbackGetContacts(data : Data) {
-        //let result = String(data: data, encoding: String.Encoding.utf8)
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func callbackGetContacts(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         
         if let dic = json as? [[String:Any]] {
             for item in dic{
@@ -270,9 +267,6 @@ class Login_VC: Base, UITextFieldDelegate{
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
-    }
-    
-    func errorGetContacts(error : Error) {
     }
     
     func GetPendingCalendar(){

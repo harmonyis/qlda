@@ -14,7 +14,7 @@ class ChatCreateGroup_Cell: UITableViewCell{
     @IBOutlet weak var btnCheck: UIButton!
 }
 
-class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
+class ChatCreateGroup_VC: Base, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate{
     
     @IBOutlet weak var tblListContact: UITableView!
     var listUserChecked : [Int] = []
@@ -99,11 +99,16 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_CreateGroupChat"
 
         let params : String = "{\"groupName\" : \""+getGroupName()+"\", \"host\": \""+String(Config.userID)+"\", \"listUserID\": \""+getListUserChecked()+"\"}"
-        ApiService.Post(url: apiUrl, params: params, callback: callbackCreateGroup, errorCallBack: errorCreateGroup)
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: callbackCreateGroup, errorCallBack: alertAction)
     }
     
-    func callbackCreateGroup(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func callbackCreateGroup(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [String:Any] {
             //if let groupID = dic["Chat_CreateGroupChatResult"] as? Int {
             if (dic["Chat_CreateGroupChatResult"] as? Int) != nil {
@@ -115,15 +120,6 @@ class ChatCreateGroup_VC: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
     }
-    
-    
-    func errorCreateGroup(error : Error) {
-        let message = error.localizedDescription
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     func selectUser(sender: UIButton!)
     {
         let value = sender.tag;

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class ChatAddUser_VC: Base, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var btnAddBar: UIBarButtonItem!
     @IBOutlet weak var tblListUser: UITableView!
@@ -43,18 +43,20 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_AddUserToGroup"
         
         let params : String = "{\"lstUser\" : \""+getListUser()+"\", \"groupID\": \""+String(groupID)+"\"}"
-        ApiService.Post(url: apiUrl, params: params, callback: callbackAddUser, errorCallBack: errorAddUser)
+        ApiService.PostAsyncAc(url: apiUrl, params: params, callback: callbackAddUser, errorCallBack: alertAction)
         
     }
     
-    func callbackAddUser(data : Data) {
-        
-        
+    func callbackAddUser(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+
         DispatchQueue.main.async(execute: { () -> Void in
             _ = self.navigationController?.popViewController(animated: true)
         })
-        
-        
     }
     
     func getListUser() -> String{
@@ -69,16 +71,6 @@ class ChatAddUser_VC: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         return userIDs
     }
-    
-    
-    func errorAddUser(error : Error) {
-        let message = error.localizedDescription
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    
     
     var searchActive : Bool = false
     var filtered = [UserContact]()

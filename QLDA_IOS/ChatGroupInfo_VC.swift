@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class ChatGroupInfo_VC: Base, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     @IBOutlet weak var barRoiNhom: UIBarButtonItem!
     
     @IBOutlet weak var btnAddUsers: UIButton!
@@ -82,10 +82,7 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
             
             let params : String = "{\"groupID\" : \"\(String(groupID!))\", \"userID\": \"\(String(Config.userID))\", \"imageData\":\(array)}"
             //let params : String = "{\"groupID\" : \"\(String(groupID!))\", \"userID\": \"\(String(ChatHub.userID))\"}"
-            ApiService.Post(url: apiUrl, params: params, callback: callbackChagePictureGroup, errorCallBack: { (error) in
-                print("error")
-                print(error.localizedDescription)
-            })
+            ApiService.PostAsyncAc(url: apiUrl, params: params, callback: callbackChagePictureGroup, errorCallBack: alertAction)
 
         } else{
             //print("Something went wrong")
@@ -101,7 +98,12 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         
     }
     
-    func callbackChagePictureGroup(data : Data) {
+    func callbackChagePictureGroup(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
         DispatchQueue.global(qos: .userInitiated).async {
             DispatchQueue.main.async {
                 self.btnGroupPicture.setBackgroundImage(self.imageTemp, for: .normal)
@@ -188,11 +190,16 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
         
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetInfoGroup/\(groupID!)"
         print(apiUrl)
-        ApiService.Get(url: apiUrl, callback: callbackGetGroup, errorCallBack: errorGetUsers)
+        ApiService.GetAsyncAc(url: apiUrl, callback: callbackGetGroup, errorCallBack: alertAction)
     }
     
-    func callbackGetGroup(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func callbackGetGroup(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         
         if let dic = json as? [String: Any] {
             let host = dic["Host"] as? Int
@@ -224,11 +231,16 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
        // ChatCommon.listContact = [UserContact]()
         let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetUserIDInGroup/\(groupID!)"
         print(apiUrl)
-        ApiService.Get(url: apiUrl, callback: callbackGetUsers, errorCallBack: errorGetUsers)
+        ApiService.GetAsyncAc(url: apiUrl, callback: callbackGetUsers, errorCallBack: alertAction)
     }
     
-    func callbackGetUsers(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func callbackGetUsers(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         
         if let dic = json as? [Int] {
             arrUser = dic
@@ -252,9 +264,6 @@ class ChatGroupInfo_VC: UIViewController, UITableViewDataSource, UITableViewDele
             }
         }
         
-    }
-    
-    func errorGetUsers(error : Error) {
     }
     
     @IBAction func chageGroupName(_ sender: UIButton) {
