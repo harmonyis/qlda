@@ -11,7 +11,7 @@ import SwiftR
 import FileBrowser
 import ImageViewer
 
-class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class Chat_VC: Base, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     //var items: [DataImageMsg] = []
     
     fileprivate let cellId = "cellId"
@@ -385,15 +385,20 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     func getMessage(){
         if contactType == 1 {
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetPrivateMessage?senderID=\(Config.userID)&receiverID=\(String(contactID))"
-            ApiService.Get(url: apiUrl, callback: callbackGetMsg, errorCallBack: errorGetMsg)
+            ApiService.GetAsyncAc(url: apiUrl, callback: callbackGetMsg, errorCallBack: alertAction)
         }
         else{
             let apiUrl : String = "\(UrlPreFix.Chat.rawValue)/Chat_GetGroupMessage/\(String(contactID))"
-            ApiService.Get(url: apiUrl, callback: callbackGetMsg, errorCallBack: errorGetMsg)
+            ApiService.GetAsyncAc(url: apiUrl, callback: callbackGetMsg, errorCallBack: alertAction)
         }
     }
-    func callbackGetMsg(data : Data) {
-        let json = try? JSONSerialization.jsonObject(with: data, options: [])
+    func callbackGetMsg(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            serverError(success: data)
+            return
+        }
+        let json = try? JSONSerialization.jsonObject(with: data.data!, options: [])
         if let dic = json as? [[String:Any]] {
             for item in dic{
                 let msg = ChatMessage()
@@ -430,13 +435,6 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             self.collectionView.reloadData()
             self.scrollToBottom(animate: false)
         }
-    }
-    
-    func errorGetMsg(error : Error) {
-        let message = error.localizedDescription
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
     
     func sendMessage(){
@@ -616,10 +614,7 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             print(String(Config.userID), Config.userName, String(contactID), contactName!)
             let params : String = "{\"senderID\" : \"\(String(Config.userID))\", \"senderName\": \"\(Config.userName)\",\"receiverID\" : \"\(String(contactID))\", \"receiverName\": \"\(contactName!)\", \"imageData\":\(array)}"
             
-            ApiService.Post(url: apiUrl, params: params, callback: callbackSendImage, errorCallBack: { (error) in
-                print("error")
-                print(error.localizedDescription)
-            })
+            ApiService.PostAsyncAc(url: apiUrl, params: params, callback: callbackSendImage, errorCallBack: alertAction)
         } else{
             print("Something went wrong")
         }
@@ -627,8 +622,12 @@ class Chat_VC: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         self.dismiss(animated: true, completion: nil)
     }
     
-    func callbackSendImage(data : Data) {
-        print("success")
+    func callbackSendImage(data : SuccessEntity) {
+        let response = data.response as! HTTPURLResponse
+        if response.statusCode != 200 {
+            self.serverError(success: data)
+            return
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
