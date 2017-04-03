@@ -21,7 +21,6 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
     var dataSource_Lanscape : TableKHGN_Lanscape?
     var dGiaTriGiaiNgan : Double = 0
     var dLKThanhToan : Double = 0
-    
     var wGTHD : CGFloat = 0
     var wLKGTTT : CGFloat = 0
     
@@ -36,7 +35,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         activityIndicator.hidesWhenStopped = true
         m_NhomHD = [NhomHopDong]()
         dGiaTriGiaiNgan = 0
-        var dLKThanhToan = 0
+        self.dLKThanhToan = 0
         self.tbvKHGN.isHidden = true
         
         self.tbvKHGN.separatorColor = UIColor.clear
@@ -126,6 +125,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
                     {
                         let itemNhomHopDong = NhomHopDong()
                         itemNhomHopDong.LoaiHopDong = itemHD[6]
+                        itemNhomHopDong.SoPhanLoai = LaySoPhanLoai(szText: itemHD[6])
                         if itemHD[7] == ""{
                             itemNhomHopDong.GiaTriLK = "0"
                         }
@@ -148,7 +148,7 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
                     }
                     
                 }
-                
+                 self.m_NhomHD = self.m_NhomHD.sorted(by: { Int($0.SoPhanLoai!) < Int($1.SoPhanLoai!) })
                 let itemNhomHopDong = self.m_NhomHD.first(where: { $0.LoaiHopDong! == "Tong" })
                 
                 itemNhomHopDong?.GiaTriLK = ((String)(dLKThanhToan))
@@ -178,6 +178,26 @@ class Tab_KHGN: Base, IndicatorInfoProvider {
         }
     }
     
+    func LaySoPhanLoai(szText : String) -> Int {
+        var nResulf = 10
+        var szString = szText
+      if szString.toUnsign() == "xay lap" {
+        nResulf = 1
+        }
+        if szString.toUnsign() == "thiet bi" {
+            nResulf = 2
+        }
+        if szString.toUnsign() == "dbgpmb" {
+            nResulf = 3
+        }
+        if szString.toUnsign() == "tu van" {
+            nResulf = 4
+        }
+        if szString.toUnsign() == "khac" {
+            nResulf = 5
+        }
+         return nResulf
+    }
     
     
     func AlertError(error : Error) {

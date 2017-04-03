@@ -92,9 +92,9 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
        // cell.lblNhomDA.sizeToFit()
         cell.lblGiaiDoan.text = itemNhomDA.GiaiDoan!
        // cell.lblGiaiDoan.sizeToFit()
-        cell.lblTMDT.text = variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!)
+        cell.lblGTGN.text = variableConfig.convert(itemNhomDA.GiaTriGiaiNgan!)
        // cell.lblGTGN.sizeToFit()
-        cell.lblGTGN.text = variableConfig.convert(itemNhomDA.TongMucDauTu!)
+        cell.lblTMDT.text = variableConfig.convert(itemNhomDA.TongMucDauTu!)
        // cell.lblTMDT.sizeToFit()
         cell.lblTGTH.text = itemNhomDA.ThoiGianThucHien!
       //  cell.lblTGTH.sizeToFit()
@@ -268,9 +268,9 @@ class TableDSDA_Lanscape: NSObject, UITableViewDelegate, UITableViewDataSource {
      //   cell.lblNhomDA.sizeToFit()
         cell.lblGiaiDoan.text = itemDuAnCon.GiaiDoan!
     //    cell.lblGiaiDoan.sizeToFit()
-        cell.lblTMDT.text = variableConfig.convert(itemDuAnCon.GiaTriGiaiNgan!)
+        cell.lblGTGN.text = variableConfig.convert(itemDuAnCon.GiaTriGiaiNgan!)
     //    cell.lblGTGN.sizeToFit()
-        cell.lblGTGN.text = variableConfig.convert(itemDuAnCon.TongMucDauTu!)
+        cell.lblTMDT.text = variableConfig.convert(itemDuAnCon.TongMucDauTu!)
      //   cell.lblTMDT.sizeToFit()
         cell.lblTGTH.text = itemDuAnCon.ThoiGianThucHien!
      //   cell.lblTGTH.sizeToFit()

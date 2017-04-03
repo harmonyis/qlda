@@ -9,11 +9,13 @@
 import Foundation
 class NhomHopDong{
     init() {
+        SoPhanLoai = 0
         LoaiHopDong = ""
         GiaTriHopDong = ""
         GiaTriLK = ""
         NhomHopDong = [HopDong]()
     }
+    var SoPhanLoai : Int?
     var LoaiHopDong : String?
     var GiaTriHopDong : String?
     var GiaTriLK : String?
